@@ -817,8 +817,9 @@ footer h2 {
   filter:drop-shadow(0 12px 15px #d977a255);
 }
 #animatedGarden {
-  position:fixed;
-  inset:0;
+  position:absolute;
+  inset:0 0 auto 0;
+  height:100%;
   z-index:0;
   overflow:hidden;
   pointer-events:none;
@@ -848,12 +849,50 @@ footer h2 {
   0%,100% {opacity:.08;transform:scale(.4)}
   50% {opacity:.7;transform:scale(1.5)}
 }
+body {position:relative; isolation:isolate}
 header,section,footer,nav {position:relative}
 header,section,footer {z-index:1}
 nav {z-index:100}
 @media(prefers-reduced-motion:reduce) {
   #animatedGarden .garden-sprite,
   #animatedGarden .garden-star {animation:none}
+}
+
+
+/* ADDED: Customer feedback link and premium service card motion */
+.feedback-count {
+  max-width:720px;
+  margin:12px auto 26px;
+  padding:17px 22px;
+  border:1px solid #efc9d9;
+  border-radius:22px;
+  background:#fffdf9e8;
+  font-weight:700;
+  box-shadow:0 10px 24px #b4779320;
+}
+.feedback-count a {color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+.product-card {
+  transform-style:preserve-3d;
+  transform:perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(var(--lift,0px));
+  transition:transform .24s ease,box-shadow .3s ease;
+}
+.product-card:hover {--lift:-8px}
+.product-card .product-inner {transform:translateZ(18px)}
+.product-card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  border-radius:inherit;
+  background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,50%),#ffffff4d,transparent 52%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s;
+}
+.product-card:hover::before {opacity:1}
+@media (hover:none),(prefers-reduced-motion:reduce) {
+  .product-card,.product-card:hover {transform:none}
+  .product-card .product-inner {transform:none}
 }
 
 </style>
@@ -1062,7 +1101,6 @@ nav {z-index:100}
     <div class="social-grid">
 
       <div class="card reveal">
-        <div style="font-size:45px">📸</div>
         <img class="social-logo" src="insta.webp" alt="Instagram logo" loading="lazy">
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
@@ -1078,7 +1116,6 @@ nav {z-index:100}
       </div>
 
       <div class="card reveal">
-        <div style="font-size:45px">🎵</div>
         <img class="social-logo" src="tiktok.avif" alt="TikTok logo" loading="lazy">
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
@@ -1183,6 +1220,8 @@ nav {z-index:100}
       Take a look at the receipts and feedback
       shared by our customers!
     </p>
+
+    <p class="feedback-count reveal">💗 And <strong>99+ more positive and honest feedbacks</strong> posted on my TikTok! <a href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">See more on TikTok ↗</a></p>
 
     <div class="proof-preview" id="proofPreview"></div>
 
@@ -2228,12 +2267,14 @@ document.addEventListener("click",event => {
   const garden = document.getElementById("animatedGarden");
   if (!garden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const symbols = ["🌸","🌷","🦋","🌼","🍃","✿","✨"];
+  const gardenHeight = Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+  garden.style.height = gardenHeight+"px";
   for (let i=0;i<25;i++) {
     const sprite=document.createElement("span");
     sprite.className="garden-sprite";
     sprite.textContent=symbols[Math.floor(Math.random()*symbols.length)];
     sprite.style.left=(Math.random()*100)+"%";
-    sprite.style.top=(Math.random()*100)+"%";
+    sprite.style.top=(Math.random()*gardenHeight)+"px";
     sprite.style.setProperty("--sprite-size",(13+Math.random()*19)+"px");
     sprite.style.setProperty("--sprite-speed",(7+Math.random()*12)+"s");
     sprite.style.setProperty("--sprite-delay",(-Math.random()*15)+"s");
@@ -2243,10 +2284,12 @@ document.addEventListener("click",event => {
     const star=document.createElement("span");
     star.className="garden-star";
     star.style.left=(Math.random()*100)+"%";
-    star.style.top=(Math.random()*100)+"%";
+    star.style.top=(Math.random()*gardenHeight)+"px";
     star.style.animationDelay=(-Math.random()*4)+"s";
     garden.appendChild(star);
   }
+  window.addEventListener("load",()=>{garden.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+"px"},{once:true});
+  window.addEventListener("resize",()=>{garden.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+"px"});
 })();
 
 /* =============================================
@@ -2351,6 +2394,26 @@ document.addEventListener("pointerover",event=>{
   modernUITone(560,.065,.013,false);
 });
 
+
+/* ADDED: Pointer-responsive 3D service cards (desktop mouse only). */
+if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion:reduce)").matches) {
+  document.querySelectorAll(".product-card").forEach(card=>{
+    card.addEventListener("pointermove",event=>{
+      const rect=card.getBoundingClientRect();
+      const x=(event.clientX-rect.left)/rect.width;
+      const y=(event.clientY-rect.top)/rect.height;
+      card.style.setProperty("--tilt-x",((.5-y)*10).toFixed(2)+"deg");
+      card.style.setProperty("--tilt-y",((x-.5)*10).toFixed(2)+"deg");
+      card.style.setProperty("--glow-x",(x*100).toFixed(1)+"%");
+      card.style.setProperty("--glow-y",(y*100).toFixed(1)+"%");
+    });
+    card.addEventListener("pointerleave",()=>{
+      card.style.setProperty("--tilt-x","0deg");
+      card.style.setProperty("--tilt-y","0deg");
+    });
+  });
+}
 </script>
 
 </body>
