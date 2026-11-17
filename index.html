@@ -3,319 +3,377 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7e6ee">
-<meta name="description" content="Trishchic.ph — your cozy little shop for affordable digital services and booking assistance.">
-<title>Trishchic.ph — Your Cozy Digital Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8e8ef">
+<meta name="description" content="Trishchic.ph — friendly services and affordable prices.">
+<title>Trishchic.ph | Your Cozy Little Shop</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --pink:#f4a7c5;
-  --rose:#df83aa;
-  --green:#a9c96d;
-  --sage:#dcebc1;
+  --pink:#f5a8c7;
+  --rose:#dc83aa;
+  --light-pink:#fff0f6;
+  --green:#a9cb70;
+  --dark-green:#769a42;
   --cream:#fffdf8;
-  --ink:#514750;
-  --shadow:0 18px 50px rgba(111,72,85,.1);
+  --text:#514850;
+  --shadow:0 16px 45px rgba(124,79,98,.11);
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
   margin:0;
-  color:var(--ink);
-  background:var(--cream);
   font-family:'DM Sans',sans-serif;
+  color:var(--text);
+  background:var(--cream);
 }
 body.modal-open { overflow:hidden; }
+a { color:inherit; text-decoration:none; }
 button,input { font:inherit; }
 button { cursor:pointer; }
-a { color:inherit; text-decoration:none; }
 img { max-width:100%; }
 h1,h2,h3 { font-family:'Fredoka',sans-serif; }
-p { line-height:1.75; }
-section { scroll-margin-top:85px; }
-.wrap { width:min(1140px,92%); margin:auto; }
+p { line-height:1.7; }
+section { scroll-margin-top:90px; }
+.container { width:min(1150px,92%); margin:auto; }
 .center { text-align:center; }
-.section { padding:88px 0; }
 .pink { color:var(--rose); }
-.green { color:#789d40; }
-.eyebrow {
+.green { color:var(--dark-green); }
+.section { padding:85px 0; }
+.section-title {
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.15;
+  margin:13px 0 18px;
+}
+.subtitle { max-width:690px; margin:0 auto 30px; }
+.tag {
   display:inline-block;
   padding:9px 17px;
   border-radius:30px;
-  background:#fff0f6;
-  color:#bf7294;
+  background:#ffe8f1;
+  color:#bd7092;
   font-size:12px;
   font-weight:800;
-  letter-spacing:1.5px;
+  letter-spacing:1.3px;
 }
-.section-title {
-  font-size:clamp(32px,5vw,51px);
-  margin:13px 0;
-  line-height:1.15;
-}
-.subtitle { max-width:680px; margin:0 auto 30px; }
-.btn {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  padding:15px 25px;
-  border:0;
-  border-radius:50px;
-  color:white;
-  background:var(--rose);
-  font-weight:800;
-  transition:transform .25s,box-shadow .25s;
-  box-shadow:0 6px 0 #c96b92;
-}
-.btn:hover { transform:translateY(-4px); box-shadow:0 10px 0 #c96b92; }
-.btn:active { transform:translateY(2px); }
-.btn-green { background:#8eae55; box-shadow:0 6px 0 #6e8e39; }
-.btn-green:hover { box-shadow:0 10px 0 #6e8e39; }
-.panel {
+.card {
   background:white;
-  border:1px solid #f4dce6;
-  border-radius:28px;
-  padding:30px;
+  border:1px solid #f3dce6;
+  border-radius:27px;
+  padding:28px;
   box-shadow:var(--shadow);
 }
-.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-/* INTRO */
-#intro {
-  position:fixed;
-  inset:0;
-  z-index:999;
-  display:flex;
-  flex-direction:column;
+.btn {
+  display:inline-flex;
   justify-content:center;
   align-items:center;
+  gap:8px;
+  padding:14px 24px;
+  border:0;
+  border-radius:35px;
+  background:var(--rose);
+  color:white;
+  font-weight:800;
+  box-shadow:0 6px 0 #c36b92;
+  transition:transform .25s,box-shadow .25s;
+}
+.btn:hover { transform:translateY(-4px); box-shadow:0 10px 0 #c36b92; }
+.btn:active { transform:translateY(2px); box-shadow:0 2px 0 #c36b92; }
+.btn-green { background:#92b45b; box-shadow:0 6px 0 #729144; }
+.btn-green:hover { box-shadow:0 10px 0 #729144; }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-15px); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* LOADING SCREEN */
+#loadingScreen {
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:20px;
-  background:linear-gradient(135deg,#ffe5ef,#f7f9e8,#e5f1ca);
+  padding:25px;
+  background:linear-gradient(135deg,#ffe3ef,#f6f9e8,#e2f0c8);
   transition:opacity .7s,visibility .7s;
 }
-#intro.done { opacity:0; visibility:hidden; pointer-events:none; }
-#intro img {
+#loadingScreen.hidden {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.loading-girl {
   width:180px;
-  height:200px;
+  height:190px;
   object-fit:contain;
   animation:float 3s ease-in-out infinite;
 }
-#intro h1 {
+#loadingScreen h1 {
+  font-size:clamp(36px,7vw,72px);
   color:var(--rose);
-  font-size:clamp(35px,7vw,72px);
   margin:15px 0 5px;
 }
-#intro p { font-size:17px; }
-.load-track {
-  width:min(310px,80%);
-  height:10px;
-  background:white;
-  border-radius:20px;
-  overflow:hidden;
+#loadingScreen p { max-width:470px; }
+.loading-bar {
+  width:min(320px,80vw);
+  height:11px;
   margin-top:20px;
+  border-radius:20px;
+  background:white;
+  overflow:hidden;
 }
-.load-fill {
-  height:100%;
+.loading-progress {
   width:0;
+  height:100%;
   background:linear-gradient(90deg,var(--pink),var(--green));
-  animation:load 2.3s ease forwards;
+  animation:load 2.4s forwards;
 }
 @keyframes load { to { width:100%; } }
-@keyframes float { 50% { transform:translateY(-16px); } }
+#enterButton { display:none; margin-top:28px; }
+#enterButton.show { display:inline-flex; }
 
-/* NAV */
+/* NAVIGATION */
 nav {
   position:sticky;
   top:0;
   z-index:100;
-  background:#fffdf8ef;
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #f3dce6;
+  background:#fffdf8f2;
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #f1dce5;
 }
 .nav-inner {
   max-width:1180px;
   margin:auto;
-  padding:14px 20px;
+  padding:13px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
 }
-.brand {
+.logo {
+  font:700 26px 'Fredoka',sans-serif;
   color:var(--rose);
-  font:700 27px 'Fredoka',sans-serif;
-  white-space:nowrap;
 }
-.nav-links { display:flex; gap:22px; align-items:center; font-size:13px; font-weight:800; }
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:20px;
+  font-size:13px;
+  font-weight:800;
+}
 .nav-links a:hover { color:var(--rose); }
-.icon-btn {
-  border:0;
-  background:#fce5ef;
-  border-radius:50%;
-  width:42px;
-  height:42px;
-  font-size:18px;
+
+/* MUSIC PLAYER */
+.music-player {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 13px;
+  border:1px solid #f0d4df;
+  border-radius:50px;
+  background:#fff0f6;
 }
+.music-button {
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:var(--rose);
+  color:white;
+  font-size:15px;
+}
+.volume-slider {
+  width:85px;
+  accent-color:var(--rose);
+  cursor:pointer;
+}
+.volume-value {
+  min-width:34px;
+  font-size:11px;
+  font-weight:800;
+  color:#b26a8b;
+}
+.music-label { font-size:12px; font-weight:800; }
 
 /* HERO */
 .hero {
   min-height:650px;
   position:relative;
-  overflow:hidden;
   display:grid;
   place-items:center;
+  overflow:hidden;
   padding:75px 20px;
   background:
     linear-gradient(120deg,#f4f9e8a8,#ffe6f0a8),
-    url('wave%20backround.jpg') center/cover;
+    url("wave%20backround.jpg") center/cover no-repeat;
 }
 .hero:before {
   content:'';
   position:absolute;
   width:350px;
   height:350px;
-  right:-130px;
-  top:-90px;
+  right:-120px;
+  top:-100px;
   transform:rotate(25deg);
-  opacity:.3;
+  opacity:.25;
   background:repeating-conic-gradient(#ee8fb4 0 25%,white 0 50%) 0 0/75px 75px;
 }
-.hero-inner { position:relative; z-index:1; text-align:center; max-width:850px; }
-.hero-character {
-  width:185px;
+.hero-content {
+  position:relative;
+  z-index:2;
+  max-width:850px;
+  text-align:center;
+}
+.hero-girl {
+  width:190px;
   height:190px;
   object-fit:contain;
   animation:float 4s ease-in-out infinite;
-  filter:drop-shadow(0 14px 18px #b5748b50);
+  filter:drop-shadow(0 12px 15px #b5748b50);
 }
 .hero h1 {
-  font-size:clamp(47px,8vw,90px);
-  line-height:1;
-  color:#88ab4d;
+  font-size:clamp(48px,8vw,90px);
+  line-height:1.05;
+  color:#86a94c;
   text-shadow:4px 4px white;
-  margin:18px 0;
+  margin:17px 0;
 }
 .hero h1 span { color:var(--rose); }
 .hero-description { font-size:18px; }
 .notice {
-  margin:27px auto;
-  padding:22px 25px;
-  max-width:720px;
-  border:2px dashed #e7a4bf;
+  max-width:740px;
+  margin:25px auto;
+  padding:23px;
+  border:2px dashed #e8a3bf;
   border-radius:24px;
-  background:#ffffffed;
-  font-weight:800;
-  font-size:clamp(17px,3vw,23px);
+  background:#fffffff0;
   box-shadow:var(--shadow);
+  font-size:clamp(17px,3vw,23px);
+  font-weight:800;
 }
-.deco {
+.sparkle {
   position:absolute;
   font-size:35px;
-  animation:float 3s ease-in-out infinite;
+  animation:float 3s infinite;
 }
 
-/* TOC */
-.toc-panel { max-width:850px; margin:auto; }
-.toc-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:30px; }
-.toc-link {
+/* TABLE OF CONTENTS */
+.toc-card { max-width:850px; margin:auto; }
+.toc-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+  margin-top:30px;
+}
+.toc-item {
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:13px;
   padding:16px;
+  border:1px solid #f3dce6;
   border-radius:17px;
-  border:1px solid #f4dce6;
   background:#fff8fa;
   font-weight:800;
   transition:.25s;
 }
-.toc-link:hover { background:#e9f2d2; transform:translateX(5px); }
-.toc-num {
+.toc-item:hover { background:#eaf3d4; transform:translateX(5px); }
+.toc-number {
   padding:9px 12px;
   border-radius:12px;
-  background:#e8a9c4;
+  background:#e9abc5;
   color:white;
   font-size:12px;
 }
 
-/* GENERAL CARDS */
-.three-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+/* SOCIAL AND FEATURE CARDS */
+.three-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
 .feature { text-align:center; }
-.feature .emoji { font-size:42px; }
-.feature h3 { font-size:24px; margin:12px 0; }
-.social-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.feature-icon { font-size:43px; }
+.feature h3 { font-size:24px; }
+.social-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
 .social-card { text-align:center; }
-.social-card .emoji { font-size:45px; }
-.social-card h3 { font-size:29px; margin:12px 0; }
+.social-card h3 { font-size:28px; }
 
 /* CINEMATIC PRODUCT CARDS */
-.shop-section {
-  background:linear-gradient(180deg,#fff0f6,#fffafc);
-}
+.shop-section { background:linear-gradient(180deg,#fff0f6,#fffafd); }
 .product-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:24px;
+  gap:23px;
   margin-top:40px;
 }
 .product-card {
   position:relative;
-  min-height:360px;
-  border-radius:27px;
+  min-height:355px;
   overflow:hidden;
   isolation:isolate;
-  background:#171717;
+  border:0;
+  border-radius:27px;
   color:white;
+  text-align:left;
   cursor:pointer;
-  perspective:900px;
   transform-style:preserve-3d;
   transition:transform .25s,box-shadow .3s;
-  box-shadow:0 14px 30px #35262d24;
+  box-shadow:0 15px 32px #35262d28;
 }
-.product-card:hover {
-  box-shadow:0 25px 50px #35262d44;
-}
+.product-card:hover { box-shadow:0 25px 50px #35262d44; }
 .product-card:focus-visible { outline:4px solid var(--rose); outline-offset:4px; }
 .product-card:before {
   content:'';
   position:absolute;
   inset:-80%;
-  background:conic-gradient(transparent,rgba(255,255,255,.15),transparent 35%);
-  animation:spin 10s linear infinite;
+  background:conic-gradient(transparent,#ffffff24,transparent 35%);
+  animation:spin 11s linear infinite;
   z-index:-1;
 }
-@keyframes spin { to { transform:rotate(360deg); } }
 .product-card:after {
   content:'';
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,transparent 15%,#000b 100%);
+  background:linear-gradient(180deg,transparent 15%,#000a);
   z-index:-1;
 }
-.product-card .orb {
+.product-orb {
   position:absolute;
-  width:220px;
-  height:220px;
+  width:230px;
+  height:230px;
+  right:-70px;
+  top:-70px;
   border-radius:50%;
-  right:-65px;
-  top:-65px;
-  background:#ffffff26;
-  filter:blur(12px);
-  animation:float 5s ease-in-out infinite;
+  background:#ffffff25;
+  filter:blur(14px);
+  animation:float 5s infinite;
 }
 .product-inner {
-  height:100%;
-  min-height:360px;
+  min-height:355px;
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  padding:30px;
+  padding:29px;
   position:relative;
   z-index:2;
 }
@@ -324,60 +382,51 @@ nav {
   height:76px;
   padding:10px;
   border-radius:20px;
-  background:#ffffffed;
+  background:#fffffff0;
   object-fit:contain;
   box-shadow:0 12px 25px #0003;
   transition:transform .4s;
 }
 .product-card:hover .product-logo { transform:scale(1.12) rotate(-5deg); }
-.product-logo-fallback {
-  width:76px;
-  height:76px;
-  border-radius:20px;
-  background:#ffffff30;
-  display:grid;
-  place-items:center;
-  font-size:45px;
-}
 .product-category {
   margin-top:auto;
-  text-transform:uppercase;
   font-size:11px;
   letter-spacing:2px;
-  opacity:.8;
+  text-transform:uppercase;
   font-weight:800;
+  opacity:.85;
 }
 .product-inner h3 {
-  font-size:clamp(27px,3vw,38px);
-  margin:9px 0;
+  font-size:clamp(27px,3vw,37px);
   line-height:1.1;
+  margin:9px 0;
 }
-.product-inner p { font-size:13px; opacity:.85; margin:0 0 20px; }
+.product-inner p { font-size:13px; opacity:.9; margin:0 0 20px; }
 .explore-pill {
-  display:inline-block;
   padding:11px 18px;
-  background:#ffffffef;
-  color:#30252b;
   border-radius:30px;
-  font-weight:800;
+  background:#fffffff0;
+  color:#30252b;
   font-size:13px;
+  font-weight:800;
 }
-.product-card:hover .explore-pill { background:#f6c4d8; }
+.product-card:hover .explore-pill { background:#f8c5d9; }
 
-/* INDIVIDUAL THEMES */
-.theme-netflix { background:radial-gradient(circle at 80% 20%,#b91924,#160509 70%); }
-.theme-canva { background:linear-gradient(135deg,#04b5c5,#6448d8,#d349a9); }
-.theme-capcut { background:linear-gradient(135deg,#3b3b3b,#050505); }
-.theme-chatgpt { background:linear-gradient(135deg,#0d806d,#063a36,#101c1b); }
-.theme-youtube { background:linear-gradient(135deg,#e51a2b,#65070e,#1a0508); }
-.theme-disney { background:radial-gradient(circle at 70% 20%,#3776cc,#091a4d 70%); }
-.theme-prime { background:linear-gradient(135deg,#0c5e9c,#071c39); }
-.theme-hbo { background:linear-gradient(135deg,#6747ae,#211039); }
-.theme-iqiyi { background:linear-gradient(135deg,#8ecf23,#285619); }
-.theme-viva { background:linear-gradient(135deg,#e03e91,#54133f); }
-.theme-default { background:linear-gradient(135deg,#8c64b8,#39245a); }
+/* INDIVIDUAL PRODUCT THEMES */
+.theme-canva { background:linear-gradient(135deg,#05b9c6,#644bd9,#d34aa9); }
+.theme-netflix { background:radial-gradient(circle at 80% 20%,#ba1826,#160508 72%); }
+.theme-youtube { background:linear-gradient(135deg,#ed2534,#65070e,#180407); }
+.theme-capcut { background:linear-gradient(135deg,#444,#070707); }
+.theme-chatgpt { background:linear-gradient(135deg,#118a72,#073d37,#111b1b); }
+.theme-prime { background:linear-gradient(135deg,#0b609d,#071d39); }
+.theme-hbo { background:linear-gradient(135deg,#7050b8,#201036); }
+.theme-iqiyi { background:linear-gradient(135deg,#93d12a,#285819); }
+.theme-viva { background:linear-gradient(135deg,#df4795,#53163e); }
+.theme-iwanttfc { background:linear-gradient(135deg,#2869b7,#091c48); }
+.theme-disney { background:radial-gradient(circle at 70% 20%,#3a79ce,#08194b 72%); }
+.theme-nba { background:linear-gradient(135deg,#d12b36,#213b83,#101a35); }
 
-/* MODAL */
+/* PRODUCT POPUP */
 .modal {
   position:fixed;
   inset:0;
@@ -386,18 +435,17 @@ nav {
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:#171019c9;
+  background:#171019cc;
   backdrop-filter:blur(12px);
 }
 .modal.active { display:flex; animation:fadeIn .3s ease; }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 .modal-box {
-  width:min(900px,100%);
+  width:min(880px,100%);
   max-height:90vh;
   overflow-y:auto;
+  position:relative;
   border-radius:30px;
   background:white;
-  position:relative;
   animation:modalUp .4s ease;
 }
 @keyframes modalUp {
@@ -405,97 +453,140 @@ nav {
   to { transform:translateY(0) scale(1); opacity:1; }
 }
 .modal-top {
-  min-height:230px;
+  min-height:220px;
   padding:35px;
-  color:white;
   display:flex;
   align-items:center;
   gap:25px;
+  color:white;
 }
 .modal-top img {
   width:105px;
   height:105px;
-  padding:13px;
-  border-radius:24px;
+  padding:12px;
+  border-radius:23px;
   background:white;
   object-fit:contain;
 }
-.modal-top h2 { font-size:clamp(30px,5vw,50px); margin:5px 0; }
-.modal-body { padding:30px; }
-.modal-body h3 { font-size:25px; }
-.plan-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:15px; margin:22px 0; }
-.plan {
-  border:2px solid #f3dce6;
-  border-radius:20px;
-  padding:20px;
-  background:#fff9fb;
-  text-align:center;
+.modal-top h2 {
+  font-size:clamp(30px,5vw,49px);
+  margin:5px 0;
 }
-.plan strong { display:block; font:700 33px 'Fredoka'; color:var(--rose); margin-top:10px; }
+.modal-body { padding:30px; }
+.modal-body h3 { font-size:26px; }
 .modal-close {
   position:absolute;
-  top:16px;
-  right:16px;
+  top:15px;
+  right:15px;
   z-index:5;
+  width:43px;
+  height:43px;
   border:0;
-  width:42px;
-  height:42px;
   border-radius:50%;
   background:white;
   color:#333;
   font-size:25px;
 }
-.modal-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.plan-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
+  gap:15px;
+  margin:23px 0;
+}
+.plan {
+  padding:21px;
+  border:2px solid #f3dce6;
+  border-radius:20px;
+  background:#fff9fb;
+  text-align:center;
+}
+.plan strong {
+  display:block;
+  margin-top:10px;
+  color:var(--rose);
+  font:700 34px 'Fredoka',sans-serif;
+}
+.modal-actions { display:flex; flex-wrap:wrap; gap:12px; }
 
 /* BOOKING */
-.booking-section { background:linear-gradient(135deg,#e6f1cd,#ffe5ef); }
-.booking-layout { display:grid; grid-template-columns:1fr 1fr; gap:35px; align-items:center; }
-.booking-visual { text-align:center; background:#ffffffb9; border-radius:30px; padding:30px; }
-.booking-visual img { height:220px; width:100%; object-fit:contain; animation:float 4s infinite; }
+.booking-section { background:linear-gradient(135deg,#e7f2cd,#ffe5ef); }
+.booking-layout {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+  align-items:center;
+}
+.booking-visual {
+  padding:30px;
+  border-radius:30px;
+  background:#ffffffb9;
+  text-align:center;
+}
+.booking-visual img {
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  animation:float 4s infinite;
+}
 .booking-visual h3 { font-size:30px; color:var(--rose); }
-.fee { display:inline-block; padding:12px 20px; border-radius:30px; background:white; font-weight:800; color:#739b43; }
+.fee {
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:30px;
+  background:white;
+  color:var(--dark-green);
+  font-weight:800;
+}
 
 /* FAQ AND FOOTER */
 details {
-  background:white;
+  margin:12px 0;
+  padding:21px;
   border:1px solid #f3dce6;
   border-radius:18px;
-  padding:21px;
-  margin:12px 0;
+  background:white;
 }
 summary { cursor:pointer; font-weight:800; }
-footer { text-align:center; padding:65px 20px; background:#cce3a8; }
+footer {
+  padding:65px 20px;
+  background:#cce3a8;
+  text-align:center;
+}
 footer h2 { color:#71963e; font-size:42px; }
-footer a { text-decoration:underline; font-weight:800; }
+footer a { font-weight:800; text-decoration:underline; }
 .floating-contact {
   position:fixed;
-  right:22px;
-  bottom:22px;
+  right:20px;
+  bottom:20px;
   z-index:90;
-  border-radius:50px;
   padding:15px 20px;
+  border-radius:40px;
   background:var(--rose);
   color:white;
   font-weight:800;
   box-shadow:0 10px 30px #a4537770;
 }
-.floating-contact:hover { transform:translateY(-4px); }
 
-/* RESPONSIVE */
-@media(max-width:900px) {
-  .product-grid,.three-grid { grid-template-columns:repeat(2,1fr); }
+/* MOBILE */
+@media(max-width:950px) {
   .nav-links { display:none; }
+  .product-grid,.three-grid { grid-template-columns:repeat(2,1fr); }
+  .music-label { display:none; }
 }
 @media(max-width:650px) {
   .section { padding:65px 0; }
   .toc-grid,.social-grid,.three-grid,.product-grid,.booking-layout { grid-template-columns:1fr; }
-  .panel { padding:23px; }
+  .card { padding:23px; }
   .hero { min-height:580px; padding:55px 15px; }
-  .hero-character { width:145px; height:155px; }
-  .product-card,.product-inner { min-height:330px; }
+  .hero-girl { width:145px; height:155px; }
+  .product-card,.product-inner { min-height:325px; }
   .modal-top { flex-direction:column; align-items:flex-start; padding:30px 25px; }
-  .modal-top img { width:75px; height:75px; }
+  .modal-top img { width:78px; height:78px; }
   .modal-body { padding:24px; }
+  .volume-slider { width:55px; }
+  .volume-value { display:none; }
+  .music-player { padding:6px 9px; gap:6px; }
+  .logo { font-size:21px; }
   .floating-contact { right:12px; bottom:12px; padding:13px 16px; font-size:13px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -510,36 +601,46 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <body>
 
+<!-- BACKGROUND MUSIC -->
+<audio id="backgroundMusic" src="cozy-music.mp3" loop preload="auto"></audio>
+
 <!-- LOADING SCREEN -->
-<div id="intro">
-  <img src="girl%20(2).png" alt="Trishchic mascot">
+<div id="loadingScreen">
+  <img src="girl%20(2).png" class="loading-girl" alt="Trishchic mascot">
   <h1>Welcome to Trishchic.ph</h1>
   <p>A shop with friendly services and affordable prices ♡</p>
-  <div class="load-track"><div class="load-fill"></div></div>
-  <p style="font-size:12px">Sprinkling some magic...</p>
+  <div class="loading-bar"><div class="loading-progress"></div></div>
+  <p style="font-size:12px">Preparing your cozy little experience...</p>
+  <button class="btn" id="enterButton">Enter My Cozy Shop ♡ 🎶</button>
 </div>
 
 <!-- NAVIGATION -->
 <nav>
   <div class="nav-inner">
-    <a class="brand" href="#home">✿ trishchic.ph</a>
+    <a class="logo" href="#home">✿ trishchic.ph</a>
     <div class="nav-links">
       <a href="#contents">Explore</a>
-      <a href="#shop">Shop</a>
+      <a href="#shop">Pricelist</a>
       <a href="#booking">Booking</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="icon-btn" id="soundBtn" aria-label="Toggle sounds">🔇</button>
+
+    <div class="music-player">
+      <span class="music-label">♫ Cozy Vibes</span>
+      <button class="music-button" id="musicToggle" aria-label="Play or pause music">▶</button>
+      <input class="volume-slider" id="volumeSlider" type="range" min="0" max="100" value="35" aria-label="Music volume">
+      <span class="volume-value" id="volumeValue">35%</span>
+    </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero" id="home">
-  <span class="deco" style="top:12%;left:7%">✿</span>
-  <span class="deco" style="bottom:12%;right:8%">✨</span>
-  <div class="hero-inner">
-    <img class="hero-character" src="girl%20(1).png" alt="Trishchic character">
-    <div><span class="eyebrow">YOUR COZY LITTLE DIGITAL SHOP ♡</span></div>
+  <span class="sparkle" style="top:12%;left:7%">✿</span>
+  <span class="sparkle" style="bottom:12%;right:8%">✨</span>
+  <div class="hero-content">
+    <img src="girl%20(1).png" class="hero-girl" alt="Trishchic character">
+    <div><span class="tag">YOUR COZY LITTLE DIGITAL SHOP ♡</span></div>
     <h1>Welcome to<br><span>Trishchic.ph</span></h1>
     <p class="hero-description">Affordable digital goodies, friendly services, and a sprinkle of happiness!</p>
     <div class="notice">💌 Please make sure to read everything so we can avoid too many questions!</div>
@@ -549,10 +650,10 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- TABLE OF CONTENTS -->
 <section class="section" id="contents">
-  <div class="wrap">
-    <div class="panel toc-panel reveal">
+  <div class="container">
+    <div class="card toc-card reveal">
       <div class="center">
-        <span class="eyebrow">YOUR LITTLE GUIDE</span>
+        <span class="tag">YOUR LITTLE GUIDE</span>
         <h2 class="section-title"><span class="green">Table of</span> <span class="pink">Contents</span></h2>
         <p>Tap any section and we'll take you there! 🌷</p>
       </div>
@@ -563,35 +664,37 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- INTRODUCTION -->
 <section class="section" id="about" style="background:#f5f9eb">
-  <div class="wrap center">
-    <span class="eyebrow">GET TO KNOW US</span>
+  <div class="container center">
+    <span class="tag">GET TO KNOW US</span>
     <h2 class="section-title">Hello there, <span class="pink">lovely!</span> 🌸</h2>
     <img src="girl%20(3).png" alt="Trishchic character" style="width:170px;height:180px;object-fit:contain">
-    <p class="subtitle">Welcome to Trishchic.ph! Your friendly little shop for affordable digital services like Canva, Netflix, CapCut, ChatGPT, YouTube, and many more.</p>
+    <p class="subtitle">Welcome to Trishchic.ph! Your friendly little shop for affordable digital services like Canva, Netflix, CapCut, ChatGPT, YouTube, and more.</p>
     <div class="three-grid">
-      <div class="panel feature reveal"><div class="emoji">🌷</div><h3>Friendly Service</h3><p>Easy to talk to and ready to help!</p></div>
-      <div class="panel feature reveal"><div class="emoji">💚</div><h3>Budget Friendly</h3><p>Affordable options for your favorite services.</p></div>
-      <div class="panel feature reveal"><div class="emoji">✨</div><h3>Easy Ordering</h3><p>Browse, choose, and message us directly.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">🌷</div><h3>Friendly Service</h3><p>Easy to talk to and ready to assist!</p></div>
+      <div class="card feature reveal"><div class="feature-icon">💚</div><h3>Budget Friendly</h3><p>Affordable options for your favorite services.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">✨</div><h3>Easy Ordering</h3><p>Browse, choose, and message us directly.</p></div>
     </div>
   </div>
 </section>
 
 <!-- SOCIALS -->
 <section class="section" id="socials">
-  <div class="wrap center">
-    <span class="eyebrow">LET'S CONNECT</span>
+  <div class="container center">
+    <span class="tag">LET'S CONNECT</span>
     <h2 class="section-title">Join Our <span class="pink">Little Community!</span></h2>
     <p class="subtitle">If there's any problem, question, or order, kindly message us through our official social accounts. We'd love to assist you! 💌</p>
     <div class="social-grid">
-      <div class="panel social-card reveal">
-        <div class="emoji">📸</div><h3>Instagram</h3>
+      <div class="card social-card reveal">
+        <div style="font-size:45px">📸</div>
+        <h3>Instagram</h3>
         <p>@xx.twisha</p>
         <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Message Us ♡</a>
       </div>
-      <div class="panel social-card reveal">
-        <div class="emoji">🎵</div><h3>TikTok</h3>
+      <div class="card social-card reveal">
+        <div style="font-size:45px">🎵</div>
+        <h3>TikTok</h3>
         <p>@trishchic.ph</p>
-        <a class="btn btn-green" href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">Visit Our TikTok ♡</a>
+        <a class="btn btn-green" href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">Visit TikTok ♡</a>
       </div>
     </div>
   </div>
@@ -599,59 +702,59 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- CINEMATIC SHOP -->
 <section class="section shop-section" id="shop">
-  <div class="wrap">
+  <div class="container">
     <div class="center">
-      <span class="eyebrow">EXPLORE OUR DIGITAL GOODIES</span>
+      <span class="tag">EXPLORE OUR DIGITAL GOODIES</span>
       <h2 class="section-title">Pick Your <span class="pink">Premium Experience</span> ✨</h2>
       <p class="subtitle">Each service has its own little world! Tap a card to explore its offers and prices.</p>
     </div>
     <div class="product-grid" id="productGrid"></div>
-    <p class="center" style="font-size:13px;margin-top:30px">All prices are based on the provided seller pricelist. Confirm current availability, access conditions, and rates before ordering. Service names and logos belong to their respective owners.</p>
+    <p class="center" style="font-size:13px;margin-top:30px">Prices are based on the seller's provided pricelist. Confirm availability and access conditions before ordering. Logos belong to their respective owners.</p>
   </div>
 </section>
 
 <!-- BEST SELLER -->
 <section class="section" id="bestseller">
-  <div class="wrap center">
-    <span class="eyebrow">CUSTOMER FAVORITE</span>
+  <div class="container center">
+    <span class="tag">CUSTOMER FAVORITE</span>
     <h2 class="section-title">Our <span class="pink">Best Seller!</span> ⭐</h2>
-    <div class="panel reveal" style="max-width:700px;margin:25px auto">
-      <div style="font-size:60px">🎨</div>
+    <div class="card reveal" style="max-width:700px;margin:25px auto">
+      <img src="canva.jpg" alt="Canva" style="width:85px;height:85px;object-fit:contain;border-radius:18px">
       <h3 style="font-size:32px">Canva Premium</h3>
       <p>For students, teachers, editors, and creative minds!</p>
       <h2 class="green" style="font-size:45px">₱199</h2>
-      <p><strong>Seller-listed lifetime offer.</strong> Please confirm the exact duration and access conditions. This is not an official lifetime Canva subscription.</p>
+      <p><strong>Seller-listed lifetime offer.</strong> Confirm the duration and access conditions. This is not an official lifetime Canva subscription.</p>
       <button class="btn" onclick="openProduct('canva')">Explore Canva Offer ♡</button>
     </div>
   </div>
 </section>
 
-<!-- HOW TO ORDER -->
+<!-- HOW TO AVAIL -->
 <section class="section" id="howto" style="background:#f5f9eb">
-  <div class="wrap center">
-    <span class="eyebrow">SUPER EASY</span>
+  <div class="container center">
+    <span class="tag">SUPER EASY</span>
     <h2 class="section-title">How to <span class="pink">Avail?</span></h2>
     <div class="three-grid">
-      <div class="panel feature reveal"><div class="emoji">🛍️</div><h3>1. Choose</h3><p>Pick your desired service and duration.</p></div>
-      <div class="panel feature reveal"><div class="emoji">💌</div><h3>2. Message</h3><p>Send your order details through Instagram.</p></div>
-      <div class="panel feature reveal"><div class="emoji">🌸</div><h3>3. Confirm</h3><p>Follow the seller's instructions and verify the service.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">🛍️</div><h3>1. Choose</h3><p>Pick your desired service and duration.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">💌</div><h3>2. Message</h3><p>Send your order details through Instagram.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">🌸</div><h3>3. Confirm</h3><p>Follow the seller's instructions and verify the service.</p></div>
     </div>
-    <p style="margin-top:25px">For your security, never share passwords or verification codes.</p>
+    <p style="margin-top:25px">Never share passwords or verification codes with anyone.</p>
   </div>
 </section>
 
-<!-- BOOKING -->
+<!-- BOOKING SERVICE -->
 <section class="section booking-section" id="booking">
-  <div class="wrap booking-layout">
+  <div class="container booking-layout">
     <div class="reveal">
-      <span class="eyebrow">SPECIAL SERVICE</span>
+      <span class="tag">SPECIAL SERVICE</span>
       <h2 class="section-title">You Must Try Our <span class="pink">Booking Service!</span> 🛵</h2>
       <p>Need a ride? Trishchic.ph also advertises booking assistance for JoyRide and Move It.</p>
-      <p><strong>Advertised assistance fee: ₱35 per booking.</strong> Confirm the actual ride fare, booking details, and service availability before proceeding.</p>
+      <p><strong>Advertised assistance fee: ₱35 per booking.</strong> Confirm actual ride fares and service availability before proceeding.</p>
       <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Ask About Booking ♡</a>
     </div>
     <div class="booking-visual reveal">
-      <img src="girl%20(4).png" alt="Trishchic booking mascot">
+      <img src="girl%20(4).png" alt="Trishchic booking character">
       <h3>Ride with Ease!</h3>
       <p>JoyRide & Move It booking assistance</p>
       <span class="fee">₱35 advertised assistance fee</span>
@@ -660,16 +763,16 @@ footer a { text-decoration:underline; font-weight:800; }
   </div>
 </section>
 
-<!-- TUTORIAL -->
+<!-- PREMIUM TUTORIAL -->
 <section class="section" id="tutorial">
-  <div class="wrap center">
-    <span class="eyebrow">QUICK GUIDE</span>
+  <div class="container center">
+    <span class="tag">QUICK GUIDE</span>
     <h2 class="section-title">How to Check <span class="pink">Premium Access</span></h2>
-    <div class="panel reveal" style="max-width:800px;margin:25px auto;text-align:left">
+    <div class="card reveal" style="max-width:800px;margin:25px auto;text-align:left">
       <p><strong>01.</strong> Check the invitation sent to your email.</p>
       <p><strong>02.</strong> Verify the sender before accepting.</p>
       <p><strong>03.</strong> Open the service using the same email address.</p>
-      <p><strong>04.</strong> Check the account or subscription settings.</p>
+      <p><strong>04.</strong> Check your account or subscription settings.</p>
       <p><strong>05.</strong> If something is wrong, contact the seller with your order details.</p>
     </div>
   </div>
@@ -677,10 +780,10 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- RULES -->
 <section class="section" id="rules" style="background:#fff0f6">
-  <div class="wrap center">
-    <span class="eyebrow">IMPORTANT INFORMATION</span>
+  <div class="container center">
+    <span class="tag">IMPORTANT INFORMATION</span>
     <h2 class="section-title">Rules & <span class="pink">Regulations</span></h2>
-    <div class="panel reveal" style="max-width:850px;margin:25px auto;text-align:left">
+    <div class="card reveal" style="max-width:850px;margin:25px auto;text-align:left">
       <p>🌷 Confirm your chosen service, duration, account type, and price before ordering.</p>
       <p>🌷 The seller states that cancellation is not accepted after submitting an email for processing.</p>
       <p>🌷 Check and accept legitimate invitations promptly.</p>
@@ -694,24 +797,24 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- NOTES -->
 <section class="section" id="notes">
-  <div class="wrap center">
-    <span class="eyebrow">LITTLE REMINDERS</span>
+  <div class="container center">
+    <span class="tag">LITTLE REMINDERS</span>
     <h2 class="section-title">Important <span class="pink">Notes</span> 💌</h2>
     <div class="three-grid">
-      <div class="panel feature reveal"><div class="emoji">📩</div><h3>Feedback</h3><p>We appreciate your feedback after receiving your service.</p></div>
-      <div class="panel feature reveal"><div class="emoji">🛠️</div><h3>Problems</h3><p>For account errors, kindly message our Instagram.</p></div>
-      <div class="panel feature reveal"><div class="emoji">💗</div><h3>Support</h3><p>Include your order details so we can assist you faster.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">📩</div><h3>Feedback</h3><p>We appreciate your feedback after receiving your service.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">🛠️</div><h3>Problems</h3><p>For account errors, kindly message our Instagram.</p></div>
+      <div class="card feature reveal"><div class="feature-icon">💗</div><h3>Support</h3><p>Include your order details so we can assist you faster.</p></div>
     </div>
   </div>
 </section>
 
 <!-- PAYMENT -->
 <section class="section" id="payment" style="background:#f5f9eb">
-  <div class="wrap center">
-    <span class="eyebrow">CHECKOUT INFORMATION</span>
+  <div class="container center">
+    <span class="tag">CHECKOUT INFORMATION</span>
     <h2 class="section-title">Mode of <span class="pink">Payment</span></h2>
-    <div class="panel reveal" style="max-width:570px;margin:25px auto">
-      <div style="font-size:60px">💳</div>
+    <div class="card reveal" style="max-width:570px;margin:25px auto">
+      <img src="gcash.jpg" alt="GCash" style="width:105px;height:105px;object-fit:contain;border-radius:18px">
       <h3 style="font-size:32px;color:#75a344">GCash</h3>
       <p>Please request the seller's current payment details through their official account before transferring money.</p>
       <a class="btn btn-green" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Request Payment Details ♡</a>
@@ -721,9 +824,9 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <div class="wrap">
+  <div class="container">
     <div class="center">
-      <span class="eyebrow">QUESTIONS?</span>
+      <span class="tag">QUESTIONS?</span>
       <h2 class="section-title">Frequently Asked <span class="pink">Questions</span></h2>
     </div>
     <div style="max-width:800px;margin:30px auto">
@@ -738,9 +841,9 @@ footer a { text-decoration:underline; font-weight:800; }
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="wrap">
+  <div class="container">
     <h2>Trishchic.ph 🌷</h2>
-    <p>Friendly services, affordable prices, and a little sprinkle of happiness!</p>
+    <p>Friendly services, affordable prices, and a sprinkle of happiness!</p>
     <p>For orders or concerns, kindly message us here ♡</p>
     <p>
       <a href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Instagram</a>
@@ -763,7 +866,7 @@ footer a { text-decoration:underline; font-weight:800; }
       <div class="plan-grid" id="modalPlans"></div>
       <p id="modalNote" style="font-size:13px"></p>
       <div class="modal-actions">
-        <a class="btn" id="orderLink" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Inquire on Instagram ♡</a>
+        <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Inquire on Instagram ♡</a>
         <button class="btn btn-green" id="backToShop">Back to Shop</button>
       </div>
     </div>
@@ -773,12 +876,11 @@ footer a { text-decoration:underline; font-weight:800; }
 <script>
 'use strict';
 
-const INSTAGRAM = 'https://www.instagram.com/xx.twisha/';
-
+/* TABLE OF CONTENTS */
 const sections = [
   ['about','Introduction'],
   ['socials','Instagram & TikTok'],
-  ['shop','Premium Pricelist'],
+  ['shop','Full Premium Pricelist'],
   ['bestseller','Best Seller'],
   ['howto','How to Avail'],
   ['booking','Booking Service 🛵'],
@@ -790,34 +892,42 @@ const sections = [
 ];
 
 document.getElementById('tocGrid').innerHTML = sections.map((item,index) => `
-  <a class="toc-link" href="#${item[0]}">
-    <span class="toc-num">${String(index+1).padStart(2,'0')}</span>
+  <a class="toc-item" href="#${item[0]}">
+    <span class="toc-number">${String(index+1).padStart(2,'0')}</span>
     <span>${item[1]}</span>
     <span style="margin-left:auto">↗</span>
   </a>
 `).join('');
 
-/* All image filenames match the GitHub screenshot.
-   Files are in the same folder as index.html. */
+/* UPDATED PRODUCTS — EXACT SELLER PRICELIST */
 const products = [
-  {
-    id:'netflix',
-    name:'Netflix',
-    category:'Entertainment',
-    theme:'netflix',
-    image:'netflix.jpeg',
-    description:'Your next movie night starts here.',
-    plans:[['1 Month Shared','₱79'],['1 Month Solo','₱149']]
-  },
   {
     id:'canva',
     name:'Canva',
     category:'Design & Creativity',
     theme:'canva',
-    emoji:'🎨',
-    description:'Create something beautiful.',
-    plans:[['1 Month','₱15'],['1 Year','₱69'],['Lifetime offer','₱199']],
-    note:'The lifetime option is a seller-listed offer, not an official Canva lifetime subscription. Confirm exact access terms.'
+    image:'canva.jpg',
+    description:'Create beautiful designs and presentations.',
+    plans:[['1 Month','₱15'],['1 Year','₱69'],['Lifetime Offer','₱199']],
+    note:'Lifetime is a seller-listed offer, not an official Canva lifetime subscription. Confirm the access conditions.'
+  },
+  {
+    id:'netflix',
+    name:'Netflix',
+    category:'Movies & Series',
+    theme:'netflix',
+    image:'netflix.jpeg',
+    description:'Your next movie night starts here.',
+    plans:[['1 Month Shared','₱79'],['1 Month Solo Profile','₱149']]
+  },
+  {
+    id:'youtube',
+    name:'YouTube / YouTube Music',
+    category:'Music & Video',
+    theme:'youtube',
+    image:'yt.png',
+    description:'Enjoy your favorite music and videos.',
+    plans:[['1 Month Invite','₱59']]
   },
   {
     id:'capcut',
@@ -825,43 +935,34 @@ const products = [
     category:'Video Editing',
     theme:'capcut',
     image:'capcut.png',
-    description:'Bring your edits to life.',
+    description:'Bring your creative edits to life.',
     plans:[['7 Days','₱59'],['1 Month','₱99']]
   },
   {
-    id:'chatgpt',
-    name:'ChatGPT',
+    id:'chatgptgo',
+    name:'ChatGPT Go',
     category:'AI & Productivity',
     theme:'chatgpt',
     image:'gpt.png',
-    description:'Explore AI-powered productivity.',
-    plans:[['Go — 1 Month','₱79'],['Plus — 1 Month','₱129']]
+    description:'AI tools for everyday productivity.',
+    plans:[['1 Month','₱79']]
   },
   {
-    id:'youtube',
-    name:'YouTube Premium',
-    category:'Music & Video',
-    theme:'youtube',
-    image:'yt.png',
-    description:'Your favorite videos and music.',
-    plans:[['1 Month Invite','₱59']]
-  },
-  {
-    id:'disney',
-    name:'Disney+',
-    category:'Entertainment',
-    theme:'disney',
-    image:'disney.png',
-    description:'A world of stories awaits.',
-    plans:[['1 Month','₱59']]
+    id:'chatgptplus',
+    name:'ChatGPT Plus',
+    category:'AI & Productivity',
+    theme:'chatgpt',
+    image:'gpt.png',
+    description:'Explore advanced AI features.',
+    plans:[['1 Month','₱129']]
   },
   {
     id:'prime',
     name:'Prime Video',
-    category:'Entertainment',
+    category:'Movies & Series',
     theme:'prime',
     image:'primevideo.png',
-    description:'Discover more stories.',
+    description:'Discover exciting movies and series.',
     plans:[['1 Month','₱39']]
   },
   {
@@ -870,16 +971,16 @@ const products = [
     category:'Entertainment',
     theme:'hbo',
     image:'hboog.png',
-    description:'Premium shows and movies.',
+    description:'Explore your favorite premium shows.',
     plans:[['1 Month Invite','₱49']]
   },
   {
     id:'iqiyi',
     name:'iQIYI',
-    category:'Entertainment',
+    category:'Asian Drama & Entertainment',
     theme:'iqiyi',
     image:'iqiyi.jpg',
-    description:'Your drama marathon starts here.',
+    description:'Discover your next favorite drama.',
     plans:[['1 Month','₱89']]
   },
   {
@@ -888,38 +989,57 @@ const products = [
     category:'Entertainment',
     theme:'viva',
     image:'vivaone.png',
-    description:'Explore your favorite shows.',
+    description:'Explore Filipino entertainment.',
     plans:[['1 Month','₱59']]
+  },
+  {
+    id:'iwanttfc',
+    name:'iWantTFC',
+    category:'Filipino Entertainment',
+    theme:'iwanttfc',
+    image:'iwtfc.webp',
+    description:'Enjoy your favorite Filipino shows.',
+    plans:[['1 Month','₱39']]
+  },
+  {
+    id:'disney',
+    name:'Disney+',
+    category:'Movies & Series',
+    theme:'disney',
+    image:'disney.png',
+    description:'Discover a world of stories.',
+    plans:[['1 Month','₱59']]
+  },
+  {
+    id:'nba',
+    name:'NBA League Pass',
+    category:'Sports & Basketball',
+    theme:'nba',
+    image:'nba.png',
+    description:'Follow exciting basketball action.',
+    plans:[['1 Month','₱79']]
   }
 ];
 
-function logoMarkup(product) {
-  if (!product.image) {
-    return `<div class="product-logo-fallback">${product.emoji || '✨'}</div>`;
-  }
-  return `<img class="product-logo" src="${encodeURI(product.image)}" alt="${product.name} logo" loading="lazy">`;
-}
-
+/* PRODUCT CARDS */
 const productGrid = document.getElementById('productGrid');
 
 productGrid.innerHTML = products.map(product => `
-  <article class="product-card theme-${product.theme}"
-    role="button"
-    tabindex="0"
+  <button class="product-card theme-${product.theme}"
     data-product="${product.id}"
     aria-label="Explore ${product.name} plans">
-    <div class="orb"></div>
-    <div class="product-inner">
-      ${logoMarkup(product)}
-      <div class="product-category">${product.category}</div>
+    <span class="product-orb"></span>
+    <span class="product-inner">
+      <img class="product-logo" src="${encodeURI(product.image)}" alt="${product.name} logo" loading="lazy">
+      <span class="product-category">${product.category}</span>
       <h3>${product.name}</h3>
       <p>${product.description}</p>
       <span class="explore-pill">Explore Plans ↗</span>
-    </div>
-  </article>
+    </span>
+  </button>
 `).join('');
 
-/* PRODUCT DETAILS */
+/* PRODUCT MODAL */
 const modal = document.getElementById('productModal');
 let lastFocused = null;
 
@@ -930,11 +1050,8 @@ function openProduct(id) {
   lastFocused = document.activeElement;
   const top = document.getElementById('modalTop');
   top.className = 'modal-top theme-' + product.theme;
-
   top.innerHTML = `
-    ${product.image
-      ? `<img src="${encodeURI(product.image)}" alt="${product.name} logo">`
-      : `<div style="font-size:70px">${product.emoji || '✨'}</div>`}
+    <img src="${encodeURI(product.image)}" alt="${product.name} logo">
     <div>
       <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase">${product.category}</div>
       <h2 id="modalTitle">${product.name}</h2>
@@ -956,7 +1073,7 @@ function openProduct(id) {
   modal.setAttribute('aria-hidden','false');
   document.body.classList.add('modal-open');
   document.getElementById('closeModal').focus();
-  playSound('open');
+  playClickSound();
 }
 
 function closeProduct() {
@@ -971,14 +1088,6 @@ productGrid.addEventListener('click',event => {
   if (card) openProduct(card.dataset.product);
 });
 
-productGrid.addEventListener('keydown',event => {
-  if (event.key !== 'Enter' && event.key !== ' ') return;
-  const card = event.target.closest('[data-product]');
-  if (!card) return;
-  event.preventDefault();
-  openProduct(card.dataset.product);
-});
-
 document.getElementById('closeModal').addEventListener('click',closeProduct);
 document.getElementById('backToShop').addEventListener('click',closeProduct);
 
@@ -989,12 +1098,10 @@ modal.addEventListener('click',event => {
 document.addEventListener('keydown',event => {
   if (!modal.classList.contains('active')) return;
   if (event.key === 'Escape') closeProduct();
-
   if (event.key === 'Tab') {
     const focusables = [...modal.querySelectorAll('button,a[href]')];
     const first = focusables[0];
     const last = focusables[focusables.length-1];
-
     if (event.shiftKey && document.activeElement === first) {
       event.preventDefault();
       last.focus();
@@ -1005,7 +1112,7 @@ document.addEventListener('keydown',event => {
   }
 });
 
-/* 3D HOVER EFFECT */
+/* CINEMATIC 3D HOVER */
 if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
   document.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('pointermove',event => {
@@ -1020,7 +1127,7 @@ if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
   });
 }
 
-/* SCROLL REVEAL */
+/* SCROLL ANIMATIONS */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1032,64 +1139,124 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-/* LOADING */
-window.addEventListener('load',() => {
-  setTimeout(() => {
-    document.getElementById('intro').classList.add('done');
-  },2400);
-});
+/* BACKGROUND MUSIC */
+const music = document.getElementById('backgroundMusic');
+const musicToggle = document.getElementById('musicToggle');
+const volumeSlider = document.getElementById('volumeSlider');
+const volumeValue = document.getElementById('volumeValue');
+const loadingScreen = document.getElementById('loadingScreen');
+const enterButton = document.getElementById('enterButton');
 
-/* COZY SOUND EFFECTS */
-let soundEnabled = false;
-let audioContext;
-let lastHover = 0;
+let wantsMusic = true;
+let musicReady = false;
 
-function playSound(type='click') {
-  if (!soundEnabled) return;
+music.volume = 0.35;
+
+function updateMusicButton() {
+  musicToggle.textContent = music.paused ? '▶' : '❚❚';
+  musicToggle.setAttribute('aria-label',music.paused ? 'Play music' : 'Pause music');
+}
+
+async function startMusic() {
+  if (!wantsMusic) return false;
   try {
-    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
-    if (audioContext.state === 'suspended') audioContext.resume();
-
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    const now = audioContext.currentTime;
-    const frequencies = {hover:680,click:520,open:440};
-
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(frequencies[type] || 520,now);
-    oscillator.frequency.exponentialRampToValueAtTime(type === 'open' ? 880 : 760,now+.12);
-
-    gain.gain.setValueAtTime(.0001,now);
-    gain.gain.exponentialRampToValueAtTime(.025,now+.015);
-    gain.gain.exponentialRampToValueAtTime(.0001,now+.17);
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now+.18);
+    await music.play();
+    musicReady = true;
+    updateMusicButton();
+    return true;
   } catch(error) {
-    console.warn('Sound unavailable:',error);
+    updateMusicButton();
+    return false;
   }
 }
 
-document.getElementById('soundBtn').addEventListener('click',event => {
-  soundEnabled = !soundEnabled;
-  event.currentTarget.textContent = soundEnabled ? '🔊' : '🔇';
-  playSound();
-});
+function enterShop() {
+  loadingScreen.classList.add('hidden');
+}
 
-document.addEventListener('click',event => {
-  if (event.target.closest('button,a,summary,[data-product]')) playSound('click');
-});
-
-document.addEventListener('pointerover',event => {
-  if (!event.target.closest('button,a,summary,[data-product]')) return;
-  const now = Date.now();
-  if (now-lastHover > 150) {
-    playSound('hover');
-    lastHover = now;
+musicToggle.addEventListener('click',async () => {
+  if (music.paused) {
+    wantsMusic = true;
+    await startMusic();
+  } else {
+    wantsMusic = false;
+    music.pause();
+    updateMusicButton();
   }
 });
+
+volumeSlider.addEventListener('input',event => {
+  const value = Number(event.target.value);
+  music.volume = value/100;
+  volumeValue.textContent = value + '%';
+});
+
+enterButton.addEventListener('click',async () => {
+  await startMusic();
+  enterShop();
+});
+
+music.addEventListener('play',updateMusicButton);
+music.addEventListener('pause',updateMusicButton);
+
+/* Attempt music during loading.
+   Browsers may require a click before allowing sound. */
+startMusic();
+
+window.addEventListener('load',() => {
+  setTimeout(async () => {
+    const started = musicReady || await startMusic();
+
+    if (started || !wantsMusic) {
+      enterShop();
+    } else {
+      enterButton.classList.add('show');
+    }
+  },2500);
+});
+
+/* CUTE CLICK SOUND EFFECT */
+let soundContext;
+
+function playClickSound() {
+  try {
+    soundContext ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (soundContext.state === 'suspended') return;
+
+    const oscillator = soundContext.createOscillator();
+    const gain = soundContext.createGain();
+    const now = soundContext.currentTime;
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(520,now);
+    oscillator.frequency.exponentialRampToValueAtTime(800,now+.09);
+
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(.012,now+.015);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+.13);
+
+    oscillator.connect(gain);
+    gain.connect(soundContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now+.14);
+  } catch(error) {
+    console.warn('Click sound unavailable',error);
+  }
+}
+
+document.addEventListener('click',event => {
+  if (event.target.closest('button,a,summary')) playClickSound();
+});
+
+document.addEventListener('pointerdown',() => {
+  if (!soundContext) {
+    try {
+      soundContext = new (window.AudioContext || window.webkitAudioContext)();
+    } catch(error) {}
+  }
+  if (soundContext?.state === 'suspended') soundContext.resume();
+},{once:true});
+
 </script>
 </body>
 </html>
