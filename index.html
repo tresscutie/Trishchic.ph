@@ -801,10 +801,68 @@ footer h2 {
     scroll-behavior:auto!important;
   }
 }
+
+/* ADDITIONS ONLY: Social logos and animated pastel garden */
+.social-logo {
+  display:block;
+  width:94px;
+  height:94px;
+  margin:12px auto 18px;
+  object-fit:contain;
+  border-radius:22px;
+  transition:transform .35s ease,filter .35s ease;
+}
+.social-logo:hover {
+  transform:translateY(-6px) scale(1.1);
+  filter:drop-shadow(0 12px 15px #d977a255);
+}
+#animatedGarden {
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+#animatedGarden .garden-sprite {
+  position:absolute;
+  font-size:var(--sprite-size);
+  opacity:.32;
+  animation:gardenWander var(--sprite-speed) ease-in-out infinite alternate;
+  animation-delay:var(--sprite-delay);
+  will-change:transform;
+}
+@keyframes gardenWander {
+  0% {transform:translate3d(0,0,0) rotate(-15deg)}
+  50% {transform:translate3d(35px,-38px,0) rotate(16deg)}
+  100% {transform:translate3d(-22px,-85px,0) rotate(-10deg)}
+}
+#animatedGarden .garden-star {
+  position:absolute;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:#e79dbc;
+  box-shadow:0 0 12px #e79dbc;
+  animation:gardenTwinkle 3s ease-in-out infinite;
+}
+@keyframes gardenTwinkle {
+  0%,100% {opacity:.08;transform:scale(.4)}
+  50% {opacity:.7;transform:scale(1.5)}
+}
+header,section,footer,nav {position:relative}
+header,section,footer {z-index:1}
+nav {z-index:100}
+@media(prefers-reduced-motion:reduce) {
+  #animatedGarden .garden-sprite,
+  #animatedGarden .garden-star {animation:none}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ADDED: Animated garden background -->
+<div id="animatedGarden" aria-hidden="true"></div>
 
 <!-- LOADING SCREEN -->
 
@@ -1005,6 +1063,7 @@ footer h2 {
 
       <div class="card reveal">
         <div style="font-size:45px">📸</div>
+        <img class="social-logo" src="insta.webp" alt="Instagram logo" loading="lazy">
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
 
@@ -1020,6 +1079,7 @@ footer h2 {
 
       <div class="card reveal">
         <div style="font-size:45px">🎵</div>
+        <img class="social-logo" src="tiktok.avif" alt="TikTok logo" loading="lazy">
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
 
@@ -2157,6 +2217,138 @@ document.addEventListener("click",event => {
   if (event.target.closest("button,a,summary")) {
     playClickSound();
   }
+});
+
+
+/* =============================================
+   ADDITIONS: LIVING PASTEL GARDEN
+   Existing site sections and features retained.
+   ============================================= */
+(function createAnimatedGarden(){
+  const garden = document.getElementById("animatedGarden");
+  if (!garden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const symbols = ["🌸","🌷","🦋","🌼","🍃","✿","✨"];
+  for (let i=0;i<25;i++) {
+    const sprite=document.createElement("span");
+    sprite.className="garden-sprite";
+    sprite.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    sprite.style.left=(Math.random()*100)+"%";
+    sprite.style.top=(Math.random()*100)+"%";
+    sprite.style.setProperty("--sprite-size",(13+Math.random()*19)+"px");
+    sprite.style.setProperty("--sprite-speed",(7+Math.random()*12)+"s");
+    sprite.style.setProperty("--sprite-delay",(-Math.random()*15)+"s");
+    garden.appendChild(sprite);
+  }
+  for (let i=0;i<18;i++) {
+    const star=document.createElement("span");
+    star.className="garden-star";
+    star.style.left=(Math.random()*100)+"%";
+    star.style.top=(Math.random()*100)+"%";
+    star.style.animationDelay=(-Math.random()*4)+"s";
+    garden.appendChild(star);
+  }
+})();
+
+/* =============================================
+   UPGRADED MUSIC: Eight-bar lo-fi arrangement
+   Overrides only the old repetitive scheduler.
+   Original audio controls are retained.
+   ============================================= */
+const newChordProgression = [
+  {bass:130.81,notes:[261.63,329.63,392.00,493.88]},
+  {bass:110.00,notes:[220.00,261.63,329.63,392.00]},
+  {bass:174.61,notes:[349.23,440.00,523.25,659.25]},
+  {bass:196.00,notes:[392.00,493.88,587.33,698.46]},
+  {bass:130.81,notes:[261.63,329.63,392.00,493.88]},
+  {bass:164.81,notes:[329.63,392.00,493.88,587.33]},
+  {bass:110.00,notes:[220.00,261.63,329.63,392.00]},
+  {bass:98.00,notes:[196.00,246.94,293.66,349.23]}
+];
+const newMelodies = [
+  [523.25,0,659.25,783.99,0,659.25,587.33,0,523.25,0,493.88,392,0,440,493.88,0],
+  [440,0,523.25,0,659.25,587.33,0,523.25,440,0,392,0,329.63,392,0,0],
+  [523.25,659.25,0,783.99,880,0,783.99,659.25,0,587.33,523.25,0,440,0,523.25,0],
+  [587.33,0,698.46,783.99,0,698.46,587.33,0,493.88,587.33,0,440,392,0,0,0],
+  [783.99,0,659.25,523.25,0,587.33,659.25,0,783.99,880,0,783.99,659.25,0,523.25,0],
+  [659.25,0,783.99,987.77,0,880,783.99,0,659.25,0,587.33,493.88,523.25,0,0,0],
+  [523.25,659.25,783.99,0,659.25,0,523.25,440,0,392,440,523.25,0,659.25,0,0],
+  [587.33,0,493.88,392,0,440,493.88,0,587.33,698.46,0,587.33,523.25,0,493.88,0]
+];
+let grooveNoiseBuffer=null;
+function groovePercussion(time,kind){
+  if(!grooveNoiseBuffer){
+    grooveNoiseBuffer=audioContext.createBuffer(1,audioContext.sampleRate,audioContext.sampleRate);
+    const channel=grooveNoiseBuffer.getChannelData(0);
+    for(let i=0;i<channel.length;i++) channel[i]=Math.random()*2-1;
+  }
+  const source=audioContext.createBufferSource();
+  const filter=audioContext.createBiquadFilter();
+  const gain=audioContext.createGain();
+  const duration=kind==="snare"?.11:.045;
+  source.buffer=grooveNoiseBuffer;
+  filter.type=kind==="snare"?"bandpass":"highpass";
+  filter.frequency.value=kind==="snare"?1600:6000;
+  gain.gain.setValueAtTime(kind==="snare"?.06:.025,time);
+  gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
+  source.connect(filter);filter.connect(gain);gain.connect(masterGain);
+  source.start(time);source.stop(time+duration);
+}
+const grooveStepSeconds=60/76/4;
+scheduleMusic=function(){
+  if(!musicPlaying || !audioContext || audioContext.state!=="running") return;
+  while(nextNoteTime<audioContext.currentTime+.3){
+    const step=noteIndex%16;
+    const bar=Math.floor(noteIndex/16);
+    const harmony=newChordProgression[bar%newChordProgression.length];
+    const tune=newMelodies[bar%newMelodies.length];
+    if(step===0){
+      harmony.notes.forEach((frequency,index)=>{
+        playTone(frequency,nextNoteTime,2.7,.04-index*.004,"triangle");
+      });
+    }
+    if(step===0||step===8) playTone(harmony.bass,nextNoteTime,.6,.15,"sine");
+    if(step===4||step===12) groovePercussion(nextNoteTime,"snare");
+    if(step%2===0) groovePercussion(nextNoteTime,"hat");
+    const pitch=tune[step];
+    if(pitch && (bar%3!==2 || step%4!==2)){
+      playTone(pitch,nextNoteTime,.3+(step%3)*.09,.085,"sine");
+      if(step%4===0) playTone(pitch*2,nextNoteTime,.2,.012,"triangle");
+    }
+    noteIndex++;
+    nextNoteTime+=grooveStepSeconds;
+  }
+};
+
+/* =============================================
+   MODERN SOFT UI SOUNDS (NOT CUTE CHIMES)
+   Hover: short airy tick. Click: low muted tap.
+   ============================================= */
+function modernUITone(frequency,duration,volume,isClick){
+  if(!audioContext || audioContext.state!=="running") return;
+  const time=audioContext.currentTime;
+  const oscillator=audioContext.createOscillator();
+  const filter=audioContext.createBiquadFilter();
+  const gain=audioContext.createGain();
+  oscillator.type=isClick?"triangle":"sine";
+  oscillator.frequency.setValueAtTime(frequency,time);
+  oscillator.frequency.exponentialRampToValueAtTime(frequency*(isClick?.65:1.07),time+duration);
+  filter.type="lowpass";filter.frequency.value=1600;
+  gain.gain.setValueAtTime(.0001,time);
+  gain.gain.linearRampToValueAtTime(volume,time+.006);
+  gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
+  oscillator.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);
+  oscillator.start(time);oscillator.stop(time+duration+.01);
+}
+playClickSound=function(){modernUITone(310,.11,.032,true)};
+let lastModernHover=0;
+document.addEventListener("pointerover",event=>{
+  if(event.pointerType==="touch")return;
+  const target=event.target.closest("button,a,summary,.product-card,.toc-item,.social-logo,[data-proof]");
+  if(!target || target.contains(event.relatedTarget))return;
+  const now=performance.now();
+  if(now-lastModernHover<100)return;
+  lastModernHover=now;
+  modernUITone(560,.065,.013,false);
 });
 
 </script>
