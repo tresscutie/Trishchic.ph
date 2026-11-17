@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trisha's Commission & Services</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pastel-pink: #ffd1dc;
+            --pastel-green: #d1f2d9;
+            --pastel-red: #ffb3ba;
+            --deep-rose: #d65a67;
+            --text-dark: #4a4a4a;
+            --bg-color: #fcf9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(214, 90, 103, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-green));
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--white);
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--pastel-red);
+        }
+
+        section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        section h2 i {
+            color: var(--deep-rose);
+        }
+
+        /* Pricelist Grid */
+        .pricelist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .price-card {
+            background: #fff8f8;
+            border: 2px dashed var(--pastel-red);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            background: #fff0f2;
+        }
+
+        .price-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .price-card .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--deep-rose);
+        }
+
+        /* Accounts / Social Links */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--pastel-green);
+            color: #2c5e3b;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .social-btn:hover {
+            background: #b5e8c2;
+            transform: scale(1.05);
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Rules & Regulations */
+        ol, ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* Notes */
+        .notes-box {
+            background: #f4faf6;
+            border-left: 5px solid var(--pastel-green);
+            padding: 15px 20px;
+            border-radius: 0 15px 15px 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trisha's Commission & Services</h1>
+        <p>Welcome! Please check out the guidelines and pricelists below.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- ACCOUNTS SECTION -->
+        <section>
+            <h2><i class="fa-solid fa-share-nodes"></i> Official Accounts</h2>
+            <div class="social-links">
+                <!-- Palitan ang '#' ng iyong actual link -->
+                <a href="https://instagram.com/your_ig_username" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://facebook.com/your_fb_profile" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+                <a href="https://t.me/your_telegram" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-telegram"></i> Telegram
+                </a>
+            </div>
+        </section>
+
+        <!-- PRICELIST SECTION -->
+        <section>
+            <h2><i class="fa-solid fa-tag"></i> Pricelist</h2>
+            <div class="pricelist-grid">
+                <div class="price-card">
+                    <h3>Service / Item 1</h3>
+                    <div class="price">₱150</div>
+                </div>
+                <div class="price-card">
+                    <h3>Service / Item 2</h3>
+                    <div class="price">₱250</div>
+                </div>
+                <div class="price-card">
+                    <h3>Service / Item 3</h3>
+                    <div class="price">₱500</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RULES AND REGULATIONS -->
+        <section>
+            <h2><i class="fa-solid fa-circle-exclamation"></i> Rules & Regulations</h2>
+            <ol>
+                <div>Be polite and respectful when inquiring.</div>
+                <div>Strictly no rushing of orders unless rush fee is paid.</div>
+                <div>50% downpayment or full payment is required before starting the commission.</div>
+                <div>Maximum of 2 minor revisions only. Additional revisions will have an extra fee.</div>
+                <div>No refunds once the work has already started.</div>
+            </ol>
+        </section>
+
+        <!-- NOTES SECTION -->
+        <section>
+            <h2><i class="fa-solid fa-note-sticky"></i> Important Notes</h2>
+            <div class="notes-box">
+                <p><strong>Turnaround Time (TAT):</strong> 3 to 7 days depending on the queue and complexity of the request. Make sure to message ahead of your deadline!</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Trisha's Services. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
