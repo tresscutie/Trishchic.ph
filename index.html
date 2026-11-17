@@ -3,158 +3,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f8e8ef">
-<meta name="description" content="Trishchic.ph — friendly services and affordable prices.">
-<title>Trishchic.ph | Your Cozy Little Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffeaf2">
+<title>Trishchic.ph | Cozy Digital Shop</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --pink:#f5a8c7;
-  --rose:#dc83aa;
-  --light-pink:#fff0f6;
-  --green:#a9cb70;
-  --dark-green:#769a42;
+  --pink:#f5a6c5;
+  --rose:#d977a2;
+  --green:#a9cb72;
+  --darkgreen:#729746;
   --cream:#fffdf8;
-  --text:#514850;
-  --shadow:0 16px 45px rgba(124,79,98,.11);
+  --text:#51464e;
+  --shadow:0 15px 40px #a66b8822;
 }
+
 * { box-sizing:border-box; }
+
 html { scroll-behavior:smooth; }
+
 body {
   margin:0;
-  font-family:'DM Sans',sans-serif;
-  color:var(--text);
   background:var(--cream);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
 }
-body.modal-open { overflow:hidden; }
-a { color:inherit; text-decoration:none; }
-button,input { font:inherit; }
-button { cursor:pointer; }
-img { max-width:100%; }
-h1,h2,h3 { font-family:'Fredoka',sans-serif; }
+
+body.locked { overflow:hidden; }
+
+h1,h2,h3 {
+  font-family:"Fredoka",sans-serif;
+}
+
 p { line-height:1.7; }
-section { scroll-margin-top:90px; }
-.container { width:min(1150px,92%); margin:auto; }
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+button,input { font:inherit; }
+
+button { cursor:pointer; }
+
+img { max-width:100%; }
+
+section { scroll-margin-top:85px; }
+
+.container {
+  width:min(1150px,92%);
+  margin:auto;
+}
+
+.section { padding:80px 0; }
+
 .center { text-align:center; }
+
 .pink { color:var(--rose); }
-.green { color:var(--dark-green); }
-.section { padding:85px 0; }
-.section-title {
+
+.green { color:var(--darkgreen); }
+
+.title {
   font-size:clamp(32px,5vw,52px);
   line-height:1.15;
-  margin:13px 0 18px;
+  margin:15px 0;
 }
-.subtitle { max-width:690px; margin:0 auto 30px; }
+
+.subtitle {
+  max-width:690px;
+  margin:0 auto 30px;
+}
+
 .tag {
   display:inline-block;
   padding:9px 17px;
   border-radius:30px;
-  background:#ffe8f1;
-  color:#bd7092;
+  background:#ffe6f0;
+  color:#bc6d91;
   font-size:12px;
   font-weight:800;
-  letter-spacing:1.3px;
+  letter-spacing:1px;
 }
+
 .card {
-  background:white;
-  border:1px solid #f3dce6;
-  border-radius:27px;
   padding:28px;
+  border:1px solid #f2dce5;
+  border-radius:26px;
+  background:white;
   box-shadow:var(--shadow);
 }
+
 .btn {
   display:inline-flex;
-  justify-content:center;
   align-items:center;
-  gap:8px;
+  justify-content:center;
+  gap:9px;
   padding:14px 24px;
   border:0;
-  border-radius:35px;
+  border-radius:40px;
   background:var(--rose);
   color:white;
   font-weight:800;
-  box-shadow:0 6px 0 #c36b92;
-  transition:transform .25s,box-shadow .25s;
+  box-shadow:0 5px 0 #bc638a;
+  transition:.25s;
 }
-.btn:hover { transform:translateY(-4px); box-shadow:0 10px 0 #c36b92; }
-.btn:active { transform:translateY(2px); box-shadow:0 2px 0 #c36b92; }
-.btn-green { background:#92b45b; box-shadow:0 6px 0 #729144; }
-.btn-green:hover { box-shadow:0 10px 0 #729144; }
-.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s,transform .7s; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-@keyframes float {
+
+.btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 0 #bc638a;
+}
+
+.btn-green {
+  background:#91b55c;
+  box-shadow:0 5px 0 #719245;
+}
+
+.btn-green:hover {
+  box-shadow:0 8px 0 #719245;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(25px);
+  transition:opacity .7s,transform .7s;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+@keyframes floating {
   0%,100% { transform:translateY(0); }
-  50% { transform:translateY(-15px); }
+  50% { transform:translateY(-14px); }
 }
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
+
+@keyframes loading {
+  from { width:0; }
+  to { width:100%; }
 }
-@keyframes spin { to { transform:rotate(360deg); } }
 
 /* LOADING SCREEN */
-#loadingScreen {
+
+#loading {
   position:fixed;
   inset:0;
   z-index:1000;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   text-align:center;
   padding:25px;
-  background:linear-gradient(135deg,#ffe3ef,#f6f9e8,#e2f0c8);
+  background:linear-gradient(135deg,#ffe3ee,#f6f9e7,#dfedc3);
   transition:opacity .7s,visibility .7s;
 }
-#loadingScreen.hidden {
+
+#loading.hide {
   opacity:0;
   visibility:hidden;
   pointer-events:none;
 }
+
 .loading-girl {
-  width:180px;
+  width:175px;
   height:190px;
   object-fit:contain;
-  animation:float 3s ease-in-out infinite;
+  animation:floating 3s infinite;
 }
-#loadingScreen h1 {
-  font-size:clamp(36px,7vw,72px);
+
+#loading h1 {
   color:var(--rose);
+  font-size:clamp(38px,7vw,72px);
   margin:15px 0 5px;
 }
-#loadingScreen p { max-width:470px; }
-.loading-bar {
+
+#loading p {
+  max-width:480px;
+}
+
+.progress {
   width:min(320px,80vw);
   height:11px;
-  margin-top:20px;
-  border-radius:20px;
   background:white;
+  border-radius:20px;
   overflow:hidden;
+  margin:20px 0;
 }
-.loading-progress {
-  width:0;
+
+.progress div {
   height:100%;
   background:linear-gradient(90deg,var(--pink),var(--green));
-  animation:load 2.4s forwards;
+  animation:loading 2.4s forwards;
 }
-@keyframes load { to { width:100%; } }
-#enterButton { display:none; margin-top:28px; }
-#enterButton.show { display:inline-flex; }
+
+#enterShop { display:none; }
+
+#enterShop.show { display:inline-flex; }
 
 /* NAVIGATION */
+
 nav {
   position:sticky;
   top:0;
   z-index:100;
-  background:#fffdf8f2;
+  background:#fffdf8ed;
   backdrop-filter:blur(15px);
   border-bottom:1px solid #f1dce5;
 }
+
 .nav-inner {
   max-width:1180px;
   margin:auto;
@@ -164,268 +229,295 @@ nav {
   justify-content:space-between;
   gap:15px;
 }
+
 .logo {
-  font:700 26px 'Fredoka',sans-serif;
+  font:700 26px "Fredoka",sans-serif;
   color:var(--rose);
 }
+
 .nav-links {
   display:flex;
-  align-items:center;
   gap:20px;
   font-size:13px;
   font-weight:800;
 }
+
 .nav-links a:hover { color:var(--rose); }
 
 /* MUSIC PLAYER */
+
 .music-player {
   display:flex;
   align-items:center;
   gap:10px;
   padding:8px 13px;
+  background:#fff0f6;
   border:1px solid #f0d4df;
   border-radius:50px;
-  background:#fff0f6;
 }
+
 .music-button {
-  display:grid;
-  place-items:center;
-  width:36px;
-  height:36px;
+  width:37px;
+  height:37px;
   border:0;
   border-radius:50%;
   background:var(--rose);
   color:white;
-  font-size:15px;
 }
-.volume-slider {
+
+#volume {
   width:85px;
   accent-color:var(--rose);
-  cursor:pointer;
 }
-.volume-value {
-  min-width:34px;
-  font-size:11px;
+
+#volumeText {
+  font-size:12px;
   font-weight:800;
-  color:#b26a8b;
 }
-.music-label { font-size:12px; font-weight:800; }
 
 /* HERO */
+
 .hero {
   min-height:650px;
-  position:relative;
   display:grid;
   place-items:center;
+  position:relative;
   overflow:hidden;
-  padding:75px 20px;
+  padding:70px 20px;
   background:
-    linear-gradient(120deg,#f4f9e8a8,#ffe6f0a8),
-    url("wave%20backround.jpg") center/cover no-repeat;
+    linear-gradient(120deg,#f5fae9b8,#ffe5efb8),
+    url("wave backround.jpg") center/cover;
 }
-.hero:before {
-  content:'';
-  position:absolute;
-  width:350px;
-  height:350px;
-  right:-120px;
-  top:-100px;
-  transform:rotate(25deg);
-  opacity:.25;
-  background:repeating-conic-gradient(#ee8fb4 0 25%,white 0 50%) 0 0/75px 75px;
-}
+
 .hero-content {
   position:relative;
-  z-index:2;
-  max-width:850px;
   text-align:center;
+  max-width:850px;
 }
+
 .hero-girl {
   width:190px;
   height:190px;
   object-fit:contain;
-  animation:float 4s ease-in-out infinite;
-  filter:drop-shadow(0 12px 15px #b5748b50);
+  animation:floating 4s infinite;
 }
+
 .hero h1 {
-  font-size:clamp(48px,8vw,90px);
+  font-size:clamp(48px,8vw,88px);
   line-height:1.05;
-  color:#86a94c;
+  color:#88a950;
   text-shadow:4px 4px white;
-  margin:17px 0;
+  margin:20px 0;
 }
+
 .hero h1 span { color:var(--rose); }
-.hero-description { font-size:18px; }
+
 .notice {
   max-width:740px;
   margin:25px auto;
   padding:23px;
-  border:2px dashed #e8a3bf;
-  border-radius:24px;
   background:#fffffff0;
-  box-shadow:var(--shadow);
+  border:2px dashed #e8a3bf;
+  border-radius:23px;
   font-size:clamp(17px,3vw,23px);
   font-weight:800;
-}
-.sparkle {
-  position:absolute;
-  font-size:35px;
-  animation:float 3s infinite;
+  box-shadow:var(--shadow);
 }
 
 /* TABLE OF CONTENTS */
-.toc-card { max-width:850px; margin:auto; }
+
+.toc-box {
+  max-width:850px;
+  margin:auto;
+}
+
 .toc-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:13px;
   margin-top:30px;
 }
+
 .toc-item {
   display:flex;
   align-items:center;
   gap:13px;
   padding:16px;
-  border:1px solid #f3dce6;
+  border:1px solid #f2dce5;
   border-radius:17px;
   background:#fff8fa;
   font-weight:800;
   transition:.25s;
 }
-.toc-item:hover { background:#eaf3d4; transform:translateX(5px); }
+
+.toc-item:hover {
+  background:#eaf3d5;
+  transform:translateX(5px);
+}
+
 .toc-number {
   padding:9px 12px;
-  border-radius:12px;
   background:#e9abc5;
   color:white;
+  border-radius:12px;
   font-size:12px;
 }
 
-/* SOCIAL AND FEATURE CARDS */
-.three-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-.feature { text-align:center; }
-.feature-icon { font-size:43px; }
-.feature h3 { font-size:24px; }
+/* SOCIALS */
+
 .social-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:20px;
 }
-.social-card { text-align:center; }
-.social-card h3 { font-size:28px; }
 
-/* CINEMATIC PRODUCT CARDS */
-.shop-section { background:linear-gradient(180deg,#fff0f6,#fffafd); }
+/* FEATURES */
+
+.feature {
+  text-align:center;
+}
+
+.feature-icon { font-size:42px; }
+
+.feature h3 { font-size:25px; }
+
+/* PRODUCTS */
+
+.shop-section {
+  background:linear-gradient(180deg,#fff0f6,#fffafd);
+}
+
 .product-grid {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:23px;
   margin-top:40px;
 }
+
 .product-card {
   position:relative;
-  min-height:355px;
-  overflow:hidden;
   isolation:isolate;
+  min-height:350px;
+  overflow:hidden;
+  padding:0;
   border:0;
   border-radius:27px;
-  color:white;
   text-align:left;
-  cursor:pointer;
-  transform-style:preserve-3d;
-  transition:transform .25s,box-shadow .3s;
+  color:white;
   box-shadow:0 15px 32px #35262d28;
+  transition:transform .3s,box-shadow .3s;
 }
-.product-card:hover { box-shadow:0 25px 50px #35262d44; }
-.product-card:focus-visible { outline:4px solid var(--rose); outline-offset:4px; }
-.product-card:before {
-  content:'';
-  position:absolute;
-  inset:-80%;
-  background:conic-gradient(transparent,#ffffff24,transparent 35%);
-  animation:spin 11s linear infinite;
-  z-index:-1;
+
+.product-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 25px 50px #35262d44;
 }
+
 .product-card:after {
-  content:'';
+  content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,transparent 15%,#000a);
   z-index:-1;
+  background:linear-gradient(180deg,transparent 10%,#0009);
 }
-.product-orb {
-  position:absolute;
-  width:230px;
-  height:230px;
-  right:-70px;
-  top:-70px;
-  border-radius:50%;
-  background:#ffffff25;
-  filter:blur(14px);
-  animation:float 5s infinite;
-}
+
 .product-inner {
-  min-height:355px;
+  min-height:350px;
+  padding:28px;
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  padding:29px;
-  position:relative;
-  z-index:2;
 }
+
 .product-logo {
-  width:76px;
-  height:76px;
+  width:78px;
+  height:78px;
   padding:10px;
+  object-fit:contain;
   border-radius:20px;
   background:#fffffff0;
-  object-fit:contain;
   box-shadow:0 12px 25px #0003;
-  transition:transform .4s;
+  transition:.4s;
 }
-.product-card:hover .product-logo { transform:scale(1.12) rotate(-5deg); }
+
+.product-card:hover .product-logo {
+  transform:scale(1.12) rotate(-5deg);
+}
+
 .product-category {
   margin-top:auto;
   font-size:11px;
+  font-weight:800;
   letter-spacing:2px;
   text-transform:uppercase;
-  font-weight:800;
-  opacity:.85;
 }
+
 .product-inner h3 {
   font-size:clamp(27px,3vw,37px);
   line-height:1.1;
-  margin:9px 0;
+  margin:10px 0;
 }
-.product-inner p { font-size:13px; opacity:.9; margin:0 0 20px; }
-.explore-pill {
+
+.product-inner p {
+  font-size:13px;
+  margin:0 0 20px;
+}
+
+.explore {
   padding:11px 18px;
   border-radius:30px;
-  background:#fffffff0;
+  background:white;
   color:#30252b;
   font-size:13px;
   font-weight:800;
 }
-.product-card:hover .explore-pill { background:#f8c5d9; }
 
-/* INDIVIDUAL PRODUCT THEMES */
-.theme-canva { background:linear-gradient(135deg,#05b9c6,#644bd9,#d34aa9); }
-.theme-netflix { background:radial-gradient(circle at 80% 20%,#ba1826,#160508 72%); }
-.theme-youtube { background:linear-gradient(135deg,#ed2534,#65070e,#180407); }
-.theme-capcut { background:linear-gradient(135deg,#444,#070707); }
-.theme-chatgpt { background:linear-gradient(135deg,#118a72,#073d37,#111b1b); }
-.theme-prime { background:linear-gradient(135deg,#0b609d,#071d39); }
-.theme-hbo { background:linear-gradient(135deg,#7050b8,#201036); }
-.theme-viva { background:linear-gradient(135deg,#df4795,#53163e); }
-.theme-iwanttfc { background:linear-gradient(135deg,#2869b7,#091c48); }
-.theme-disney { background:radial-gradient(circle at 70% 20%,#3a79ce,#08194b 72%); }
-.theme-nba { background:linear-gradient(135deg,#d12b36,#213b83,#101a35); }
+.theme-canva {
+  background:linear-gradient(135deg,#05b9c6,#644bd9,#d34aa9);
+}
 
-/* PRODUCT POPUP */
+.theme-netflix {
+  background:radial-gradient(circle at 80% 20%,#ba1826,#160508 72%);
+}
+
+.theme-youtube {
+  background:linear-gradient(135deg,#ed2534,#65070e,#180407);
+}
+
+.theme-capcut {
+  background:linear-gradient(135deg,#444,#070707);
+}
+
+.theme-chatgpt {
+  background:linear-gradient(135deg,#118a72,#073d37,#111b1b);
+}
+
+.theme-prime {
+  background:linear-gradient(135deg,#0b609d,#071d39);
+}
+
+.theme-hbo {
+  background:linear-gradient(135deg,#7050b8,#201036);
+}
+
+.theme-viva {
+  background:linear-gradient(135deg,#df4795,#53163e);
+}
+
+.theme-iwanttfc {
+  background:linear-gradient(135deg,#2869b7,#091c48);
+}
+
+.theme-disney {
+  background:radial-gradient(circle at 70% 20%,#3a79ce,#08194b 72%);
+}
+
+.theme-nba {
+  background:linear-gradient(135deg,#d12b36,#213b83,#101a35);
+}
+
+/* FLOATING MODALS */
+
 .modal {
   position:fixed;
   inset:0;
@@ -437,42 +529,32 @@ nav {
   background:#171019cc;
   backdrop-filter:blur(12px);
 }
-.modal.active { display:flex; animation:fadeIn .3s ease; }
+
+.modal.active {
+  display:flex;
+}
+
 .modal-box {
-  width:min(880px,100%);
+  position:relative;
+  width:min(850px,100%);
   max-height:90vh;
   overflow-y:auto;
-  position:relative;
   border-radius:30px;
   background:white;
-  animation:modalUp .4s ease;
+  animation:modalUp .35s ease;
 }
+
 @keyframes modalUp {
-  from { transform:translateY(35px) scale(.96); opacity:0; }
-  to { transform:translateY(0) scale(1); opacity:1; }
+  from {
+    opacity:0;
+    transform:translateY(30px) scale(.96);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
-.modal-top {
-  min-height:220px;
-  padding:35px;
-  display:flex;
-  align-items:center;
-  gap:25px;
-  color:white;
-}
-.modal-top img {
-  width:105px;
-  height:105px;
-  padding:12px;
-  border-radius:23px;
-  background:white;
-  object-fit:contain;
-}
-.modal-top h2 {
-  font-size:clamp(30px,5vw,49px);
-  margin:5px 0;
-}
-.modal-body { padding:30px; }
-.modal-body h3 { font-size:26px; }
+
 .modal-close {
   position:absolute;
   top:15px;
@@ -486,58 +568,137 @@ nav {
   color:#333;
   font-size:25px;
 }
+
+.modal-top {
+  min-height:210px;
+  padding:35px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+  color:white;
+}
+
+.modal-top img {
+  width:105px;
+  height:105px;
+  padding:12px;
+  border-radius:23px;
+  background:white;
+  object-fit:contain;
+}
+
+.modal-top h2 {
+  font-size:clamp(30px,5vw,48px);
+  margin:8px 0;
+}
+
+.modal-body { padding:30px; }
+
 .plan-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
   gap:15px;
-  margin:23px 0;
+  margin:22px 0;
 }
+
 .plan {
-  padding:21px;
+  padding:20px;
   border:2px solid #f3dce6;
   border-radius:20px;
   background:#fff9fb;
   text-align:center;
 }
+
 .plan strong {
   display:block;
   margin-top:10px;
   color:var(--rose);
-  font:700 34px 'Fredoka',sans-serif;
+  font:700 34px "Fredoka",sans-serif;
 }
-.modal-actions { display:flex; flex-wrap:wrap; gap:12px; }
+
+/* LEGITIMACY */
+
+.proof-section {
+  background:linear-gradient(135deg,#f5f9e8,#ffe7f0);
+}
+
+.proof-preview {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin:25px 0;
+}
+
+.proof-preview img {
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:17px;
+  border:4px solid white;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.proof-preview img:hover {
+  transform:translateY(-7px);
+}
+
+.proof-gallery {
+  width:min(700px,100%);
+  padding:25px;
+  text-align:center;
+}
+
+.proof-gallery h2 {
+  font-size:30px;
+  color:var(--rose);
+}
+
+.proof-gallery img {
+  display:block;
+  max-width:100%;
+  max-height:60vh;
+  margin:20px auto;
+  border-radius:15px;
+  object-fit:contain;
+}
+
+.gallery-controls {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+}
 
 /* BOOKING */
-.booking-section { background:linear-gradient(135deg,#e7f2cd,#ffe5ef); }
+
+.booking-section {
+  background:linear-gradient(135deg,#e7f2cd,#ffe5ef);
+}
+
 .booking-layout {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:35px;
   align-items:center;
 }
+
 .booking-visual {
   padding:30px;
   border-radius:30px;
   background:#ffffffb9;
   text-align:center;
 }
+
 .booking-visual img {
-  width:100%;
   height:220px;
   object-fit:contain;
-  animation:float 4s infinite;
-}
-.booking-visual h3 { font-size:30px; color:var(--rose); }
-.fee {
-  display:inline-block;
-  padding:12px 20px;
-  border-radius:30px;
-  background:white;
-  color:var(--dark-green);
-  font-weight:800;
+  animation:floating 4s infinite;
 }
 
-/* FAQ AND FOOTER */
+/* FAQ */
+
 details {
   margin:12px 0;
   padding:21px;
@@ -545,14 +706,25 @@ details {
   border-radius:18px;
   background:white;
 }
-summary { cursor:pointer; font-weight:800; }
+
+summary {
+  cursor:pointer;
+  font-weight:800;
+}
+
+/* FOOTER */
+
 footer {
   padding:65px 20px;
   background:#cce3a8;
   text-align:center;
 }
-footer h2 { color:#71963e; font-size:42px; }
-footer a { font-weight:800; text-decoration:underline; }
+
+footer h2 {
+  color:#71963e;
+  font-size:42px;
+}
+
 .floating-contact {
   position:fixed;
   right:20px;
@@ -567,27 +739,61 @@ footer a { font-weight:800; text-decoration:underline; }
 }
 
 /* MOBILE */
+
 @media(max-width:950px) {
   .nav-links { display:none; }
-  .product-grid,.three-grid { grid-template-columns:repeat(2,1fr); }
-  .music-label { display:none; }
+  .product-grid,.grid {
+    grid-template-columns:repeat(2,1fr);
+  }
 }
+
 @media(max-width:650px) {
-  .section { padding:65px 0; }
-  .toc-grid,.social-grid,.three-grid,.product-grid,.booking-layout { grid-template-columns:1fr; }
-  .card { padding:23px; }
-  .hero { min-height:580px; padding:55px 15px; }
-  .hero-girl { width:145px; height:155px; }
-  .product-card,.product-inner { min-height:325px; }
-  .modal-top { flex-direction:column; align-items:flex-start; padding:30px 25px; }
-  .modal-top img { width:78px; height:78px; }
+  .section { padding:60px 0; }
+
+  .toc-grid,
+  .social-grid,
+  .grid,
+  .product-grid,
+  .booking-layout {
+    grid-template-columns:1fr;
+  }
+
+  .hero { min-height:580px; }
+
+  .hero-girl {
+    width:145px;
+    height:155px;
+  }
+
+  .logo { font-size:20px; }
+
+  .music-player { gap:5px; }
+
+  #volume { width:55px; }
+
+  #volumeText { display:none; }
+
+  .proof-preview {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .proof-preview img { height:150px; }
+
+  .modal-top {
+    flex-direction:column;
+    align-items:flex-start;
+    padding:30px 25px;
+  }
+
   .modal-body { padding:24px; }
-  .volume-slider { width:55px; }
-  .volume-value { display:none; }
-  .music-player { padding:6px 9px; gap:6px; }
-  .logo { font-size:21px; }
-  .floating-contact { right:12px; bottom:12px; padding:13px 16px; font-size:13px; }
+
+  .floating-contact {
+    right:12px;
+    bottom:12px;
+    font-size:13px;
+  }
 }
+
 @media(prefers-reduced-motion:reduce) {
   *,*:before,*:after {
     animation-duration:.01ms!important;
@@ -600,662 +806,1360 @@ footer a { font-weight:800; text-decoration:underline; }
 
 <body>
 
-<!-- BACKGROUND MUSIC -->
-<audio id="backgroundMusic" src="cozy-music.mp3" loop preload="auto"></audio>
-
 <!-- LOADING SCREEN -->
-<div id="loadingScreen">
-  <img src="girl%20(2).png" class="loading-girl" alt="Trishchic mascot">
+
+<div id="loading">
+  <img
+    src="girl (2).png"
+    class="loading-girl"
+    alt="Trishchic mascot"
+  >
+
   <h1>Welcome to Trishchic.ph</h1>
-  <p>A shop with friendly services and affordable prices ♡</p>
-  <div class="loading-bar"><div class="loading-progress"></div></div>
-  <p style="font-size:12px">Preparing your cozy little experience...</p>
-  <button class="btn" id="enterButton">Enter My Cozy Shop ♡ 🎶</button>
+
+  <p>
+    A shop with friendly services and affordable prices ♡
+  </p>
+
+  <div class="progress">
+    <div></div>
+  </div>
+
+  <p>Preparing your cozy little experience...</p>
+
+  <button class="btn" id="enterShop">
+    Enter My Cozy Shop ♡ 🎶
+  </button>
 </div>
 
 <!-- NAVIGATION -->
+
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="#home">✿ trishchic.ph</a>
+
+    <a href="#home" class="logo">
+      ✿ trishchic.ph
+    </a>
+
     <div class="nav-links">
       <a href="#contents">Explore</a>
       <a href="#shop">Pricelist</a>
+      <a href="#proofs">Legitimacy</a>
       <a href="#booking">Booking</a>
       <a href="#contact">Contact</a>
     </div>
 
     <div class="music-player">
-      <span class="music-label">♫ Cozy Vibes</span>
-      <button class="music-button" id="musicToggle" aria-label="Play or pause music">▶</button>
-      <input class="volume-slider" id="volumeSlider" type="range" min="0" max="100" value="35" aria-label="Music volume">
-      <span class="volume-value" id="volumeValue">35%</span>
+      <span>♫</span>
+
+      <button
+        class="music-button"
+        id="musicToggle"
+        aria-label="Play or pause music"
+      >▶</button>
+
+      <input
+        type="range"
+        id="volume"
+        min="0"
+        max="100"
+        value="35"
+        aria-label="Music volume"
+      >
+
+      <span id="volumeText">35%</span>
     </div>
+
   </div>
 </nav>
 
 <!-- HERO -->
+
 <header class="hero" id="home">
-  <span class="sparkle" style="top:12%;left:7%">✿</span>
-  <span class="sparkle" style="bottom:12%;right:8%">✨</span>
   <div class="hero-content">
-    <img src="girl%20(1).png" class="hero-girl" alt="Trishchic character">
-    <div><span class="tag">YOUR COZY LITTLE DIGITAL SHOP ♡</span></div>
-    <h1>Welcome to<br><span>Trishchic.ph</span></h1>
-    <p class="hero-description">Affordable digital goodies, friendly services, and a sprinkle of happiness!</p>
-    <div class="notice">💌 Please make sure to read everything so we can avoid too many questions!</div>
-    <a class="btn" href="#contents">Let's Explore ♡ ↓</a>
+
+    <img
+      src="girl (1).png"
+      class="hero-girl"
+      alt="Trishchic character"
+    >
+
+    <div>
+      <span class="tag">
+        YOUR COZY LITTLE DIGITAL SHOP ♡
+      </span>
+    </div>
+
+    <h1>
+      Welcome to<br>
+      <span>Trishchic.ph</span>
+    </h1>
+
+    <p>
+      Affordable digital goodies, friendly services,
+      and a sprinkle of happiness!
+    </p>
+
+    <div class="notice">
+      💌 Please make sure to read everything
+      so we can avoid too many questions!
+    </div>
+
+    <a href="#contents" class="btn">
+      Let's Explore ♡ ↓
+    </a>
+
   </div>
 </header>
 
 <!-- TABLE OF CONTENTS -->
+
 <section class="section" id="contents">
   <div class="container">
-    <div class="card toc-card reveal">
+
+    <div class="card toc-box reveal">
+
       <div class="center">
         <span class="tag">YOUR LITTLE GUIDE</span>
-        <h2 class="section-title"><span class="green">Table of</span> <span class="pink">Contents</span></h2>
-        <p>Tap any section and we'll take you there! 🌷</p>
+
+        <h2 class="title">
+          <span class="green">Table of</span>
+          <span class="pink">Contents</span>
+        </h2>
+
+        <p>Tap any section to explore! 🌷</p>
       </div>
+
       <div class="toc-grid" id="tocGrid"></div>
+
     </div>
+
   </div>
 </section>
 
 <!-- INTRODUCTION -->
+
 <section class="section" id="about" style="background:#f5f9eb">
   <div class="container center">
+
     <span class="tag">GET TO KNOW US</span>
-    <h2 class="section-title">Hello there, <span class="pink">lovely!</span> 🌸</h2>
-    <img src="girl%20(3).png" alt="Trishchic character" style="width:170px;height:180px;object-fit:contain">
-    <p class="subtitle">Welcome to Trishchic.ph! Your friendly little shop for affordable digital services like Canva, Netflix, CapCut, ChatGPT, YouTube, and more.</p>
-    <div class="three-grid">
-      <div class="card feature reveal"><div class="feature-icon">🌷</div><h3>Friendly Service</h3><p>Easy to talk to and ready to assist!</p></div>
-      <div class="card feature reveal"><div class="feature-icon">💚</div><h3>Budget Friendly</h3><p>Affordable options for your favorite services.</p></div>
-      <div class="card feature reveal"><div class="feature-icon">✨</div><h3>Easy Ordering</h3><p>Browse, choose, and message us directly.</p></div>
+
+    <h2 class="title">
+      Hello there, <span class="pink">lovely!</span> 🌸
+    </h2>
+
+    <img
+      src="girl (3).png"
+      alt="Trishchic character"
+      style="width:170px;height:180px;object-fit:contain"
+    >
+
+    <p class="subtitle">
+      Welcome to Trishchic.ph! Your friendly little
+      shop for affordable digital services.
+    </p>
+
+    <div class="grid">
+
+      <div class="card feature reveal">
+        <div class="feature-icon">🌷</div>
+        <h3>Friendly Service</h3>
+        <p>Easy to talk to and ready to assist!</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">💚</div>
+        <h3>Budget Friendly</h3>
+        <p>Affordable options for your favorite services.</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">✨</div>
+        <h3>Easy Ordering</h3>
+        <p>Browse, choose, and message us directly.</p>
+      </div>
+
     </div>
+
   </div>
 </section>
 
-<!-- SOCIALS -->
+<!-- SOCIAL MEDIA -->
+
 <section class="section" id="socials">
   <div class="container center">
+
     <span class="tag">LET'S CONNECT</span>
-    <h2 class="section-title">Join Our <span class="pink">Little Community!</span></h2>
-    <p class="subtitle">If there's any problem, question, or order, kindly message us through our official social accounts. We'd love to assist you! 💌</p>
+
+    <h2 class="title">
+      Join Our <span class="pink">Little Community!</span>
+    </h2>
+
+    <p class="subtitle">
+      If there's any problem, question, or order,
+      kindly message us through our official social accounts.
+      We'd love to assist you! 💌
+    </p>
+
     <div class="social-grid">
-      <div class="card social-card reveal">
+
+      <div class="card reveal">
         <div style="font-size:45px">📸</div>
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
-        <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Message Us ♡</a>
+
+        <a
+          class="btn"
+          href="https://www.instagram.com/xx.twisha/"
+          target="_blank"
+          rel="noopener"
+        >
+          Message Us ♡
+        </a>
       </div>
-      <div class="card social-card reveal">
+
+      <div class="card reveal">
         <div style="font-size:45px">🎵</div>
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
-        <a class="btn btn-green" href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">Visit TikTok ♡</a>
+
+        <a
+          class="btn btn-green"
+          href="https://www.tiktok.com/@trishchic.ph"
+          target="_blank"
+          rel="noopener"
+        >
+          Visit TikTok ♡
+        </a>
       </div>
+
     </div>
+
   </div>
 </section>
 
-<!-- CINEMATIC SHOP -->
+<!-- PRODUCTS -->
+
 <section class="section shop-section" id="shop">
   <div class="container">
+
     <div class="center">
-      <span class="tag">EXPLORE OUR DIGITAL GOODIES</span>
-      <h2 class="section-title">Pick Your <span class="pink">Premium Experience</span> ✨</h2>
-      <p class="subtitle">Each service has its own little world! Tap a card to explore its offers and prices.</p>
+      <span class="tag">DIGITAL GOODIES</span>
+
+      <h2 class="title">
+        Pick Your
+        <span class="pink">Premium Experience</span> ✨
+      </h2>
+
+      <p class="subtitle">
+        Tap any product to explore its plans and prices!
+      </p>
     </div>
+
     <div class="product-grid" id="productGrid"></div>
-    <p class="center" style="font-size:13px;margin-top:30px">Prices are based on the seller's provided pricelist. Confirm availability and access conditions before ordering. Logos belong to their respective owners.</p>
+
+    <p class="center" style="font-size:13px;margin-top:30px">
+      Prices are based on the seller's supplied pricelist.
+      Please confirm availability and account conditions
+      before ordering.
+    </p>
+
   </div>
 </section>
 
 <!-- BEST SELLER -->
+
 <section class="section" id="bestseller">
   <div class="container center">
+
     <span class="tag">CUSTOMER FAVORITE</span>
-    <h2 class="section-title">Our <span class="pink">Best Seller!</span> ⭐</h2>
+
+    <h2 class="title">
+      Our <span class="pink">Best Seller!</span> ⭐
+    </h2>
+
     <div class="card reveal" style="max-width:700px;margin:25px auto">
-      <img src="canva.jpg" alt="Canva" style="width:85px;height:85px;object-fit:contain;border-radius:18px">
+
+      <img
+        src="canva.jpg"
+        alt="Canva"
+        style="width:90px;height:90px;object-fit:contain"
+      >
+
       <h3 style="font-size:32px">Canva Premium</h3>
+
       <p>For students, teachers, editors, and creative minds!</p>
+
       <h2 class="green" style="font-size:45px">₱199</h2>
-      <p><strong>Seller-listed lifetime offer.</strong> Confirm the duration and access conditions. This is not an official lifetime Canva subscription.</p>
-      <button class="btn" onclick="openProduct('canva')">Explore Canva Offer ♡</button>
+
+      <p>
+        Seller-listed lifetime offer.
+        Confirm the access conditions before purchasing.
+        This is not an official lifetime Canva subscription.
+      </p>
+
+      <button class="btn" onclick="openProduct('canva')">
+        Explore Canva Offer ♡
+      </button>
+
     </div>
+
+  </div>
+</section>
+
+<!-- LEGITIMACY SECTION -->
+
+<section class="section proof-section" id="proofs">
+  <div class="container center">
+
+    <span class="tag">CUSTOMER EXPERIENCES ♡</span>
+
+    <h2 class="title">
+      Our <span class="pink">Customer Proofs</span> 💌
+    </h2>
+
+    <p class="subtitle">
+      Curious about previous orders?
+      Take a look at the receipts and feedback
+      shared by our customers!
+    </p>
+
+    <div class="proof-preview" id="proofPreview"></div>
+
+    <button class="btn" id="openProofs">
+      💗 View Customer Proofs ♡
+    </button>
+
+    <p style="font-size:12px;margin-top:22px">
+      These are seller-provided screenshots and have not
+      been independently verified. Personal customer
+      details should be hidden before publishing.
+    </p>
+
   </div>
 </section>
 
 <!-- HOW TO AVAIL -->
+
 <section class="section" id="howto" style="background:#f5f9eb">
   <div class="container center">
+
     <span class="tag">SUPER EASY</span>
-    <h2 class="section-title">How to <span class="pink">Avail?</span></h2>
-    <div class="three-grid">
-      <div class="card feature reveal"><div class="feature-icon">🛍️</div><h3>1. Choose</h3><p>Pick your desired service and duration.</p></div>
-      <div class="card feature reveal"><div class="feature-icon">💌</div><h3>2. Message</h3><p>Send your order details through Instagram.</p></div>
-      <div class="card feature reveal"><div class="feature-icon">🌸</div><h3>3. Confirm</h3><p>Follow the seller's instructions and verify the service.</p></div>
+
+    <h2 class="title">
+      How to <span class="pink">Avail?</span>
+    </h2>
+
+    <div class="grid">
+
+      <div class="card feature reveal">
+        <div class="feature-icon">🛍️</div>
+        <h3>1. Choose</h3>
+        <p>Pick your desired service and duration.</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">💌</div>
+        <h3>2. Message</h3>
+        <p>Send your order details through Instagram.</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">🌸</div>
+        <h3>3. Confirm</h3>
+        <p>Follow the seller's instructions and verify access.</p>
+      </div>
+
     </div>
-    <p style="margin-top:25px">Never share passwords or verification codes with anyone.</p>
+
+    <p style="margin-top:25px">
+      Never share your password or verification codes.
+    </p>
+
   </div>
 </section>
 
-<!-- BOOKING SERVICE -->
+<!-- BOOKING -->
+
 <section class="section booking-section" id="booking">
   <div class="container booking-layout">
+
     <div class="reveal">
+
       <span class="tag">SPECIAL SERVICE</span>
-      <h2 class="section-title">You Must Try Our <span class="pink">Booking Service!</span> 🛵</h2>
-      <p>Need a ride? Trishchic.ph also advertises booking assistance for JoyRide and Move It.</p>
-      <p><strong>Advertised assistance fee: ₱35 per booking.</strong> Confirm actual ride fares and service availability before proceeding.</p>
-      <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Ask About Booking ♡</a>
+
+      <h2 class="title">
+        You Must Try Our
+        <span class="pink">Booking Service!</span> 🛵
+      </h2>
+
+      <p>
+        Need a ride? Trishchic.ph also advertises
+        booking assistance for JoyRide and Move It.
+      </p>
+
+      <h3>₱35 assistance fee per booking</h3>
+
+      <p>
+        Confirm the actual ride fare, booking conditions,
+        and availability before proceeding.
+      </p>
+
+      <a
+        class="btn"
+        href="https://www.instagram.com/xx.twisha/"
+        target="_blank"
+        rel="noopener"
+      >
+        Ask About Booking ♡
+      </a>
+
     </div>
+
     <div class="booking-visual reveal">
-      <img src="girl%20(4).png" alt="Trishchic booking character">
-      <h3>Ride with Ease!</h3>
+
+      <img src="girl (4).png" alt="Booking character">
+
+      <h3 class="pink">Ride with Ease!</h3>
+
       <p>JoyRide & Move It booking assistance</p>
-      <span class="fee">₱35 advertised assistance fee</span>
-      <p style="font-size:12px">Use official ride confirmations and follow the provider's safety rules.</p>
+
+      <span class="tag">₱35 advertised assistance fee</span>
+
     </div>
+
   </div>
 </section>
 
 <!-- PREMIUM TUTORIAL -->
+
 <section class="section" id="tutorial">
   <div class="container center">
+
     <span class="tag">QUICK GUIDE</span>
-    <h2 class="section-title">How to Check <span class="pink">Premium Access</span></h2>
+
+    <h2 class="title">
+      How to Check <span class="pink">Premium Access</span>
+    </h2>
+
     <div class="card reveal" style="max-width:800px;margin:25px auto;text-align:left">
+
       <p><strong>01.</strong> Check the invitation sent to your email.</p>
+
       <p><strong>02.</strong> Verify the sender before accepting.</p>
-      <p><strong>03.</strong> Open the service using the same email address.</p>
+
+      <p><strong>03.</strong> Open the service using the same email.</p>
+
       <p><strong>04.</strong> Check your account or subscription settings.</p>
-      <p><strong>05.</strong> If something is wrong, contact the seller with your order details.</p>
+
+      <p><strong>05.</strong> Contact the seller if something is wrong.</p>
+
     </div>
+
   </div>
 </section>
 
 <!-- RULES -->
+
 <section class="section" id="rules" style="background:#fff0f6">
   <div class="container center">
+
     <span class="tag">IMPORTANT INFORMATION</span>
-    <h2 class="section-title">Rules & <span class="pink">Regulations</span></h2>
+
+    <h2 class="title">
+      Rules & <span class="pink">Regulations</span>
+    </h2>
+
     <div class="card reveal" style="max-width:850px;margin:25px auto;text-align:left">
-      <p>🌷 Confirm your chosen service, duration, account type, and price before ordering.</p>
-      <p>🌷 The seller states that cancellation is not accepted after submitting an email for processing.</p>
+
+      <p>🌷 Confirm your selected service, duration, and price before ordering.</p>
+
       <p>🌷 Check and accept legitimate invitations promptly.</p>
-      <p>🌷 Keep your order confirmation and proof of payment.</p>
+
+      <p>🌷 Keep your order confirmation and payment receipt.</p>
+
       <p>🌷 Please communicate respectfully.</p>
-      <p>🌷 Report any service problems as soon as possible.</p>
-      <p>🌷 Refunds, replacements, and warranty claims remain subject to applicable consumer rights and agreed terms.</p>
+
+      <p>🌷 Report service problems as soon as possible.</p>
+
+      <p>🌷 Cancellation, replacement, and refund requests are subject to agreed terms and applicable consumer rights.</p>
+
     </div>
+
   </div>
 </section>
 
 <!-- NOTES -->
+
 <section class="section" id="notes">
   <div class="container center">
+
     <span class="tag">LITTLE REMINDERS</span>
-    <h2 class="section-title">Important <span class="pink">Notes</span> 💌</h2>
-    <div class="three-grid">
-      <div class="card feature reveal"><div class="feature-icon">📩</div><h3>Feedback</h3><p>We appreciate your feedback after receiving your service.</p></div>
-      <div class="card feature reveal"><div class="feature-icon">🛠️</div><h3>Problems</h3><p>For account errors, kindly message our Instagram.</p></div>
-      <div class="card feature reveal"><div class="feature-icon">💗</div><h3>Support</h3><p>Include your order details so we can assist you faster.</p></div>
+
+    <h2 class="title">
+      Important <span class="pink">Notes</span> 💌
+    </h2>
+
+    <div class="grid">
+
+      <div class="card feature reveal">
+        <div class="feature-icon">📩</div>
+        <h3>Feedback</h3>
+        <p>We appreciate your feedback after receiving your service.</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">🛠️</div>
+        <h3>Problems</h3>
+        <p>For account errors, kindly message our Instagram.</p>
+      </div>
+
+      <div class="card feature reveal">
+        <div class="feature-icon">💗</div>
+        <h3>Support</h3>
+        <p>Include your order details so we can assist you faster.</p>
+      </div>
+
     </div>
+
   </div>
 </section>
 
 <!-- PAYMENT -->
+
 <section class="section" id="payment" style="background:#f5f9eb">
   <div class="container center">
+
     <span class="tag">CHECKOUT INFORMATION</span>
-    <h2 class="section-title">Mode of <span class="pink">Payment</span></h2>
+
+    <h2 class="title">
+      Mode of <span class="pink">Payment</span>
+    </h2>
+
     <div class="card reveal" style="max-width:570px;margin:25px auto">
-      <img src="gcash.jpg" alt="GCash" style="width:105px;height:105px;object-fit:contain;border-radius:18px">
+
+      <img
+        src="gcash.jpg"
+        alt="GCash"
+        style="width:105px;height:105px;object-fit:contain"
+      >
+
       <h3 style="font-size:32px;color:#75a344">GCash</h3>
-      <p>Please request the seller's current payment details through their official account before transferring money.</p>
-      <a class="btn btn-green" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Request Payment Details ♡</a>
+
+      <p>
+        Please request the seller's current payment
+        details through their official Instagram account.
+      </p>
+
+      <a
+        class="btn btn-green"
+        href="https://www.instagram.com/xx.twisha/"
+        target="_blank"
+        rel="noopener"
+      >
+        Request Payment Details ♡
+      </a>
+
     </div>
+
   </div>
 </section>
 
 <!-- FAQ -->
+
 <section class="section" id="faq">
   <div class="container">
+
     <div class="center">
       <span class="tag">QUESTIONS?</span>
-      <h2 class="section-title">Frequently Asked <span class="pink">Questions</span></h2>
+
+      <h2 class="title">
+        Frequently Asked <span class="pink">Questions</span>
+      </h2>
     </div>
+
     <div style="max-width:800px;margin:30px auto">
-      <details><summary>How can I order?</summary><p>Choose your service, open its pricing card, and message the seller through Instagram.</p></details>
-      <details><summary>Do I need to provide my password?</summary><p>No. Never share your password or verification codes.</p></details>
-      <details><summary>How long does activation take?</summary><p>Processing times vary. Ask the seller for the current estimate.</p></details>
-      <details><summary>What if my service stops working?</summary><p>Message the seller with your order details and a description of the issue.</p></details>
-      <details><summary>Can I request another service?</summary><p>Yes. Contact the seller to ask whether another service is available.</p></details>
+
+      <details>
+        <summary>How can I order?</summary>
+        <p>Choose a service and message the seller through Instagram.</p>
+      </details>
+
+      <details>
+        <summary>Do I need to provide my password?</summary>
+        <p>No. Never share passwords or verification codes.</p>
+      </details>
+
+      <details>
+        <summary>How long does activation take?</summary>
+        <p>Processing times vary. Ask the seller for an estimate.</p>
+      </details>
+
+      <details>
+        <summary>What if my service stops working?</summary>
+        <p>Message the seller with your order details and a description of the issue.</p>
+      </details>
+
+      <details>
+        <summary>Can I request another service?</summary>
+        <p>Contact the seller to ask about other available services.</p>
+      </details>
+
     </div>
+
   </div>
 </section>
 
 <!-- FOOTER -->
+
 <footer id="contact">
   <div class="container">
+
     <h2>Trishchic.ph 🌷</h2>
-    <p>Friendly services, affordable prices, and a sprinkle of happiness!</p>
-    <p>For orders or concerns, kindly message us here ♡</p>
+
     <p>
-      <a href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Instagram</a>
-      &nbsp; ✿ &nbsp;
-      <a href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">TikTok</a>
+      Friendly services, affordable prices,
+      and a sprinkle of happiness!
     </p>
-    <p style="font-size:12px;margin-top:35px">© 2026 Trishchic.ph. All rights reserved.</p>
+
+    <p>For orders or concerns, kindly message us ♡</p>
+
+    <a
+      href="https://www.instagram.com/xx.twisha/"
+      target="_blank"
+      rel="noopener"
+    >Instagram</a>
+
+    &nbsp; ✿ &nbsp;
+
+    <a
+      href="https://www.tiktok.com/@trishchic.ph"
+      target="_blank"
+      rel="noopener"
+    >TikTok</a>
+
+    <p style="font-size:12px;margin-top:35px">
+      © 2026 Trishchic.ph
+    </p>
+
   </div>
 </footer>
 
-<a class="floating-contact" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">💌 Message Us</a>
+<a
+  class="floating-contact"
+  href="https://www.instagram.com/xx.twisha/"
+  target="_blank"
+  rel="noopener"
+>
+  💌 Message Us
+</a>
 
-<!-- PRODUCT MODAL -->
-<div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+<!-- PRODUCT FLOATING TAB -->
+
+<div
+  class="modal"
+  id="productModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Product details"
+  aria-hidden="true"
+>
   <div class="modal-box">
-    <button class="modal-close" id="closeModal" aria-label="Close product details">×</button>
+
+    <button
+      class="modal-close"
+      onclick="closeProduct()"
+      aria-label="Close product details"
+    >×</button>
+
     <div class="modal-top" id="modalTop"></div>
+
     <div class="modal-body">
+
       <h3>Choose Your Plan ♡</h3>
+
       <div class="plan-grid" id="modalPlans"></div>
-      <p id="modalNote" style="font-size:13px"></p>
-      <div class="modal-actions">
-        <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Inquire on Instagram ♡</a>
-        <button class="btn btn-green" id="backToShop">Back to Shop</button>
-      </div>
+
+      <p id="modalNote"></p>
+
+      <a
+        class="btn"
+        href="https://www.instagram.com/xx.twisha/"
+        target="_blank"
+        rel="noopener"
+      >
+        Inquire on Instagram ♡
+      </a>
+
     </div>
+
+  </div>
+</div>
+
+<!-- LEGITIMACY FLOATING GALLERY -->
+
+<div
+  class="modal"
+  id="proofModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Customer proof gallery"
+  aria-hidden="true"
+>
+  <div class="modal-box proof-gallery">
+
+    <button
+      class="modal-close"
+      onclick="closeProofs()"
+      aria-label="Close gallery"
+    >×</button>
+
+    <h2>Customer Proofs ♡ 💌</h2>
+
+    <p>Browse our seller-provided customer screenshots.</p>
+
+    <img
+      id="proofImage"
+      src="receipt (1).jpg"
+      alt="Customer proof"
+    >
+
+    <div class="gallery-controls">
+
+      <button class="btn" onclick="changeProof(-1)">
+        ❮
+      </button>
+
+      <span id="proofCounter">1 / 4</span>
+
+      <button class="btn" onclick="changeProof(1)">
+        ❯
+      </button>
+
+    </div>
+
   </div>
 </div>
 
 <script>
-'use strict';
+"use strict";
 
 /* TABLE OF CONTENTS */
+
 const sections = [
-  ['about','Introduction'],
-  ['socials','Instagram & TikTok'],
-  ['shop','Full Premium Pricelist'],
-  ['bestseller','Best Seller'],
-  ['howto','How to Avail'],
-  ['booking','Booking Service 🛵'],
-  ['tutorial','Premium Tutorial'],
-  ['rules','Rules & Regulations'],
-  ['notes','Important Notes'],
-  ['payment','Mode of Payment'],
-  ['faq','Frequently Asked Questions']
+  ["about","Introduction"],
+  ["socials","Instagram & TikTok"],
+  ["shop","Full Premium Pricelist"],
+  ["bestseller","Best Seller"],
+  ["proofs","Legitimacy & Customer Proofs"],
+  ["howto","How to Avail"],
+  ["booking","Booking Service 🛵"],
+  ["tutorial","Premium Tutorial"],
+  ["rules","Rules & Regulations"],
+  ["notes","Important Notes"],
+  ["payment","Mode of Payment"],
+  ["faq","Frequently Asked Questions"]
 ];
 
-document.getElementById('tocGrid').innerHTML = sections.map((item,index) => `
-  <a class="toc-item" href="#${item[0]}">
-    <span class="toc-number">${String(index+1).padStart(2,'0')}</span>
-    <span>${item[1]}</span>
-    <span style="margin-left:auto">↗</span>
-  </a>
-`).join('');
+document.getElementById("tocGrid").innerHTML =
+  sections.map((item,index) => `
+    <a class="toc-item" href="#${item[0]}">
+      <span class="toc-number">
+        ${String(index+1).padStart(2,"0")}
+      </span>
+      <span>${item[1]}</span>
+      <span style="margin-left:auto">↗</span>
+    </a>
+  `).join("");
 
-/* UPDATED PRODUCTS — EXACT SELLER PRICELIST */
+/* UPDATED PRODUCT LIST */
+/* iQIYI REMOVED */
+/* NETFLIX AND HBO FILENAMES FIXED */
+
 const products = [
   {
-    id:'canva',
-    name:'Canva',
-    category:'Design & Creativity',
-    theme:'canva',
-    image:'canva.jpg',
-    description:'Create beautiful designs and presentations.',
-    plans:[['1 Month','₱15'],['1 Year','₱69'],['Lifetime Offer','₱199']],
-    note:'Lifetime is a seller-listed offer, not an official Canva lifetime subscription. Confirm the access conditions.'
+    id:"canva",
+    name:"Canva",
+    category:"Design & Creativity",
+    theme:"canva",
+    image:"canva.jpg",
+    description:"Create beautiful designs and presentations.",
+    plans:[
+      ["1 Month","₱15"],
+      ["1 Year","₱69"],
+      ["Lifetime Offer","₱199"]
+    ],
+    note:"Lifetime is a seller-listed offer, not an official Canva lifetime subscription. Confirm the access conditions."
   },
   {
-    id:'netflix',
-    name:'Netflix',
-    category:'Movies & Series',
-    theme:'netflix',
-    image:'netflix.png',
-    description:'Your next movie night starts here.',
-    plans:[['1 Month Shared','₱79'],['1 Month Solo Profile','₱149']]
+    id:"netflix",
+    name:"Netflix",
+    category:"Movies & Series",
+    theme:"netflix",
+    image:"netflix.png",
+    description:"Your next movie night starts here.",
+    plans:[
+      ["1 Month Shared","₱79"],
+      ["1 Month Solo Profile","₱149"]
+    ]
   },
   {
-    id:'youtube',
-    name:'YouTube / YouTube Music',
-    category:'Music & Video',
-    theme:'youtube',
-    image:'yt.png',
-    description:'Enjoy your favorite music and videos.',
-    plans:[['1 Month Invite','₱59']]
+    id:"youtube",
+    name:"YouTube / YouTube Music",
+    category:"Music & Video",
+    theme:"youtube",
+    image:"yt.png",
+    description:"Enjoy your favorite music and videos.",
+    plans:[
+      ["1 Month Invite","₱59"]
+    ]
   },
   {
-    id:'capcut',
-    name:'CapCut',
-    category:'Video Editing',
-    theme:'capcut',
-    image:'capcut.png',
-    description:'Bring your creative edits to life.',
-    plans:[['7 Days','₱59'],['1 Month','₱99']]
+    id:"capcut",
+    name:"CapCut",
+    category:"Video Editing",
+    theme:"capcut",
+    image:"capcut.png",
+    description:"Bring your creative edits to life.",
+    plans:[
+      ["7 Days","₱59"],
+      ["1 Month","₱99"]
+    ]
   },
   {
-    id:'chatgptgo',
-    name:'ChatGPT Go',
-    category:'AI & Productivity',
-    theme:'chatgpt',
-    image:'gpt.png',
-    description:'AI tools for everyday productivity.',
-    plans:[['1 Month','₱79']]
+    id:"chatgptgo",
+    name:"ChatGPT Go",
+    category:"AI & Productivity",
+    theme:"chatgpt",
+    image:"gpt.png",
+    description:"AI tools for everyday productivity.",
+    plans:[
+      ["1 Month","₱79"]
+    ]
   },
   {
-    id:'chatgptplus',
-    name:'ChatGPT Plus',
-    category:'AI & Productivity',
-    theme:'chatgpt',
-    image:'gpt.png',
-    description:'Explore advanced AI features.',
-    plans:[['1 Month','₱129']]
+    id:"chatgptplus",
+    name:"ChatGPT Plus",
+    category:"AI & Productivity",
+    theme:"chatgpt",
+    image:"gpt.png",
+    description:"Explore advanced AI features.",
+    plans:[
+      ["1 Month","₱129"]
+    ]
   },
   {
-    id:'prime',
-    name:'Prime Video',
-    category:'Movies & Series',
-    theme:'prime',
-    image:'primevideo.png',
-    description:'Discover exciting movies and series.',
-    plans:[['1 Month','₱39']]
+    id:"prime",
+    name:"Prime Video",
+    category:"Movies & Series",
+    theme:"prime",
+    image:"primevideo.png",
+    description:"Discover exciting movies and series.",
+    plans:[
+      ["1 Month","₱39"]
+    ]
   },
   {
-    id:'hbo',
-    name:'HBO',
-    category:'Entertainment',
-    theme:'hbo',
-    image:'hboog.png',
-    description:'Explore your favorite premium shows.',
-    plans:[['1 Month Invite','₱49']]
+    id:"hbo",
+    name:"HBO",
+    category:"Entertainment",
+    theme:"hbo",
+    image:"hboog.png",
+    description:"Explore your favorite premium shows.",
+    plans:[
+      ["1 Month Invite","₱49"]
+    ]
   },
   {
-    id:'iqiyi',
-    name:'iQIYI',
-    category:'Asian Drama & Entertainment',
-    theme:'iqiyi',
-    image:'iqiyi.jpg',
-    description:'Discover your next favorite drama.',
-    plans:[['1 Month','₱89']]
+    id:"viva",
+    name:"Viva One / VivaMax",
+    category:"Entertainment",
+    theme:"viva",
+    image:"vivaone.png",
+    description:"Explore Filipino entertainment.",
+    plans:[
+      ["1 Month","₱59"]
+    ]
   },
   {
-    id:'viva',
-    name:'Viva One / VivaMax',
-    category:'Entertainment',
-    theme:'viva',
-    image:'vivaone.png',
-    description:'Explore Filipino entertainment.',
-    plans:[['1 Month','₱59']]
+    id:"iwanttfc",
+    name:"iWantTFC",
+    category:"Filipino Entertainment",
+    theme:"iwanttfc",
+    image:"iwtfc.webp",
+    description:"Enjoy your favorite Filipino shows.",
+    plans:[
+      ["1 Month","₱39"]
+    ]
   },
   {
-    id:'iwanttfc',
-    name:'iWantTFC',
-    category:'Filipino Entertainment',
-    theme:'iwanttfc',
-    image:'iwtfc.webp',
-    description:'Enjoy your favorite Filipino shows.',
-    plans:[['1 Month','₱39']]
+    id:"disney",
+    name:"Disney+",
+    category:"Movies & Series",
+    theme:"disney",
+    image:"disney.png",
+    description:"Discover a world of stories.",
+    plans:[
+      ["1 Month","₱59"]
+    ]
   },
   {
-    id:'disney',
-    name:'Disney+',
-    category:'Movies & Series',
-    theme:'disney',
-    image:'disney.png',
-    description:'Discover a world of stories.',
-    plans:[['1 Month','₱59']]
-  },
-  {
-    id:'nba',
-    name:'NBA League Pass',
-    category:'Sports & Basketball',
-    theme:'nba',
-    image:'nba.png',
-    description:'Follow exciting basketball action.',
-    plans:[['1 Month','₱79']]
+    id:"nba",
+    name:"NBA League Pass",
+    category:"Sports & Basketball",
+    theme:"nba",
+    image:"nba.png",
+    description:"Follow exciting basketball action.",
+    plans:[
+      ["1 Month","₱79"]
+    ]
   }
 ];
 
-/* PRODUCT CARDS */
-const productGrid = document.getElementById('productGrid');
+/* RENDER CINEMATIC PRODUCTS */
 
-productGrid.innerHTML = products.map(product => `
-  <button class="product-card theme-${product.theme}"
-    data-product="${product.id}"
-    aria-label="Explore ${product.name} plans">
-    <span class="product-orb"></span>
-    <span class="product-inner">
-      <img class="product-logo" src="${encodeURI(product.image)}" alt="${product.name} logo" loading="lazy">
-      <span class="product-category">${product.category}</span>
-      <h3>${product.name}</h3>
-      <p>${product.description}</p>
-      <span class="explore-pill">Explore Plans ↗</span>
-    </span>
-  </button>
-`).join('');
+document.getElementById("productGrid").innerHTML =
+  products.map(product => `
+    <button
+      class="product-card theme-${product.theme}"
+      data-product="${product.id}"
+    >
+      <span class="product-inner">
 
-/* PRODUCT MODAL */
-const modal = document.getElementById('productModal');
-let lastFocused = null;
+        <img
+          class="product-logo"
+          src="${encodeURI(product.image)}"
+          alt="${product.name}"
+          loading="lazy"
+        >
+
+        <span class="product-category">
+          ${product.category}
+        </span>
+
+        <h3>${product.name}</h3>
+
+        <p>${product.description}</p>
+
+        <span class="explore">
+          Explore Plans ↗
+        </span>
+
+      </span>
+    </button>
+  `).join("");
+
+/* PRODUCT FLOATING MODAL */
+
+const productModal = document.getElementById("productModal");
 
 function openProduct(id) {
   const product = products.find(item => item.id === id);
+
   if (!product) return;
 
-  lastFocused = document.activeElement;
-  const top = document.getElementById('modalTop');
-  top.className = 'modal-top theme-' + product.theme;
+  const top = document.getElementById("modalTop");
+
+  top.className = "modal-top theme-" + product.theme;
+
   top.innerHTML = `
-    <img src="${encodeURI(product.image)}" alt="${product.name} logo">
+    <img src="${encodeURI(product.image)}" alt="${product.name}">
+
     <div>
-      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase">${product.category}</div>
-      <h2 id="modalTitle">${product.name}</h2>
-      <p style="margin:0">${product.description}</p>
+      <small>${product.category}</small>
+      <h2>${product.name}</h2>
+      <p>${product.description}</p>
     </div>
   `;
 
-  document.getElementById('modalPlans').innerHTML = product.plans.map(plan => `
-    <div class="plan">
-      <div>${plan[0]}</div>
-      <strong>${plan[1]}</strong>
-    </div>
-  `).join('');
+  document.getElementById("modalPlans").innerHTML =
+    product.plans.map(plan => `
+      <div class="plan">
+        <div>${plan[0]}</div>
+        <strong>${plan[1]}</strong>
+      </div>
+    `).join("");
 
-  document.getElementById('modalNote').textContent =
-    product.note || 'Please confirm availability, subscription conditions, and current pricing with the seller.';
+  document.getElementById("modalNote").textContent =
+    product.note ||
+    "Please confirm availability, pricing, and access conditions with the seller.";
 
-  modal.classList.add('active');
-  modal.setAttribute('aria-hidden','false');
-  document.body.classList.add('modal-open');
-  document.getElementById('closeModal').focus();
+  productModal.classList.add("active");
+  productModal.setAttribute("aria-hidden","false");
+
+  document.body.classList.add("locked");
+
   playClickSound();
 }
 
 function closeProduct() {
-  modal.classList.remove('active');
-  modal.setAttribute('aria-hidden','true');
-  document.body.classList.remove('modal-open');
-  if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  productModal.classList.remove("active");
+  productModal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("locked");
 }
 
-productGrid.addEventListener('click',event => {
-  const card = event.target.closest('[data-product]');
-  if (card) openProduct(card.dataset.product);
-});
+document.getElementById("productGrid").addEventListener(
+  "click",
+  event => {
+    const card = event.target.closest("[data-product]");
 
-document.getElementById('closeModal').addEventListener('click',closeProduct);
-document.getElementById('backToShop').addEventListener('click',closeProduct);
-
-modal.addEventListener('click',event => {
-  if (event.target === modal) closeProduct();
-});
-
-document.addEventListener('keydown',event => {
-  if (!modal.classList.contains('active')) return;
-  if (event.key === 'Escape') closeProduct();
-  if (event.key === 'Tab') {
-    const focusables = [...modal.querySelectorAll('button,a[href]')];
-    const first = focusables[0];
-    const last = focusables[focusables.length-1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
+    if (card) {
+      openProduct(card.dataset.product);
     }
+  }
+);
+
+productModal.addEventListener("click",event => {
+  if (event.target === productModal) closeProduct();
+});
+
+/* CUSTOMER PROOF GALLERY */
+
+const proofFiles = [
+  "receipt (1).jpg",
+  "receipt (2).jpg",
+  "receipt (3).jpg",
+  "receipt (4).jpg"
+];
+
+let currentProof = 0;
+
+const proofModal = document.getElementById("proofModal");
+
+document.getElementById("proofPreview").innerHTML =
+  proofFiles.map((file,index) => `
+    <img
+      src="${encodeURI(file)}"
+      alt="Customer proof ${index+1}"
+      data-proof="${index}"
+      loading="lazy"
+    >
+  `).join("");
+
+function updateProof() {
+  document.getElementById("proofImage").src =
+    encodeURI(proofFiles[currentProof]);
+
+  document.getElementById("proofCounter").textContent =
+    `${currentProof+1} / ${proofFiles.length}`;
+}
+
+function openProofs(index=0) {
+  currentProof = index;
+  updateProof();
+
+  proofModal.classList.add("active");
+  proofModal.setAttribute("aria-hidden","false");
+  document.body.classList.add("locked");
+
+  playClickSound();
+}
+
+function closeProofs() {
+  proofModal.classList.remove("active");
+  proofModal.setAttribute("aria-hidden","true");
+  document.body.classList.remove("locked");
+}
+
+function changeProof(direction) {
+  currentProof =
+    (currentProof+direction+proofFiles.length) % proofFiles.length;
+
+  updateProof();
+  playClickSound();
+}
+
+document.getElementById("openProofs").addEventListener(
+  "click",
+  () => openProofs()
+);
+
+document.getElementById("proofPreview").addEventListener(
+  "click",
+  event => {
+    const image = event.target.closest("[data-proof]");
+
+    if (image) {
+      openProofs(Number(image.dataset.proof));
+    }
+  }
+);
+
+proofModal.addEventListener("click",event => {
+  if (event.target === proofModal) closeProofs();
+});
+
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") {
+    closeProofs();
+    closeProduct();
+  }
+
+  if (proofModal.classList.contains("active")) {
+    if (event.key === "ArrowRight") changeProof(1);
+    if (event.key === "ArrowLeft") changeProof(-1);
   }
 });
 
-/* CINEMATIC 3D HOVER */
-if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-  document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('pointermove',event => {
-      const rect = card.getBoundingClientRect();
-      const x = (event.clientX-rect.left)/rect.width-.5;
-      const y = (event.clientY-rect.top)/rect.height-.5;
-      card.style.transform = `perspective(900px) rotateY(${x*9}deg) rotateX(${-y*9}deg) translateY(-5px)`;
-    });
-    card.addEventListener('pointerleave',() => {
-      card.style.transform = '';
-    });
-  });
-}
+/* SCROLL REVEAL */
 
-/* SCROLL ANIMATIONS */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+      entry.target.classList.add("visible");
       observer.unobserve(entry.target);
     }
   });
 },{threshold:.08});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
 
-/* BACKGROUND MUSIC */
-const music = document.getElementById('backgroundMusic');
-const musicToggle = document.getElementById('musicToggle');
-const volumeSlider = document.getElementById('volumeSlider');
-const volumeValue = document.getElementById('volumeValue');
-const loadingScreen = document.getElementById('loadingScreen');
-const enterButton = document.getElementById('enterButton');
+/* ORIGINAL COZY MUSIC */
+/* GENERATED USING WEB AUDIO API */
+/* NO MP3 FILE REQUIRED */
 
-let wantsMusic = true;
-let musicReady = false;
+let audioContext;
+let masterGain;
+let musicTimer;
+let musicPlaying = false;
+let noteIndex = 0;
+let nextNoteTime = 0;
+let wantedMusic = true;
 
-music.volume = 0.35;
+const musicButton = document.getElementById("musicToggle");
+const volumeSlider = document.getElementById("volume");
+const volumeText = document.getElementById("volumeText");
 
-function updateMusicButton() {
-  musicToggle.textContent = music.paused ? '▶' : '❚❚';
-  musicToggle.setAttribute('aria-label',music.paused ? 'Play music' : 'Pause music');
+const melody = [
+  392.00,493.88,587.33,493.88,
+  440.00,523.25,659.25,523.25,
+  392.00,493.88,587.33,493.88,
+  349.23,440.00,523.25,440.00,
+
+  329.63,392.00,493.88,392.00,
+  349.23,440.00,523.25,440.00,
+  392.00,493.88,587.33,659.25,
+  523.25,440.00,392.00,329.63
+];
+
+const chords = [
+  [261.63,329.63,392.00],
+  [220.00,261.63,329.63],
+  [174.61,220.00,261.63],
+  [196.00,246.94,293.66]
+];
+
+function setupAudio() {
+  if (audioContext) return;
+
+  audioContext = new (
+    window.AudioContext || window.webkitAudioContext
+  )();
+
+  masterGain = audioContext.createGain();
+  masterGain.gain.value = Number(volumeSlider.value)/100*.24;
+
+  const compressor = audioContext.createDynamicsCompressor();
+  compressor.threshold.value = -20;
+  compressor.ratio.value = 3;
+
+  masterGain.connect(compressor);
+  compressor.connect(audioContext.destination);
+}
+
+function playTone(frequency,time,duration,volume,type="sine") {
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency,time);
+
+  gain.gain.setValueAtTime(.0001,time);
+  gain.gain.exponentialRampToValueAtTime(volume,time+.04);
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    time+duration
+  );
+
+  oscillator.connect(gain);
+  gain.connect(masterGain);
+
+  oscillator.start(time);
+  oscillator.stop(time+duration+.02);
+}
+
+function scheduleMusic() {
+  if (!musicPlaying) return;
+
+  while (nextNoteTime < audioContext.currentTime+.35) {
+    const position = noteIndex % melody.length;
+
+    playTone(
+      melody[position],
+      nextNoteTime,
+      .36,
+      .11,
+      "sine"
+    );
+
+    if (position % 8 === 0) {
+      const chordIndex = Math.floor(position/8)%chords.length;
+
+      chords[chordIndex].forEach(frequency => {
+        playTone(
+          frequency/2,
+          nextNoteTime,
+          2.6,
+          .055,
+          "triangle"
+        );
+      });
+    }
+
+    noteIndex++;
+    nextNoteTime += .43;
+  }
 }
 
 async function startMusic() {
-  if (!wantsMusic) return false;
   try {
-    await music.play();
-    musicReady = true;
-    updateMusicButton();
+    setupAudio();
+
+    await audioContext.resume();
+
+    if (audioContext.state !== "running") return false;
+
+    if (musicPlaying) return true;
+
+    musicPlaying = true;
+    wantedMusic = true;
+    nextNoteTime = audioContext.currentTime+.05;
+
+    scheduleMusic();
+
+    musicTimer = setInterval(scheduleMusic,100);
+
+    musicButton.textContent = "❚❚";
+    musicButton.setAttribute("aria-label","Pause music");
+
     return true;
   } catch(error) {
-    updateMusicButton();
+    console.warn("Music could not start:",error);
     return false;
   }
 }
 
-function enterShop() {
-  loadingScreen.classList.add('hidden');
+function stopMusic() {
+  musicPlaying = false;
+  wantedMusic = false;
+
+  clearInterval(musicTimer);
+
+  if (audioContext && masterGain) {
+    masterGain.gain.setTargetAtTime(
+      0,
+      audioContext.currentTime,
+      .05
+    );
+  }
+
+  musicButton.textContent = "▶";
+  musicButton.setAttribute("aria-label","Play music");
 }
 
-musicToggle.addEventListener('click',async () => {
-  if (music.paused) {
-    wantsMusic = true;
-    await startMusic();
+musicButton.addEventListener("click",async () => {
+  if (musicPlaying) {
+    stopMusic();
   } else {
-    wantsMusic = false;
-    music.pause();
-    updateMusicButton();
+    if (masterGain && audioContext) {
+      masterGain.gain.setTargetAtTime(
+        Number(volumeSlider.value)/100*.24,
+        audioContext.currentTime,
+        .05
+      );
+    }
+    await startMusic();
   }
 });
 
-volumeSlider.addEventListener('input',event => {
+volumeSlider.addEventListener("input",event => {
   const value = Number(event.target.value);
-  music.volume = value/100;
-  volumeValue.textContent = value + '%';
+
+  volumeText.textContent = value+"%";
+
+  if (masterGain && audioContext) {
+    masterGain.gain.setTargetAtTime(
+      value/100*.24,
+      audioContext.currentTime,
+      .05
+    );
+  }
 });
 
-enterButton.addEventListener('click',async () => {
+/* LOADING SCREEN AND AUTOPLAY */
+
+const loadingScreen = document.getElementById("loading");
+const enterButton = document.getElementById("enterShop");
+
+function finishLoading() {
+  loadingScreen.classList.add("hide");
+}
+
+enterButton.addEventListener("click",async () => {
   await startMusic();
-  enterShop();
+  finishLoading();
 });
 
-music.addEventListener('play',updateMusicButton);
-music.addEventListener('pause',updateMusicButton);
-
-/* Attempt music during loading.
-   Browsers may require a click before allowing sound. */
-startMusic();
-
-window.addEventListener('load',() => {
+window.addEventListener("load",() => {
   setTimeout(async () => {
-    const started = musicReady || await startMusic();
+    const started = await startMusic();
 
-    if (started || !wantsMusic) {
-      enterShop();
+    if (started) {
+      finishLoading();
     } else {
-      enterButton.classList.add('show');
+      enterButton.classList.add("show");
     }
   },2500);
 });
 
-/* CUTE CLICK SOUND EFFECT */
-let soundContext;
+/* CUTE BUTTON CLICK SOUNDS */
 
 function playClickSound() {
   try {
-    soundContext ??= new (window.AudioContext || window.webkitAudioContext)();
-    if (soundContext.state === 'suspended') return;
+    if (!audioContext || audioContext.state !== "running") return;
 
-    const oscillator = soundContext.createOscillator();
-    const gain = soundContext.createGain();
-    const now = soundContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const time = audioContext.currentTime;
 
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(520,now);
-    oscillator.frequency.exponentialRampToValueAtTime(800,now+.09);
+    oscillator.type = "sine";
 
-    gain.gain.setValueAtTime(.0001,now);
-    gain.gain.exponentialRampToValueAtTime(.012,now+.015);
-    gain.gain.exponentialRampToValueAtTime(.0001,now+.13);
+    oscillator.frequency.setValueAtTime(600,time);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      880,time+.09
+    );
+
+    gain.gain.setValueAtTime(.0001,time);
+    gain.gain.exponentialRampToValueAtTime(.035,time+.015);
+    gain.gain.exponentialRampToValueAtTime(.0001,time+.14);
 
     oscillator.connect(gain);
-    gain.connect(soundContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now+.14);
-  } catch(error) {
-    console.warn('Click sound unavailable',error);
-  }
+    gain.connect(audioContext.destination);
+
+    oscillator.start(time);
+    oscillator.stop(time+.15);
+  } catch(error) {}
 }
 
-document.addEventListener('click',event => {
-  if (event.target.closest('button,a,summary')) playClickSound();
+document.addEventListener("click",event => {
+  if (event.target.closest("button,a,summary")) {
+    playClickSound();
+  }
 });
 
-document.addEventListener('pointerdown',() => {
-  if (!soundContext) {
-    try {
-      soundContext = new (window.AudioContext || window.webkitAudioContext)();
-    } catch(error) {}
-  }
-  if (soundContext?.state === 'suspended') soundContext.resume();
-},{once:true});
-
 </script>
+
 </body>
 </html>
