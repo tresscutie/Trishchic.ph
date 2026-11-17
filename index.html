@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trisha's Commission & Services ✨</title>
+    <title>Trisha's Luxury Portfolio & Pricelist ✨</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --pastel-pink: #ffd1dc;
-            --pastel-green: #d1f2d9;
-            --pastel-red: #ffb3ba;
-            --deep-rose: #e06d7a;
-            --text-dark: #4a4a4a;
-            --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #f0fdf4 100%);
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --shadow: 0 10px 30px rgba(224, 109, 122, 0.12);
-            --radius: 24px;
+            --bg-dark: #0f0e13;
+            --card-bg: rgba(25, 24, 32, 0.7);
+            --border-glow: rgba(255, 182, 193, 0.15);
+            --accent-pink: #ffb6c1;
+            --accent-green: #c1ffd7;
+            --accent-red: #ff8fa3;
+            --gold-gradient: linear-gradient(135deg, #ffb6c1 0%, #ff8fa3 50%, #c1ffd7 100%);
+            --text-main: #f3f3f6;
+            --text-muted: #a1a0ab;
+            --radius: 20px;
         }
 
         * {
@@ -29,99 +30,117 @@
         }
 
         body {
-            background: var(--bg-gradient);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(193, 255, 215, 0.06) 0%, transparent 40%);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px 10px;
+            padding: 30px 15px;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 580px;
             width: 100%;
             margin: 0 auto;
-            padding: 0 15px;
         }
 
-        /* Modern Girly Header */
+        /* Luxury Header */
         header {
             text-align: center;
-            padding: 40px 20px 25px;
+            padding: 30px 20px 40px;
         }
 
-        .avatar-badge {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-red));
+        .avatar-frame {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(193, 255, 215, 0.2));
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
-            color: white;
-            box-shadow: 0 8px 20px rgba(255, 179, 186, 0.5);
-            animation: float 3s ease-in-out infinite;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.15);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            animation: pulseGlow 4s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.15); }
+            50% { box-shadow: 0 0 35px rgba(255, 182, 193, 0.35); }
+        }
+
+        .avatar-frame i {
+            font-size: 2.2rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header h1 {
-            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: #3b3b3b;
-            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            font-size: 0.95rem;
-            color: #777;
-            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* Glassmorphism Cards */
+        /* Luxury Glass Cards */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
             border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            border-color: rgba(255, 182, 193, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.08);
         }
 
         .card h2 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 18px;
-            color: #444;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
         }
 
         .card h2 i {
-            color: var(--deep-rose);
-            background: #fff0f2;
+            color: var(--accent-pink);
+            background: rgba(255, 182, 193, 0.08);
             padding: 10px;
-            border-radius: 14px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
         }
 
-        /* Social / Accounts Grid */
+        /* Accounts / Social Links */
         .social-grid {
             display: grid;
-            grid-template-columns: 1fr;
             gap: 12px;
         }
 
@@ -129,23 +148,21 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: white;
-            color: var(--text-dark);
-            padding: 14px 20px;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-main);
+            padding: 16px 20px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
-            border: 1px solid #fce8eb;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
         .social-btn:hover {
-            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-green));
-            border-color: transparent;
-            transform: scale(1.02);
-            color: #2c2c2c;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(193, 255, 215, 0.1));
+            border-color: rgba(255, 182, 193, 0.3);
+            transform: scale(1.01);
         }
 
         .social-left {
@@ -156,39 +173,55 @@
 
         .social-left i {
             font-size: 1.2rem;
-            color: var(--deep-rose);
+            color: var(--accent-pink);
         }
 
-        .social-btn:hover .social-left i {
-            color: #2c2c2c;
+        .social-btn i.fa-arrow-right {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover i.fa-arrow-right {
+            transform: translateX(4px);
+            color: var(--accent-pink);
         }
 
         /* Pricelist Grid */
         .pricelist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
         }
 
         .price-item {
-            background: white;
-            border: 1.5px dashed var(--pastel-red);
-            padding: 18px 15px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px dashed rgba(255, 143, 163, 0.3);
+            padding: 20px 15px;
             border-radius: 16px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-item:hover {
+            background: rgba(255, 182, 193, 0.04);
+            border-color: var(--accent-pink);
         }
 
         .price-item h3 {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
             font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .price-item .price {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: var(--deep-rose);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Rules & Regulations */
@@ -201,37 +234,42 @@
             counter-increment: rule-counter;
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            margin-bottom: 14px;
             font-size: 0.9rem;
-            color: #555;
-            line-height: 1.5;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         .rules-list li::before {
             content: counter(rule-counter);
-            background: var(--pastel-green);
-            color: #2d5a3d;
+            background: rgba(193, 255, 215, 0.1);
+            color: var(--accent-green);
             font-weight: 600;
             font-size: 0.75rem;
-            min-width: 22px;
-            height: 22px;
+            min-width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(193, 255, 215, 0.2);
+            flex-shrink: 0;
             margin-top: 2px;
         }
 
         /* Notes Box */
         .notes-content {
-            background: #f4faf6;
-            border-left: 4px solid var(--pastel-green);
-            padding: 15px;
+            background: rgba(193, 255, 215, 0.03);
+            border-left: 3px solid var(--accent-green);
+            padding: 16px 20px;
             border-radius: 0 16px 16px 0;
             font-size: 0.9rem;
-            color: #4a6b52;
-            line-height: 1.5;
+            color: #d1f2d9;
+            line-height: 1.6;
+            border-top: 1px solid rgba(193, 255, 215, 0.05);
+            border-right: 1px solid rgba(193, 255, 215, 0.05);
+            border-bottom: 1px solid rgba(193, 255, 215, 0.05);
         }
 
         /* Footer */
@@ -239,7 +277,8 @@
             text-align: center;
             padding: 20px 0 10px;
             font-size: 0.8rem;
-            color: #999;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
 
         @media (max-width: 480px) {
@@ -253,16 +292,16 @@
 
     <div class="container">
         <header>
-            <div class="avatar-badge">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <div class="avatar-frame">
+                <i class="fa-solid fa-crown"></i>
             </div>
-            <h1>Trisha's Services</h1>
-            <p>Welcome to my official commission & links hub! ✨</p>
+            <h1>TRISHA</h1>
+            <p>Exclusive Services & Commission Hub ✨</p>
         </header>
 
         <!-- ACCOUNTS SECTION -->
         <div class="card">
-            <h2><i class="fa-solid fa-link"></i> Official Accounts</h2>
+            <h2><i class="fa-solid fa-compass"></i> Official Links</h2>
             <div class="social-grid">
                 <!-- Palitan ang mga href ng actual links mo -->
                 <a href="https://instagram.com/your_ig" target="_blank" class="social-btn">
@@ -270,43 +309,43 @@
                         <i class="fa-brands fa-instagram"></i>
                         <span>Instagram</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; color: #bbb;"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </a>
                 <a href="https://facebook.com/your_fb" target="_blank" class="social-btn">
                     <div class="social-left">
                         <i class="fa-brands fa-facebook"></i>
                         <span>Facebook Profile</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; color: #bbb;"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </a>
                 <a href="https://t.me/your_tg" target="_blank" class="social-btn">
                     <div class="social-left">
                         <i class="fa-brands fa-telegram"></i>
-                        <span>Telegram</span>
+                        <span>Telegram Channel</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; color: #bbb;"></i>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
         </div>
 
         <!-- PRICELIST SECTION -->
         <div class="card">
-            <h2><i class="fa-solid fa-tag"></i> Pricelist</h2>
+            <h2><i class="fa-solid fa-gem"></i> Pricelist</h2>
             <div class="pricelist-grid">
                 <div class="price-item">
-                    <h3>Service Type 1</h3>
+                    <h3>Service Tier I</h3>
                     <div class="price">₱150</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Type 2</h3>
+                    <h3>Service Tier II</h3>
                     <div class="price">₱250</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Type 3</h3>
+                    <h3>Service Tier III</h3>
                     <div class="price">₱350</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Type 4</h3>
+                    <h3>Service Tier IV</h3>
                     <div class="price">₱500</div>
                 </div>
             </div>
@@ -314,27 +353,27 @@
 
         <!-- RULES AND REGULATIONS -->
         <div class="card">
-            <h2><i class="fa-solid fa-circle-exclamation"></i> Rules & Regulations</h2>
+            <h2><i class="fa-solid fa-shield-halved"></i> Guidelines</h2>
             <ul class="rules-list">
-                <li>Be polite and respectful when sending an inquiry.</li>
-                <li>Strictly no rushing of orders unless rush fee is settled.</li>
-                <li>50% downpayment or full payment required before starting.</li>
-                <li>Maximum of 2 minor revisions only.</li>
-                <li>No refunds once the work process has already started.</li>
+                <li>Approach with utmost respect and clarity regarding inquiries.</li>
+                <li>Strictly no rushing of orders unless a priority fee is settled.</li>
+                <li>50% downpayment or full payment required before project commencement.</li>
+                <li>Maximum of 2 minor revisions allowed per project tier.</li>
+                <li>Non-refundable once the production process has begun.</li>
             </ul>
         </div>
 
         <!-- NOTES SECTION -->
         <div class="card">
-            <h2><i class="fa-solid fa-note-sticky"></i> Important Notes</h2>
+            <h2><i class="fa-solid fa-bolt"></i> Important Notes</h2>
             <div class="notes-content">
-                <p><strong>TAT (Turnaround Time):</strong> 3 to 7 days depending on the queue. Please book in advance if you have a strict deadline!</p>
+                <p><strong>Turnaround Time (TAT):</strong> 3 to 7 business days depending on queue capacity. Kindly secure your slot in advance!</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Trisha. All rights reserved. ✨</p>
+        <p>&copy; 2026 TRISHA. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
