@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trisha's Elite Portfolio & Services ✨</title>
+    <title>TrishChic.ph ✨ Elite Hub</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -11,15 +11,13 @@
     <style>
         :root {
             --bg-light: #fff5f7;
-            --card-bg: rgba(255, 255, 255, 0.82);
-            --border-glow: rgba(255, 182, 193, 0.4);
+            --card-bg: rgba(255, 255, 255, 0.88);
             --accent-pink: #ff758c;
             --accent-green: #2ecc71;
-            --accent-red: #e74c3c;
             --gold-gradient: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #a8edea 100%);
             --text-main: #3d3a45;
             --text-muted: #78738a;
-            --radius: 28px;
+            --radius: 24px;
         }
 
         * {
@@ -32,22 +30,20 @@
 
         body {
             background-color: var(--bg-light);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(255, 183, 197, 0.4) 0%, transparent 45%),
-                radial-gradient(circle at 85% 85%, rgba(193, 255, 215, 0.35) 0%, transparent 45%),
-                url('https://i.pinimg.com/originals/f5/62/77/f562775f0a0ea5b5f2a1b9b9bf8e0697.png');
-            background-repeat: repeat;
-            background-size: 320px;
+            background-image: url('wave background.jpg'); /* Paggamit ng wave background mo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 15px;
+            padding: 20px 10px;
             overflow-x: hidden;
         }
 
-        /* --- BRIGHT MAGICAL LOADING SCREEN --- */
+        /* --- INTRO / LOADING SCREEN --- */
         #loader {
             position: fixed;
             top: 0;
@@ -61,33 +57,47 @@
             justify-content: center;
             z-index: 9999;
             transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .loader-content {
+            padding: 20px;
             text-align: center;
-            animation: pulseGlowLoader 2s infinite ease-in-out;
         }
 
-        .loader-content i {
-            font-size: 4rem;
+        .loader-content img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff758c;
+            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.3);
+            margin-bottom: 20px;
+            animation: floatChar 3s ease-in-out infinite;
+        }
+
+        @keyframes floatChar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .loader-content h3 {
+            font-size: 0.95rem;
+            color: var(--accent-pink);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .loader-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px rgba(255, 117, 140, 0.4));
+            margin-bottom: 10px;
         }
 
-        .loader-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-
-        @keyframes pulseGlowLoader {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
+        .loader-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
         .fade-out {
@@ -96,7 +106,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 580px;
             width: 100%;
             margin: 0 auto;
             opacity: 0;
@@ -112,103 +122,166 @@
             }
         }
 
-        /* --- BRIGHT LUXURY HEADER --- */
+        /* --- HEADER SECTION --- */
         header {
             text-align: center;
-            padding: 40px 20px 45px;
-            position: relative;
+            padding: 30px 15px;
         }
 
         .avatar-frame {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, rgba(255, 183, 197, 0.5), rgba(193, 255, 215, 0.5));
+            width: 100px;
+            height: 100px;
+            background: #fff;
             border-radius: 50%;
-            margin: 0 auto 22px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(255, 117, 140, 0.25);
-            border: 2px solid #ffffff;
-            animation: floatCrown 5s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.25);
+            border: 3px solid #ffffff;
+            overflow: hidden;
         }
 
-        @keyframes floatCrown {
-            0%, 100% { transform: translateY(0) rotate(0deg); box-shadow: 0 10px 25px rgba(255, 117, 140, 0.25); }
-            50% { transform: translateY(-8px) rotate(3deg); box-shadow: 0 15px 35px rgba(255, 117, 140, 0.4); }
-        }
-
-        .avatar-frame i {
-            font-size: 2.6rem;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
 
-        header p {
+        /* Warning Notice Banner */
+        .notice-banner {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px dashed var(--accent-pink);
+            padding: 12px 18px;
+            border-radius: 16px;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent-pink);
+            margin-bottom: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: center;
         }
 
-        /* --- MODERN GLASS CARDS --- */
+        /* --- MODERN CARDS --- */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border: 1px solid #ffffff;
             border-radius: var(--radius);
-            padding: 32px;
-            margin-bottom: 26px;
-            box-shadow: 0 15px 35px rgba(255, 117, 140, 0.12);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 26px;
+            margin-bottom: 22px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(255, 117, 140, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 35px rgba(255, 117, 140, 0.15);
         }
 
         .card h2 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 22px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
             color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .card h2 i {
             color: var(--accent-pink);
             background: #ffe6eb;
-            padding: 12px;
-            border-radius: 14px;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.15);
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 0.95rem;
         }
 
-        /* --- ACCOUNTS / SOCIAL LINKS --- */
+        /* --- TABLE OF CONTENTS (Organized Navigation) ---.toc-list { */
+        .toc-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 12px 18px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #ffe6eb;
+            transition: all 0.25s ease;
+        }
+
+        .toc-item:hover {
+            background: #ffe6eb;
+            transform: translateX(4px);
+            color: var(--accent-pink);
+        }
+
+        .toc-item.highlight {
+            background: linear-gradient(135deg, #fff0f3 0%, #e8f8f5 100%);
+            border-color: var(--accent-green);
+        }
+
+        /* --- PRICELIST GRID --- */
+        .pricelist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .price-item {
+            background: #ffffff;
+            border: 1.5px dashed rgba(255, 117, 140, 0.4);
+            padding: 16px 12px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .price-item:hover {
+            background: #fff0f3;
+            border-color: var(--accent-pink);
+            transform: translateY(-2px);
+        }
+
+        .price-item h3 {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .price-item .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- SOCIAL LINKS --- */
         .social-grid {
             display: grid;
-            gap: 14px;
+            gap: 12px;
         }
 
         .social-btn {
@@ -217,94 +290,32 @@
             justify-content: space-between;
             background: #ffffff;
             color: var(--text-main);
-            padding: 18px 22px;
-            border-radius: 18px;
+            padding: 14px 18px;
+            border-radius: 16px;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             border: 1px solid #ffe6eb;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: all 0.25s ease;
         }
 
         .social-btn:hover {
-            background: linear-gradient(135deg, #ffe6eb 0%, #e8f8f5 100%);
-            border-color: var(--accent-pink);
-            transform: translateX(6px);
-            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.2);
+            background: #ffe6eb;
+            transform: translateX(4px);
         }
 
         .social-left {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
         .social-left i {
-            font-size: 1.3rem;
-            color: var(--accent-pink);
-            transition: transform 0.3s ease;
-        }
-
-        .social-btn:hover .social-left i {
-            transform: scale(1.2);
-        }
-
-        .social-btn i.fa-arrow-right {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            transition: transform 0.3s ease;
-        }
-
-        .social-btn:hover i.fa-arrow-right {
-            transform: translateX(6px);
+            font-size: 1.2rem;
             color: var(--accent-pink);
         }
 
-        /* --- PRICELIST GRID --- */
-        .pricelist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .price-item {
-            background: #ffffff;
-            border: 1.5px dashed rgba(255, 117, 140, 0.4);
-            padding: 22px 16px;
-            border-radius: 18px;
-            text-align: center;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .price-item:hover {
-            background: #fff0f3;
-            border-color: var(--accent-pink);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.15);
-        }
-
-        .price-item h3 {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .price-item .price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* --- RULES & REGULATIONS --- */
+        /* --- RULES & GUIDELINES --- */
         .rules-list {
             list-style: none;
             counter-reset: rule-counter;
@@ -314,21 +325,21 @@
             counter-increment: rule-counter;
             display: flex;
             align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 16px;
-            font-size: 0.9rem;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .rules-list li::before {
             content: counter(rule-counter);
             background: #e8f8f5;
-            color: #27ae60;
-            font-weight: 600;
-            font-size: 0.75rem;
-            min-width: 26px;
-            height: 26px;
+            color: var(--accent-green);
+            font-weight: 700;
+            font-size: 0.72rem;
+            min-width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -336,31 +347,28 @@
             border: 1px solid #d1f2eb;
             flex-shrink: 0;
             margin-top: 2px;
-            box-shadow: 0 2px 8px rgba(39, 174, 96, 0.15);
         }
 
-        /* --- NOTES BOX --- */
+        /* --- NOTES & BOXES --- */
         .notes-content {
             background: #e8f8f5;
-            border-left: 3.5px solid #27ae60;
-            padding: 18px 22px;
-            border-radius: 0 18px 18px 0;
-            font-size: 0.9rem;
+            border-left: 3.5px solid var(--accent-green);
+            padding: 15px 18px;
+            border-radius: 0 14px 14px 0;
+            font-size: 0.88rem;
             color: #1e6b3e;
-            line-height: 1.6;
+            line-height: 1.5;
             border-top: 1px solid #d1f2eb;
             border-right: 1px solid #d1f2eb;
             border-bottom: 1px solid #d1f2eb;
-            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.08);
         }
 
-        /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 25px 0 10px;
-            font-size: 0.8rem;
+            padding: 20px 0 10px;
+            font-size: 0.78rem;
             color: var(--text-muted);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         @media (max-width: 480px) {
@@ -372,15 +380,17 @@
 </head>
 <body>
 
-    <!-- MAGICAL LOADING SCREEN -->
+    <!-- INTRO LOADING SCREEN -->
     <div id="loader">
         <div class="loader-content">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <h2>Loading Trisha's Elite Hub... ✨</h2>
+            <img src="girl (1).png" alt="TrishChic Character">
+            <h3>Welcome to trishchic.ph</h3>
+            <h1>TRISHCHIC.PH</h1>
+            <p>A shop with friendly services and affordable prices ✨</p>
         </div>
     </div>
 
-    <!-- AUDIO & INTERACTIVE ANIMATIONS ENGINE -->
+    <!-- AUDIO & COZY SOUND EFFECTS ENGINE -->
     <script>
         let audioCtx = null;
 
@@ -390,32 +400,32 @@
             }
         }
 
-        // 1. Magical Entrance Chime Chord Sequence
-        function playMagicalSound() {
+        // Cozy Magical Chime (Opening)
+        function playCozyIntroSound() {
             try {
                 initAudio();
-                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; 
+                const notes = [523.25, 659.25, 783.99, 1046.50]; 
                 notes.forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.07);
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.08);
                     
-                    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + index * 0.07);
-                    gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + index * 0.07 + 0.04);
-                    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + index * 0.07 + 1.4);
+                    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + index * 0.08);
+                    gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + index * 0.08 + 0.04);
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + index * 0.08 + 1.2);
                     
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     
-                    osc.start(audioCtx.currentTime + index * 0.07);
-                    osc.stop(audioCtx.currentTime + index * 0.07 + 1.5);
+                    osc.start(audioCtx.currentTime + index * 0.08);
+                    osc.stop(audioCtx.currentTime + index * 0.08 + 1.3);
                 });
-            } catch(e) { console.log(e); }
+            } catch(e) {}
         }
 
-        // 2. Soft Hover Chime (Kapag dinadaanan ng cursor ang button)
+        // Soft Cozy Hover Pop
         function playHoverSound() {
             try {
                 initAudio();
@@ -423,10 +433,32 @@
                 const gain = audioCtx.createGain();
                 
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5 note
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
                 
                 gain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.025, audioCtx.currentTime + 0.02);
+                gain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.13);
+            } catch(e) {}
+        }
+
+        // Cozy Click Sound
+        function playClickSound() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.1);
+                
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.18);
                 
                 osc.connect(gain);
@@ -437,40 +469,17 @@
             } catch(e) {}
         }
 
-        // 3. Satisfying Click Sound (Kapag pinindot ang button)
-        function playClickSound() {
-            try {
-                initAudio();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.12);
-                
-                gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.22);
-                
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.25);
-            } catch(e) {}
-        }
-
-        // Alisin ang loading screen at i-trigger ang sound pag-load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.classList.add('fade-out');
-                playMagicalSound();
-            }, 1300);
+                playCozyIntroSound();
+            }, 1400);
 
-            // Mag-attach ng sound listeners sa lahat ng social buttons
-            document.querySelectorAll('.social-btn').forEach(btn => {
-                btn.addEventListener('mouseenter', playHoverSound);
-                btn.addEventListener('click', playClickSound);
+            // Attach sounds to buttons and links
+            document.querySelectorAll('a, button, .toc-item, .social-btn').forEach(el => {
+                el.addEventListener('mouseenter', playHoverSound);
+                el.addEventListener('click', playClickSound);
             });
         });
     </script>
@@ -478,87 +487,191 @@
     <div class="container">
         <header>
             <div class="avatar-frame">
-                <i class="fa-solid fa-crown"></i>
+                <img src="girl (2).png" alt="TrishChic Logo">
             </div>
-            <h1>TRISHA</h1>
-            <p>Exclusive Services & Elite Hub ✨</p>
+            <h1>TRISHCHIC.PH</h1>
         </header>
 
-        <!-- ACCOUNTS SECTION -->
-        <div class="card">
-            <h2><i class="fa-solid fa-compass"></i> Official Links</h2>
+        <div class="notice-banner">
+            ✨ PLEASE MAKE SURE TO READ EVERYTHING SO WE CAN AVOID TOO MANY QUESTIONS ✨
+        </div>
+
+        <!-- 1. TABLE OF CONTENTS -->
+        <div class="card" id="toc">
+            <h2><img src="girl (3.png" style="width:24px; height:24px; border-radius:50%; object-fit:cover;" alt=""> Table of Contents</h2>
+            <div class="toc-list">
+                <a href="#intro" class="toc-item"><span>1. Introduction & Community</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#bestseller" class="toc-item"><span>2. Best Seller (Lifetime Canva)</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#booking" class="toc-item highlight"><span>✨ 3. You Must Try Booking Service!</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#pricelist" class="toc-item"><span>4. Full Pricelist (Apps & Premiums)</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#howto" class="toc-item"><span>5. What to Do / How to Avail</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#tutorial" class="toc-item"><span>6. How to Check if Pro</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#rules" class="toc-item"><span>7. Rules & Regulations</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+                <a href="#notes" class="toc-item"><span>8. Important Notes & Payment</span><i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:#aaa;"></i></a>
+            </div>
+        </div>
+
+        <!-- 2. INTRODUCTION & COMMUNITY & SOCIALS -->
+        <div class="card" id="intro">
+            <h2><i class="fa-solid fa-heart"></i> Introduction & Community</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">
+                I sell some premiums like Canva, CapCut, Netflix, Viva One, Viva Max, ChatGPT, YouTube etc. in super affordable prices![cite: 3]
+            </p>
             <div class="social-grid">
-                <!-- Palitan ang mga href ng actual links mo -->
-                <a href="https://instagram.com/your_ig" target="_blank" class="social-btn">
+                <a href="https://instagram.com/xx.twisha" target="_blank" class="social-btn">
                     <div class="social-left">
                         <i class="fa-brands fa-instagram"></i>
-                        <span>Instagram Profile</span>
+                        <span>Instagram (@xx.twisha)</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-arrow-right" style="font-size:0.8rem; color:#aaa;"></i>
                 </a>
-                <a href="https://facebook.com/your_fb" target="_blank" class="social-btn">
+                <a href="https://tiktok.com/@trishchic.ph" target="_blank" class="social-btn">
                     <div class="social-left">
-                        <i class="fa-brands fa-facebook"></i>
-                        <span>Facebook Account</span>
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>Tiktok (@trishchic.ph)</span>
                     </div>
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-arrow-right" style="font-size:0.8rem; color:#aaa;"></i>
                 </a>
-                <a href="https://t.me/your_tg" target="_blank" class="social-btn">
-                    <div class="social-left">
-                        <i class="fa-brands fa-telegram"></i>
-                        <span>Telegram Channel</span>
-                    </div>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--accent-pink); margin-top: 14px; text-align: center; font-weight: 600;">
+                If there's any problem or order, kindly message me here! ✨
+            </p>
+        </div>
+
+        <!-- 3. BEST SELLER -->
+        <div class="card" id="bestseller">
+            <h2><i class="fa-solid fa-star"></i> Best Seller</h2>
+            <div style="background: #fff0f3; border: 1.5px dashed var(--accent-pink); padding: 18px; border-radius: 16px; text-align: center;">
+                <p style="font-size: 0.9rem; font-weight: 600; color: var(--text-main); line-height: 1.6; margin-bottom: 12px;">
+                    ⭐ I offer <strong>LIFETIME CANVA</strong> po for <strong>₱199</strong> only! Yes, lifetime niyo na po siya magagamit. No monthly and yearly fee[cite: 5].
+                </p>
+                <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 8px;">ORIGINAL PRICE: ₱250[cite: 5]</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Plus this service only took 5 seconds para ma-premium account mo! 😲[cite: 5]</p>
             </div>
         </div>
 
-        <!-- PRICELIST SECTION -->
-        <div class="card">
-            <h2><i class="fa-solid fa-gem"></i> Pricelist</h2>
+        <!-- 4. BOOKING SERVICE (FEATURED) -->
+        <div class="card" id="booking">
+            <h2><i class="fa-solid fa-motorcycle"></i> Booking Services</h2>
+            <div style="background: #e8f8f5; border: 1.5px solid #2ecc71; padding: 18px; border-radius: 16px; text-align: center;">
+                <h3 style="font-size: 1.1rem; color: #1e6b3e; margin-bottom: 6px;">JOYRIDE & MOVE IT</h3>
+                <p style="font-size: 0.95rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 10px;">35 fee only per book (Less 50% off on all bookings!)</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Affordable, less hassle, beat the traffic, arrive faster and safe.</p>
+            </div>
+        </div>
+
+        <!-- 5. FULL PRICELIST -->
+        <div class="card" id="pricelist">
+            <h2><i class="fa-solid fa-tag"></i> Full Pricelist</h2>
             <div class="pricelist-grid">
                 <div class="price-item">
-                    <h3>Service Tier I</h3>
-                    <div class="price">₱150</div>
+                    <h3>Canva (CNVA)</h3>
+                    <div class="price">₱15 - 1 Mo<br>₱69 - 1 Yr<br>₱199 - Lifetime[cite: 11]</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Tier II</h3>
-                    <div class="price">₱250</div>
+                    <h3>Netflix (NTFLIX)</h3>
+                    <div class="price">₱79 - 1 Mo SH<br>₱149 - 1 Mo SL Profile[cite: 11]</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Tier III</h3>
-                    <div class="price">₱350</div>
+                    <h3>YouTube + Music</h3>
+                    <div class="price">₱59 - 1 Month Invite[cite: 11]</div>
                 </div>
                 <div class="price-item">
-                    <h3>Service Tier IV</h3>
-                    <div class="price">₱500</div>
+                    <h3>CapCut (CPCUT)</h3>
+                    <div class="price">₱59 - 7 Days<br>₱99 - 1 Month[cite: 11]</div>
                 </div>
+                <div class="price-item">
+                    <h3>ChatGPT (CGPT)</h3>
+                    <div class="price">₱79 - Go (1 Mo)<br>₱129 - Plus (1 Mo)[cite: 12]</div>
+                </div>
+                <div class="price-item">
+                    <h3>Prime Video</h3>
+                    <div class="price">₱39 - 1 Month[cite: 12]</div>
+                </div>
+                <div class="price-item">
+                    <h3>HBO GO</h3>
+                    <div class="price">₱49 - 1 Month Invite[cite: 12]</div>
+                </div>
+                <div class="price-item">
+                    <h3>iQiyi (IKLOK)</h3>
+                    <div class="price">₱89 - 1 Month[cite: 12]</div>
+                </div>
+                <div class="price-item">
+                    <h3>Viva One & Max</h3>
+                    <div class="price">₱59 - 1 Month[cite: 13]</div>
+                </div>
+                <div class="price-item">
+                    <h3>WeTV VIP</h3>
+                    <div class="price">₱39 - 1 Month[cite: 13]</div>
+                </div>
+                <div class="price-item">
+                    <h3>Disney+</h3>
+                    <div class="price">₱59 - 1 Month[cite: 13]</div>
+                </div>
+                <div class="price-item">
+                    <h3>NBA League Pass</h3>
+                    <div class="price">₱79 - 1 Month[cite: 13]</div>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; text-align: center; color: var(--text-muted); margin-top: 14px;">
+                Many more options are available that are not listed here. If there is any app you want in premium, just direct message me![cite: 14]
+            </p>
+        </div>
+
+        <!-- 6. WHAT TO DO / HOW TO AVAIL -->
+        <div class="card" id="howto">
+            <h2><i class="fa-solid fa-circle-question"></i> What to Do / How to Avail</h2>
+            <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+                <p style="margin-bottom: 10px;">Drop Gmail po, <strong>no need password</strong>. Pa-indicate if (1 month, one year, lifetime). Can do service first, pwede rin po pay first. It's up to you po[cite: 7].</p>
+                <p style="font-weight: 600; color: var(--accent-pink);">Ex: example@gmail.com one year[cite: 7]</p>
             </div>
         </div>
 
-        <!-- RULES AND REGULATIONS -->
-        <div class="card">
-            <h2><i class="fa-solid fa-shield-halved"></i> Guidelines</h2>
+        <!-- 7. TUTORIAL HOW TO CHECK -->
+        <div class="card" id="tutorial">
+            <h2><i class="fa-solid fa-laptop-code"></i> How to Check if Pro</h2>
             <ul class="rules-list">
-                <li>Approach with utmost respect and clarity regarding inquiries.</li>
-                <li>Strictly no rushing of orders unless a priority fee is settled.</li>
-                <li>50% downpayment or full payment required before project commencement.</li>
-                <li>Maximum of 2 minor revisions allowed per project tier.</li>
-                <li>Non-refundable once the production process has begun.</li>
+                <li>I-accept mo invitation sa Gmail na binigay mo sakin[cite: 8].</li>
+                <li>Open Canva, make sure same Gmail ang naka-login[cite: 8].</li>
+                <li>Try to use pro font o ibang ginagamitan ng pro[cite: 8].</li>
+                <li>I-save/download mo[cite: 8].</li>
+                <li>Kung na-save, <strong>congrats</strong>![cite: 8]</li>
             </ul>
         </div>
 
-        <!-- NOTES SECTION -->
-        <div class="card">
-            <h2><i class="fa-solid fa-bolt"></i> Important Notes</h2>
-            <div class="notes-content">
-                <p><strong>Turnaround Time (TAT):</strong> 3 to 7 business days depending on queue capacity. Kindly secure your slot in advance!</p>
+        <!-- 8. RULES AND REGULATIONS -->
+        <div class="card" id="rules">
+            <h2><i class="fa-solid fa-shield-halved"></i> Rules & Regulations</h2>
+            <ul class="rules-list">
+                <li>No refund once paid, invite, and dropped Gmail[cite: 10].</li>
+                <li>For month Canva 0-25 days considered as one month[cite: 10].</li>
+                <li>No to rude buyers[cite: 10].</li>
+                <li>Do vouch to activate full warranty[cite: 10].</li>
+                <li>Make sure to accept the invitation within 24 hours[cite: 10].</li>
+                <li>Do join sa community/group ko sa IG for sales and updated prices and for updates[cite: 10].</li>
+                <li>Once hindi ka nag bayad after ka mabigyan ng service first, within 48h you will be posted, unless may valid reason[cite: 10].</li>
+                <li>Once dropped mo na Gmail mo, no cancellation[cite: 10].</li>
+            </ul>
+        </div>
+
+        <!-- 9. NOTES & PAYMENT -->
+        <div class="card" id="notes">
+            <h2><i class="fa-solid fa-note-sticky"></i> Notes & Payment</h2>
+            <div class="notes-content" style="margin-bottom: 16px;">
+                <p>If there's something sa account—can replace, as long as may proper feedback. Please do feedback sa post ko o drop nalang here don't forget to put @trishchic.ph. Screenshot and send it here[cite: 9].</p>
+            </div>
+            <div style="background: #fff; border: 1.5px dashed var(--accent-green); padding: 16px; border-radius: 16px; text-align: center;">
+                <h3 style="font-size: 1rem; color: var(--accent-green); margin-bottom: 6px;">MODE OF PAYMENT: GCASH</h3>
+                <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">0946 051 9829</p>
+                <p style="font-size: 0.85rem; font-weight: 600; color: var(--accent-pink); margin-bottom: 10px;">AP..E C.</p>
+                <p style="font-size: 0.78rem; color: var(--text-muted);">Giving tip isn't required, but I really appreciate it if you do[cite: 9]!</p>
             </div>
         </div>
+
     </div>
 
     <footer>
-        <p>&copy; 2026 TRISHA. ALL RIGHTS RESERVED. ✨</p>
+        <p>&copy; 2026 TRISHCHIC.PH. ALL RIGHTS RESERVED. ✨</p>
     </footer>
 
 </body>
