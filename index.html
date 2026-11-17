@@ -33,9 +33,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             overflow: hidden;
             position: relative;
+            padding: 20px 0;
         }
 
         /* --- ANIMATED MOVING WAVE BACKGROUND --- */
@@ -135,11 +136,11 @@
             visibility: hidden;
         }
 
-        /* --- MAIN CONTAINER & CARD SWIPER SYSTEM --- */
+        /* --- CONTAINER & 3D CAROUSEL ARENA --- */
         .container {
-            max-width: 500px;
-            width: 90%;
-            height: 85vh;
+            max-width: 700px;
+            width: 100%;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -149,12 +150,11 @@
 
         header {
             text-align: center;
-            margin-bottom: 10px;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -164,89 +164,119 @@
         .notice-banner {
             background: rgba(255, 255, 255, 0.9);
             border: 1.5px dashed var(--accent-pink);
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: 14px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--accent-pink);
-            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             text-align: center;
         }
 
-        /* Card Stack / Swiper Arena */
-        .card-deck {
+        /* 3D Carousel Stage */
+        .carousel-stage {
             width: 100%;
-            height: 520px;
+            height: 420px;
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            perspective: 1000px;
+        }
+
+        .carousel-track {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .card {
+        .carousel-card {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.92);
+            width: 320px;
+            height: 380px;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border: 2px solid #ffffff;
             border-radius: var(--radius);
-            padding: 30px 25px;
-            box-shadow: 0 20px 40px rgba(255, 117, 140, 0.15);
+            padding: 25px 20px;
+            box-shadow: 0 25px 50px rgba(255, 117, 140, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.5s cubic-bezier(0.15, 1.1, 0.3, 1), opacity 0.4s ease;
+            transition: all 0.6s cubic-bezier(0.15, 1.1, 0.3, 1);
+            cursor: pointer;
             backface-visibility: hidden;
         }
 
-        .card h2 {
-            font-size: 1.25rem;
+        .carousel-card h2 {
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
             border-bottom: 2px solid #ffe6eb;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
-        .card h2 i {
-            color: var(--accent-pink);
-            background: #ffe6eb;
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 1rem;
+        .carousel-card h2 img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .card-body {
             flex-grow: 1;
             overflow-y: auto;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            line-height: 1.6;
-            padding-right: 4px;
+            line-height: 1.5;
+            margin-top: 10px;
         }
 
-        .card-body::-webkit-scrollbar {
-            width: 4px;
-        }
-        .card-body::-webkit-scrollbar-thumb {
-            background: #ffb3c1;
-            border-radius: 10px;
+        /* Logo Grid for Pricelists using uploaded images */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
-        /* Navigation Controls (Swipe / Next Buttons) */
+        .logo-item {
+            background: #ffffff;
+            border: 1.5px solid #ffe6eb;
+            padding: 10px;
+            border-radius: 14px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logo-item img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .logo-item span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Controls */
         .controls {
             display: flex;
             gap: 15px;
-            width: 100%;
-            margin-top: 15px;
+            width: 320px;
         }
 
         .nav-btn {
@@ -254,15 +284,15 @@
             background: #ffffff;
             border: 2px solid var(--accent-pink);
             color: var(--accent-pink);
-            padding: 14px;
-            border-radius: 18px;
+            padding: 12px;
+            border-radius: 16px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: 0 6px 20px rgba(255, 117, 140, 0.15);
             transition: all 0.3s ease;
         }
@@ -270,44 +300,13 @@
         .nav-btn:hover {
             background: var(--accent-pink);
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.3);
+            transform: translateY(-2px);
         }
 
         .nav-btn.primary {
             background: var(--gold-gradient);
             border: none;
             color: white;
-        }
-
-        /* Pricelist & Social Grids inside cards */
-        .pricelist-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .price-item {
-            background: #ffffff;
-            border: 1.5px dashed rgba(255, 117, 140, 0.4);
-            padding: 12px 10px;
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .price-item h3 {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            font-weight: 600;
-        }
-
-        .price-item .price {
-            font-size: 0.98rem;
-            font-weight: 700;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .social-grid {
@@ -322,49 +321,18 @@
             justify-content: space-between;
             background: #ffffff;
             color: var(--text-main);
-            padding: 12px 16px;
-            border-radius: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             border: 1px solid #ffe6eb;
-        }
-
-        .rules-list {
-            list-style: none;
-            counter-reset: rule-counter;
-        }
-
-        .rules-list li {
-            counter-increment: rule-counter;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .rules-list li::before {
-            content: counter(rule-counter);
-            background: #e8f8f5;
-            color: var(--accent-green);
-            font-weight: 700;
-            font-size: 0.7rem;
-            min-width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
         }
 
         footer {
             font-size: 0.72rem;
             color: var(--text-muted);
             letter-spacing: 1.5px;
-            margin-top: 5px;
         }
     </style>
 </head>
@@ -457,7 +425,7 @@
                 playCozyIntroSound();
             }, 1400);
 
-            document.querySelectorAll('a, button, .nav-btn').forEach(el => {
+            document.querySelectorAll('a, button, .nav-btn, .carousel-card').forEach(el => {
                 el.addEventListener('mouseenter', playHoverSound);
                 el.addEventListener('click', playClickSound);
             });
@@ -473,102 +441,102 @@
             ✨ PLEASE MAKE SURE TO READ EVERYTHING TO AVOID QUESTIONS ✨
         </div>
 
-        <!-- CARD SWIPER ARENA -->
-        <div class="card-deck" id="cardDeck">
-            
-            <!-- Card 1: Intro & Socials -->
-            <div class="card" data-index="0">
-                <h2><i class="fa-solid fa-heart"></i> Introduction</h2>
-                <div class="card-body">
-                    <p style="margin-bottom: 14px;">I sell some premiums like Canva, CapCut, Netflix, Viva One, Viva Max, ChatGPT, YouTube etc. in super affordable prices!</p>
-                    <div class="social-grid">
-                        <a href="https://instagram.com/xx.twisha" target="_blank" class="social-btn">
-                            <span><i class="fa-brands fa-instagram" style="color:#ff758c; margin-right:8px;"></i> Instagram (@xx.twisha)</span>
-                            <i class="fa-solid fa-arrow-right" style="font-size:0.75rem; color:#aaa;"></i>
-                        </a>
-                        <a href="https://tiktok.com/@trishchic.ph" target="_blank" class="social-btn">
-                            <span><i class="fa-brands fa-tiktok" style="color:#ff758c; margin-right:8px;"></i> Tiktok (@trishchic.ph)</span>
-                            <i class="fa-solid fa-arrow-right" style="font-size:0.75rem; color:#aaa;"></i>
-                        </a>
-                    </div>
-                    <p style="font-size: 0.82rem; color: var(--accent-pink); margin-top: 14px; text-align: center; font-weight: 600;">If there's any problem or order, kindly message me here!</p>
-                </div>
-            </div>
-
-            <!-- Card 2: Best Seller -->
-            <div class="card" data-index="1" style="transform: scale(0.95) translateY(15px); opacity: 0.7; z-index: -1;">
-                <h2><i class="fa-solid fa-star"></i> Best Seller</h2>
-                <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
-                    <div style="background: #fff0f3; border: 1.5px dashed var(--accent-pink); padding: 20px; border-radius: 16px;">
-                        <p style="font-size: 0.9rem; font-weight: 600; color: var(--text-main); margin-bottom: 12px;">
-                            ⭐ I offer <strong>LIFETIME CANVA</strong> po for <strong>₱199</strong> only! Yes, lifetime niyo na po siya magagamit. No monthly and yearly fee.
-                        </p>
-                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 8px;">ORIGINAL PRICE: ₱250</div>
-                        <p style="font-size: 0.82rem; color: var(--text-muted);">Plus this service only took 5 seconds para ma-premium account mo! 😲</p>
+        <!-- 3D CAROUSEL STAGE -->
+        <div class="carousel-stage">
+            <div class="carousel-track" id="carouselTrack">
+                
+                <!-- Card 1: Intro & Socials -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><img src="girl (2.png" alt=""> Introduction</h2>
+                    <div class="card-body">
+                        <p style="margin-bottom: 10px;">I sell some premiums like Canva, CapCut, Netflix, Viva One, Viva Max, ChatGPT, YouTube etc. in super affordable prices!</p>
+                        <div class="social-grid">
+                            <a href="https://instagram.com/xx.twisha" target="_blank" class="social-btn">
+                                <span><i class="fa-brands fa-instagram" style="color:#ff758c;"></i> IG: @xx.twisha</span>
+                                <i class="fa-solid fa-arrow-right" style="font-size:0.7rem; color:#aaa;"></i>
+                            </a>
+                            <a href="https://tiktok.com/@trishchic.ph" target="_blank" class="social-btn">
+                                <span><i class="fa-brands fa-tiktok" style="color:#ff758c;"></i> TikTok: @trishchic.ph</span>
+                                <i class="fa-solid fa-arrow-right" style="font-size:0.7rem; color:#aaa;"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Card 3: Booking Service -->
-            <div class="card" data-index="2" style="transform: scale(0.9) translateY(30px); opacity: 0.4; z-index: -2;">
-                <h2><i class="fa-solid fa-motorcycle"></i> Booking Service</h2>
-                <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
-                    <div style="background: #e8f8f5; border: 1.5px solid #2ecc71; padding: 20px; border-radius: 16px;">
-                        <h3 style="font-size: 1.1rem; color: #1e6b3e; margin-bottom: 6px;">✨ YOU MUST TRY BOOKING SERVICE!</h3>
-                        <p style="font-size: 1rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 10px;">JoyRide & MoveIt<br>35 fee only per book (Less 50% off!)</p>
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">Affordable, less hassle, beat the traffic, arrive faster and safe.</p>
+                <!-- Card 2: Best Seller -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><i class="fa-solid fa-star" style="color:var(--accent-pink);"></i> Best Seller</h2>
+                    <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                        <div style="background: #fff0f3; border: 1.5px dashed var(--accent-pink); padding: 16px; border-radius: 14px;">
+                            <p style="font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+                                ⭐ <strong>LIFETIME CANVA</strong> po for <strong>₱199</strong> only! No monthly & yearly fee.
+                            </p>
+                            <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 6px;">ORIGINAL: ₱250</div>
+                            <p style="font-size: 0.78rem; color: var(--text-muted);">Only took 5 seconds para ma-premium! 😲</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Card 4: Pricelist Part 1 -->
-            <div class="card" data-index="3" style="transform: scale(0.85) translateY(45px); opacity: 0.2; z-index: -3;">
-                <h2><i class="fa-solid fa-tag"></i> Pricelist (1/2)</h2>
-                <div class="card-body">
-                    <div class="pricelist-grid">
-                        <div class="price-item"><h3>Canva (CNVA)</h3><div class="price">₱15 - 1 Mo<br>₱69 - 1 Yr<br>₱199 - Life</div></div>
-                        <div class="price-item"><h3>Netflix (NTFLIX)</h3><div class="price">₱79 - 1 Mo SH<br>₱149 - 1 Mo SL</div></div>
-                        <div class="price-item"><h3>YouTube + Music</h3><div class="price">₱59 - 1 Mo Invite</div></div>
-                        <div class="price-item"><h3>CapCut (CPCUT)</h3><div class="price">₱59 - 7 Days<br>₱99 - 1 Month</div></div>
+                <!-- Card 3: Booking Service -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><i class="fa-solid fa-motorcycle" style="color:var(--accent-green);"></i> Booking Service</h2>
+                    <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                        <div style="background: #e8f8f5; border: 1.5px solid #2ecc71; padding: 16px; border-radius: 14px;">
+                            <h3 style="font-size: 1rem; color: #1e6b3e; margin-bottom: 4px;">✨ YOU MUST TRY!</h3>
+                            <p style="font-size: 0.9rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 6px;">JoyRide & MoveIt<br>₱35 fee (Less 50% off!)</p>
+                            <p style="font-size: 0.78rem; color: var(--text-muted);">Affordable, less hassle, beat traffic & safe.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Card 5: Pricelist Part 2 -->
-            <div class="card" data-index="4" style="transform: scale(0.8) translateY(60px); opacity: 0.1; z-index: -4;">
-                <h2><i class="fa-solid fa-tag"></i> Pricelist (2/2)</h2>
-                <div class="card-body">
-                    <div class="pricelist-grid">
-                        <div class="price-item"><h3>ChatGPT</h3><div class="price">₱79 - Go<br>₱129 - Plus</div></div>
-                        <div class="price-item"><h3>Prime Video</h3><div class="price">₱39 - 1 Mo</div></div>
-                        <div class="price-item"><h3>HBO GO</h3><div class="price">₱49 - 1 Mo</div></div>
-                        <div class="price-item"><h3>iQiyi</h3><div class="price">₱89 - 1 Mo</div></div>
-                        <div class="price-item"><h3>Viva One/Max</h3><div class="price">₱59 - 1 Mo</div></div>
-                        <div class="price-item"><h3>Disney+</h3><div class="price">₱59 - 1 Mo</div></div>
+                <!-- Card 4: Pricelist (Streaming & Apps using uploaded logos) -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><i class="fa-solid fa-gem" style="color:var(--accent-pink);"></i> Premiums (1/2)</h2>
+                    <div class="card-body">
+                        <div class="logo-grid">
+                            <div class="logo-item"><img src="netflix.png" alt="Netflix"><span>Netflix</span><span style="color:var(--accent-pink);">₱79 - ₱149</span></div>
+                            <div class="logo-item"><img src="primevideo.png" alt="Prime"><span>Prime Video</span><span style="color:var(--accent-pink);">₱39 / mo</span></div>
+                            <div class="logo-item"><img src="yt.png" alt="YouTube"><span>YouTube</span><span style="color:var(--accent-pink);">₱59 / mo</span></div>
+                            <div class="logo-item"><img src="capcut.png" alt="CapCut"><span>CapCut</span><span style="color:var(--accent-pink);">₱59 - ₱99</span></div>
+                        </div>
                     </div>
-                    <p style="font-size: 0.78rem; text-align: center; color: var(--text-muted); margin-top: 10px;">Many more options available. DM me!</p>
                 </div>
-            </div>
 
-            <!-- Card 6: How to Avail & Rules -->
-            <div class="card" data-index="5" style="transform: scale(0.75) translateY(75px); opacity: 0.0; z-index: -5;">
-                <h2><i class="fa-solid fa-circle-question"></i> How to Avail & Rules</h2>
-                <div class="card-body">
-                    <p style="font-size: 0.85rem; margin-bottom: 10px;"><strong>How to Avail:</strong> Drop Gmail po, no need password. Ex: example@gmail.com one year</p>
-                    <ul class="rules-list" style="margin-top: 8px;">
-                        <li>No refund once paid, invite, and dropped Gmail.</li>
-                        <li>Make sure to accept invitation within 24 hours.</li>
-                        <li>Mode of Payment: GCash (0946 051 9829 AP..E C.)</li>
-                    </ul>
+                <!-- Card 5: Pricelist (AI & Entertainment) -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><i class="fa-solid fa-gem" style="color:var(--accent-pink);"></i> Premiums (2/2)</h2>
+                    <div class="card-body">
+                        <div class="logo-grid">
+                            <div class="logo-item"><img src="gpt.png" alt="GPT"><span>ChatGPT</span><span style="color:var(--accent-pink);">₱79 - ₱129</span></div>
+                            <div class="logo-item"><img src="disney.png" alt="Disney"><span>Disney+</span><span style="color:var(--accent-pink);">₱59 / mo</span></div>
+                            <div class="logo-item"><img src="vivaone.png" alt="Viva"><span>Viva One/Max</span><span style="color:var(--accent-pink);">₱59 / mo</span></div>
+                            <div class="logo-item"><img src="hbogo.png" alt="HBO"><span>HBO GO</span><span style="color:var(--accent-pink);">₱49 / mo</span></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
+                <!-- Card 6: Rules & Payment -->
+                <div class="carousel-card" onclick="nextCard()">
+                    <h2><i class="fa-solid fa-shield-halved" style="color:var(--accent-green);"></i> Rules & Payment</h2>
+                    <div class="card-body">
+                        <p style="font-size: 0.8rem; margin-bottom: 6px;"><strong>How to Avail:</strong> Drop Gmail po, no need password.</p>
+                        <ul style="font-size: 0.78rem; color: var(--text-muted); padding-left: 15px; line-height: 1.4;">
+                            <li>No refund once paid & dropped Gmail.</li>
+                            <li>Accept invitation within 24 hours.</li>
+                        </ul>
+                        <div style="background: #fff; border: 1px dashed var(--accent-green); padding: 8px; border-radius: 10px; text-align: center; margin-top: 8px;">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent-green);">GCASH: 0946 051 9829 (AP..E C.)</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- CONTROLS / SWIPE BUTTONS -->
+        <!-- CONTROLS -->
         <div class="controls">
-            <button class="nav-btn" id="prevBtn" onclick="prevCard()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-            <button class="nav-btn primary" id="nextBtn" onclick="nextCard()">Next Card <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="nav-btn" onclick="prevCard()"><i class="fa-solid fa-arrow-left"></i> Prev</button>
+            <button class="nav-btn primary" onclick="nextCard()">Next <i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
         <footer>
@@ -576,57 +544,51 @@
         </footer>
     </div>
 
-    <!-- CARD SWIPER ANIMATION SCRIPT -->
+    <!-- 3D CAROUSEL SCRIPT -->
     <script>
         let currentIndex = 0;
-        const cards = document.querySelectorAll('.card');
+        const cards = document.querySelectorAll('.carousel-card');
         const totalCards = cards.length;
 
-        function updateCards() {
+        function updateCarousel() {
             cards.forEach((card, index) => {
-                const offset = index - currentIndex;
+                const offset = (index - currentIndex + totalCards) % totalCards;
+                
                 if (offset === 0) {
-                    // Active Card
-                    card.style.transform = "scale(1) translateY(0) rotate(0deg)";
+                    // Active Center Card
+                    card.style.transform = "translateX(0) translateZ(0px) rotateY(0deg) scale(1)";
                     card.style.opacity = "1";
                     card.style.zIndex = "10";
                     card.style.pointerEvents = "auto";
-                } else if (offset > 0 && offset <= 2) {
-                    // Stacked Cards behind
-                    card.style.transform = `scale(${1 - offset * 0.05}) translateY(${offset * 18}px) rotate(${offset * 2}deg)`;
-                    card.style.opacity = `${1 - offset * 0.3}`;
-                    card.style.zIndex = `${10 - offset}`;
+                } else if (offset === 1 || offset === totalCards - 1) {
+                    // Side Cards (3D Perspective)
+                    const direction = offset === 1 ? 1 : -1;
+                    card.style.transform = `translateX(${direction * 140}px) translateZ(-150px) rotateY(${-direction * 25}deg) scale(0.85)`;
+                    card.style.opacity = "0.5";
+                    card.style.zIndex = "5";
                     card.style.pointerEvents = "none";
                 } else {
-                    // Hidden cards
-                    card.style.transform = "scale(0.8) translateY(80px)";
+                    // Hidden Cards behind
+                    card.style.transform = "translateX(0) translateZ(-300px) scale(0.7)";
                     card.style.opacity = "0";
-                    card.style.zIndex = "-1";
+                    card.style.zIndex = "1";
                     card.style.pointerEvents = "none";
                 }
             });
         }
 
         function nextCard() {
-            if (currentIndex < totalCards - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0; // Loop back to start
-            }
-            updateCards();
+            currentIndex = (currentIndex + 1) % totalCards;
+            updateCarousel();
         }
 
         function prevCard() {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = totalCards - 1;
-            }
-            updateCards();
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            updateCarousel();
         }
 
-        // Initialize stack positions
-        updateCards();
+        // Initialize 3D Stage
+        updateCarousel();
     </script>
 </body>
 </html>
