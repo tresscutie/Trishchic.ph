@@ -3,81 +3,161 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trishchic.ph | Cozy Premium Shop</title>
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --pink:#f5a7c6;
-  --lightpink:#fff0f5;
-  --green:#b8d875;
-  --darkgreen:#607d39;
-  --cream:#fffdf7;
-  --ink:#514b49;
+  --pink:#f4a6c5;
+  --pink-dark:#dc7fa7;
+  --pink-light:#fff0f6;
+  --green:#b9d97b;
+  --green-dark:#739b43;
+  --cream:#fffdf8;
+  --text:#554d50;
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
 body {
   margin:0;
   font-family:'DM Sans',sans-serif;
+  color:var(--text);
   background:var(--cream);
-  color:var(--ink);
 }
-button,a { -webkit-tap-highlight-color:transparent; }
-button { cursor:pointer; font:inherit; }
-a { color:inherit; text-decoration:none; }
-h1,h2,h3 { font-family:'Fredoka',sans-serif; }
-h2 { font-size:clamp(29px,5vw,44px); margin:0 0 15px; }
-p { line-height:1.8; }
-section { scroll-margin-top:90px; }
-.container { width:min(1100px,92%); margin:auto; }
-.pink { color:#e889af; }
-.green { color:#85aa47; }
-.center { text-align:center; }
+
+button,a {
+  -webkit-tap-highlight-color:transparent;
+}
+
+button {
+  font:inherit;
+  cursor:pointer;
+}
+
+a {
+  text-decoration:none;
+  color:inherit;
+}
+
+h1,h2,h3 {
+  font-family:'Fredoka',sans-serif;
+}
+
+h2 {
+  font-size:clamp(30px,5vw,46px);
+  margin:12px 0 18px;
+}
+
+p {
+  line-height:1.75;
+}
+
+section {
+  scroll-margin-top:85px;
+}
+
+.container {
+  width:min(1120px,92%);
+  margin:auto;
+}
+
+.center {
+  text-align:center;
+}
+
+.pink {
+  color:var(--pink-dark);
+}
+
+.green {
+  color:var(--green-dark);
+}
+
+.section-pad {
+  padding:85px 0;
+}
+
 .tag {
   display:inline-block;
-  background:#fff1f6;
-  color:#c46b92;
+  background:#fff0f6;
+  color:#c77599;
   padding:9px 18px;
   border-radius:30px;
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
   letter-spacing:1px;
 }
-.btn {
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  padding:14px 25px;
-  border:0;
-  border-radius:30px;
-  font-weight:800;
-  background:var(--pink);
-  color:white;
-  box-shadow:0 6px 0 #e68eb1;
-  transition:transform .2s,box-shadow .2s;
-}
-.btn:hover {
-  transform:translateY(-4px);
-  box-shadow:0 10px 0 #e68eb1;
-}
-.btn:active { transform:translateY(3px); box-shadow:0 2px 0 #e68eb1; }
-.btn-green { background:#a8c96a; box-shadow:0 6px 0 #86a64c; }
-.btn-green:hover { box-shadow:0 10px 0 #86a64c; }
+
 .card {
   background:white;
-  border:2px solid #f9e1ea;
-  border-radius:28px;
-  padding:30px;
-  box-shadow:0 12px 35px #e9b5c226;
+  border:2px solid #f8e0e9;
+  border-radius:26px;
+  padding:28px;
+  box-shadow:0 12px 35px #dca8bb25;
 }
-.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.reveal { opacity:0; transform:translateY(25px); transition:.7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
 
-/* Loading screen */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:none;
+  border-radius:30px;
+  background:var(--pink);
+  color:white;
+  padding:14px 25px;
+  font-weight:800;
+  box-shadow:0 6px 0 #dc88aa;
+  transition:transform .2s,box-shadow .2s;
+}
+
+.btn:hover {
+  transform:translateY(-4px);
+  box-shadow:0 10px 0 #dc88aa;
+}
+
+.btn:active {
+  transform:translateY(3px);
+  box-shadow:0 2px 0 #dc88aa;
+}
+
+.btn-green {
+  background:#a8c96b;
+  box-shadow:0 6px 0 #86a34d;
+}
+
+.btn-green:hover {
+  box-shadow:0 10px 0 #86a34d;
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s,transform .7s;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* LOADING SCREEN */
+
 #loader {
   position:fixed;
   inset:0;
@@ -86,103 +166,179 @@ section { scroll-margin-top:90px; }
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:24px;
   text-align:center;
-  background:linear-gradient(145deg,#fce4ee,#f7fbe8);
+  padding:20px;
+  background:linear-gradient(145deg,#fce5ef,#edf5d6);
   transition:opacity .6s,visibility .6s;
 }
-#loader.hide { opacity:0; visibility:hidden; }
-.loader-heart { font-size:65px; animation:bounce 1.1s infinite; }
-#loader h1 { font-size:clamp(34px,7vw,70px); color:#df87ac; margin:10px 0; }
-#loader p { font-size:18px; max-width:450px; }
+
+#loader.hide {
+  opacity:0;
+  visibility:hidden;
+}
+
+.loader-character {
+  width:190px;
+  max-height:230px;
+  object-fit:contain;
+  animation:float 3s ease-in-out infinite;
+}
+
+#loader h1 {
+  font-size:clamp(35px,7vw,68px);
+  color:#dd85ab;
+  margin:15px 0 8px;
+}
+
+#loader p {
+  max-width:450px;
+  font-size:17px;
+}
+
 .progress {
-  width:min(300px,75vw);
+  width:min(310px,80vw);
   height:12px;
   border-radius:20px;
   background:white;
   overflow:hidden;
   margin-top:25px;
 }
-.progress div {
+
+.progress-fill {
   height:100%;
   width:0;
   border-radius:20px;
-  background:linear-gradient(90deg,#e7a3c0,#a5c96c);
-  animation:load 2.3s forwards;
+  background:linear-gradient(90deg,#e9a4c2,#a7cb70);
+  animation:loading 2.4s forwards;
 }
-@keyframes load { to { width:100%; } }
-@keyframes bounce { 50% { transform:translateY(-15px) rotate(8deg); } }
 
-/* Navigation */
+@keyframes loading {
+  to { width:100%; }
+}
+
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-15px); }
+}
+
+/* NAVIGATION */
+
 nav {
   position:sticky;
   top:0;
   z-index:100;
-  background:#fffdf7ed;
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid #f5dbe5;
+  background:#fffdf8ed;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #f4dce6;
 }
+
 .nav-inner {
   max-width:1150px;
   margin:auto;
   padding:15px 22px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
 }
-.logo { font-family:'Fredoka'; font-size:26px; color:#e38bac; font-weight:700; }
-.nav-links { display:flex; gap:22px; align-items:center; font-size:14px; font-weight:700; }
-.nav-links a:hover { color:#e38bac; }
-#soundBtn { background:#fbe4ee; border:0; border-radius:50%; padding:12px; }
 
-/* Hero */
+.logo {
+  font-family:'Fredoka',sans-serif;
+  font-size:25px;
+  font-weight:700;
+  color:#df8eae;
+}
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:22px;
+  font-size:14px;
+  font-weight:700;
+}
+
+.nav-links a:hover {
+  color:var(--pink-dark);
+}
+
+#soundBtn {
+  border:none;
+  border-radius:50%;
+  background:#fbe5ed;
+  padding:12px;
+}
+
+/* HERO */
+
 .hero {
   position:relative;
   overflow:hidden;
-  padding:90px 20px;
+  padding:80px 20px;
   background:
-    radial-gradient(circle at 15% 20%,#fff9 0 4px,transparent 5px),
-    radial-gradient(circle at 80% 70%,#fff9 0 4px,transparent 5px),
-    linear-gradient(135deg,#d9ecaa,#f6f9e9 55%,#f9d7e6);
+    linear-gradient(#ffffff65,#ffffff65),
+    url("wave%20backround.jpg") center/cover no-repeat;
 }
-.hero:after {
-  content:'';
-  position:absolute;
-  right:-90px;
-  top:-100px;
-  width:340px;
-  height:340px;
-  transform:rotate(35deg);
-  opacity:.4;
-  background:repeating-conic-gradient(#f4a8c4 0 25%,white 0 50%) 0 0/70px 70px;
-  border-radius:35px;
+
+.hero-content {
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  margin:auto;
+  text-align:center;
 }
-.hero-content { position:relative; z-index:2; max-width:850px; margin:auto; text-align:center; }
+
 .hero h1 {
-  font-size:clamp(45px,8vw,85px);
-  color:#86aa49;
+  font-size:clamp(45px,8vw,84px);
   line-height:1.05;
-  margin:22px 0;
+  color:#8eaf51;
+  margin:15px 0;
   text-shadow:4px 4px white;
 }
-.hero .notice {
+
+.hero p {
+  font-size:18px;
+}
+
+.hero-character {
+  width:220px;
+  max-width:65%;
+  max-height:260px;
+  object-fit:contain;
+  animation:float 4s ease-in-out infinite;
+  filter:drop-shadow(0 12px 15px #c47f9b55);
+}
+
+.notice {
+  max-width:730px;
   margin:25px auto;
-  padding:22px;
-  max-width:720px;
-  border:2px dashed #e7a4be;
-  border-radius:22px;
+  padding:24px;
+  border:2px dashed #e9a5c0;
+  border-radius:23px;
   background:#fffffff0;
-  font-size:clamp(17px,3vw,23px);
+  font-size:clamp(18px,3vw,24px);
   font-weight:800;
 }
-.sparkle { position:absolute; font-size:30px; animation:float 3s ease-in-out infinite; }
-@keyframes float { 50% { transform:translateY(-18px) rotate(12deg); } }
 
-/* Contents */
-.section-pad { padding:85px 0; }
-.toc-box { max-width:850px; margin:auto; }
-.toc-list { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:30px; }
+.sparkle {
+  position:absolute;
+  font-size:30px;
+  animation:float 3s ease-in-out infinite;
+}
+
+/* TABLE OF CONTENTS */
+
+.toc-box {
+  max-width:850px;
+  margin:auto;
+}
+
+.toc-list {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+  margin-top:30px;
+}
+
 .toc-link {
   display:flex;
   align-items:center;
@@ -194,221 +350,633 @@ nav {
   font-weight:800;
   transition:.25s;
 }
-.toc-link:hover { background:#e8f1d0; transform:translateX(5px); }
-.toc-number { background:#eab1c9; color:white; border-radius:12px; padding:8px 12px; }
 
-/* Social */
-.social-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:30px; }
-.social-card { text-align:center; background:#fff; border:2px solid #f4dce7; border-radius:25px; padding:30px; }
-.social-icon { font-size:45px; }
-.social-card h3 { font-size:25px; margin:12px 0; }
+.toc-link:hover {
+  background:#eaf3d4;
+  transform:translateX(5px);
+}
 
-/* Products */
-.products-bg { background:#fdf0f5; }
-.product-card { transition:.3s; position:relative; overflow:hidden; }
-.product-card:hover { transform:translateY(-8px); box-shadow:0 20px 40px #e5a4bd35; }
-.product-icon { width:65px; height:65px; object-fit:contain; margin-bottom:12px; }
-.product-emoji { font-size:45px; margin-bottom:12px; }
-.product-card h3 { font-size:25px; margin:5px 0 12px; }
-.price-line { display:flex; justify-content:space-between; gap:10px; padding:12px 0; border-bottom:1px dashed #efd7df; }
-.price-line strong { color:#8aac50; white-space:nowrap; }
-.product-card .btn { width:100%; margin-top:22px; }
-.ribbon { position:absolute; top:18px; right:-35px; transform:rotate(35deg); background:#a9cc6b; color:white; padding:7px 35px; font-size:11px; font-weight:800; }
+.toc-number {
+  background:#eab1c9;
+  color:white;
+  border-radius:12px;
+  padding:8px 12px;
+}
 
-/* Steps */
-.steps { counter-reset:step; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.step { text-align:center; }
-.step-num { display:inline-grid; place-items:center; width:55px; height:55px; background:#b6d67c; border-radius:50%; color:white; font-size:24px; font-weight:800; }
+/* CHARACTERS */
 
-/* Booking */
-.booking { background:linear-gradient(135deg,#e9f4ce,#ffe8f1); }
-.booking-feature { display:grid; grid-template-columns:1fr 1fr; gap:35px; align-items:center; }
-.booking-banner { border-radius:25px; padding:40px; background:white; text-align:center; }
-.booking-banner .big { font-size:70px; }
-.booking-banner h3 { font-size:32px; color:#dc83a7; }
+.character {
+  display:block;
+  width:200px;
+  max-width:100%;
+  object-fit:contain;
+  margin:15px auto;
+  animation:float 4s ease-in-out infinite;
+}
+
+.character-gallery {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.character-gallery img {
+  width:170px;
+  max-width:40%;
+  object-fit:contain;
+  animation:float 4s ease-in-out infinite;
+}
+
+.character-gallery img:nth-child(2) {
+  animation-delay:1s;
+}
+
+/* SOCIALS */
+
+.social-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:30px;
+}
+
+.social-card {
+  background:white;
+  border:2px solid #f4dce7;
+  border-radius:25px;
+  padding:30px;
+  text-align:center;
+}
+
+.social-icon {
+  font-size:45px;
+}
+
+.social-card h3 {
+  font-size:26px;
+  margin:12px 0;
+}
+
+/* PRODUCTS */
+
+.products-bg {
+  background:#fdf0f5;
+}
+
+.product-card {
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.product-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px #e5a4bd35;
+}
+
+.product-icon {
+  width:70px;
+  height:70px;
+  object-fit:contain;
+  margin-bottom:15px;
+  border-radius:12px;
+}
+
+.product-emoji {
+  font-size:45px;
+  margin-bottom:12px;
+}
+
+.product-card h3 {
+  font-size:25px;
+  margin:5px 0 12px;
+}
+
+.price-line {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px dashed #efd7df;
+}
+
+.price-line strong {
+  color:#80a84a;
+  white-space:nowrap;
+}
+
+.product-card .btn {
+  width:100%;
+  margin-top:auto;
+  position:relative;
+  top:15px;
+}
+
+.ribbon {
+  position:absolute;
+  top:18px;
+  right:-35px;
+  transform:rotate(35deg);
+  background:#a9cc6b;
+  color:white;
+  padding:7px 35px;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* STEPS */
+
+.steps {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.step {
+  text-align:center;
+}
+
+.step-num {
+  display:inline-grid;
+  place-items:center;
+  width:55px;
+  height:55px;
+  background:#b6d67c;
+  border-radius:50%;
+  color:white;
+  font-size:24px;
+  font-weight:800;
+}
+
+/* BOOKING */
+
+.booking {
+  background:linear-gradient(135deg,#e9f4ce,#ffe8f1);
+}
+
+.booking-feature {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+  align-items:center;
+}
+
+.booking-banner {
+  background:white;
+  border-radius:25px;
+  padding:35px;
+  text-align:center;
+}
+
+.booking-banner h3 {
+  font-size:32px;
+  color:#dc83a7;
+}
 
 /* FAQ */
-details { background:white; border:1px solid #f2d8e3; border-radius:17px; padding:20px; margin-bottom:12px; }
-summary { cursor:pointer; font-weight:800; }
-details p { margin-bottom:0; }
 
-/* Footer */
-footer { padding:55px 20px; text-align:center; background:#c8e19c; }
-footer h2 { color:#638b36; }
-footer a { text-decoration:underline; }
+details {
+  background:white;
+  border:1px solid #f2d8e3;
+  border-radius:17px;
+  padding:20px;
+  margin-bottom:12px;
+}
+
+summary {
+  cursor:pointer;
+  font-weight:800;
+}
+
+details p {
+  margin-bottom:0;
+}
+
+/* FOOTER */
+
+footer {
+  padding:55px 20px;
+  text-align:center;
+  background:#c8e19c;
+}
+
+footer h2 {
+  color:#638b36;
+}
+
+footer a {
+  text-decoration:underline;
+}
+
+/* RESPONSIVE */
+
 @media(max-width:800px) {
-  .grid,.steps { grid-template-columns:repeat(2,1fr); }
-  .booking-feature { grid-template-columns:1fr; }
-  .nav-links { display:none; }
+  .grid,.steps {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .booking-feature {
+    grid-template-columns:1fr;
+  }
+
+  .nav-links {
+    display:none;
+  }
 }
+
 @media(max-width:550px) {
-  .grid,.steps,.toc-list,.social-grid { grid-template-columns:1fr; }
-  .hero { padding:65px 15px; }
-  .card { padding:22px; }
-  .section-pad { padding:65px 0; }
+  .grid,.steps,.toc-list,.social-grid {
+    grid-template-columns:1fr;
+  }
+
+  .hero {
+    padding:55px 15px;
+  }
+
+  .card {
+    padding:22px;
+  }
+
+  .section-pad {
+    padding:65px 0;
+  }
+
+  .loader-character {
+    width:150px;
+  }
 }
+
 @media(prefers-reduced-motion:reduce) {
-  *,*:before,*:after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+  *,*:before,*:after {
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADING SCREEN -->
+
 <div id="loader">
-  <div class="loader-heart">🌷</div>
+  <img
+    src="girl%20(2).png"
+    class="loader-character"
+    alt="Trishchic loading character"
+  >
+
   <h1>Welcome to Trishchic.ph</h1>
+
   <p>A shop with friendly services and affordable prices ♡</p>
-  <div class="progress"><div></div></div>
-  <p style="font-size:13px">Preparing something cute for you...</p>
+
+  <div class="progress">
+    <div class="progress-fill"></div>
+  </div>
+
+  <p style="font-size:13px">
+    Preparing something cute for you...
+  </p>
 </div>
+
+<!-- NAVIGATION -->
 
 <nav>
   <div class="nav-inner">
     <a class="logo" href="#home">✿ trishchic.ph</a>
+
     <div class="nav-links">
       <a href="#contents">Explore</a>
       <a href="#products">Pricelist</a>
       <a href="#booking">Booking</a>
       <a href="#contact">Contact</a>
     </div>
-    <button id="soundBtn" title="Toggle sound" aria-label="Toggle sound">🔇</button>
+
+    <button id="soundBtn" title="Toggle sound" aria-label="Toggle sound">
+      🔇
+    </button>
   </div>
 </nav>
+
+<!-- HERO -->
 
 <header class="hero" id="home">
   <span class="sparkle" style="top:12%;left:8%">✿</span>
   <span class="sparkle" style="bottom:15%;right:9%">✨</span>
+
   <div class="hero-content">
+
+    <img
+      src="girl%20(1).png"
+      class="hero-character"
+      alt="Trishchic mascot"
+    >
+
     <span class="tag">YOUR CUTE LITTLE PREMIUM SHOP ♡</span>
-    <h1>Welcome to<br><span class="pink">Trishchic.ph</span></h1>
-    <p>Affordable premiums, friendly services, and a little sprinkle of happiness!</p>
+
+    <h1>
+      Welcome to<br>
+      <span class="pink">Trishchic.ph</span>
+    </h1>
+
+    <p>
+      Affordable premiums, friendly services,
+      and a little sprinkle of happiness!
+    </p>
+
     <div class="notice">
-      💌 Please make sure to read everything so we can avoid too many questions!
+      💌 Please make sure to read everything
+      so we can avoid too many questions!
     </div>
-    <a class="btn" href="#contents">Start Exploring ♡ ↓</a>
+
+    <a class="btn" href="#contents">
+      Start Exploring ♡ ↓
+    </a>
   </div>
 </header>
+
+<!-- TABLE OF CONTENTS -->
 
 <section class="section-pad" id="contents">
   <div class="container">
     <div class="card toc-box reveal">
       <div class="center">
         <span class="tag">YOUR LITTLE GUIDE</span>
-        <h2><span class="green">Table of</span> <span class="pink">Contents</span></h2>
+
+        <h2>
+          <span class="green">Table of</span>
+          <span class="pink">Contents</span>
+        </h2>
+
         <p>Just tap a section and we'll take you there! 🌸</p>
       </div>
+
       <div class="toc-list" id="tocList"></div>
     </div>
   </div>
 </section>
 
-<section class="section-pad" style="background:#f6faed" id="introduction">
+<!-- INTRODUCTION -->
+
+<section class="section-pad" id="introduction" style="background:#f6faed">
   <div class="container center">
     <span class="tag">GET TO KNOW US</span>
+
     <h2>Hi there, <span class="pink">lovely!</span> 🌷</h2>
+
+    <img src="girl%20(3).png" class="character" alt="Trishchic character">
+
     <p style="max-width:720px;margin:15px auto 30px">
-      Welcome to Trishchic.ph! We offer affordable premium services like Canva, CapCut, Netflix, ChatGPT, YouTube, and many more. Our goal is to make your shopping experience easy, friendly, and budget-friendly!
+      Welcome to Trishchic.ph! We offer affordable premium services
+      like Canva, CapCut, Netflix, ChatGPT, YouTube, and many more.
+      Our goal is to make your shopping experience easy, friendly,
+      and budget-friendly!
     </p>
+
     <div class="grid">
-      <div class="card reveal"><h3>🌸 Friendly Seller</h3><p>Questions? We're happy to assist you!</p></div>
-      <div class="card reveal"><h3>💚 Affordable</h3><p>Student-friendly prices for your favorite services.</p></div>
-      <div class="card reveal"><h3>⚡ Fast Process</h3><p>Easy instructions and convenient ordering.</p></div>
+      <div class="card reveal">
+        <h3>🌸 Friendly Seller</h3>
+        <p>Questions? We're happy to assist you!</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>💚 Affordable</h3>
+        <p>Student-friendly prices for your favorite services.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>⚡ Fast Process</h3>
+        <p>Easy instructions and convenient ordering.</p>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- SOCIALS -->
 
 <section class="section-pad" id="socials">
   <div class="container center">
     <span class="tag">LET'S BE FRIENDS</span>
+
     <h2>Follow our <span class="pink">little community!</span></h2>
-    <p>For orders, updates, and concerns, kindly message us through our official accounts.</p>
+
+    <p>
+      For orders, updates, and concerns,
+      kindly message us through our official accounts.
+    </p>
+
     <div class="social-grid">
+
       <div class="social-card reveal">
         <div class="social-icon">📸</div>
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.instagram.com/xx.twisha/">Message on Instagram ♡</a>
+
+        <a
+          class="btn"
+          target="_blank"
+          rel="noopener"
+          href="https://www.instagram.com/xx.twisha/"
+        >
+          Message on Instagram ♡
+        </a>
       </div>
+
       <div class="social-card reveal">
         <div class="social-icon">🎵</div>
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
-        <a class="btn btn-green" target="_blank" rel="noopener" href="https://www.tiktok.com/@trishchic.ph">Visit TikTok ♡</a>
+
+        <a
+          class="btn btn-green"
+          target="_blank"
+          rel="noopener"
+          href="https://www.tiktok.com/@trishchic.ph"
+        >
+          Visit TikTok ♡
+        </a>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- PRODUCTS -->
+
 <section class="section-pad products-bg" id="products">
   <div class="container">
+
     <div class="center">
       <span class="tag">PREMIUM GOODIES</span>
+
       <h2>Our <span class="pink">Cute Pricelist</span> 🛍️</h2>
+
       <p>Choose your favorite service and message us to order!</p>
     </div>
+
     <div class="grid" id="productGrid" style="margin-top:35px"></div>
+
     <p class="center" style="font-size:13px;margin-top:25px">
-      Prices are based on the provided pricelist and may change. Please confirm availability, account type, and current rates before paying.
+      Prices are based on the provided pricelist and may change.
+      Please confirm availability, account type, and current rates before paying.
     </p>
   </div>
 </section>
 
+<!-- BEST SELLER -->
+
 <section class="section-pad" id="bestseller">
   <div class="container center">
     <span class="tag">CUSTOMER FAVORITE</span>
+
     <h2>Our <span class="pink">Best Seller!</span> ⭐</h2>
+
     <div class="card reveal" style="max-width:680px;margin:25px auto">
+
       <div style="font-size:65px">🎨</div>
+
       <h3 style="font-size:32px">Canva Premium</h3>
-      <p>Perfect for students, teachers, editors, and freelancers!</p>
-      <h2 class="green">₱199 <span style="font-size:16px">Lifetime offer</span></h2>
-      <p>Please confirm the exact duration, access conditions, and availability with the seller. This is a seller-listed offer, not an official Canva lifetime subscription.</p>
-      <a class="btn" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Inquire Now ♡</a>
+
+      <p>
+        Perfect for students, teachers, editors, and freelancers!
+      </p>
+
+      <h2 class="green">
+        ₱199
+        <span style="font-size:16px">Lifetime offer</span>
+      </h2>
+
+      <p>
+        Please confirm the exact duration, access conditions,
+        and availability with the seller.
+        This is a seller-listed offer, not an official Canva lifetime subscription.
+      </p>
+
+      <a
+        class="btn"
+        href="https://www.instagram.com/xx.twisha/"
+        target="_blank"
+        rel="noopener"
+      >
+        Inquire Now ♡
+      </a>
     </div>
   </div>
 </section>
 
-<section class="section-pad" style="background:#f6faed" id="howto">
+<!-- HOW TO AVAIL -->
+
+<section class="section-pad" id="howto" style="background:#f6faed">
   <div class="container center">
     <span class="tag">EASY PEASY</span>
+
     <h2>How to <span class="pink">Avail?</span></h2>
+
     <div class="steps" style="margin-top:35px">
-      <div class="card step reveal"><div class="step-num">1</div><h3>Choose</h3><p>Pick the service and duration you want.</p></div>
-      <div class="card step reveal"><div class="step-num">2</div><h3>Message</h3><p>Send your chosen service and duration to our Instagram account.</p></div>
-      <div class="card step reveal"><div class="step-num">3</div><h3>Confirm</h3><p>Follow the seller's instructions and confirm activation before completing payment.</p></div>
+
+      <div class="card step reveal">
+        <div class="step-num">1</div>
+        <h3>Choose</h3>
+        <p>Pick the service and duration you want.</p>
+      </div>
+
+      <div class="card step reveal">
+        <div class="step-num">2</div>
+        <h3>Message</h3>
+        <p>Send your chosen service and duration to our Instagram account.</p>
+      </div>
+
+      <div class="card step reveal">
+        <div class="step-num">3</div>
+        <h3>Confirm</h3>
+        <p>Follow the seller's instructions and confirm activation before completing payment.</p>
+      </div>
+
     </div>
-    <p style="margin-top:25px">Never share your account password or verification codes with anyone.</p>
+
+    <p style="margin-top:25px">
+      Never share your account password or verification codes with anyone.
+    </p>
   </div>
 </section>
+
+<!-- BOOKING SERVICE -->
 
 <section class="section-pad booking" id="booking">
   <div class="container">
+
     <div class="booking-feature">
+
       <div class="reveal">
         <span class="tag">SPECIAL SERVICE</span>
-        <h2>You Must Try Our <span class="pink">Booking Service!</span> 🛵</h2>
-        <p>Need a ride? Trishchic.ph also offers booking assistance for JoyRide and Move It!</p>
-        <p><strong>Advertised assistance fee: ₱35 per booking.</strong> Actual fares, discounts, and availability must be confirmed with the seller and ride provider.</p>
-        <a class="btn" target="_blank" rel="noopener" href="https://www.instagram.com/xx.twisha/">Ask About Booking ♡</a>
+
+        <h2>
+          You Must Try Our
+          <span class="pink">Booking Service!</span> 🛵
+        </h2>
+
+        <p>
+          Need a ride? Trishchic.ph also offers booking assistance
+          for JoyRide and Move It!
+        </p>
+
+        <p>
+          <strong>Advertised assistance fee: ₱35 per booking.</strong>
+          Actual fares, discounts, and availability must be confirmed
+          with the seller and ride provider.
+        </p>
+
+        <a
+          class="btn"
+          target="_blank"
+          rel="noopener"
+          href="https://www.instagram.com/xx.twisha/"
+        >
+          Ask About Booking ♡
+        </a>
       </div>
+
       <div class="booking-banner reveal">
-        <div class="big">🛵🌷</div>
+        <img
+          src="girl%20(4).png"
+          class="character"
+          alt="Trishchic booking mascot"
+        >
+
         <h3>Ride with Ease!</h3>
+
         <p>JoyRide & Move It booking assistance</p>
+
         <span class="tag">₱35 advertised booking fee</span>
-        <p style="font-size:13px">For your safety, use official ride confirmations and follow the provider's safety rules.</p>
+
+        <p style="font-size:13px">
+          For your safety, use official ride confirmations
+          and follow the provider's safety rules.
+        </p>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- PREMIUM TUTORIAL -->
 
 <section class="section-pad" id="tutorial">
   <div class="container">
     <div class="center">
       <span class="tag">QUICK GUIDE</span>
-      <h2>How to Check Your <span class="pink">Premium Access</span></h2>
+
+      <h2>
+        How to Check Your
+        <span class="pink">Premium Access</span>
+      </h2>
     </div>
+
     <div class="card reveal" style="max-width:780px;margin:25px auto">
       <p><strong>1.</strong> Open the invitation sent to the email you provided.</p>
       <p><strong>2.</strong> Verify the sender and invitation before accepting.</p>
@@ -419,12 +987,16 @@ footer a { text-decoration:underline; }
   </div>
 </section>
 
-<section class="section-pad" style="background:#fff0f5" id="rules">
+<!-- RULES -->
+
+<section class="section-pad" id="rules" style="background:#fff0f5">
   <div class="container">
     <div class="center">
       <span class="tag">PLEASE READ</span>
+
       <h2>Rules & <span class="pink">Regulations</span></h2>
     </div>
+
     <div class="card reveal" style="max-width:850px;margin:25px auto">
       <p>🌷 Confirm the service, duration, account type, and total amount before ordering.</p>
       <p>🌷 The seller states that cancellation is not accepted after the email has been submitted for processing.</p>
@@ -437,60 +1009,153 @@ footer a { text-decoration:underline; }
   </div>
 </section>
 
+<!-- NOTES -->
+
 <section class="section-pad" id="notes">
   <div class="container center">
     <span class="tag">IMPORTANT REMINDERS</span>
+
     <h2>Little <span class="pink">Notes</span> 💌</h2>
+
     <div class="grid">
-      <div class="card reveal"><h3>📩 Feedback</h3><p>We appreciate your feedback! Kindly send it after receiving your service.</p></div>
-      <div class="card reveal"><h3>🛠️ Concerns</h3><p>For sudden errors or account problems, message us on Instagram.</p></div>
-      <div class="card reveal"><h3>💗 Support</h3><p>Please include your order details so we can assist you more easily.</p></div>
+
+      <div class="card reveal">
+        <h3>📩 Feedback</h3>
+        <p>We appreciate your feedback! Kindly send it after receiving your service.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>🛠️ Concerns</h3>
+        <p>For sudden errors or account problems, message us on Instagram.</p>
+      </div>
+
+      <div class="card reveal">
+        <h3>💗 Support</h3>
+        <p>Please include your order details so we can assist you more easily.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section class="section-pad" style="background:#f6faed" id="payment">
+<!-- PAYMENT -->
+
+<section class="section-pad" id="payment" style="background:#f6faed">
   <div class="container center">
     <span class="tag">PAYMENT DETAILS</span>
+
     <h2>Mode of <span class="pink">Payment</span></h2>
+
     <div class="card reveal" style="max-width:580px;margin:25px auto">
+
       <div style="font-size:60px">💳</div>
+
       <h3 style="font-size:30px;color:#76a744">GCash</h3>
-      <p>Please request the seller's current payment details directly through their official account before transferring money.</p>
-      <a class="btn btn-green" target="_blank" rel="noopener" href="https://www.instagram.com/xx.twisha/">Request Payment Details</a>
+
+      <p>
+        Please request the seller's current payment details directly
+        through their official account before transferring money.
+      </p>
+
+      <a
+        class="btn btn-green"
+        target="_blank"
+        rel="noopener"
+        href="https://www.instagram.com/xx.twisha/"
+      >
+        Request Payment Details
+      </a>
     </div>
   </div>
 </section>
+
+<!-- FAQ -->
 
 <section class="section-pad" id="faq">
   <div class="container">
     <div class="center">
       <span class="tag">NEED HELP?</span>
-      <h2>Frequently Asked <span class="pink">Questions</span></h2>
+
+      <h2>
+        Frequently Asked
+        <span class="pink">Questions</span>
+      </h2>
     </div>
+
     <div style="max-width:800px;margin:30px auto">
-      <details><summary>How do I order?</summary><p>Choose a service, then message our Instagram account with the service name and duration.</p></details>
-      <details><summary>Do I need to give my password?</summary><p>No. Do not share passwords or one-time verification codes.</p></details>
-      <details><summary>How long does activation take?</summary><p>Processing time depends on availability. Ask the seller for the current estimated time.</p></details>
-      <details><summary>What if my account has a problem?</summary><p>Contact the seller with your order information and a description of the problem.</p></details>
-      <details><summary>Can I request another premium service?</summary><p>Yes! Message the seller to ask whether the service is available.</p></details>
+
+      <details>
+        <summary>How do I order?</summary>
+        <p>Choose a service, then message our Instagram account with the service name and duration.</p>
+      </details>
+
+      <details>
+        <summary>Do I need to give my password?</summary>
+        <p>No. Do not share passwords or one-time verification codes.</p>
+      </details>
+
+      <details>
+        <summary>How long does activation take?</summary>
+        <p>Processing time depends on availability. Ask the seller for the current estimated time.</p>
+      </details>
+
+      <details>
+        <summary>What if my account has a problem?</summary>
+        <p>Contact the seller with your order information and a description of the problem.</p>
+      </details>
+
+      <details>
+        <summary>Can I request another premium service?</summary>
+        <p>Yes! Message the seller to ask whether the service is available.</p>
+      </details>
+
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
+
 <footer id="contact">
   <div class="container">
     <h2>Trishchic.ph 🌷</h2>
-    <p>Friendly services, affordable prices, and a little bit of pink!</p>
-    <p>For orders or concerns, kindly message us here ♡</p>
-    <a href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Instagram</a>
+
+    <p>
+      Friendly services, affordable prices,
+      and a little bit of pink!
+    </p>
+
+    <p>
+      For orders or concerns, kindly message us here ♡
+    </p>
+
+    <a
+      href="https://www.instagram.com/xx.twisha/"
+      target="_blank"
+      rel="noopener"
+    >
+      Instagram
+    </a>
+
     &nbsp; ✿ &nbsp;
-    <a href="https://www.tiktok.com/@trishchic.ph" target="_blank" rel="noopener">TikTok</a>
-    <p style="font-size:12px;margin-top:35px">© 2026 Trishchic.ph. All rights reserved.</p>
+
+    <a
+      href="https://www.tiktok.com/@trishchic.ph"
+      target="_blank"
+      rel="noopener"
+    >
+      TikTok
+    </a>
+
+    <p style="font-size:12px;margin-top:35px">
+      © 2026 Trishchic.ph. All rights reserved.
+    </p>
   </div>
 </footer>
 
 <script>
+
+/* TABLE OF CONTENTS */
+
 const sections = [
   ['introduction','Introduction'],
   ['socials','Our Socials'],
@@ -505,46 +1170,148 @@ const sections = [
   ['faq','Frequently Asked Questions']
 ];
 
-document.getElementById('tocList').innerHTML = sections.map((s,i) => `
-  <a class="toc-link" href="#${s[0]}">
-    <span class="toc-number">${String(i+1).padStart(2,'0')}</span>
-    <span>${s[1]}</span>
-    <span style="margin-left:auto">↗</span>
-  </a>
-`).join('');
+document.getElementById('tocList').innerHTML =
+  sections.map((s,i) => `
+    <a class="toc-link" href="#${s[0]}">
+      <span class="toc-number">
+        ${String(i+1).padStart(2,'0')}
+      </span>
+      <span>${s[1]}</span>
+      <span style="margin-left:auto">↗</span>
+    </a>
+  `).join('');
+
+
+/* PRODUCTS WITH ACTUAL IMAGE FILES */
 
 const products = [
-  {name:'Canva',icon:'🎨',prices:[['1 Month','₱15'],['1 Year','₱69'],['Lifetime offer','₱199']]},
-  {name:'Netflix',icon:'🎬',prices:[['1 Month Shared','₱79'],['1 Month Solo','₱149']]},
-  {name:'YouTube / YouTube Music',icon:'▶️',prices:[['1 Month Invite','₱59']]},
-  {name:'CapCut',icon:'✂️',prices:[['7 Days','₱59'],['1 Month','₱99']]},
-  {name:'ChatGPT Go',icon:'🤖',prices:[['1 Month','₱79']]},
-  {name:'ChatGPT Plus',icon:'✨',prices:[['1 Month','₱129']]},
-  {name:'Prime Video',icon:'🍿',prices:[['1 Month','₱39']]},
-  {name:'HBO',icon:'📺',prices:[['1 Month Invite','₱49']]},
-  {name:'iQIYI',icon:'🎞️',prices:[['1 Month','₱89']]},
-  {name:'Viva One / VivaMax',icon:'💗',prices:[['1 Month','₱59']]},
-  {name:'iWantTFC',icon:'📽️',prices:[['1 Month','₱39']]},
-  {name:'Disney+',icon:'🏰',prices:[['1 Month','₱59']]},
-  {name:'NBA League Pass',icon:'🏀',prices:[['1 Month','₱79']]}
+  {
+    name:'Canva',
+    icon:'🎨',
+    prices:[
+      ['1 Month','₱15'],
+      ['1 Year','₱69'],
+      ['Lifetime offer','₱199']
+    ]
+  },
+  {
+    name:'Netflix',
+    image:'netflix.jpeg',
+    prices:[
+      ['1 Month Shared','₱79'],
+      ['1 Month Solo','₱149']
+    ]
+  },
+  {
+    name:'YouTube / YouTube Music',
+    image:'yt.png',
+    prices:[
+      ['1 Month Invite','₱59']
+    ]
+  },
+  {
+    name:'CapCut',
+    image:'capcut.png',
+    prices:[
+      ['7 Days','₱59'],
+      ['1 Month','₱99']
+    ]
+  },
+  {
+    name:'ChatGPT Go',
+    image:'gpt.png',
+    prices:[
+      ['1 Month','₱79']
+    ]
+  },
+  {
+    name:'ChatGPT Plus',
+    image:'gpt.png',
+    prices:[
+      ['1 Month','₱129']
+    ]
+  },
+  {
+    name:'Prime Video',
+    image:'primevideo.png',
+    prices:[
+      ['1 Month','₱39']
+    ]
+  },
+  {
+    name:'HBO',
+    image:'hboog.png',
+    prices:[
+      ['1 Month Invite','₱49']
+    ]
+  },
+  {
+    name:'iQIYI',
+    image:'iqiyi.jpg',
+    prices:[
+      ['1 Month','₱89']
+    ]
+  },
+  {
+    name:'Viva One / VivaMax',
+    image:'vivaone.png',
+    prices:[
+      ['1 Month','₱59']
+    ]
+  },
+  {
+    name:'Disney+',
+    image:'disney.png',
+    prices:[
+      ['1 Month','₱59']
+    ]
+  }
 ];
 
 const ig = 'https://www.instagram.com/xx.twisha/';
 
-document.getElementById('productGrid').innerHTML = products.map((p,i) => `
-  <article class="card product-card reveal">
-    ${i===0?'<span class="ribbon">POPULAR</span>':''}
-    <div class="product-emoji">${p.icon}</div>
-    <h3>${p.name}</h3>
-    ${p.prices.map(price => `
-      <div class="price-line">
-        <span>${price[0]}</span>
-        <strong>${price[1]}</strong>
-      </div>
-    `).join('')}
-    <a class="btn" href="${ig}" target="_blank" rel="noopener">Inquire Now ♡</a>
-  </article>
-`).join('');
+document.getElementById('productGrid').innerHTML =
+  products.map((p,i) => `
+    <article class="card product-card reveal">
+
+      ${i===0
+        ? '<span class="ribbon">POPULAR</span>'
+        : ''
+      }
+
+      ${p.image
+        ? `<img
+            class="product-icon"
+            src="${encodeURI(p.image)}"
+            alt="${p.name} logo"
+            loading="lazy"
+          >`
+        : `<div class="product-emoji">${p.icon}</div>`
+      }
+
+      <h3>${p.name}</h3>
+
+      ${p.prices.map(price => `
+        <div class="price-line">
+          <span>${price[0]}</span>
+          <strong>${price[1]}</strong>
+        </div>
+      `).join('')}
+
+      <a
+        class="btn"
+        href="${ig}"
+        target="_blank"
+        rel="noopener"
+      >
+        Inquire Now ♡
+      </a>
+
+    </article>
+  `).join('');
+
+
+/* SCROLL ANIMATIONS */
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -555,36 +1322,62 @@ const observer = new IntersectionObserver(entries => {
   });
 },{threshold:0.08});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-window.addEventListener('load',() => {
-  setTimeout(() => document.getElementById('loader').classList.add('hide'),2400);
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
 });
 
-/* Soft cozy sound effects */
+
+/* LOADING SCREEN */
+
+window.addEventListener('load',() => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  },2400);
+});
+
+
+/* COZY SOUND EFFECTS */
+
 let soundEnabled = false;
 let audioContext;
 
 function playSound(type='click') {
   if(!soundEnabled) return;
+
   try {
-    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
-    if(audioContext.state==='suspended') audioContext.resume();
+    audioContext ??=
+      new (window.AudioContext || window.webkitAudioContext)();
+
+    if(audioContext.state==='suspended') {
+      audioContext.resume();
+    }
+
     const oscillator = audioContext.createOscillator();
     const gain = audioContext.createGain();
     const now = audioContext.currentTime;
 
     oscillator.type='sine';
-    oscillator.frequency.setValueAtTime(type==='hover'?660:520,now);
-    oscillator.frequency.exponentialRampToValueAtTime(type==='hover'?780:880,now+0.09);
+
+    oscillator.frequency.setValueAtTime(
+      type==='hover' ? 660 : 520,
+      now
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+      type==='hover' ? 780 : 880,
+      now+0.09
+    );
+
     gain.gain.setValueAtTime(0.0001,now);
     gain.gain.exponentialRampToValueAtTime(0.025,now+0.012);
     gain.gain.exponentialRampToValueAtTime(0.0001,now+0.13);
 
     oscillator.connect(gain);
     gain.connect(audioContext.destination);
+
     oscillator.start(now);
     oscillator.stop(now+0.14);
+
   } catch(error) {
     console.warn('Sound unavailable',error);
   }
@@ -597,18 +1390,24 @@ document.getElementById('soundBtn').addEventListener('click',e => {
 });
 
 document.addEventListener('click',e => {
-  if(e.target.closest('a,button,summary')) playSound('click');
+  if(e.target.closest('a,button,summary')) {
+    playSound('click');
+  }
 });
 
 let lastHover=0;
+
 document.addEventListener('pointerover',e => {
   if(!e.target.closest('a,button,summary')) return;
+
   const now=Date.now();
+
   if(now-lastHover>130) {
     playSound('hover');
     lastHover=now;
   }
 });
+
 </script>
 </body>
 </html>
