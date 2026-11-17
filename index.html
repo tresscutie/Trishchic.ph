@@ -31,11 +31,10 @@
 
         body {
             background-color: var(--bg-dark);
-            /* Hello Kitty Pattern & Luxury Gradient Background */
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.12) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(193, 255, 215, 0.08) 0%, transparent 40%),
-                url('https://i.pinimg.com/originals/f5/62/77/f562775f0a0ea5b5f2a1b9b9bf8e0697.png'); /* Cute Hello Kitty aesthetic watermark */
+                url('https://i.pinimg.com/originals/f5/62/77/f562775f0a0ea5b5f2a1b9b9bf8e0697.png');
             background-repeat: repeat;
             background-size: 350px;
             color: var(--text-main);
@@ -209,6 +208,7 @@
             font-size: 0.95rem;
             border: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .social-btn:hover {
@@ -350,16 +350,21 @@
         </div>
     </div>
 
-    <!-- MAGICAL SOUND EFFECT (Embedded Web Audio Chime) -->
+    <!-- AUDIO EFFECTS LOGIC -->
     <script>
-        // Function para mag-play ng magical sound kapag binuksan ang site
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // 1. Magical Entrance Sound (Chime chords)
         function playMagicalSound() {
             try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Notes para sa magical harp/chime chord sequence
-                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
-                
+                initAudio();
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; 
                 notes.forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
@@ -377,18 +382,68 @@
                     osc.start(audioCtx.currentTime + index * 0.08);
                     osc.stop(audioCtx.currentTime + index * 0.08 + 1.3);
                 });
-            } catch(e) {
-                console.log("Audio autoplay restricted until user interaction.");
-            }
+            } catch(e) { console.log(e); }
         }
 
-        // Alisin ang loading screen pagkalipas ng 1.5 segundo at i-trigger ang sound
+        // 2. Soft Hover Sound (Mahinang pop/chime kapag nadaanan ng cursor)
+        function playHoverSound() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note
+                
+                gain.gain.setValueAtTime(0, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.16);
+            } catch(e) {}
+        }
+
+        // 3. Click Sound (Mas buo at satisfying na tunog kapag pinindot)
+        function playClickSound() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.22);
+            } catch(e) {}
+        }
+
+        // Alisin ang loading screen at i-trigger ang entrance sound
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.classList.add('fade-out');
                 playMagicalSound();
             }, 1200);
+
+            // Mag-attach ng sound listeners sa lahat ng social buttons
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', playHoverSound);
+                btn.addEventListener('click', () => {
+                    playClickSound();
+                });
+            });
         });
     </script>
 
