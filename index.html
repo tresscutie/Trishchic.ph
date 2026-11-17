@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trisha's Luxury Portfolio & Pricelist ✨</title>
+    <title>Trisha's Elite Portfolio & Services ✨</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #121015;
-            --card-bg: rgba(28, 24, 32, 0.75);
-            --border-glow: rgba(255, 182, 193, 0.2);
+            --bg-dark: #0a090e;
+            --card-bg: rgba(22, 19, 28, 0.65);
+            --border-glow: rgba(255, 182, 193, 0.25);
             --accent-pink: #ffb6c1;
             --accent-green: #c1ffd7;
             --accent-red: #ff8fa3;
-            --gold-gradient: linear-gradient(135deg, #ffb6c1 0%, #ff8fa3 50%, #c1ffd7 100%);
-            --text-main: #f3f3f6;
-            --text-muted: #b0afbc;
-            --radius: 24px;
+            --gold-gradient: linear-gradient(135deg, #ffb6c1 0%, #ff8fa3 40%, #c1ffd7 100%);
+            --text-main: #f8f8fc;
+            --text-muted: #9e9cb5;
+            --radius: 28px;
         }
 
         * {
@@ -27,16 +27,17 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(193, 255, 215, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 15% 15%, rgba(255, 182, 193, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(193, 255, 215, 0.1) 0%, transparent 45%),
                 url('https://i.pinimg.com/originals/f5/62/77/f562775f0a0ea5b5f2a1b9b9bf8e0697.png');
             background-repeat: repeat;
-            background-size: 350px;
+            background-size: 320px;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
@@ -46,46 +47,47 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN --- */
+        /* --- LUXURY LOADING SCREEN --- */
         #loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0d0c10;
+            background: #070609;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
         .loader-content {
             text-align: center;
-            animation: bounceLoader 2s infinite ease-in-out;
+            animation: pulseGlowLoader 2s infinite ease-in-out;
         }
 
         .loader-content i {
-            font-size: 3.5rem;
+            font-size: 4rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.4));
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 25px rgba(255, 182, 193, 0.6));
         }
 
         .loader-content h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
+            font-size: 1.6rem;
+            letter-spacing: 3px;
             color: var(--text-main);
+            text-transform: uppercase;
         }
 
-        @keyframes bounceLoader {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes pulseGlowLoader {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
 
         .fade-out {
@@ -94,39 +96,51 @@
         }
 
         .container {
-            max-width: 580px;
+            max-width: 600px;
             width: 100%;
             margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 1.2s;
         }
 
-        /* Luxury Header */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- ULTRA LUXURY HEADER --- */
         header {
             text-align: center;
-            padding: 30px 20px 40px;
+            padding: 40px 20px 45px;
+            position: relative;
         }
 
         .avatar-frame {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25), rgba(193, 255, 215, 0.25));
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(193, 255, 215, 0.3));
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
-            border: 1.5px solid rgba(255, 182, 193, 0.4);
-            animation: pulseGlow 4s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.25);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            animation: floatCrown 5s ease-in-out infinite;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(255, 182, 193, 0.4); }
+        @keyframes floatCrown {
+            0%, 100% { transform: translateY(0) rotate(0deg); box-shadow: 0 0 30px rgba(255, 182, 193, 0.25); }
+            50% { transform: translateY(-8px) rotate(3deg); box-shadow: 0 0 50px rgba(255, 182, 193, 0.45); }
         }
 
         .avatar-frame i {
-            font-size: 2.3rem;
+            font-size: 2.6rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -134,130 +148,159 @@
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
+            font-size: 2.6rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             margin-bottom: 8px;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 10px rgba(255, 182, 193, 0.2));
         }
 
         header p {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            letter-spacing: 1.5px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
 
-        /* Luxury Glass Cards */
+        /* --- 3D TILT GLASS CARDS --- */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-glow);
             border-radius: var(--radius);
-            padding: 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 32px;
+            margin-bottom: 26px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            transition: 0.6s;
+        }
+
+        .card:hover::before {
+            left: 100%;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 182, 193, 0.4);
-            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.12);
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(255, 182, 193, 0.5);
+            box-shadow: 0 30px 60px rgba(255, 182, 193, 0.15);
         }
 
         .card h2 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
             color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-transform: uppercase;
         }
 
         .card h2 i {
             color: var(--accent-pink);
-            background: rgba(255, 182, 193, 0.1);
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 0.95rem;
+            background: rgba(255, 182, 193, 0.12);
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.15);
         }
 
-        /* Accounts / Social Links */
+        /* --- ACCOUNTS / SOCIAL LINKS --- */
         .social-grid {
             display: grid;
-            gap: 12px;
+            gap: 14px;
         }
 
         .social-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.025);
+            background: rgba(255, 255, 255, 0.02);
             color: var(--text-main);
-            padding: 16px 20px;
-            border-radius: 16px;
+            padding: 18px 22px;
+            border-radius: 18px;
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
+            position: relative;
         }
 
         .social-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.12), rgba(193, 255, 215, 0.12));
-            border-color: rgba(255, 182, 193, 0.4);
-            transform: scale(1.01);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15), rgba(193, 255, 215, 0.15));
+            border-color: rgba(255, 182, 193, 0.5);
+            transform: translateX(6px);
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.2);
         }
 
         .social-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
 
         .social-left i {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--accent-pink);
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover .social-left i {
+            transform: scale(1.2);
         }
 
         .social-btn i.fa-arrow-right {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             transition: transform 0.3s ease;
         }
 
         .social-btn:hover i.fa-arrow-right {
-            transform: translateX(4px);
+            transform: translateX(6px);
             color: var(--accent-pink);
         }
 
-        /* Pricelist Grid */
+        /* --- PRICELIST GRID --- */
         .pricelist-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 16px;
         }
 
         .price-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed rgba(255, 143, 163, 0.35);
-            padding: 20px 15px;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.015);
+            border: 1.5px dashed rgba(255, 143, 163, 0.4);
+            padding: 22px 16px;
+            border-radius: 18px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
 
         .price-item:hover {
-            background: rgba(255, 182, 193, 0.05);
+            background: rgba(255, 182, 193, 0.07);
             border-color: var(--accent-pink);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.15);
         }
 
         .price-item h3 {
@@ -269,14 +312,14 @@
         }
 
         .price-item .price {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Rules & Regulations */
+        /* --- RULES & REGULATIONS --- */
         .rules-list {
             list-style: none;
             counter-reset: rule-counter;
@@ -286,51 +329,58 @@
             counter-increment: rule-counter;
             display: flex;
             align-items: flex-start;
-            gap: 14px;
-            margin-bottom: 14px;
+            gap: 16px;
+            margin-bottom: 16px;
             font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .rules-list li:hover {
+            color: var(--text-main);
         }
 
         .rules-list li::before {
             content: counter(rule-counter);
-            background: rgba(193, 255, 215, 0.12);
+            background: rgba(193, 255, 215, 0.15);
             color: var(--accent-green);
             font-weight: 600;
             font-size: 0.75rem;
-            min-width: 24px;
-            height: 24px;
+            min-width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(193, 255, 215, 0.25);
+            border: 1px solid rgba(193, 255, 215, 0.3);
             flex-shrink: 0;
             margin-top: 2px;
+            box-shadow: 0 0 10px rgba(193, 255, 215, 0.2);
         }
 
-        /* Notes Box */
+        /* --- NOTES BOX --- */
         .notes-content {
-            background: rgba(193, 255, 215, 0.035);
-            border-left: 3px solid var(--accent-green);
-            padding: 16px 20px;
-            border-radius: 0 16px 16px 0;
+            background: rgba(193, 255, 215, 0.04);
+            border-left: 3.5px solid var(--accent-green);
+            padding: 18px 22px;
+            border-radius: 0 18px 18px 0;
             font-size: 0.9rem;
             color: #d1f2d9;
             line-height: 1.6;
-            border-top: 1px solid rgba(193, 255, 215, 0.06);
-            border-right: 1px solid rgba(193, 255, 215, 0.06);
-            border-bottom: 1px solid rgba(193, 255, 215, 0.06);
+            border-top: 1px solid rgba(193, 255, 215, 0.08);
+            border-right: 1px solid rgba(193, 255, 215, 0.08);
+            border-bottom: 1px solid rgba(193, 255, 215, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Footer */
+        /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 20px 0 10px;
+            padding: 25px 0 10px;
             font-size: 0.8rem;
             color: var(--text-muted);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         @media (max-width: 480px) {
@@ -346,11 +396,11 @@
     <div id="loader">
         <div class="loader-content">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <h2>Loading Trisha's World... ✨</h2>
+            <h2>Loading Trisha's Elite Hub... ✨</h2>
         </div>
     </div>
 
-    <!-- AUDIO EFFECTS LOGIC -->
+    <!-- AUDIO & INTERACTIVE ANIMATIONS ENGINE -->
     <script>
         let audioCtx = null;
 
@@ -360,32 +410,32 @@
             }
         }
 
-        // 1. Magical Entrance Sound (Chime chords)
+        // 1. Magical Entrance Chime Chord Sequence
         function playMagicalSound() {
             try {
                 initAudio();
-                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; 
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; 
                 notes.forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gainNode = audioCtx.createGain();
                     
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.08);
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.07);
                     
-                    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + index * 0.08);
-                    gainNode.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + index * 0.08 + 0.05);
-                    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + index * 0.08 + 1.2);
+                    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + index * 0.07);
+                    gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + index * 0.07 + 0.04);
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + index * 0.07 + 1.4);
                     
                     osc.connect(gainNode);
                     gainNode.connect(audioCtx.destination);
                     
-                    osc.start(audioCtx.currentTime + index * 0.08);
-                    osc.stop(audioCtx.currentTime + index * 0.08 + 1.3);
+                    osc.start(audioCtx.currentTime + index * 0.07);
+                    osc.stop(audioCtx.currentTime + index * 0.07 + 1.5);
                 });
             } catch(e) { console.log(e); }
         }
 
-        // 2. Soft Hover Sound (Mahinang pop/chime kapag nadaanan ng cursor)
+        // 2. Soft Hover Chime (Kapag dinadaanan ng cursor ang button)
         function playHoverSound() {
             try {
                 initAudio();
@@ -393,21 +443,21 @@
                 const gain = audioCtx.createGain();
                 
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note
+                osc.frequency.setValueAtTime(987.77, audioCtx.currentTime); // B5 note
                 
                 gain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+                gain.gain.linearRampToValueAtTime(0.025, audioCtx.currentTime + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.18);
                 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.16);
+                osc.stop(audioCtx.currentTime + 0.19);
             } catch(e) {}
         }
 
-        // 3. Click Sound (Mas buo at satisfying na tunog kapag pinindot)
+        // 3. Satisfying Click Sound (Kapag pinindot ang button)
         function playClickSound() {
             try {
                 initAudio();
@@ -415,34 +465,32 @@
                 const gain = audioCtx.createGain();
                 
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.12);
                 
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
+                gain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.22);
                 
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.22);
+                osc.stop(audioCtx.currentTime + 0.25);
             } catch(e) {}
         }
 
-        // Alisin ang loading screen at i-trigger ang entrance sound
+        // Alisin ang loading screen at i-trigger ang sound pag-load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.classList.add('fade-out');
                 playMagicalSound();
-            }, 1200);
+            }, 1300);
 
             // Mag-attach ng sound listeners sa lahat ng social buttons
             document.querySelectorAll('.social-btn').forEach(btn => {
                 btn.addEventListener('mouseenter', playHoverSound);
-                btn.addEventListener('click', () => {
-                    playClickSound();
-                });
+                btn.addEventListener('click', playClickSound);
             });
         });
     </script>
@@ -453,7 +501,7 @@
                 <i class="fa-solid fa-crown"></i>
             </div>
             <h1>TRISHA</h1>
-            <p>Exclusive Services & Commission Hub ✨</p>
+            <p>Exclusive Services & Elite Hub ✨</p>
         </header>
 
         <!-- ACCOUNTS SECTION -->
@@ -464,14 +512,14 @@
                 <a href="https://instagram.com/your_ig" target="_blank" class="social-btn">
                     <div class="social-left">
                         <i class="fa-brands fa-instagram"></i>
-                        <span>Instagram</span>
+                        <span>Instagram Profile</span>
                     </div>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
                 <a href="https://facebook.com/your_fb" target="_blank" class="social-btn">
                     <div class="social-left">
                         <i class="fa-brands fa-facebook"></i>
-                        <span>Facebook Profile</span>
+                        <span>Facebook Account</span>
                     </div>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -530,7 +578,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 TRISHA. ALL RIGHTS RESERVED.</p>
+        <p>&copy; 2026 TRISHA. ALL RIGHTS RESERVED. ✨</p>
     </footer>
 
 </body>
