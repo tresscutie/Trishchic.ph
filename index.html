@@ -163,9 +163,14 @@ section { scroll-margin-top:85px; }
   align-items:center;
   text-align:center;
   padding:25px;
-  background:linear-gradient(135deg,#ffe3ee,#f6f9e7,#dfedc3);
+  background:
+    linear-gradient(135deg,#ffe3eed9,#f6f9e7c9,#dfedc3d9),
+    url("wave backround.jpg") center/cover no-repeat;
   transition:opacity .7s,visibility .7s;
 }
+
+/* Keep splash content clear over the matching front-page wave background. */
+#loading > * {position:relative;z-index:1}
 
 #loading.hide {
   opacity:0;
@@ -2058,7 +2063,7 @@ function setupAudio() {
   )();
 
   masterGain = audioContext.createGain();
-  masterGain.gain.value = Number(volumeSlider.value)/100*.24;
+  masterGain.gain.value = Number(volumeSlider.value)/100*.12;
 
   const compressor = audioContext.createDynamicsCompressor();
   compressor.threshold.value = -20;
@@ -2174,7 +2179,7 @@ musicButton.addEventListener("click",async () => {
   } else {
     if (masterGain && audioContext) {
       masterGain.gain.setTargetAtTime(
-        Number(volumeSlider.value)/100*.24,
+        Number(volumeSlider.value)/100*.12,
         audioContext.currentTime,
         .05
       );
@@ -2190,7 +2195,7 @@ volumeSlider.addEventListener("input",event => {
 
   if (masterGain && audioContext) {
     masterGain.gain.setTargetAtTime(
-      value/100*.24,
+      value/100*.12,
       audioContext.currentTime,
       .05
     );
@@ -2382,7 +2387,7 @@ function modernUITone(frequency,duration,volume,isClick){
   oscillator.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);
   oscillator.start(time);oscillator.stop(time+duration+.01);
 }
-playClickSound=function(){modernUITone(310,.11,.032,true)};
+playClickSound=function(){modernUITone(310,.13,.13,true)};
 let lastModernHover=0;
 document.addEventListener("pointerover",event=>{
   if(event.pointerType==="touch")return;
@@ -2391,7 +2396,7 @@ document.addEventListener("pointerover",event=>{
   const now=performance.now();
   if(now-lastModernHover<100)return;
   lastModernHover=now;
-  modernUITone(560,.065,.013,false);
+  modernUITone(560,.09,.065,false);
 });
 
 
