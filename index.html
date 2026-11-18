@@ -858,6 +858,10 @@ body {position:relative; isolation:isolate}
 header,section,footer,nav {position:relative}
 header,section,footer {z-index:1}
 nav {z-index:100}
+@media(max-width:650px) {
+  #animatedGarden .garden-sprite:nth-child(n+13),
+  #animatedGarden .garden-star:nth-child(n+31) {display:none}
+}
 @media(prefers-reduced-motion:reduce) {
   #animatedGarden .garden-sprite,
   #animatedGarden .garden-star {animation:none}
@@ -1654,6 +1658,26 @@ nav {z-index:100}
 </div>
 
 <script>
+// Independent splash fail-safe for browsers that reject an unrelated script.
+(function () {
+  function reveal() {
+    var splash = document.getElementById('loading');
+    if (splash) {
+      splash.classList.add('hide');
+      splash.style.pointerEvents = 'none';
+    }
+  }
+  setTimeout(reveal, 4500);
+  document.addEventListener('DOMContentLoaded', function () {
+    var button = document.getElementById('enterShop');
+    if (button) {
+      button.classList.add('show');
+      button.addEventListener('click', reveal);
+    }
+  });
+})();
+</script>
+<script>
 "use strict";
 
 /* TABLE OF CONTENTS */
@@ -2219,22 +2243,25 @@ function finishLoading() {
   loadingScreen.classList.add("hide");
 }
 
-enterButton.addEventListener("click",async () => {
-  await startMusic();
+// iPhone/Safari-safe entrance: audio permission must never block the shop.
+enterButton.addEventListener("click",() => {
   finishLoading();
+  // A tap is a user gesture; attempt music, but never wait for it to enter.
+  Promise.resolve().then(() => startMusic()).catch(() => {});
 });
 
-window.addEventListener("load",() => {
-  setTimeout(async () => {
-    const started = await startMusic();
+// Show the entry button promptly, even when some images are still downloading.
+setTimeout(() => enterButton.classList.add("show"), 900);
 
-    if (started) {
-      finishLoading();
-    } else {
-      enterButton.classList.add("show");
-    }
-  },2500);
-});
+// Always reveal the shop after a short intro, regardless of audio or image status.
+setTimeout(finishLoading, 3500);
+
+// An earlier close is fine once the document is interactive.
+if (document.readyState === "complete") {
+  setTimeout(finishLoading, 2600);
+} else {
+  window.addEventListener("load", () => setTimeout(finishLoading, 2600), {once:true});
+}
 
 /* CUTE BUTTON CLICK SOUNDS */
 
