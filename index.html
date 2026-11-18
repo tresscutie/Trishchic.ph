@@ -1112,6 +1112,33 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
  #loading.cherry-v5 .intro-v5-arc {height:66px;}
  #loading.cherry-v5 .intro-v5-footer {gap:5px;}
 }
+
+/* V7: keep the title, doll and CTA as one vertically centered group. */
+#loading.cherry-v5 .intro-v5-shell {
+  height:auto!important; max-height:calc(100svh - 28px);
+  grid-template-rows:auto auto auto!important;
+  align-content:center; gap:clamp(8px,1.6vh,16px);
+  transform:translateY(-5vh)!important;
+}
+#loading.cherry-v5 .intro-v5-heading {align-self:center!important;}
+#loading.cherry-v5 .intro-v5-arc {height:clamp(95px,13vh,140px);}
+#loading.cherry-v5 .intro-v5-figure {
+  height:clamp(210px,38vh,360px)!important;
+  align-self:center!important;
+}
+#loading.cherry-v5 .intro-v5-figure img {height:100%!important;max-height:100%!important;}
+#loading.cherry-v5 .intro-v5-footer {align-self:center!important;padding-bottom:0!important;gap:10px;}
+@media(max-width:650px) {
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-3vh)!important;gap:8px;}
+ #loading.cherry-v5 .intro-v5-arc {height:clamp(70px,11svh,105px);}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(185px,36svh,310px)!important;}
+}
+@media(max-height:600px) {
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-1vh)!important;gap:4px;}
+ #loading.cherry-v5 .intro-v5-arc {height:65px;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(110px,30svh,190px)!important;}
+ #loading.cherry-v5 .intro-v5-footer {gap:5px;}
+}
 </style>
 </head>
 
