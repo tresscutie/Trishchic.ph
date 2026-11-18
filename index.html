@@ -912,11 +912,38 @@ nav {z-index:100}
   .product-card .product-inner {transform:none}
 }
 
+
+/* Pastel pink + pastel green + pastel red accents and gentle sitewide glitter */
+:root { --pastel-red:#e9a1a2; --pastel-red-light:#ffe1e0; }
+body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0ef 100%);}
+.shop-section {background:linear-gradient(135deg,#fff0f5 0%,#ffe5e3 52%,#f0f8df 100%);}
+.booking-section {background:linear-gradient(120deg,#e8f3d5 0%,#ffe2e4 56%,#fbe7f1 100%);}
+.proof-section {background:linear-gradient(135deg,#f0f7df,#ffe2e3,#ffe9f3);}
+#howto {background:linear-gradient(125deg,#f5f9eb,#ffe9e8)!important;}
+#payment {background:linear-gradient(130deg,#f5f9eb,#ffe8e8)!important;}
+#notes {background:linear-gradient(120deg,#fff9f7,#f1f7e5,#ffe7e8);}
+#faq {background:linear-gradient(130deg,#fffaf9,#ffe9e8);}
+#rules {background:linear-gradient(130deg,#fff0f6,#ffe4e3)!important;}
+.tag {background:#ffe6e9;color:#bf627a;}
+.toc-number {background:var(--pastel-red);}
+.card {border-color:#f0d5d8;}
+.more-options-note {max-width:780px;margin:0 auto 28px;padding:15px 22px;background:#fff9fae8;border:1px dashed #e9a1a2;border-radius:18px;color:#69525b;font-size:14px;line-height:1.7;}
+.alt-instagram-link {display:inline-block;margin:14px 12px 0;color:#c35f89;text-decoration:underline;text-underline-offset:4px;font-weight:700;font-size:14px;}
+.modal-contact-note {padding:12px 16px;border-radius:15px;background:#fff0f3;border-left:4px solid var(--pastel-red);font-size:14px;}
+/* Sparse, low-overhead glitter across the entire scrollable page */
+#siteGlitter {position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+#siteGlitter .glitter {position:absolute;display:block;width:var(--sz);height:var(--sz);border-radius:50%;background:var(--clr);opacity:.55;box-shadow:0 0 8px 2px var(--clr);animation:glitterPulse var(--dur) ease-in-out infinite alternate;animation-delay:var(--delay);}
+#siteGlitter .glitter.star {border-radius:0;clip-path:polygon(50% 0,61% 36%,100% 50%,61% 64%,50% 100%,39% 64%,0 50%,39% 36%);}
+@keyframes glitterPulse {0%{opacity:.12;transform:scale(.65) rotate(0deg)}100%{opacity:.8;transform:scale(1.25) rotate(35deg)}}
+@media (max-width:650px){#siteGlitter .glitter:nth-child(n+48){display:none}}
+@media (prefers-reduced-motion:reduce){#siteGlitter .glitter{animation:none;opacity:.3}}
+
 </style>
 </head>
 
 <body>
 
+<div id="siteGlitter" aria-hidden="true"></div>
 <!-- ADDED: Animated garden background -->
 <div id="animatedGarden" aria-hidden="true"></div>
 
@@ -1111,7 +1138,7 @@ nav {z-index:100}
 
     <p class="subtitle">
       If there's any problem, question, or order,
-      kindly message us through our official social accounts.
+      kindly message us on TikTok @trishchic.ph or Instagram @xx.twisha.
       We'd love to assist you! 💌
     </p>
 
@@ -1168,6 +1195,7 @@ nav {z-index:100}
       <p class="subtitle">
         Tap any product to explore its plans and prices!
       </p>
+      <p class="more-options-note">Many more options are available that are not listed here. If there’s any app you want in premium, just direct message me on TikTok <strong>@trishchic.ph</strong> (or Instagram <strong>@xx.twisha</strong>). ♡</p>
     </div>
 
     <div class="product-grid" id="productGrid"></div>
@@ -1277,7 +1305,7 @@ nav {z-index:100}
       <div class="card feature reveal">
         <div class="feature-icon">💌</div>
         <h3>2. Message</h3>
-        <p>Send your order details through Instagram.</p>
+        <p>Send your order details through the seller’s TikTok account (@trishchic.ph).</p>
       </div>
 
       <div class="card feature reveal">
@@ -1325,12 +1353,13 @@ nav {z-index:100}
 
       <a
         class="btn"
-        href="https://www.instagram.com/xx.twisha/"
+        href="https://www.tiktok.com/@trishchic.ph"
         target="_blank"
         rel="noopener"
       >
-        Ask About Booking ♡
+        Ask About Booking on TikTok ♡
       </a>
+      <a class="alt-instagram-link" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Or ask on Instagram ♡</a>
 
     </div>
 
@@ -1429,7 +1458,7 @@ nav {z-index:100}
       <div class="card feature reveal">
         <div class="feature-icon">🛠️</div>
         <h3>Problems</h3>
-        <p>For account errors, kindly message our Instagram.</p>
+        <p>For account errors, kindly message our TikTok (@trishchic.ph). Instagram is also available.</p>
       </div>
 
       <div class="card feature reveal">
@@ -1470,12 +1499,13 @@ nav {z-index:100}
 
       <a
         class="btn btn-green"
-        href="https://www.instagram.com/xx.twisha/"
+        href="https://www.tiktok.com/@trishchic.ph"
         target="_blank"
         rel="noopener"
       >
-        Send Payment Receipt ♡
+        Send Receipt on TikTok ♡
       </a>
+      <a class="alt-instagram-link" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Or send through Instagram ♡</a>
 
     </div>
 
@@ -1499,7 +1529,7 @@ nav {z-index:100}
 
       <details>
         <summary>How can I order?</summary>
-        <p>Choose a service and message the seller through Instagram.</p>
+        <p>Choose a service and message the seller on TikTok (@trishchic.ph), or Instagram.</p>
       </details>
 
       <details>
@@ -1539,7 +1569,7 @@ nav {z-index:100}
       and a sprinkle of happiness!
     </p>
 
-    <p>For orders or concerns, kindly message us ♡</p>
+    <p>For orders or concerns, message us on TikTok @trishchic.ph or Instagram @xx.twisha ♡</p>
 
     <a
       href="https://www.instagram.com/xx.twisha/"
@@ -1564,11 +1594,11 @@ nav {z-index:100}
 
 <a
   class="floating-contact"
-  href="https://www.instagram.com/xx.twisha/"
+  href="https://www.tiktok.com/@trishchic.ph"
   target="_blank"
   rel="noopener"
 >
-  💌 Message Us
+  💌 Message on TikTok
 </a>
 
 <!-- PRODUCT FLOATING TAB -->
@@ -1598,15 +1628,17 @@ nav {z-index:100}
       <div class="plan-grid" id="modalPlans"></div>
 
       <p id="modalNote"></p>
+      <p class="modal-contact-note">Send your order details through seller's TikTok account (<strong>@trishchic.ph</strong>). Instagram <strong>@xx.twisha</strong> is also available.</p>
 
       <a
         class="btn"
-        href="https://www.instagram.com/xx.twisha/"
+        href="https://www.tiktok.com/@trishchic.ph"
         target="_blank"
         rel="noopener"
       >
-        Inquire on Instagram ♡
+        Inquire on TikTok ♡
       </a>
+      <a class="alt-instagram-link" href="https://www.instagram.com/xx.twisha/" target="_blank" rel="noopener">Or inquire on Instagram ♡</a>
 
     </div>
 
@@ -1726,7 +1758,7 @@ const products = [
       ["1 Year","₱69"],
       ["Lifetime Offer","₱199"]
     ],
-    note:"Lifetime is a seller-listed offer, not an official Canva lifetime subscription. Confirm the access conditions."
+    note:"Send your order details through seller's TikTok account (@trishchic.ph). Lifetime is a seller-listed offer, not an official Canva lifetime subscription. Confirm the access conditions."
   },
   {
     id:"netflix",
@@ -1837,7 +1869,7 @@ const products = [
     image:"disney.png",
     description:"Discover a world of stories.",
     plans:[
-      ["1 Month","₱59"]
+      ["1 Month","₱79"]
     ]
   },
   {
@@ -1919,7 +1951,7 @@ function openProduct(id) {
 
   document.getElementById("modalNote").textContent =
     product.note ||
-    "Please confirm availability, pricing, and access conditions with the seller.";
+    "Send your order details through the seller’s TikTok account (@trishchic.ph). Please confirm availability, pricing, and access conditions.";
 
   productModal.classList.add("active");
   productModal.setAttribute("aria-hidden","false");
@@ -2457,5 +2489,27 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 }
 </script>
 
+
+<script>
+/* Deterministic decorative glitter, with no extra image downloads. */
+(function(){
+ function createGlitter(){
+  var layer=document.getElementById('siteGlitter');if(!layer)return;
+  var totalHeight=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+  layer.style.height=totalHeight+'px';
+  var count=Math.min(110,Math.max(35,Math.round(totalHeight/65)));
+  var colors=['#e9a1a2','#f5a6c5','#b9d98e','#f8c7ca'];
+  var html='';
+  for(var i=0;i<count;i++){
+   var x=((i*67.39+17)%100),y=((i*43.73+11)%100);
+   var size=3+(i*7%7);
+   html+='<i class="glitter '+(i%3===0?'star':'')+'" style="left:'+x+'%;top:'+y+'%;--sz:'+size+'px;--clr:'+colors[i%4]+';--dur:'+(2+i%5)+'s;--delay:-'+(i%7)+'s"></i>';
+  }
+  layer.innerHTML=html;
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',createGlitter);else createGlitter();
+ window.addEventListener('load',createGlitter,{once:true});
+})();
+</script>
 </body>
 </html>
