@@ -1656,6 +1656,54 @@ footer :is(p,small,a){color:#fff2ed!important}
  .hero::before,.hero::after{animation:none!important}
 }
 
+
+/* V18 — light cherry gingham, delicate fabric texture and accessible contrast */
+:root{--cherry:#85364c;--berry:#b95772;--blush:#f4c6ce;--ink:#4c2937;--rose-paper:#fff9f7}
+html,body{background-color:#f7d9dc!important}
+body{
+ background-color:#f7d9dc!important;
+ background-image:
+  linear-gradient(90deg,rgba(175,65,83,.17) 50%,transparent 50%),
+  linear-gradient(rgba(175,65,83,.17) 50%,transparent 50%),
+  linear-gradient(90deg,transparent 50%,rgba(255,255,255,.43) 50%),
+  linear-gradient(transparent 50%,rgba(255,255,255,.43) 50%)!important;
+ background-size:88px 88px!important;
+ color:#4c2937!important;
+}
+body::before{
+ background:radial-gradient(ellipse at 50% 30%,#fffaf67a,transparent 70%),
+ repeating-linear-gradient(35deg,#ffffff08 0 1px,transparent 1px 5px)!important;
+}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(150deg,rgba(255,249,246,.91),rgba(255,234,235,.87),rgba(255,249,246,.91))!important;
+ color:#4c2937!important;
+}
+.hero{background:radial-gradient(ellipse at center,#fffaf4ed,#f8dce0ed)!important}
+.hero h1{color:#873c59!important;text-shadow:0 3px 0 #fffaf7,0 6px 24px #a65a7655!important}
+.hero h1 span{color:#c05c7c!important}
+.hero .tag,.section .tag{background:#fff4f2!important;color:#93465c!important;border:1px solid #e7bac1!important}
+.hero .notice{background:#fffdfbee!important;color:#542f3d!important;border-color:#e4b2be!important}
+.hero-content > p:not(.explore-help),.section .container > p,.section .center > p{color:#613c4c!important}
+.explore-help{color:#542c3c!important;background:#fffaf6f2!important}
+.section .title,.section h2.title{color:#653347!important;text-shadow:none!important}
+.section .title .pink,.section .pink{color:#c45e82!important}
+.section .title .green,.section .green{color:#9b7153!important}
+.section h3,.section p,.section li{color:#573744}
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body,.modal-content){background:#fffdfb!important;color:#4c2937!important}
+#contents .toc-box{background:linear-gradient(145deg,#fffdfb,#fff1f0)!important}
+#contents .toc-item{background:linear-gradient(135deg,#fffefd,#fff6f4)!important}
+#faq details,#faq details summary,#faq details p{background:#fffdfb!important;color:#4c2937!important}
+#proofs .feedback-count{background:#fffaf7!important;color:#4c2937!important}
+#proofs .feedback-count *:not(a){color:#4c2937!important}
+#socials .card{background:#fffdfb!important}
+#socials .card *:not(.btn){color:#4c2937!important}
+footer{background:linear-gradient(150deg,#fff1ed,#f2c7ce)!important;color:#563040!important;border-top:1px solid #e2a8b6!important}
+footer :is(h2,p,small,a){color:#563040!important}
+.joyride-brand,.section .joyride-brand,.section p .joyride-brand{color:#1461d9!important;font-weight:900!important;text-shadow:none!important}
+.moveit-brand,.section .moveit-brand,.section p .moveit-brand{color:#d72435!important;font-weight:900!important;text-shadow:none!important}
+#booking h3.pink{color:#bf5c7a!important}
+@media(max-width:720px){body{background-size:64px 64px!important}}
+
 </style>
 </head>
 
@@ -2051,11 +2099,11 @@ footer :is(p,small,a){color:#fff2ed!important}
 
       <p>
         Need a ride? Trishchic.ph also advertises
-        booking assistance for JoyRide and Move It.
+        booking assistance for <strong class="joyride-brand">JoyRide</strong> and <strong class="moveit-brand">Move It</strong>.
       </p>
 
       <h3 style="color:#d977a2;font-size:clamp(25px,3vw,35px);margin-bottom:8px">Up to 50% OFF on Bookings! ♡</h3>
-      <p style="font-weight:700;margin-top:0">JoyRide &amp; Move It • ₱35 assistance fee per booking</p>
+      <p style="font-weight:700;margin-top:0"><strong class="joyride-brand">JoyRide</strong> &amp; <strong class="moveit-brand">Move It</strong> • ₱35 assistance fee per booking</p>
       <p>Example from the promo: a ₱175 ride fare reduced to ₱87. Actual discounts may vary by ride, availability, and booking conditions.</p>
 
       <p>
@@ -2081,7 +2129,7 @@ footer :is(p,small,a){color:#fff2ed!important}
 
       <h3 class="pink">Ride with Ease!</h3>
 
-      <p>JoyRide & Move It booking assistance</p>
+      <p><strong class="joyride-brand">JoyRide</strong> &amp; <strong class="moveit-brand">Move It</strong> booking assistance</p>
 
       <span class="tag">UP TO 50% OFF • ₱35 BOOKING FEE</span>
 
