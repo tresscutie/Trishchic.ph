@@ -1139,6 +1139,96 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
  #loading.cherry-v5 .intro-v5-figure {height:clamp(110px,30svh,190px)!important;}
  #loading.cherry-v5 .intro-v5-footer {gap:5px;}
 }
+
+
+/* V8: elevated compact composition with a larger mascot and lively shimmer */
+#loading.cherry-v5 {isolation:isolate;overflow:hidden;}
+#loading.cherry-v5 .intro-v5-shell {
+  width:min(94vw,860px)!important;
+  height:auto!important; max-height:none!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:0!important;
+  transform:translateY(-10vh)!important;position:relative;z-index:3;
+}
+#loading.cherry-v5 .intro-v5-heading {width:100%;flex:none!important;position:relative;z-index:4;margin:0 0 -12px!important;}
+#loading.cherry-v5 .intro-v5-kicker {display:block;margin-bottom:-7px;letter-spacing:.23em;}
+#loading.cherry-v5 .intro-v5-arc {display:block;width:min(100%,800px);height:clamp(105px,17vh,160px)!important;margin:0 auto;overflow:visible;filter:drop-shadow(0 3px 8px #5c112a);animation:introTitleFloat 4s ease-in-out infinite;}
+#loading.cherry-v5 .intro-v5-arc text {font-size:clamp(47px,5vw,64px);paint-order:stroke fill;stroke:rgba(90,20,40,.5);stroke-width:2px;}
+#loading.cherry-v5 .intro-v5-figure {height:clamp(310px,46vh,490px)!important;width:min(80vw,470px)!important;min-height:0!important;flex:none!important;margin:-22px 0 -4px!important;position:relative;z-index:2;}
+#loading.cherry-v5 .intro-v5-figure img {display:block;height:100%!important;width:100%!important;max-height:none!important;max-width:none!important;object-fit:contain!important;filter:drop-shadow(0 14px 20px rgba(29,0,15,.45));animation:introDollBreathe 4.5s ease-in-out infinite!important;}
+#loading.cherry-v5 .intro-v5-footer {flex:none!important;z-index:5;position:relative;gap:9px!important;margin-top:0!important;}
+#loading.cherry-v5 .intro-v5-footer p {margin:0!important;text-shadow:0 2px 8px #431024;}
+#loading.cherry-v5 #enterShop {animation:introButtonPulse 2.8s ease-in-out infinite;}
+#loading.cherry-v5 .intro-glitter {position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+#loading.cherry-v5 .intro-glitter i {position:absolute;left:var(--x);top:var(--y);font-style:normal;font-size:var(--s);color:#ffe6b0;text-shadow:0 0 8px #fff3ce,0 0 20px #ff99c4;animation:introTwinkle var(--d) ease-in-out infinite;animation-delay:var(--delay);opacity:0;}
+#loading.cherry-v5 .intro-halo {position:absolute;z-index:1;left:50%;top:48%;width:min(72vw,660px);height:min(60vh,510px);transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(255,168,202,.22),rgba(255,170,205,.07) 45%,transparent 70%);pointer-events:none;animation:introHalo 5s ease-in-out infinite;}
+#loading.cherry-v5 .intro-glow-orbit {position:absolute;z-index:2;left:50%;top:53%;width:min(68vw,540px);height:clamp(85px,16vh,145px);border:2px solid rgba(255,206,224,.38);border-radius:50%;transform:translate(-50%,-50%) rotate(-13deg);box-shadow:0 0 16px rgba(255,159,196,.25);pointer-events:none;animation:introOrbit 7s ease-in-out infinite;}
+@keyframes introTwinkle {0%,100%{opacity:0;transform:translateY(10px) scale(.25) rotate(0)}40%,65%{opacity:1;transform:translateY(-7px) scale(1.25) rotate(65deg)}}
+@keyframes introTitleFloat {0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes introDollBreathe {0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+@keyframes introButtonPulse {0%,100%{box-shadow:0 5px 0 rgba(100,20,54,.6),0 0 10px rgba(255,155,202,.15)}50%{box-shadow:0 5px 0 rgba(100,20,54,.6),0 0 24px rgba(255,178,211,.7)}}
+@keyframes introHalo {0%,100%{opacity:.65;scale:1}50%{opacity:1;scale:1.12}}
+@keyframes introOrbit {0%,100%{opacity:.3;transform:translate(-50%,-50%) rotate(-13deg) scale(.98)}50%{opacity:.7;transform:translate(-50%,-50%) rotate(-7deg) scale(1.04)}}
+@media(max-width:650px){
+ #loading.cherry-v5 .intro-v5-shell {width:96vw!important;transform:translateY(-5vh)!important;}
+ #loading.cherry-v5 .intro-v5-heading {margin-bottom:-10px!important;}
+ #loading.cherry-v5 .intro-v5-kicker {font-size:clamp(8px,2.1vw,11px)!important;letter-spacing:.12em;}
+ #loading.cherry-v5 .intro-v5-arc {height:clamp(75px,12svh,110px)!important;}
+ #loading.cherry-v5 .intro-v5-arc text {font-size:57px;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(245px,42svh,400px)!important;width:88vw!important;margin:-15px 0 -3px!important;}
+ #loading.cherry-v5 .intro-v5-footer {width:95%;gap:8px!important;}
+ #loading.cherry-v5 .intro-v5-footer p {font-size:clamp(11px,3vw,14px)!important;text-align:center;}
+ #loading.cherry-v5 .intro-glow-orbit {width:86vw;}
+}
+@media(max-height:700px) and (min-width:651px){
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-4vh)!important;}
+ #loading.cherry-v5 .intro-v5-arc {height:90px!important;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(210px,39vh,330px)!important;}
+}
+@media(max-height:600px) and (max-width:650px){
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-1vh)!important;}
+ #loading.cherry-v5 .intro-v5-arc {height:65px!important;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(145px,33svh,240px)!important;}
+}
+@media(prefers-reduced-motion:reduce){#loading.cherry-v5 .intro-glitter i,#loading.cherry-v5 .intro-halo,#loading.cherry-v5 .intro-glow-orbit,#loading.cherry-v5 .intro-v5-arc,#loading.cherry-v5 .intro-v5-figure img,#loading.cherry-v5 #enterShop{animation:none!important}}
+
+
+/* V9: visible-pixel mascot sizing and vertically centered layout */
+#loading.cherry-v5 .intro-v5-shell {
+  width:min(96vw,900px)!important;
+  transform:translateY(-5vh)!important;
+  gap:0!important;
+}
+#loading.cherry-v5 .intro-v5-heading {margin-bottom:-18px!important;}
+#loading.cherry-v5 .intro-v5-arc {height:clamp(100px,15vh,145px)!important;}
+#loading.cherry-v5 .intro-v5-figure {
+  width:clamp(340px,43vw,560px)!important;
+  height:clamp(320px,47vh,480px)!important;
+  margin:-10px 0 -5px!important;
+  overflow:visible!important;
+}
+#loading.cherry-v5 .intro-v5-figure img {
+  width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center center!important;
+}
+#loading.cherry-v5 .intro-v5-footer {margin-top:0!important;gap:10px!important;}
+@media(max-width:650px){
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-3vh)!important;width:100%!important;}
+ #loading.cherry-v5 .intro-v5-arc {height:clamp(78px,12svh,112px)!important;}
+ #loading.cherry-v5 .intro-v5-figure {width:min(95vw,430px)!important;height:clamp(270px,44svh,430px)!important;margin:-6px 0 0!important;}
+ #loading.cherry-v5 .intro-v5-footer p {font-size:clamp(12px,3.2vw,15px)!important;}
+}
+@media(max-height:680px) and (min-width:651px){
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(-2vh)!important;}
+ #loading.cherry-v5 .intro-v5-arc {height:88px!important;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(240px,43vh,330px)!important;}
+}
+@media(max-height:590px) and (max-width:650px){
+ #loading.cherry-v5 .intro-v5-shell {transform:translateY(0)!important;}
+ #loading.cherry-v5 .intro-v5-arc {height:65px!important;}
+ #loading.cherry-v5 .intro-v5-figure {height:clamp(190px,38svh,260px)!important;}
+}
+
 </style>
 </head>
 
@@ -1151,6 +1241,8 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
 <!-- LOADING SCREEN -->
 
 <div id="loading" class="cherry-intro cherry-v5" aria-label="Welcome to Trishchic.ph">
+  <div class="intro-halo" aria-hidden="true"></div><div class="intro-glow-orbit" aria-hidden="true"></div>
+  <div class="intro-glitter" aria-hidden="true"><i style="--x:15%;--y:22%;--s:13px;--d:2.1s;--delay:-0.00s">✧</i><i style="--x:52%;--y:51%;--s:18px;--d:2.75s;--delay:-0.31s">✦</i><i style="--x:89%;--y:80%;--s:23px;--d:3.4000000000000004s;--delay:-0.62s">✦</i><i style="--x:30%;--y:21%;--s:28px;--d:4.050000000000001s;--delay:-0.93s">✧</i><i style="--x:67%;--y:50%;--s:33px;--d:4.7s;--delay:-1.24s">✦</i><i style="--x:8%;--y:79%;--s:13px;--d:2.1s;--delay:-1.55s">✦</i><i style="--x:45%;--y:20%;--s:18px;--d:2.75s;--delay:-1.86s">✧</i><i style="--x:82%;--y:49%;--s:23px;--d:3.4000000000000004s;--delay:-2.17s">✦</i><i style="--x:23%;--y:78%;--s:28px;--d:4.050000000000001s;--delay:-2.48s">✦</i><i style="--x:60%;--y:19%;--s:33px;--d:4.7s;--delay:-2.79s">✧</i><i style="--x:97%;--y:48%;--s:13px;--d:2.1s;--delay:-3.10s">✦</i><i style="--x:38%;--y:77%;--s:18px;--d:2.75s;--delay:-3.41s">✦</i><i style="--x:75%;--y:18%;--s:23px;--d:3.4000000000000004s;--delay:-3.72s">✧</i><i style="--x:16%;--y:47%;--s:28px;--d:4.050000000000001s;--delay:-4.03s">✦</i><i style="--x:53%;--y:76%;--s:33px;--d:4.7s;--delay:-4.34s">✦</i><i style="--x:90%;--y:17%;--s:13px;--d:2.1s;--delay:-4.65s">✧</i><i style="--x:31%;--y:46%;--s:18px;--d:2.75s;--delay:-4.96s">✦</i><i style="--x:68%;--y:75%;--s:23px;--d:3.4000000000000004s;--delay:-5.27s">✦</i><i style="--x:9%;--y:16%;--s:28px;--d:4.050000000000001s;--delay:-5.58s">✧</i><i style="--x:46%;--y:45%;--s:33px;--d:4.7s;--delay:-5.89s">✦</i><i style="--x:83%;--y:74%;--s:13px;--d:2.1s;--delay:-6.20s">✦</i><i style="--x:24%;--y:15%;--s:18px;--d:2.75s;--delay:-6.51s">✧</i><i style="--x:61%;--y:44%;--s:23px;--d:3.4000000000000004s;--delay:-6.82s">✦</i><i style="--x:2%;--y:73%;--s:28px;--d:4.050000000000001s;--delay:-7.13s">✦</i><i style="--x:39%;--y:14%;--s:33px;--d:4.7s;--delay:-7.44s">✧</i><i style="--x:76%;--y:43%;--s:13px;--d:2.1s;--delay:-7.75s">✦</i><i style="--x:17%;--y:72%;--s:18px;--d:2.75s;--delay:-8.06s">✦</i><i style="--x:54%;--y:13%;--s:23px;--d:3.4000000000000004s;--delay:-8.37s">✧</i></div>
   <div class="cherry-spark cherry-spark-one" aria-hidden="true">✦</div>
   <div class="cherry-spark cherry-spark-two" aria-hidden="true">✧</div>
   <div class="cherry-spark cherry-spark-three" aria-hidden="true">✦</div>
@@ -2702,5 +2794,43 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
  window.addEventListener('load',createGlitter,{once:true});
 })();
 </script>
+
+<script>
+/* Crop only fully transparent margins from the GitHub PNG at runtime.
+   This makes the actual doll fill its allocated display area. */
+(function(){
+ const mascot=document.querySelector('#loading.cherry-v5 .intro-v5-figure img');
+ if(!mascot) return;
+ function trimTransparentPadding(){
+   if(mascot.dataset.trimmed==='1'||!mascot.naturalWidth||!mascot.naturalHeight)return;
+   mascot.dataset.trimmed='1';
+   try{
+     const sourceWidth=mascot.naturalWidth,sourceHeight=mascot.naturalHeight;
+     const ratio=Math.min(1,850/Math.max(sourceWidth,sourceHeight));
+     const w=Math.max(1,Math.round(sourceWidth*ratio)),h=Math.max(1,Math.round(sourceHeight*ratio));
+     const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+     const ctx=canvas.getContext('2d',{willReadFrequently:true});
+     ctx.drawImage(mascot,0,0,w,h);
+     const pixels=ctx.getImageData(0,0,w,h).data;
+     let left=w,top=h,right=-1,bottom=-1;
+     for(let y=0;y<h;y+=2){for(let x=0;x<w;x+=2){
+       if(pixels[(y*w+x)*4+3]>20){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
+     }}
+     if(right<left||bottom<top)return;
+     const padding=5;
+     left=Math.max(0,left-padding);top=Math.max(0,top-padding);
+     right=Math.min(w-1,right+padding);bottom=Math.min(h-1,bottom+padding);
+     const cw=right-left+1,ch=bottom-top+1;
+     if(cw/w>.94&&ch/h>.94)return;
+     const cropped=document.createElement('canvas');cropped.width=cw;cropped.height=ch;
+     cropped.getContext('2d').drawImage(canvas,left,top,cw,ch,0,0,cw,ch);
+     mascot.src=cropped.toDataURL('image/png');
+   }catch(err){/* Keep original image if browser restricts canvas */}
+ }
+ if(mascot.complete)trimTransparentPadding();
+ else mascot.addEventListener('load',trimTransparentPadding,{once:true});
+})();
+</script>
+
 </body>
 </html>
