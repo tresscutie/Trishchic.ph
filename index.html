@@ -1756,6 +1756,27 @@ body section#booking .moveit-brand{color:#ce2535!important;font-weight:900!impor
 /* Keep color changes clear and accessible on mobile too */
 @media(max-width:720px){body section.section .container > h2.title{color:#54293b!important}}
 
+
+/* V20: Slightly deeper pink gingham, stronger visible stripes */
+html,body{background-color:#efbfc9!important}
+body{
+ background-color:#efbfc9!important;
+ background-image:
+  linear-gradient(90deg,rgba(164,54,79,.26) 50%,transparent 50%),
+  linear-gradient(rgba(164,54,79,.26) 50%,transparent 50%),
+  linear-gradient(90deg,transparent 50%,rgba(255,248,247,.25) 50%),
+  linear-gradient(transparent 50%,rgba(255,248,247,.25) 50%)!important;
+ background-size:88px 88px!important;
+ background-attachment:fixed!important;
+}
+body::before{background:repeating-linear-gradient(35deg,#ffffff09 0 1px,transparent 1px 6px)!important;opacity:.5!important}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(150deg,rgba(255,248,246,.78),rgba(255,230,235,.73),rgba(255,248,246,.78))!important;
+ color:#54293b!important;
+}
+.hero{background:radial-gradient(ellipse at center,rgba(255,249,246,.83),rgba(248,216,224,.71))!important}
+@media(max-width:720px){body{background-size:64px 64px!important}}
+
 </style>
 </head>
 
