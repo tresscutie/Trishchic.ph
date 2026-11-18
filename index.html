@@ -1777,6 +1777,42 @@ body::before{background:repeating-linear-gradient(35deg,#ffffff09 0 1px,transpar
 .hero{background:radial-gradient(ellipse at center,rgba(255,249,246,.83),rgba(248,216,224,.71))!important}
 @media(max-width:720px){body{background-size:64px 64px!important}}
 
+
+/* V21: contrast, glitter and gratitude section */
+body section.section .product-card .explore,
+body section.section .product-card .explore *{
+  background:#fff6f3!important;color:#572438!important;
+  font-weight:900!important;text-shadow:none!important;
+  border:1px solid #ffd6df!important;
+  box-shadow:0 5px 0 #a94366,0 10px 20px #21051135!important;
+}
+body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!important;text-shadow:0 2px 5px #20010b77!important}
+#productModal .modal-top :is(h2,p,small),
+#productModal .modal-top div :is(h2,p,small){color:#fff!important;text-shadow:0 2px 6px #24051888!important}
+#productModal .modal-top h2{font-weight:900!important}
+#productModal .modal-body,#productModal .modal-body :is(p,strong,h2,h3){color:#51283a!important}
+#productModal .modal-body .btn,#productModal .modal-body .btn *{color:#fff!important}
+#productModal .modal-body a:not(.btn){color:#a32c57!important;font-weight:800!important}
+#productModal .plan{background:#fff9fa!important;color:#4d2838!important}
+#productModal .plan strong{color:#8d294b!important}
+/* Animated dots are CSS light particles, not emoji */
+.glitter-sky{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.glitter-sky i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:var(--c);box-shadow:0 0 7px 2px var(--c),0 0 19px 5px var(--c);opacity:.15;animation:glitterPulse var(--d) ease-in-out infinite alternate;animation-delay:var(--delay)}
+@keyframes glitterPulse{0%{opacity:.06;transform:scale(.45) translateY(3px)}55%{opacity:.9}100%{opacity:.2;transform:scale(1.4) translateY(-8px)}}
+.glitter-sky i:nth-child(7n){width:2px;height:2px;box-shadow:0 0 12px 4px var(--c)}
+.thankyou-section{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,#622137,#8c3956 53%,#4c172d)!important;padding:75px 22px 85px;color:#fff7f4;text-align:center;border-top:5px solid #f5c5d2}
+.thankyou-section:before{content:'';position:absolute;inset:0;z-index:-1;opacity:.18;background:repeating-linear-gradient(45deg,transparent 0 18px,#ffffff30 19px 20px,transparent 21px 40px)}
+.thankyou-wrap{max-width:1060px;margin:auto;display:grid;grid-template-columns:minmax(220px,350px) 1fr;align-items:center;gap:clamp(26px,6vw,90px)}
+.thankyou-photo{margin:0;transform:rotate(-4deg);padding:12px 12px 34px;background:#fff8f4;box-shadow:0 20px 40px #26061477;border-radius:6px;transition:transform .4s}
+.thankyou-photo:hover{transform:rotate(0) scale(1.03)}
+.thankyou-photo img{width:100%;height:320px;object-fit:cover;display:block;border-radius:3px;background:#f2c4d0}
+.thankyou-photo figcaption{color:#8d3c59;font-weight:800;margin-top:12px;font-size:14px}
+.thankyou-copy h2{font-size:clamp(44px,6vw,78px);line-height:1.15;color:#fff8f4!important;text-shadow:0 3px 15px #3c0b20!important;margin:0 0 18px}
+.thankyou-copy p{font-size:clamp(16px,2vw,20px);line-height:1.75;color:#fff7f4!important;margin:0 auto 16px;max-width:560px}
+.thankyou-copy .thankyou-pill{display:inline-block;border:1px solid #ffcedc;border-radius:50px;padding:12px 24px;margin-top:10px;color:#fff8f4;font-weight:800;letter-spacing:.04em}
+@media(max-width:650px){.thankyou-section{padding:50px 18px 65px}.thankyou-wrap{grid-template-columns:1fr;gap:32px}.thankyou-photo{max-width:285px;margin:auto}.thankyou-photo img{height:270px}.thankyou-copy h2{font-size:48px}}
+@media(prefers-reduced-motion:reduce){.glitter-sky i{animation:none;opacity:.6}}
+
 </style>
 </head>
 
@@ -2407,8 +2443,25 @@ body::before{background:repeating-linear-gradient(35deg,#ffffff09 0 1px,transpar
   </div>
 </section>
 
+
+<section class="thankyou-section" id="thank-you" aria-label="Thank you for visiting Trishchic">
+  <div class="thankyou-wrap">
+    <figure class="thankyou-photo">
+      <img src="self.jpg" alt="A thank-you photo from Trishchic.ph" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('figcaption').textContent='With love, Trishchic.ph ♡';">
+      <figcaption>with love, trishchic.ph ♡</figcaption>
+    </figure>
+    <div class="thankyou-copy">
+      <h2>Thank You! ♡</h2>
+      <p>Thank you so much for visiting <strong>Trishchic.ph</strong>! Whether you're just browsing or you've placed an order, your time and support mean so much to us.</p>
+      <p>We hope you found something that makes your day a little sweeter. We can't wait to serve you again! ♡</p>
+      <div class="thankyou-pill">♡ Shop · Order · Create · Enjoy ♡</div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 
+<div class="glitter-sky" aria-hidden="true" id="glitterSky"></div>
 <footer id="contact">
   <div class="container">
 
@@ -3414,5 +3467,23 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 })();
 </script>
 
+<script>
+/* Small, low-cost glowing particles across the page */
+(function(){
+ const sky=document.getElementById('glitterSky');
+ if(!sky)return;
+ const colors=['#fffef9','#fff7d6','#ffe4a5','#ffffff'];
+ for(let i=0;i<48;i++){
+  const dot=document.createElement('i');
+  dot.style.setProperty('--x',((i*67.39+13)%100)+'%');
+  dot.style.setProperty('--y',((i*37.73+9)%100)+'%');
+  dot.style.setProperty('--s',(i%5===0?5:i%3===0?3:2)+'px');
+  dot.style.setProperty('--c',colors[i%colors.length]);
+  dot.style.setProperty('--d',(2.1+(i%8)*.46)+'s');
+  dot.style.setProperty('--delay',(-i*.31)+'s');
+  sky.appendChild(dot);
+ }
+})();
+</script>
 </body>
 </html>
