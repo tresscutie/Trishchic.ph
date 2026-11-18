@@ -1814,6 +1814,31 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
 @media(prefers-reduced-motion:reduce){.glitter-sky i{animation:none;opacity:.6}}
 
 </style>
+<style id="v22-booking-and-interactions">
+/* Booking details: framed, readable, and clearly separated from gingham. */
+#booking .booking-layout > .reveal:first-child{background:rgba(255,250,250,.94)!important;border:2px solid #b95378!important;box-shadow:0 20px 55px rgba(96,24,52,.18),inset 0 0 0 6px rgba(255,221,231,.65)!important;border-radius:32px;padding:clamp(22px,3vw,44px)!important;backdrop-filter:blur(9px)}
+#booking .booking-layout > .reveal:first-child p{color:#512b3c!important;line-height:1.75!important}
+#booking .booking-layout > .reveal:first-child h2{color:#4a2434!important}
+#booking .booking-layout > .reveal:first-child h3{color:#a93462!important}
+#booking .booking-visual{border:2px solid #e7a7bd!important;background:rgba(255,249,251,.95)!important;box-shadow:0 20px 50px #641e3a25!important}
+#booking .booking-visual h3{color:#a62f60!important}
+#booking .booking-visual p{color:#542a3d!important}
+#booking .booking-visual .tag{color:#922e54!important}
+#booking .joyride-brand{color:#0860db!important;font-weight:900!important}
+#booking .moveit-brand{color:#d21f37!important;font-weight:900!important}
+/* Product selection has a distinct pop and ring, followed by a modal entrance. */
+.product-card{isolation:isolate;overflow:hidden;position:relative;cursor:pointer}
+.product-card.v22-selected{animation:v22-card-select .48s cubic-bezier(.2,.9,.2,1) both!important}
+.product-card.v22-selected::before{opacity:1!important}
+@keyframes v22-card-select{0%{filter:brightness(1);scale:1}42%{filter:brightness(1.24);scale:.965}75%{scale:1.045}100%{filter:brightness(1);scale:1}}
+#productModal.active .modal-box{animation:v22-modal-entry .55s cubic-bezier(.17,.88,.3,1.12) both!important;transform-origin:center center}
+@keyframes v22-modal-entry{from{opacity:0;transform:translateY(35px) scale(.88);filter:blur(7px)}65%{opacity:1;filter:blur(0)}to{opacity:1;transform:translateY(0) scale(1)}}
+.v22-click-ripple{position:fixed;z-index:999999;pointer-events:none;border-radius:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border:2px solid rgba(255,230,156,.95);background:radial-gradient(circle,#fffef4 0%,#ffd9e8 35%,transparent 70%);box-shadow:0 0 15px #ffdf8b,0 0 28px #f8a4c2;animation:v22-click-burst .68s ease-out forwards}
+.v22-click-ripple::after{content:'';position:absolute;inset:-12px;border-radius:50%;border:1px solid #fff9e5;animation:v22-click-burst .68s ease-out forwards}
+@keyframes v22-click-burst{0%{opacity:1;transform:scale(.25)}60%{opacity:.85}100%{opacity:0;transform:scale(5)}}
+@media(max-width:780px){#booking .booking-layout{grid-template-columns:1fr!important}#booking .booking-layout > .reveal:first-child{padding:23px!important}}
+@media(prefers-reduced-motion:reduce){.product-card.v22-selected,#productModal.active .modal-box,.v22-click-ripple,.v22-click-ripple::after{animation:none!important}}
+</style>
 </head>
 
 <body>
@@ -3483,6 +3508,25 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
   dot.style.setProperty('--delay',(-i*.31)+'s');
   sky.appendChild(dot);
  }
+})();
+</script>
+<script id="v22-interaction-script">
+(function(){
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ document.addEventListener('pointerdown',function(event){
+   if(reduced || event.button>0)return;
+   const target=event.target.closest('button,a,summary,[role="button"]');
+   if(!target)return;
+   const ripple=document.createElement('span');ripple.className='v22-click-ripple';
+   ripple.style.left=event.clientX+'px';ripple.style.top=event.clientY+'px';
+   document.body.appendChild(ripple);setTimeout(()=>ripple.remove(),750);
+ },{passive:true});
+ const grid=document.getElementById('productGrid');
+ if(grid)grid.addEventListener('click',function(e){
+   const card=e.target.closest('.product-card');if(!card||reduced)return;
+   card.classList.remove('v22-selected');void card.offsetWidth;card.classList.add('v22-selected');
+   setTimeout(()=>card.classList.remove('v22-selected'),550);
+ });
 })();
 </script>
 </body>
