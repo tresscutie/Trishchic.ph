@@ -1536,6 +1536,126 @@ body::before{background:radial-gradient(circle at 15% 22%,#f39ca41c 0 1px,transp
 @media(max-width:700px){#contents .toc-box{padding:22px 16px!important;border-radius:22px!important}#contents .toc-item{padding:14px 12px!important}#faq details summary{padding:18px!important}}
 @media(prefers-reduced-motion:reduce){#contents .toc-item,#faq details summary{transition:none!important}}
 
+
+/* V17 — Vintage cherry gingham / polished feminine boutique */
+:root {
+  --cherry:#79242d;--berry:#a83f50;--blush:#e9adb4;
+  --rose-paper:#fff7f4;--ink:#4a2631;--gold:#d5ad82;
+}
+html,body{background-color:#7f2832!important}
+body{
+  background-image:
+    linear-gradient(90deg,rgba(104,13,25,.29) 50%,transparent 50%),
+    linear-gradient(rgba(104,13,25,.29) 50%,transparent 50%),
+    linear-gradient(90deg,transparent 50%,rgba(255,222,224,.20) 50%),
+    linear-gradient(transparent 50%,rgba(255,222,224,.20) 50%)!important;
+  background-size:88px 88px!important;
+  background-attachment:fixed!important;
+  color:#fff8f5!important;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 32%,rgba(255,242,236,.10),transparent 68%),
+             linear-gradient(110deg,rgba(30,0,11,.13),transparent 50%,rgba(30,0,11,.15));
+}
+body > header,body > section,body > footer{position:relative;z-index:1}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+  background:linear-gradient(160deg,rgba(57,7,18,.73),rgba(97,18,35,.68),rgba(54,7,19,.74))!important;
+  background-image:linear-gradient(160deg,rgba(57,7,18,.73),rgba(97,18,35,.68),rgba(54,7,19,.74))!important;
+  backdrop-filter:none;
+}
+.hero{
+  background:radial-gradient(ellipse at center,rgba(119,30,53,.74),rgba(37,3,15,.87))!important;
+  min-height:min(900px,100svh);
+}
+.hero::before,.hero::after{
+  border-color:rgba(255,218,220,.55)!important;
+  box-shadow:0 0 28px #f5b7bf48!important;
+}
+.hero h1{color:#fff3ef!important;text-shadow:0 4px 0 #672238,0 0 20px #ffd6df88!important}
+.hero h1 span{color:#ffb5c7!important}
+.hero .notice{
+  background:rgba(255,247,243,.94)!important;color:#5c2537!important;
+  border:2px solid #e8b8bd!important;
+  box-shadow:0 14px 34px #23000d55!important;
+}
+.hero .btn,.btn,.btn-green,.explore{
+  background:linear-gradient(135deg,#8d2942,#c55877)!important;
+  color:#fffaf7!important;
+  border:1px solid #f3c6c5!important;
+  box-shadow:0 5px 0 #5d1b30,0 12px 22px #2e081b44!important;
+}
+.hero .btn:hover,.btn:hover,.btn-green:hover,.explore:hover{
+  background:linear-gradient(135deg,#a43753,#d66f89)!important;
+  box-shadow:0 3px 0 #5d1b30,0 16px 28px #2e081b55!important;
+}
+.explore-help{
+  color:#512437!important;background:#fff6f0f2!important;
+  border:1px solid #e5b8b5!important;box-shadow:0 9px 25px #2e081b44!important;
+}
+.section .title,.section h2.title{color:#fff4ed!important;text-shadow:0 2px 12px #23020d44}
+.section .title .pink,.section .pink{color:#ffc1d0!important}
+.section .title .green,.section .green{color:#f1cba6!important}
+.section .tag{background:#f8e0dd!important;color:#8c344a!important;border:1px solid #f4c2bd!important}
+.section .container > p,.section .center > p{color:#fff3ec}
+:is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body,.modal-content,.toc-item,.product-card,.feedback-count){
+  border-color:#eac6bd!important;
+}
+:is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body,.modal-content){
+  background:#fff8f5!important;
+  color:var(--ink)!important;
+  box-shadow:0 14px 32px #2b071d33!important;
+}
+:is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body,.modal-content) :is(h2,h3,h4,p,li,strong,small){
+  color:var(--ink)!important;
+}
+#contents .toc-box{
+  background:linear-gradient(155deg,#fffaf7,#f8e8e5)!important;
+  border:1px solid #ddb4a7!important;
+  box-shadow:0 26px 60px #27030f66,inset 0 0 0 5px #fffaf7,inset 0 0 0 6px #e9c6b5!important;
+}
+#contents .toc-box .title,#contents .toc-box h2{color:#642e42!important}
+#contents .toc-box .green{color:#9d6b57!important}
+#contents .toc-box .pink{color:#ba5270!important}
+#contents .toc-item{
+  background:linear-gradient(135deg,#fffefd,#f9eeeb)!important;
+  border:1px solid #e2c5bc!important;
+  color:#562c3d!important;
+  box-shadow:0 5px 14px #51162a1b!important;
+}
+#contents .toc-item *{color:#562c3d!important}
+#contents .toc-number{
+  background:#8e354b!important;color:#fff8f4!important;
+  border:1px solid #d4a894!important;
+}
+#contents .toc-item .toc-number{color:#fff8f4!important}
+#contents .toc-item:hover{
+  background:#fff2ed!important;border-color:#c47d8a!important;
+  box-shadow:0 14px 30px #5013273b!important;
+}
+#faq details,#faq details summary,#faq details p{
+  background:#fff9f6!important;color:#512c3a!important;
+}
+#faq details summary{font-weight:850!important}
+#proofs .feedback-count,#proofs .feedback-count *:not(a){color:#502c3b!important}
+#proofs .feedback-count{background:#fff8f5!important}
+#proofs .feedback-count a{color:#a52d56!important}
+#socials .card,#socials .card *:not(.btn){color:#4c2938!important}
+#socials .card{background:#fff8f5!important}
+#socials .card .btn{color:#fff!important}
+footer{background:linear-gradient(145deg,#340a19ef,#732c41ef)!important;color:#fff5f0!important}
+footer :is(p,small,a){color:#fff2ed!important}
+#siteGlitter{pointer-events:none}
+@media(max-width:720px){
+ body{background-size:64px 64px!important}
+ .hero{min-height:100svh}
+ .hero .notice{padding:17px 15px!important}
+ #contents .toc-box{padding:22px 15px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero::before,.hero::after{animation:none!important}
+}
+
 </style>
 </head>
 
