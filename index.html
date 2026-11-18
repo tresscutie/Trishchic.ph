@@ -1261,6 +1261,62 @@ body{background:#fff8f8;}
 #warranty{--blend-middle:#f3f8e9}
 /* Respect user volume preference while starting louder by default. */
 
+
+/* V12: rich but readable velvet background, continuously blended across sections */
+html {background:#f9eee8 url("websiteBG.jpg") center center / cover fixed no-repeat;}
+body { background:transparent!important; }
+
+#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,
+#tutorial,#rules,#notes,#payment,#faq,#warranty {
+  background:rgba(255,249,247,.36)!important;
+  background-image:none!important;
+}
+.hero {
+  background:
+    linear-gradient(180deg,rgba(255,248,242,.45),rgba(255,248,242,.18))!important;
+}
+footer {
+  background:linear-gradient(145deg,rgba(211,232,171,.92),rgba(248,215,215,.90))!important;
+}
+.explore-help {
+  max-width:720px!important;
+  font-size:clamp(16px,1.5vw,21px)!important;
+  line-height:1.55!important;
+  font-weight:800!important;
+  color:#713b4f!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.95);
+  background:rgba(255,255,255,.74);
+  border:1px solid rgba(221,133,163,.35);
+  padding:13px 20px;
+  border-radius:18px;
+}
+#siteGlitter{z-index:15;mix-blend-mode:screen;}
+#siteGlitter .glitter{
+  opacity:0;
+  filter:drop-shadow(0 0 5px #fff9c8);
+  box-shadow:0 0 5px 2px var(--clr),0 0 17px 6px var(--clr),0 0 35px 9px rgba(255,232,140,.48);
+  animation:glitterPulse var(--dur) ease-in-out infinite;
+  animation-delay:var(--delay);
+}
+@keyframes glitterPulse {
+  0%,100% {opacity:.12;transform:scale(.45)}
+  40% {opacity:.96;transform:scale(1.65)}
+  62% {opacity:.65;transform:scale(1.12)}
+}
+.music-button[hidden]{display:none!important}
+.music-player {gap:8px}
+.card, .toc-card, .product-card {transition:transform .28s ease,box-shadow .28s ease}
+@media(hover:hover) {
+  .card:hover, .toc-card:hover, .product-card:hover {transform:translateY(-5px)}
+}
+@media(max-width:650px){
+  html{background-position:55% center}
+  .explore-help{margin:16px 12px 0!important;font-size:15px!important;padding:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.toc-card,.product-card{transition:none}
+}
+
 </style>
 </head>
 
@@ -1311,6 +1367,7 @@ body{background:#fff8f8;}
       <button
         class="music-button"
         id="musicToggle"
+        hidden
         aria-label="Play or pause music"
       >▶</button>
 
@@ -1319,11 +1376,11 @@ body{background:#fff8f8;}
         id="volume"
         min="0"
         max="100"
-        value="65"
+        value="75"
         aria-label="Music volume"
       >
 
-      <span id="volumeText">65%</span>
+      <span id="volumeText">75%</span>
     </div>
 
   </div>
@@ -1884,7 +1941,7 @@ body{background:#fff8f8;}
     <div class="warranty-grid">
       <article class="card warranty-card"><span class="warranty-period">7 Days</span><p><strong>5–7 days</strong> is considered one week.</p></article>
       <article class="card warranty-card"><span class="warranty-period">1 Month</span><p><strong>20–31 days</strong> is considered one month.</p></article>
-      <article class="card warranty-card"><span class="warranty-period">1 Year</span><p><strong>340–465 days</strong> is considered one year.</p></article>
+      <article class="card warranty-card"><span class="warranty-period">1 Year</span><p><strong>340–365 days</strong> is considered one year.</p></article>
     </div>
     <p class="warranty-disclaimer">These are the seller's stated warranty ranges. Please confirm the exact coverage, start date, and conditions before purchasing.</p>
   </div>
@@ -1919,7 +1976,7 @@ body{background:#fff8f8;}
     >TikTok</a>
 
     <p style="font-size:12px;margin-top:35px">
-      © 2026 Trishchic.ph
+      © 2025 Trishchic.ph
     </p>
 
   </div>
@@ -2462,12 +2519,15 @@ function setupAudio() {
   )();
 
   masterGain = audioContext.createGain();
-  masterGain.gain.value = Number(volumeSlider.value)/100*.22;
+  masterGain.gain.value = Number(volumeSlider.value)/100*.75;
 
   const compressor = audioContext.createDynamicsCompressor();
-  compressor.threshold.value = -20;
-  compressor.ratio.value = 3;
+  compressor.threshold.value = -24;
+  compressor.ratio.value = 5;
 
+  compressor.knee.value = 16;
+  compressor.attack.value = .008;
+  compressor.release.value = .18;
   masterGain.connect(compressor);
   compressor.connect(audioContext.destination);
 }
@@ -2578,7 +2638,7 @@ musicButton.addEventListener("click",async () => {
   } else {
     if (masterGain && audioContext) {
       masterGain.gain.setTargetAtTime(
-        Number(volumeSlider.value)/100*.22,
+        Number(volumeSlider.value)/100*.75,
         audioContext.currentTime,
         .05
       );
@@ -2594,7 +2654,7 @@ volumeSlider.addEventListener("input",event => {
 
   if (masterGain && audioContext) {
     masterGain.gain.setTargetAtTime(
-      value/100*.22,
+      value/100*.75,
       audioContext.currentTime,
       .05
     );
@@ -2625,6 +2685,8 @@ function unlockIntroMusic(){
 }
 document.addEventListener("pointerdown",unlockIntroMusic,{passive:true});
 document.addEventListener("keydown",unlockIntroMusic);
+document.addEventListener("touchstart",unlockIntroMusic,{passive:true,once:true});
+document.addEventListener("click",unlockIntroMusic,{once:true});
 
 // Show the entry button promptly, even when some images are still downloading.
 setTimeout(() => enterButton.classList.add("show"), 300);
@@ -2840,12 +2902,12 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
   var layer=document.getElementById('siteGlitter');if(!layer)return;
   var totalHeight=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
   layer.style.height=totalHeight+'px';
-  var count=Math.min(190,Math.max(65,Math.round(totalHeight/45)));
+  var count=Math.min(260,Math.max(95,Math.round(totalHeight/34)));
   var colors=['#ffffff','#fff5cb','#ffe39a','#fffdf2'];
   var html='';
   for(var i=0;i<count;i++){
    var x=((i*67.39+17)%100),y=((i*43.73+11)%100);
-   var size=2+(i*3%4);
+   var size=2+(i*3%5);
    html+='<i class="glitter '+''+'" style="left:'+x+'%;top:'+y+'%;--sz:'+size+'px;--clr:'+colors[i%4]+';--dur:'+(2+i%5)+'s;--delay:-'+(i%7)+'s"></i>';
   }
   layer.innerHTML=html;
