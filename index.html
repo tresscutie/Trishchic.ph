@@ -1427,6 +1427,44 @@ footer h2 {color:#ffa9c7!important}
  .hero .btn,.card {animation:none!important}
 }
 
+
+/* V14 — coordinated dark-cherry / blush / champagne palette */
+:root {--rose:#ed79a2;--pink:#f6a7c0;--green:#e8c3a1;--darkgreen:#d9a6b3;--text:#4b2c39}
+.section .title,.section h2:not(.card h2),.section .subtitle,
+section > .container > h2, section > .container > p {color:#fff0ee!important}
+.section .pink,.section .title .pink,.section h2 span {color:#ff9dc0!important}
+.section .green,.section .title .green {color:#f5c7a5!important}
+.section .tag,.eyebrow,.section .pill {background:#70233d!important;color:#ffe6eb!important;border-color:#bc6580!important}
+/* Product tiles: retain recognizable brand hues, but make text reliably white. */
+.product-card,.product-card *:not(.explore) {color:#fff9f5!important}
+.product-card:after {z-index:0!important;background:linear-gradient(180deg,#00000012 0%,#1a0204b8 90%)!important;pointer-events:none}
+.product-inner {position:relative;z-index:1}
+.product-category,.product-inner p {color:#ffe4e8!important;text-shadow:0 1px 3px #120108b8}
+.product-inner h3 {color:#fff!important;text-shadow:0 2px 7px #160009bb}
+.product-card .explore {color:#54172e!important;background:#fff2f3!important;box-shadow:0 3px 15px #13000744}
+/* White/cream cards remain readable; their accents match the new theme. */
+.card,.toc-box,.toc-item,.modal-box,.modal-body,.faq-item,.service-card,.plan-card {background-color:#fff5f4;color:#4c2e3b}
+.card h2,.card h3,.card p,.card li,.toc-box h2,.toc-box p,.toc-item,.faq-item,
+.modal-body,.modal-body p,.modal-body h3,.modal-body li,.plan-card,.plan-card * {color:#4c2e3b}
+.card .pink,.toc-box .pink,.modal-body .pink {color:#c94b79!important}
+.card .green,.toc-box .green,.modal-body .green {color:#a35a68!important}
+.card .tag,.toc-box .tag {background:#f9dce4!important;color:#8d3053!important}
+.toc-item,.plan-card {border-color:#e8b5c4!important}
+.toc-item:hover,.plan-card:hover {background:#ffe7ed!important}
+/* Consistent call-to-action buttons, links and highlights. */
+.btn,.floating-contact,.primary-btn,.contact-btn {background:linear-gradient(120deg,#9d244b,#e66b99)!important;color:#fff!important;border-color:#f7acc4!important}
+.btn:hover,.floating-contact:hover,.primary-btn:hover {filter:brightness(1.12)}
+a {text-underline-offset:3px}
+footer a {color:#ffd3df!important}
+/* Modals have light readable content and branded colored headers. */
+.modal-box {background:#fff6f6!important;color:#4c2e3b!important}
+.modal-top,.modal-top h2,.modal-top p {color:#fff!important}
+.modal-body {background:#fff6f6!important}
+/* Don't let global heading rules force dark text onto dark backgrounds. */
+.section .card h2,.section .card h3,.section .card p,
+.section .toc-box h2,.section .toc-box p {color:#4c2e3b!important}
+@media(max-width:650px){.product-inner h3{font-size:clamp(25px,7vw,36px)}}
+
 </style>
 </head>
 
