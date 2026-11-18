@@ -1465,6 +1465,40 @@ footer a {color:#ffd3df!important}
 .section .toc-box h2,.section .toc-box p {color:#4c2e3b!important}
 @media(max-width:650px){.product-inner h3{font-size:clamp(25px,7vw,36px)}}
 
+
+/* V15 — editorial black-cherry texture, cohesive surfaces and contrast repair */
+:root{--v15-ink:#432636;--v15-cream:#fff7f5;--v15-cherry:#6d1535;--v15-blush:#ee8fac;--v15-gold:#f6cda4}
+html{background:#17040c!important}
+body{background:#17040c!important}
+body::before{background:radial-gradient(circle at 15% 22%,#f39ca41c 0 1px,transparent 2px),radial-gradient(circle at 82% 70%,#ffdfa81c 0 1px,transparent 2px),repeating-linear-gradient(125deg,#fff1eb07 0 1px,transparent 1px 9px),radial-gradient(ellipse at 52% 20%,#8c234440,transparent 65%)!important;background-size:73px 71px,107px 103px,auto,auto;opacity:.7}
+.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{background:linear-gradient(155deg,#240711f2,#4c1024f0 52%,#1d0610f4)!important}
+.section:nth-of-type(even){background:linear-gradient(155deg,#310c1bf2,#220710f2 70%,#410c20ef)!important}
+/* Explicitly target all readable surfaces, even when nested inside dark sections. */
+:is(.card,.toc-box,.toc-item,.faq-item,.service-card,.plan-card,.modal-box,.modal-body,.modal-content,.booking-card,.payment-card,.feature-card,.info-card,.step-card,.warranty-card){background:#fff8f6!important;color:var(--v15-ink)!important;border-color:#f1c4cf!important;box-shadow:0 14px 34px #13020a30!important}
+:is(.card,.toc-box,.toc-item,.faq-item,.service-card,.plan-card,.modal-box,.modal-body,.modal-content,.booking-card,.payment-card,.feature-card,.info-card,.step-card,.warranty-card) :is(h1,h2,h3,h4,h5,p,li,small,strong,b,label,span:not(.pink):not(.green):not(.tag):not(.badge),div:not(.btn):not(.tag):not(.badge)){color:var(--v15-ink)!important;text-shadow:none!important}
+/* The two-tone section titles inside white cards need dark versions. */
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body) .title{color:var(--v15-ink)!important}
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body) .pink{color:#bd396c!important}
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body) .green{color:#8c5361!important}
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body) .tag{background:#f8dce4!important;color:#832e4e!important}
+/* Brand product tiles are intentionally dark and should keep light text. */
+.product-card,.product-card :is(h2,h3,h4,p,small,strong,span){color:#fff8f4!important}
+.product-card .explore{color:#58213c!important}
+/* Dark headers in light modal dialogs are exceptions. */
+.modal-top,.modal-top :is(h2,h3,p,span){color:#fff8f4!important;text-shadow:0 1px 3px #30061266!important}
+/* Avoid accidental white-on-white from global section heading rules. */
+.section :is(.card,.toc-box,.faq-item,.service-card,.plan-card,.modal-body) :is(.title,h2,h3,p){color:var(--v15-ink)!important}
+/* Modern feminine surfaces: soft highlight and microinteractions. */
+:is(.card,.toc-box,.toc-item,.faq-item,.service-card,.plan-card,.product-card,.btn,.explore){transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,filter .35s ease!important}
+@media(hover:hover){:is(.card,.toc-item,.service-card,.plan-card,.product-card):hover{transform:translateY(-6px) scale(1.008)!important;box-shadow:0 20px 44px #12030d55!important}:is(.btn,.explore):hover{transform:translateY(-3px)!important;filter:brightness(1.09)}}
+.hero::before{animation:v15Wave 10s ease-in-out infinite alternate}
+.hero::after{animation:v15Wave 13s ease-in-out infinite alternate-reverse}
+@keyframes v15Wave{from{transform:rotate(-5deg) translateY(0)}to{transform:rotate(1deg) translateY(18px)}}
+.hero h1{text-shadow:0 4px 0 #9e2850,0 0 24px #ff669b77!important}
+.hero .notice{backdrop-filter:blur(8px)}
+.section .container{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.hero::before,.hero::after{animation:none!important}:is(.card,.toc-item,.service-card,.plan-card,.product-card,.btn,.explore){transition:none!important}}
+
 </style>
 </head>
 
