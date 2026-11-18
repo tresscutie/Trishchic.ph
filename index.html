@@ -968,6 +968,39 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
 @media(max-height:630px){.cherry-heading{height:90px}.cherry-portrait-wrap{height:40vh;min-height:165px;width:min(230px,44vw)}.cherry-bottom{gap:5px;margin-top:5px}.cherry-overline{font-size:9px}.cherry-ribbon{font-size:11px;padding:5px 12px}}
 @media(prefers-reduced-motion:reduce){.cherry-portrait,.cherry-spark,.cherry-progress>div{animation:none!important}.cherry-progress>div{transform:none}}
 
+
+/* Cherry intro layout correction: center all content and show entire character */
+#loading.cherry-intro { padding: 16px 18px; min-height: 100svh; }
+#loading.cherry-intro .cherry-stage {
+  width: min(720px,100%); height: auto; max-height: calc(100svh - 32px);
+  min-height: 0; margin: auto; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0;
+}
+#loading.cherry-intro .cherry-heading {
+  height: clamp(95px, 17svh, 145px); margin: 0 0 2px;
+  flex: 0 0 auto; width: 100%;
+}
+#loading.cherry-intro .cherry-arc {height: calc(100% - 18px); width:100%;}
+#loading.cherry-intro .cherry-portrait-wrap {
+  width: min(340px, 54vw); height: min(46svh, 410px);
+  min-height: 0; flex: 0 1 auto; margin: 0 auto;
+}
+#loading.cherry-intro .cherry-portrait {
+  background-size: contain !important; background-position: center center !important;
+  background-repeat: no-repeat !important; border-radius: 22px;
+  -webkit-mask-image: none !important; mask-image: none !important;
+}
+#loading.cherry-intro .cherry-bottom { margin: 12px 0 0; gap: 8px; flex: 0 0 auto; }
+@media (max-width:650px) {
+  #loading.cherry-intro .cherry-heading {height:clamp(88px,15svh,118px)}
+  #loading.cherry-intro .cherry-portrait-wrap {width:min(300px,78vw);height:min(45svh,390px)}
+  #loading.cherry-intro .cherry-bottom {margin-top:8px;gap:7px}
+}
+@media (max-height:700px) {
+  #loading.cherry-intro .cherry-heading {height:92px}
+  #loading.cherry-intro .cherry-portrait-wrap {height: min(40svh, 290px);width:min(260px,55vw)}
+  #loading.cherry-intro .cherry-bottom {margin-top:5px;gap:5px}
+}
 </style>
 </head>
 
