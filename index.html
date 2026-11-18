@@ -1499,6 +1499,43 @@ body::before{background:radial-gradient(circle at 15% 22%,#f39ca41c 0 1px,transp
 .section .container{position:relative;z-index:1}
 @media(prefers-reduced-motion:reduce){.hero::before,.hero::after{animation:none!important}:is(.card,.toc-item,.service-card,.plan-card,.product-card,.btn,.explore){transition:none!important}}
 
+
+/* V16: luxury boutique refinements and explicit high-contrast surfaces */
+:root{--lux-ink:#442334;--lux-wine:#681731;--lux-gold:#c69a69;--lux-cream:#fff9f5}
+/* FAQ details were white while summary text inherited light section text. */
+#faq details{background:#fffaf7!important;border:1px solid #e8d3c7!important;border-radius:18px!important;box-shadow:0 10px 28px #14020c30!important;overflow:hidden}
+#faq details summary{color:#4d2637!important;background:#fffaf7!important;font-weight:800!important;font-size:clamp(16px,1.25vw,19px)!important;padding:21px 24px!important;cursor:pointer;transition:background .25s,color .25s}
+#faq details summary::marker{color:#a75a71!important}
+#faq details summary::-webkit-details-marker{color:#a75a71!important}
+#faq details summary:hover,#faq details[open] summary{background:#f9e9e6!important;color:#741b3c!important}
+#faq details p,#faq details p *,#faq details div{color:#503243!important;background:#fffaf7!important;line-height:1.65!important}
+#faq details[open]{border-color:#d8a88f!important}
+/* Customer proof notice: enforce readable dark ink on light panel. */
+#proofs .feedback-count{background:#fff8f5!important;color:#4a2939!important;border:1px solid #e8c6b6!important;box-shadow:0 12px 32px #12020b3d!important}
+#proofs .feedback-count strong,#proofs .feedback-count :not(a){color:#4a2939!important}
+#proofs .feedback-count a{color:#9c2351!important;font-weight:900!important;text-decoration-thickness:2px!important}
+#proofs .feedback-count a:hover{color:#6d1034!important}
+/* All light social cards retain dark text; no accidental light-on-light. */
+#socials .card{background:#fff9f6!important;color:#4b2939!important;border:1px solid #e9c5c7!important}
+#socials .card h3,#socials .card p{color:#4b2939!important}
+/* Remove inherited green bottom shadows and green backgrounds on TikTok CTA. */
+#socials .btn-green,#socials .card .btn,.btn-green{background:linear-gradient(120deg,#8b2349,#d45d86)!important;color:#fff!important;border:1px solid #e8a4b7!important;box-shadow:0 5px 0 #5a1835,0 12px 24px #3d0b2244!important}
+#socials .btn-green:hover,#socials .card .btn:hover{background:linear-gradient(120deg,#a62d59,#e4779d)!important;box-shadow:0 3px 0 #5a1835,0 16px 28px #3d0b2255!important}
+/* Premium table of contents: pearl paper, champagne trim, burgundy lettering. */
+#contents .toc-box{background:linear-gradient(145deg,#fffaf7 0%,#f9eee9 58%,#fff9f6 100%)!important;border:1px solid #d8b391!important;border-radius:30px!important;box-shadow:0 26px 65px #09010665, inset 0 0 0 5px #fff9f6,inset 0 0 0 6px #e8c9b0!important;padding:clamp(24px,4vw,46px)!important}
+#contents .toc-box .title{color:#572c3e!important;text-shadow:none!important}
+#contents .toc-box .green{color:#a16d49!important}
+#contents .toc-box .pink{color:#a93c65!important}
+#contents .toc-box p{color:#6d4d58!important}
+#contents .toc-grid{gap:14px!important}
+#contents .toc-item{position:relative;background:linear-gradient(135deg,#fffefd,#fbf0eb)!important;border:1px solid #ddc0ac!important;border-radius:15px!important;color:#512b3c!important;box-shadow:0 5px 13px #4c1b2d13!important;padding:17px 19px!important;letter-spacing:.01em;transition:transform .25s,box-shadow .25s,background .25s!important}
+#contents .toc-item,#contents .toc-item *{color:#512b3c!important}
+#contents .toc-item .toc-number{background:linear-gradient(140deg,#77304a,#b24e71)!important;color:#fff8f2!important;border:1px solid #d7a58b!important;box-shadow:0 2px 7px #571a3240!important;border-radius:10px!important;font-weight:900!important}
+#contents .toc-item:hover,#contents .toc-item:focus-visible{background:linear-gradient(135deg,#fff9f2,#f8e4dd)!important;transform:translateY(-3px)!important;box-shadow:0 13px 24px #4c1b2d2a!important;outline:2px solid #c59a75;outline-offset:2px}
+#contents .toc-item:hover .toc-number{background:linear-gradient(140deg,#8d3a55,#c26584)!important}
+@media(max-width:700px){#contents .toc-box{padding:22px 16px!important;border-radius:22px!important}#contents .toc-item{padding:14px 12px!important}#faq details summary{padding:18px!important}}
+@media(prefers-reduced-motion:reduce){#contents .toc-item,#faq details summary{transition:none!important}}
+
 </style>
 </head>
 
