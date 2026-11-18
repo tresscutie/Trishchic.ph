@@ -1317,6 +1317,116 @@ footer {
   .card,.toc-card,.product-card{transition:none}
 }
 
+
+/* V13 — Ribbon-free burgundy & black glamour theme */
+:root {
+ --cream:#160309;
+ --text:#fff2ed;
+ --rose:#f26391;
+ --darkgreen:#c5e2a3;
+ --shadow:0 15px 38px #10000677;
+}
+html {background:#130208!important}
+body {
+ background:radial-gradient(ellipse at 50% 12%,#680e27 0%,#300712 35%,#110308 80%)!important;
+ color:#fff3ef;
+}
+body::before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+ background:
+ radial-gradient(circle at 8% 12%,#ff8d9e25,transparent 25%),
+ radial-gradient(circle at 94% 74%,#ff476b22,transparent 28%),
+ repeating-linear-gradient(135deg,transparent 0 165px,#ffb0a705 166px 167px,transparent 168px 290px);
+}
+body > * {position:relative}
+.hero {
+ min-height: min(850px,100svh);
+ display:flex;align-items:center;justify-content:center;
+ background:
+ radial-gradient(ellipse at 50% 55%,#710b2b 0%,#370511 46%,#120207 100%)!important;
+ isolation:isolate;
+ position:relative;
+ overflow:hidden;
+}
+.hero::before,.hero::after {
+ content:"";position:absolute;inset:auto -8% -9% -8%;height:30%;
+ border-top:2px solid #ff728a99;border-radius:50% 50% 0 0;
+ transform:rotate(-5deg);pointer-events:none;
+ box-shadow:0 -5px 32px #ff335f44;
+}
+.hero::after {inset:-16% -8% auto -8%;transform:rotate(7deg);border-top:0;border-bottom:2px solid #ffb0a788}
+.hero-content {position:relative;z-index:1;width:min(1100px,94%);padding:80px 12px!important;text-align:center}
+.hero-girl {display:none!important}
+.hero h1 {font-size:clamp(56px,8vw,116px)!important;line-height:1.02!important;color:#ffe1e8!important;text-shadow:0 4px 0 #a3274f,0 0 25px #ff4b8d99!important;margin:18px 0 26px!important}
+.hero h1 span{color:#ff91b8!important}
+.hero .tag {background:transparent!important;color:#ffbecf!important;border:1px solid #ffadc955;letter-spacing:2px}
+.hero-content > p:not(.explore-help){color:#fff1ed!important;font-size:clamp(16px,1.7vw,21px)!important}
+.hero .notice{
+ background:linear-gradient(110deg,#580c22df,#8e2042aa,#480a1adf)!important;
+ color:#fff3e7!important;
+ border:2px solid #ff9da8!important;
+ box-shadow:0 0 13px #ff668a77,inset 0 0 18px #ff668a26!important;
+ border-radius:25px!important;
+ font-size:clamp(17px,2vw,25px)!important;
+ font-weight:800!important;
+ padding:23px 28px!important;
+}
+.hero .btn{
+ background:linear-gradient(120deg,#9f0a38,#f34b82,#a70c43)!important;
+ border:2px solid #ffc2d2!important;
+ box-shadow:0 0 17px #ff7195a3,0 5px 0 #5c0624!important;
+ font-size:clamp(16px,1.8vw,21px);
+ padding:17px 36px;
+}
+.explore-help{
+ max-width:900px!important;
+ color:#fff0e6!important;
+ background:#6e1231df!important;
+ border:1px solid #ffa3bb!important;
+ box-shadow:0 0 17px #ff719555!important;
+ font-size:clamp(16px,1.5vw,21px)!important;
+ font-weight:800!important;
+ padding:16px 24px!important;
+}
+.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,
+#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(180deg,#260611ee,#4c1021ec 50%,#260611ee)!important;
+ background-image:none!important;
+ color:#fff1ee;
+}
+.section:nth-of-type(even){background:linear-gradient(180deg,#320918ee,#1c0510f0)!important}
+.section .title,.section h2:not(.card h2),.section .subtitle {color:#fff0ed}
+.section .pink {color:#ff93b9!important}
+.section .green {color:#c4e5a3!important}
+.section .tag{background:#6b203d;color:#ffe0e9}
+.card,.toc-box,.toc-item,.product-card,.modal-content,.faq-item,
+.service-card,.plan-card {
+ color:#48333f;
+}
+.card h2,.card h3,.card p,.toc-box h2,.toc-box p {color:inherit}
+#contents .card {background:#fff8f9!important;color:#493541!important}
+#contents .card .title {color:#493541!important}
+#contents .card .green {color:#688d43!important}
+#contents .card .pink {color:#d76598!important}
+footer{
+ background:linear-gradient(150deg,#160308,#650e2c,#26040e)!important;
+ color:#ffe9e7!important;
+ border-top:1px solid #ff95ac88;
+}
+footer h2 {color:#ffa9c7!important}
+#siteGlitter{z-index:20;mix-blend-mode:screen}
+#siteGlitter .glitter{box-shadow:0 0 6px 2px var(--clr),0 0 18px 5px var(--clr),0 0 36px 8px #ffe8b966}
+@media(max-width:700px){
+ .hero {min-height:100svh}
+ .hero-content {padding:58px 12px!important}
+ .hero h1 {font-size:clamp(43px,12vw,72px)!important}
+ .hero .notice{padding:17px 14px!important}
+ .explore-help{font-size:15px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero .btn,.card {animation:none!important}
+}
+
 </style>
 </head>
 
