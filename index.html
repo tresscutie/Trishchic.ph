@@ -1704,6 +1704,58 @@ footer :is(h2,p,small,a){color:#563040!important}
 #booking h3.pink{color:#bf5c7a!important}
 @media(max-width:720px){body{background-size:64px 64px!important}}
 
+
+/* V19 readability audit: high-specificity contrast rules for light gingham theme */
+:root{--readable-ink:#54293b;--readable-muted:#68475a;--readable-rose:#b43d69}
+body section.section .container > h2.title,
+body section.section .container.center > h2.title,
+body section.section .container > h2:not(.card h2),
+body section.section h2.title,
+body section.section .title,
+body section.section .subtitle{
+ color:var(--readable-ink)!important;text-shadow:none!important;
+}
+body section.section .container > h2.title .pink,
+body section.section .title .pink,
+body section.section h2 .pink{
+ color:var(--readable-rose)!important;text-shadow:none!important;
+}
+body section.section .container > h2.title .green,
+body section.section .title .green{color:#8b5a44!important;text-shadow:none!important}
+body section.section .container > p.subtitle,
+body section.section .container.center > p,
+body section.section > .container > p,
+body section.section .container > .subtitle{
+ color:var(--readable-muted)!important;text-shadow:none!important;
+}
+body section.section .tag{color:#84364d!important}
+body section.section .card,
+body section.section .toc-box,
+body section.section .faq-item,
+body section.section .service-card,
+body section.section .plan-card{
+ color:var(--readable-ink)!important;
+}
+body section.section .card :is(h2,h3,h4,p,li,small,strong),
+body section.section .faq-item :is(h2,h3,p,summary),
+body section.section .service-card :is(h2,h3,p),
+body section.section .plan-card :is(h2,h3,p){color:var(--readable-ink)!important}
+body section.section .btn,body section.section .btn-green,
+body section.section a.btn,body section.section button.btn{color:#fffaf8!important}
+body section.section .product-card :is(h2,h3,h4,p,small,strong,span){color:#fffaf8!important}
+body section.section .product-card .btn{color:#fffaf8!important}
+body section.section #nothing{color:inherit}
+body section#proofs .feedback-count,
+body section#proofs .feedback-count :not(a){color:#54293b!important}
+body section#proofs .feedback-count a{color:#9f2855!important}
+body section#socials .card :is(h2,h3,h4,p,small,strong,span){color:#54293b!important}
+body section#socials .card .btn,body section#socials .card .btn *{color:#fffaf8!important}
+body section#faq details summary,body section#faq details p{color:#54293b!important}
+body section#booking .joyride-brand{color:#1159d2!important;font-weight:900!important}
+body section#booking .moveit-brand{color:#ce2535!important;font-weight:900!important}
+/* Keep color changes clear and accessible on mobile too */
+@media(max-width:720px){body section.section .container > h2.title{color:#54293b!important}}
+
 </style>
 </head>
 
