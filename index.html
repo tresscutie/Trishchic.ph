@@ -1238,6 +1238,29 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
  #loading.cherry-v5 .intro-v5-figure {height:clamp(190px,38svh,260px)!important;}
 }
 
+
+/* V11: seamless color transitions, without visible section seams */
+body{background:#fff8f8;}
+.hero{background:linear-gradient(to bottom,rgba(255,249,247,.08) 0%,rgba(255,249,247,.10) 72%,#fff8f8 100%),linear-gradient(120deg,#f5fae9b8,#ffe5efb8),url("wave backround.jpg") center/cover;}
+#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(to bottom,#fff8f8 0%,var(--blend-middle,#fff3f4) 22%,var(--blend-middle,#fff3f4) 78%,#fff8f8 100%)!important;
+}
+#contents{--blend-middle:#fff4f8}
+#about{--blend-middle:#f2f8e8}
+#socials{--blend-middle:#fff0f4}
+#shop{--blend-middle:#ffe9eb}
+#bestseller{--blend-middle:#fff1f1}
+#proofs{--blend-middle:#f1f7e8}
+#howto{--blend-middle:#f0f7e8}
+#booking{--blend-middle:#ffe9e9}
+#tutorial{--blend-middle:#fff2f7}
+#rules{--blend-middle:#ffe9ee}
+#notes{--blend-middle:#f1f8e9}
+#payment{--blend-middle:#f0f7e9}
+#faq{--blend-middle:#fff0f3}
+#warranty{--blend-middle:#f3f8e9}
+/* Respect user volume preference while starting louder by default. */
+
 </style>
 </head>
 
@@ -1296,11 +1319,11 @@ body {background:linear-gradient(155deg,#fffaf8 0%,#fff2f5 38%,#f6faee 68%,#fff0
         id="volume"
         min="0"
         max="100"
-        value="35"
+        value="65"
         aria-label="Music volume"
       >
 
-      <span id="volumeText">35%</span>
+      <span id="volumeText">65%</span>
     </div>
 
   </div>
@@ -2439,7 +2462,7 @@ function setupAudio() {
   )();
 
   masterGain = audioContext.createGain();
-  masterGain.gain.value = Number(volumeSlider.value)/100*.12;
+  masterGain.gain.value = Number(volumeSlider.value)/100*.22;
 
   const compressor = audioContext.createDynamicsCompressor();
   compressor.threshold.value = -20;
@@ -2555,7 +2578,7 @@ musicButton.addEventListener("click",async () => {
   } else {
     if (masterGain && audioContext) {
       masterGain.gain.setTargetAtTime(
-        Number(volumeSlider.value)/100*.12,
+        Number(volumeSlider.value)/100*.22,
         audioContext.currentTime,
         .05
       );
@@ -2571,7 +2594,7 @@ volumeSlider.addEventListener("input",event => {
 
   if (masterGain && audioContext) {
     masterGain.gain.setTargetAtTime(
-      value/100*.12,
+      value/100*.22,
       audioContext.currentTime,
       .05
     );
@@ -2591,8 +2614,17 @@ function finishLoading() {
 enterButton.addEventListener("click",() => {
   finishLoading();
   // A tap is a user gesture; attempt music, but never wait for it to enter.
-  Promise.resolve().then(() => startMusic()).catch(() => {});
+  startMusic().catch(() => {});
 });
+
+// Try autoplay immediately; browsers may block audible playback without a gesture.
+// The first tap/click anywhere on the intro unlocks audio where permitted.
+startMusic().catch(() => {});
+function unlockIntroMusic(){
+  if (wantedMusic && !musicPlaying) startMusic().catch(() => {});
+}
+document.addEventListener("pointerdown",unlockIntroMusic,{passive:true});
+document.addEventListener("keydown",unlockIntroMusic);
 
 // Show the entry button promptly, even when some images are still downloading.
 setTimeout(() => enterButton.classList.add("show"), 300);
