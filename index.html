@@ -2355,9 +2355,10 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <span id="volumeText">75%</span>
       <label for="cozyMusicChoice" class="music-choice-label">Music</label>
       <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
-        <option value="piano">① Candlelight Dinner Piano</option>
-        <option value="bossa">② Cozy Rose Dinner Piano</option>
-        <option value="waltz">③ Soft Café Piano</option>
+        <option value="lounge" selected>① Luxury Hotel Lounge (MP3)</option>
+        <option value="piano">② Candlelight Dinner Piano</option>
+        <option value="bossa">③ Cozy Rose Dinner Piano</option>
+        <option value="waltz">④ Soft Café Piano</option>
       </select>
     </div>
 
@@ -2366,9 +2367,10 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
  <div class="mobile-music-toolbar" aria-label="Mobile background music settings">
   <label for="mobileCozyMusicChoice">♫ Music</label>
   <select id="mobileCozyMusicChoice" aria-label="Choose background music on phone">
-   <option value="piano">① Candlelight Dinner Piano</option>
-   <option value="bossa">② Cozy Rose Dinner Piano</option>
-   <option value="waltz">③ Soft Café Piano</option>
+   <option value="lounge" selected>① Luxury Hotel Lounge (MP3)</option>
+        <option value="piano">② Candlelight Dinner Piano</option>
+   <option value="bossa">③ Cozy Rose Dinner Piano</option>
+   <option value="waltz">④ Soft Café Piano</option>
   </select>
   <input id="mobileMusicVolume" type="range" min="0" max="100" value="75" aria-label="Music volume on phone">
  </div>
@@ -3432,7 +3434,11 @@ const musicButton=document.getElementById('musicToggle');
 const volumeSlider=document.getElementById('volume');
 const volumeText=document.getElementById('volumeText');
 const musicPicker=document.getElementById('cozyMusicChoice');
-let currentTrack=musicPicker?.value||'piano';
+const loungeAudio=new Audio('trishchic_cozy_lounge.mp3');
+loungeAudio.loop=true;
+loungeAudio.preload='auto';
+loungeAudio.volume=Number(volumeSlider?.value||75)/100;
+let currentTrack=musicPicker?.value||'lounge';
 let currentStep=0, nextNoteTime=0;
 let activeNotes=new Set();
 const tracks={
@@ -3507,10 +3513,22 @@ function clearScheduledNotes(){
 }
 async function startMusic(){
  try{
-  setupAudio();await audioContext.resume();
-  if(audioContext.state!=='running')return false;
   wantedMusic=true;
+  if(currentTrack!=='lounge'){
+   setupAudio();await audioContext.resume();
+   if(audioContext.state!=='running')return false;
+  }
   if(musicPlaying){updateIntroMusicHint();return true;}
+  if(currentTrack==='lounge'){
+   // Play the supplied MP3 rather than synthesizing music.
+   try{
+    loungeAudio.volume=Number(volumeSlider?.value||75)/100;
+    await loungeAudio.play();
+    musicPlaying=true;
+    if(musicButton){musicButton.textContent='❚❚';musicButton.setAttribute('aria-label','Pause music');}
+    updateIntroMusicHint();return true;
+   }catch(error){musicPlaying=false;updateIntroMusicHint();return false;}
+  }
   musicPlaying=true;currentStep=0;nextNoteTime=audioContext.currentTime+.04;
   masterGain.gain.setTargetAtTime(Number(volumeSlider?.value||75)/100*1.65,audioContext.currentTime,.03);
   clearInterval(musicTimer);scheduleMusic();musicTimer=setInterval(scheduleMusic,65);
@@ -3520,21 +3538,26 @@ async function startMusic(){
  }catch(e){console.warn('Music unavailable until user interacts',e);updateIntroMusicHint();return false;}
 }
 function stopMusic(){
- musicPlaying=false;wantedMusic=false;clearInterval(musicTimer);clearScheduledNotes();
+ musicPlaying=false;wantedMusic=false;loungeAudio.pause();clearInterval(musicTimer);clearScheduledNotes();
  if(musicButton){musicButton.textContent='▶';musicButton.setAttribute('aria-label','Play music');}
 }
 async function switchMusic(){
- const choice=musicPicker?.value||'piano';
- currentTrack=tracks[choice]?choice:'piano';
+ const choice=musicPicker?.value||'lounge';
+ const previous=currentTrack;
+ currentTrack=(choice==='lounge'||tracks[choice])?choice:'lounge';
  if(musicPicker)musicPicker.setAttribute('aria-label','Selected: '+musicPicker.options[musicPicker.selectedIndex].text);
- if(!musicPlaying){await startMusic();return;}
- clearScheduledNotes();currentStep=0;nextNoteTime=audioContext.currentTime+.045;
- scheduleMusic();
+ // Stop the previous track before starting the newly selected one.
+ loungeAudio.pause();clearInterval(musicTimer);clearScheduledNotes();
+ musicPlaying=false;
+ currentStep=0;
+ if(audioContext)nextNoteTime=audioContext.currentTime+.045;
+ await startMusic();
 }
 if(musicPicker){musicPicker.addEventListener('change',switchMusic);}
 if(musicButton)musicButton.addEventListener('click',()=>musicPlaying?stopMusic():startMusic());
 if(volumeSlider)volumeSlider.addEventListener('input',()=>{
  const v=Number(volumeSlider.value);if(volumeText)volumeText.textContent=v+'%';
+ loungeAudio.volume=v/100;
  if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(v/100*1.65,audioContext.currentTime,.025);
 });
 function playClickSound(){
