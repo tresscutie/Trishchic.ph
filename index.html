@@ -2894,6 +2894,8 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <article class="card warranty-card"><span class="warranty-period">1 Month</span><p><strong>20–31 days</strong> is considered one month.</p></article>
       <article class="card warranty-card"><span class="warranty-period">1 Year</span><p><strong>340–365 days</strong> is considered one year.</p></article>
     </div>
+    <p class="warranty-disclaimer">These are the seller's stated warranty ranges. Please confirm the exact coverage, start date, and conditions before purchasing.</p>
+  </div>
 </section>
 
 
@@ -3462,8 +3464,13 @@ const musicPicker=document.getElementById('cozyMusicChoice');
 const loungeAudio=new Audio('trishchic_cozy_lounge.mp3');
 loungeAudio.loop=true;
 loungeAudio.preload='auto';
+loungeAudio.autoplay=true;
+loungeAudio.setAttribute('playsinline','');
+loungeAudio.setAttribute('webkit-playsinline','');
 loungeAudio.volume=Number(volumeSlider?.value||75)/100;
 let currentTrack=musicPicker?.value||'lounge';
+let musicAttemptInProgress=false;
+let autoplayWasBlocked=false;
 let currentStep=0, nextNoteTime=0;
 let activeNotes=new Set();
 const tracks={
@@ -3548,11 +3555,21 @@ async function startMusic(){
    // Play the supplied MP3 rather than synthesizing music.
    try{
     loungeAudio.volume=Number(volumeSlider?.value||75)/100;
-    await loungeAudio.play();
+    if(musicAttemptInProgress)return false;
+    musicAttemptInProgress=true;
+    try { await loungeAudio.play(); }
+    finally { musicAttemptInProgress=false; }
+    autoplayWasBlocked=false;
+    if(musicButton){musicButton.hidden=true;musicButton.style.display='none';}
     musicPlaying=true;
     if(musicButton){musicButton.textContent='❚❚';musicButton.setAttribute('aria-label','Pause music');}
     updateIntroMusicHint();return true;
-   }catch(error){musicPlaying=false;updateIntroMusicHint();return false;}
+   }catch(error){
+    musicPlaying=false;
+    autoplayWasBlocked=(error?.name==='NotAllowedError');
+    if(musicButton){musicButton.hidden=false;musicButton.style.display='inline-flex';musicButton.textContent='▶';musicButton.setAttribute('aria-label','Tap to play background music');}
+    updateIntroMusicHint();return false;
+   }
   }
   musicPlaying=true;currentStep=0;nextNoteTime=audioContext.currentTime+.04;
   masterGain.gain.setTargetAtTime(Number(volumeSlider?.value||75)/100*1.65,audioContext.currentTime,.03);
@@ -3597,7 +3614,7 @@ const enterButton = document.getElementById("enterShop");
 const introMusicHint = document.getElementById("introMusicHint");
 function updateIntroMusicHint(){
  if(!introMusicHint)return;
- introMusicHint.textContent=musicPlaying?'♫ Cozy dinner music is playing':'♫ Tap anywhere to start cozy dinner music';
+ introMusicHint.textContent=musicPlaying?'♫ Luxury Hotel Lounge is playing':'♫ Tap anywhere to enjoy music';
 }
 
 
@@ -3612,16 +3629,23 @@ enterButton.addEventListener("click",() => {
   startMusic().catch(() => {});
 });
 
-// Try autoplay immediately; browsers may block audible playback without a gesture.
-// The first tap/click anywhere on the intro unlocks audio where permitted.
-startMusic().then(updateIntroMusicHint).catch(updateIntroMusicHint);
-function unlockIntroMusic(){
-  if (wantedMusic && !musicPlaying) startMusic().catch(() => {});
+// V55: Attempt audible autoplay at first load. Browser permissions decide whether it is allowed.
+// Retry on page restoration, when the tab becomes visible, and on the first visitor gesture.
+// Never mute the track to fake successful audible autoplay.
+function tryStartLounge(){
+ if(wantedMusic && !musicPlaying && !musicAttemptInProgress){
+  startMusic().catch(()=>{});
+ }
 }
-document.addEventListener("pointerdown",unlockIntroMusic,{passive:true});
-document.addEventListener("keydown",unlockIntroMusic);
-document.addEventListener("touchstart",unlockIntroMusic,{passive:true,once:true});
-document.addEventListener("click",unlockIntroMusic,{once:true});
+tryStartLounge();
+window.addEventListener('pageshow',tryStartLounge);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tryStartLounge();});
+function unlockIntroMusic(){tryStartLounge();}
+document.addEventListener('pointerdown',unlockIntroMusic,{passive:true});
+document.addEventListener('touchstart',unlockIntroMusic,{passive:true});
+document.addEventListener('keydown',unlockIntroMusic);
+// Browsers that block unprompted sound will start playback on the first click/tap.
+document.addEventListener('click',unlockIntroMusic);
 
 // Show the entry button promptly, even when some images are still downloading.
 setTimeout(() => enterButton.classList.add("show"), 300);
