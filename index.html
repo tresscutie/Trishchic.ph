@@ -2299,17 +2299,19 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
 @media(max-width:650px){.hero .explore-help{max-width:92%!important;margin:13px auto 0!important;padding:10px 13px!important;border-radius:17px!important;font-size:13px!important}#contents .toc-tap-guide{max-width:100%;padding:8px 10px!important;font-size:12px!important}}
 @media(prefers-reduced-motion:reduce){#contents .toc-tap-hand{animation:none}}
 </style>
-<style>
-/* V50 — single animated girl pointing to each Table of Contents choice */
+<style id="v51-click-cues">
+/* V51: small animated mouse-click indicator on every TOC card, replacing moving girl */
 #contents .toc-box{position:relative;overflow:visible!important}
-#contents .toc-grid{position:relative}
-#contents .toc-girl-guide{position:absolute;z-index:9;width:52px;height:66px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 5px #78374e55);transition:top .7s cubic-bezier(.22,.8,.25,1),left .7s cubic-bezier(.22,.8,.25,1),opacity .25s ease;animation:tocGirlBob 1.8s ease-in-out infinite;opacity:0}
-#contents .toc-girl-guide.ready{opacity:1}
-@keyframes tocGirlBob{0%,100%{translate:0 0;rotate:-7deg}50%{translate:0 -7px;rotate:5deg}}
-#contents .toc-item{isolation:isolate}
-#contents .toc-item.guide-highlight{box-shadow:0 6px 21px #bd64804d!important;border-color:#c67894!important}
-@media(max-width:650px){#contents .toc-girl-guide{width:37px;height:48px}#contents .toc-item{padding-right:20px!important}}
-@media(prefers-reduced-motion:reduce){#contents .toc-girl-guide{animation:none;transition:none}}
+#contents .toc-item{position:relative!important;isolation:isolate;padding-right:55px!important}
+#contents .toc-click-cue{position:absolute;right:17px;top:50%;transform:translateY(-50%);width:25px;height:28px;pointer-events:none;display:grid;place-items:center;color:#a3416a}
+#contents .toc-click-cue svg{width:23px;height:23px;overflow:visible;filter:drop-shadow(0 2px 2px #ad587033);animation:v51MouseTap 2.5s ease-in-out infinite;animation-delay:var(--tap-delay,0s)}
+#contents .toc-click-cue:after{content:"";position:absolute;left:0;top:0;width:13px;height:13px;border:1.5px solid #c76489;border-radius:50%;opacity:0;animation:v51TapRipple 2.5s ease-out infinite;animation-delay:var(--tap-delay,0s)}
+@keyframes v51MouseTap{0%,17%,55%,100%{transform:translate(0,0) scale(1)}25%,35%{transform:translate(-3px,3px) scale(.86)}43%{transform:translate(0,0) scale(1)}}
+@keyframes v51TapRipple{0%,20%{transform:scale(.35);opacity:0}27%{opacity:.7}50%,100%{transform:scale(2);opacity:0}}
+@media(max-width:650px){#contents .toc-item{padding-right:42px!important}#contents .toc-click-cue{right:10px}}
+@media(prefers-reduced-motion:reduce){#contents .toc-click-cue svg,#contents .toc-click-cue:after{animation:none!important}}
+#cozyMusicChoice,#mobileCozyMusicChoice,.music-choice-label{display:none!important}
+.v51-mobile-music-title{font-size:11px;font-weight:700;color:#8d3c5e;white-space:nowrap}
 </style>
 </head>
 
@@ -2374,8 +2376,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       >
 
       <span id="volumeText">75%</span>
-      <label for="cozyMusicChoice" class="music-choice-label">Music</label>
-      <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
+      <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Background music" hidden style="display:none!important">
         <option value="lounge" selected>Luxury Hotel Lounge (MP3)</option>
       </select>
     </div>
@@ -2383,8 +2384,8 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
   </div>
 
  <div class="mobile-music-toolbar" aria-label="Mobile background music settings">
-  <label for="mobileCozyMusicChoice">♫ Music</label>
-  <select id="mobileCozyMusicChoice" aria-label="Choose background music on phone">
+  <span class="v51-mobile-music-title">♫ Luxury Hotel Lounge</span>
+  <select id="mobileCozyMusicChoice" aria-label="Background music" hidden style="display:none!important">
    <option value="lounge" selected>Luxury Hotel Lounge (MP3)</option>
   </select>
   <input id="mobileMusicVolume" type="range" min="0" max="100" value="75" aria-label="Music volume on phone">
@@ -3870,42 +3871,17 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 </script>
 <script>
 
-/* V50 — guided TOC cursor: one moving girl, never blocks clicks */
+/* V51 — animated mouse-click indicator beside every Table of Contents entry */
 (function(){
- const grid=document.getElementById('tocGrid');
- const box=document.querySelector('#contents .toc-box');
- if(!grid||!box)return;
- const cards=[...grid.querySelectorAll('.toc-item')];
- if(!cards.length)return;
- const girl=document.createElement('img');
- girl.src='girl(5).png';
- girl.alt='';girl.setAttribute('aria-hidden','true');
- girl.className='toc-girl-guide';
- box.appendChild(girl);
- let active=0, interval=null;
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- function moveTo(index){
-  active=index;
-  const target=cards[index],boxRect=box.getBoundingClientRect(),r=target.getBoundingClientRect();
-  const girlWidth=window.innerWidth<=650?37:52;
-  const left=r.right-boxRect.left-girlWidth*.85;
-  girl.style.left=Math.max(4,left)+'px';
-  girl.style.top=(r.top-boxRect.top+(r.height-(window.innerWidth<=650?48:66))/2)+'px';
-  girl.classList.add('ready');
-  cards.forEach((c,i)=>c.classList.toggle('guide-highlight',i===index));
- }
- function restart(){if(interval)clearInterval(interval);if(!reduced)interval=setInterval(()=>moveTo((active+1)%cards.length),1700)}
+ const cards=document.querySelectorAll('#tocGrid .toc-item');
  cards.forEach((card,i)=>{
-  card.addEventListener('pointerenter',()=>{moveTo(i);restart()});
-  card.addEventListener('focus',()=>{moveTo(i);restart()});
+  const cue=document.createElement('span');
+  cue.className='toc-click-cue';
+  cue.setAttribute('aria-hidden','true');
+  cue.style.setProperty('--tap-delay',((i%4)*.26)+'s');
+  cue.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5v13.8l4-3.4 2.7 6.6 2.8-1.2-2.7-6.4 5.2-.3L5 3.5Z"/><path d="M17.5 2.5v3M21 7h-3M14.5 4.5l2-2"/></svg>';
+  card.appendChild(cue);
  });
- const observer=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){moveTo(active);restart()}
-  else if(interval){clearInterval(interval);interval=null}
- },{threshold:.12});
- observer.observe(grid);
- window.addEventListener('resize',()=>moveTo(active));
- if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>moveTo(active));
 })();
 /* V50 — Sweet Bubble Pop on the X of the Premium Experience popup */
 (function(){
