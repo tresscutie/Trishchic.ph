@@ -2103,6 +2103,80 @@ section .more-options-note {color:#55283b !important; background:rgba(255,247,25
 section .tag {background:#fff5f7 !important;color:#8e2c4d !important;border:1px solid #e9b4c7 !important;}
 @media(max-width:650px){section .title,section h2.title{padding:12px 14px !important;border-radius:16px !important;font-size:clamp(1.65rem,7vw,2.7rem) !important;}}
 </style>
+
+<style id="v35-light-pink-readability-and-music">
+/* Clear pale-pink captions across the alternating burgundy/pink artwork. */
+#about .subtitle, #shop .subtitle, #shop .container > p,
+#shop .container > .center > p, #shop .price-note,
+#shop .disclaimer, #shop .seller-note,
+#warranty .container > p, #warranty .center > p,
+#warranty .subtitle, #warranty .warranty-note,
+#contact .container > p, #contact .container > a,
+footer .container > p, footer .container > a {
+  color:#592b41 !important;
+  text-shadow:none !important;
+}
+#shop .container > p:not(.tag), #shop .center > p:not(.tag),
+#warranty .container > p:not(.tag), #warranty .center > p:not(.tag),
+#contact .container > p, footer .container > p {
+  display:table !important;
+  max-width:min(94%,850px) !important;
+  margin:16px auto !important;
+  padding:10px 19px !important;
+  border-radius:16px !important;
+  background:rgba(255,239,246,.94) !important;
+  border:1px solid rgba(255,255,255,.72) !important;
+  box-shadow:0 5px 20px rgba(64,16,35,.14) !important;
+  line-height:1.6 !important;
+}
+footer#contact {
+  padding:56px 16px !important;
+  text-align:center !important;
+}
+footer#contact .container {
+  width:min(94%,820px) !important;
+  margin:auto !important;
+  padding:26px 22px !important;
+  border-radius:28px !important;
+  background:rgba(255,239,246,.94) !important;
+  border:1px solid rgba(255,255,255,.85) !important;
+  box-shadow:0 16px 45px rgba(57,13,32,.22) !important;
+}
+footer#contact h2 {color:#682b46 !important;text-shadow:none !important;}
+footer#contact a {color:#a52963 !important;font-weight:800 !important;}
+footer#contact .container > p {box-shadow:none !important;background:transparent !important;border:0 !important;margin:10px auto !important;}
+/* Smaller print on the shop and warranty pages must remain readable too. */
+#shop .container > :is(small,.small,.caption,.fine-print),
+#warranty .container > :is(small,.small,.caption,.fine-print) {
+ color:#592b41 !important;background:rgba(255,239,246,.94) !important;
+ padding:8px 14px !important;border-radius:12px !important;
+}
+.music-player {display:flex !important;align-items:center;gap:8px !important;flex-wrap:wrap;}
+.music-choice-label {font-size:11px;font-weight:700;color:#6c3550;}
+.cozy-music-select {
+  max-width:190px;min-width:135px;
+  border:1px solid #e8b7cb;border-radius:999px;
+  background:#fff1f7;color:#71334f;
+  padding:7px 9px;font:600 11px inherit;
+  cursor:pointer;
+}
+.cozy-music-select:focus-visible{outline:2px solid #bd4b7c;outline-offset:2px;}
+@media(max-width:760px){
+ .music-player{gap:5px !important;}
+ .cozy-music-select{max-width:125px;min-width:95px;font-size:10px;padding:6px;}
+ .music-choice-label{display:none;}
+ footer#contact .container{padding:22px 14px !important;}
+}
+</style>
+<style id="v36-center-girl-in-halo">
+/* Center the floating doll visually within the round pink halo. */
+.hero .v29-character-wrap{display:flex!important;justify-content:center!important;align-items:flex-end!important;}
+.hero .v29-character-halo{left:50%!important;right:auto!important;transform:translateX(-50%)!important;}
+.hero .v29-character{margin-left:-32px!important;margin-right:0!important;animation:v36CenteredFloat 5.5s ease-in-out infinite!important;}
+@keyframes v36CenteredFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(max-width:760px){.hero .v29-character{margin-left:-18px!important;}}
+@media(prefers-reduced-motion:reduce){.hero .v29-character{animation:none!important;}}
+</style>
 </head>
 
 <body>
@@ -2166,6 +2240,12 @@ section .tag {background:#fff5f7 !important;color:#8e2c4d !important;border:1px 
       >
 
       <span id="volumeText">75%</span>
+      <label for="cozyMusicChoice" class="music-choice-label">Music</label>
+      <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
+        <option value="piano">① Soft Café Piano</option>
+        <option value="bossa">② Gentle Bossa Lounge</option>
+        <option value="waltz">③ Dreamy Dining Waltz</option>
+      </select>
     </div>
 
   </div>
@@ -3905,6 +3985,91 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
    nextNoteTime+=stepDuration;
   }
  };
+})();
+</script>
+
+<script id="v35-cozy-music-options">
+(function(){
+  "use strict";
+  const chooser=document.getElementById("cozyMusicChoice");
+  if(!chooser) return;
+  const progressions={
+    piano:[
+      {bass:130.81,chord:[261.63,329.63,392,493.88]},
+      {bass:110,chord:[220,261.63,329.63,392]},
+      {bass:146.83,chord:[293.66,349.23,440,523.25]},
+      {bass:98,chord:[196,246.94,329.63,392]}
+    ],
+    bossa:[
+      {bass:130.81,chord:[261.63,329.63,440,493.88]},
+      {bass:146.83,chord:[293.66,349.23,440,523.25]},
+      {bass:110,chord:[220,261.63,329.63,440]},
+      {bass:98,chord:[196,246.94,329.63,392]}
+    ],
+    waltz:[
+      {bass:174.61,chord:[349.23,440,523.25,659.25]},
+      {bass:130.81,chord:[261.63,329.63,392,523.25]},
+      {bass:146.83,chord:[293.66,349.23,440,587.33]},
+      {bass:196,chord:[392,493.88,587.33,698.46]}
+    ]
+  };
+  const phrases={
+    piano:[0,523.25,0,659.25,0,587.33,0,493.88,0,440,0,392,0,440,0,0],
+    bossa:[392,0,493.88,523.25,0,440,0,392,440,0,523.25,0,493.88,392,0,0],
+    waltz:[523.25,0,659.25,0,587.33,0,523.25,0,493.88,0,440,0]
+  };
+  let selected="piano", stepIndex=0;
+  function gentleNote(freq,when,duration,level,type){
+    if(!freq || !audioContext || !masterGain)return;
+    const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+    const filter=audioContext.createBiquadFilter();
+    osc.type=type||"sine";
+    osc.frequency.setValueAtTime(freq,when);
+    filter.type="lowpass";filter.frequency.value=type==="triangle"?1000:1550;
+    gain.gain.setValueAtTime(.0001,when);
+    gain.gain.exponentialRampToValueAtTime(level,when+.035);
+    gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+    osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
+    osc.start(when);osc.stop(when+duration+.02);
+  }
+  // All three compositions are synthesized on-device, with no external audio or copyright dependency.
+  scheduleMusic=function(){
+    if(!musicPlaying || !audioContext || audioContext.state!=="running")return;
+    const beat=selected==="piano"?.46:selected==="bossa"?.31:.43;
+    const stepsPerBar=selected==="waltz"?12:16;
+    while(nextNoteTime<audioContext.currentTime+.25){
+      const step=stepIndex%stepsPerBar;
+      const bar=Math.floor(stepIndex/stepsPerBar);
+      const harmony=progressions[selected][bar%4];
+      if(step===0){
+        gentleNote(harmony.bass,nextNoteTime,1.05,.085,"sine");
+        harmony.chord.forEach((n,i)=>gentleNote(n,nextNoteTime,selected==="piano"?2.6:1.8,.023-i*.002,"triangle"));
+      }
+      if(selected==="bossa" && (step===7 || step===13)){
+        harmony.chord.forEach((n,i)=>gentleNote(n,nextNoteTime,.44,.012-i*.001,"sine"));
+      }
+      if(selected==="waltz" && (step===4 || step===8)){
+        harmony.chord.slice(1).forEach((n,i)=>gentleNote(n,nextNoteTime,.65,.014-i*.002,"sine"));
+      }
+      const phrase=phrases[selected],tone=phrase[step%phrase.length];
+      if(tone)gentleNote(tone,nextNoteTime,selected==="piano"?.64:.37,.028,"sine");
+      stepIndex++;
+      nextNoteTime+=beat;
+    }
+  };
+  chooser.addEventListener("change",function(){
+    selected=chooser.value in progressions?chooser.value:"piano";
+    stepIndex=0;
+    if(typeof noteIndex!=="undefined")noteIndex=0;
+    if(typeof nextNoteTime!=="undefined" && audioContext)nextNoteTime=audioContext.currentTime+.15;
+  });
+  // Gentle glassy two-note click instead of the previous game-like tap.
+  playClickSound=function(){
+    if(!audioContext || audioContext.state!=="running")return;
+    const t=audioContext.currentTime;
+    gentleNote(740,t,.13,.026,"sine");
+    gentleNote(987.77,t+.055,.18,.018,"sine");
+  };
 })();
 </script>
 </body>
