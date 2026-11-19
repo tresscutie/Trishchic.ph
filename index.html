@@ -2029,6 +2029,24 @@ html body::before {
  html, html body {background-size:cover !important;background-position:center center !important;background-attachment:fixed !important;}
 }
 </style>
+
+<style id="v32-crisp-full-site-background">
+/* V32: crisp, full-width repeating background with mirrored joins. */
+html,html body {
+ background-color:#61243c !important;
+ background-image:url("trishchic_wavy_background_v32.jpg") !important;
+ background-repeat:repeat-y !important;
+ background-position:center top !important;
+ background-size:100% auto !important;
+ background-attachment:scroll !important;
+ filter:none !important;
+}
+/* Remove decorative overlay that washes out the pattern. */
+html body::before{background:none !important;opacity:0 !important;}
+/* Let the same image show behind every page section, not only the hero. */
+html body .hero{background:transparent !important;}
+@media(max-width:760px){html,html body{background-size:100% auto !important;background-attachment:scroll !important;}}
+</style>
 </head>
 
 <body>
