@@ -2222,6 +2222,59 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
   nav .nav-links{display:none!important;}
 }
 </style>
+
+<style id="v42-mobile-hero-order">
+/* Only on mobile: put the floating doll above the title; keep desktop untouched. */
+@media(max-width:760px){
+ .hero .v29-hero-panel{
+   display:flex!important;flex-direction:column!important;
+   align-items:center!important;justify-content:center!important;
+   gap:2px!important;padding:25px 18px 28px!important;
+   min-height:0!important;
+ }
+ .hero .v29-character-wrap{
+   order:0!important;position:relative!important;align-self:center!important;
+   width:100%!important;height:205px!important;margin:0 auto 8px!important;
+   display:flex!important;justify-content:center!important;align-items:center!important;
+ }
+ .hero .v29-character-halo{
+   width:185px!important;height:185px!important;left:50%!important;
+   right:auto!important;top:50%!important;bottom:auto!important;
+   transform:translate(-50%,-50%)!important;
+ }
+ .hero .v29-character{
+   width:165px!important;height:190px!important;max-width:100%!important;
+   margin:0 auto!important;object-position:center center!important;
+   animation:v42PhoneDollFloat 5.5s ease-in-out infinite!important;
+ }
+ .hero .v29-hero-copy{
+   order:1!important;width:100%!important;max-width:100%!important;
+   text-align:center!important;
+ }
+ .hero .v29-eyebrow{font-size:clamp(9px,2.6vw,12px)!important;letter-spacing:.07em!important;}
+ .hero .v29-heading-wrap{margin:17px auto 9px!important;}
+ .hero .v29-welcome{transform:none!important;transform-origin:center!important;font-size:clamp(36px,9vw,53px)!important;}
+ .hero .v29-heading-wrap h1{font-size:clamp(36px,9.2vw,60px)!important;white-space:normal!important;overflow-wrap:normal!important;}
+ .hero .v29-panel-subtitle{margin:12px auto 0!important;font-size:clamp(14px,3.7vw,18px)!important;}
+ .hero .v29-mini-line{margin:17px auto 0!important;}
+ .hero .v29-character-heart{top:8px!important;right:19%!important;}
+}
+@keyframes v42PhoneDollFloat{0%,100%{transform:translateY(-7px)}50%{transform:translateY(-17px)}}
+@media(prefers-reduced-motion:reduce){.hero .v29-character{animation:none!important}}
+</style>
+<style id="v43-intro-audio-hint">
+#loading .intro-music-hint{
+ font-size:clamp(11px,2.6vw,14px)!important;
+ color:#fff0f6!important;
+ font-weight:700!important;
+ text-align:center!important;
+ background:rgba(72,19,40,.65);
+ border:1px solid rgba(255,226,238,.6);
+ padding:8px 14px;border-radius:999px;
+ margin:4px auto 8px!important;
+ max-width:95%;line-height:1.4!important;
+}
+</style>
 </head>
 
 <body>
@@ -2244,7 +2297,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <svg class="intro-v5-arc" viewBox="0 0 760 180" role="img" aria-label="Welcome to Trishchic.ph"><defs><path id="introV5Arc" d="M 30,155 Q 380,-20 730,155"/></defs><text><textPath href="#introV5Arc" startOffset="50%" text-anchor="middle">Welcome to Trishchic.ph</textPath></text></svg>
     </div>
     <div class="intro-v5-figure"><img src="intro girl.png" alt="Pink ribbon doll mascot" /></div>
-    <div class="intro-v5-footer"><p>Affordable digital goodies, made a little sweeter ♡</p><div class="cherry-progress" aria-hidden="true"><div></div></div><button class="btn" id="enterShop" type="button">Enter My Cozy Shop ♡ ✦</button></div>
+    <div class="intro-v5-footer"><p>Affordable digital goodies, made a little sweeter ♡</p><p id="introMusicHint" class="intro-music-hint" aria-live="polite">♫ Cozy music is ready · tap anywhere to enable sound</p><div class="cherry-progress" aria-hidden="true"><div></div></div><button class="btn" id="enterShop" type="button">Enter My Cozy Shop ♡ ✦</button></div>
   </div>
 </div>
 
@@ -2288,7 +2341,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <label for="cozyMusicChoice" class="music-choice-label">Music</label>
       <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
         <option value="piano">① Candlelight Dinner Piano</option>
-        <option value="bossa">② Velvet Dinner Jazz</option>
+        <option value="bossa">② Cozy Rose Dinner Piano</option>
         <option value="waltz">③ Soft Café Piano</option>
       </select>
     </div>
@@ -3437,8 +3490,11 @@ function setupAudio(){
  if(audioContext)return;
  audioContext=new (window.AudioContext||window.webkitAudioContext)();
  masterGain=audioContext.createGain();
- masterGain.gain.value=Number(volumeSlider?.value||75)/100*.78;
- masterGain.connect(audioContext.destination);
+ masterGain.gain.value=Number(volumeSlider?.value||75)/100*1.65;
+ const limiter=audioContext.createDynamicsCompressor();
+ limiter.threshold.value=-10;limiter.knee.value=18;limiter.ratio.value=4;
+ limiter.attack.value=.004;limiter.release.value=.24;
+ masterGain.connect(limiter);limiter.connect(audioContext.destination);
 }
 function tone(freq,time,duration,vol,wave='sine'){
  if(!freq||!audioContext||!masterGain)return;
@@ -3460,22 +3516,25 @@ function scheduleMusic(){
   const chord=t.chords[h];
   if(currentTrack==='piano'){
    // Candlelight: slow, spacious, broken-chord piano.
-   if(step===0)tone(t.bass[h],nextNoteTime,2,.105,'sine');
+   if(step===0)tone(t.bass[h],nextNoteTime,2,.19,'sine');
    if(step===0||step===4||step===8||step===12)
-     tone(chord[(step/4)%4],nextNoteTime,1.25,.08,'triangle');
-   if(t.lead[step])tone(t.lead[step],nextNoteTime,.8,.052,'sine');
+     tone(chord[(step/4)%4],nextNoteTime,1.25,.16,'triangle');
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,.8,.11,'sine');
   }else if(currentTrack==='bossa'){
-   // Velvet jazz: off-beat lounge chords, walking bass, soft lead.
-   if(step===0||step===8)tone(t.bass[h]*(step===8?1.5:1),nextNoteTime,.62,.14,'sine');
-   if(step===3||step===7||step===11||step===15)
-     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.025,.32,.035,'triangle'));
-   if(t.lead[step])tone(t.lead[step],nextNoteTime,.28,.045,'sine');
+   // Cozy Rose Dinner: uninterrupted, softly voiced dinner piano with
+   // long overlapping chords, a gentle walking bass and delicate melody.
+   if(step===0||step===8)tone(t.bass[h]*(step===8?1.5:1),nextNoteTime,2.5,.21,'sine');
+   if(step===0||step===8){
+     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.045,2.9,.078,'triangle'));
+   }
+   if(step===4||step===12)tone(chord[step===4?1:2],nextNoteTime,1.8,.073,'sine');
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,1.12,.095,'sine');
   }else{
    // Soft Cafe Piano: light mellow notes and gentle alternating piano chords.
-   if(step===0||step===8)tone(t.bass[h],nextNoteTime,1.45,.13,'sine');
+   if(step===0||step===8)tone(t.bass[h],nextNoteTime,1.45,.22,'sine');
    if(step===0||step===5||step===10||step===14)
-     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.045,.9,.033,'triangle'));
-   if(t.lead[step])tone(t.lead[step],nextNoteTime,.56,.065,'sine');
+     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.045,.9,.075,'triangle'));
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,.56,.12,'sine');
   }
   currentStep++;nextNoteTime+=t.step;
  }
@@ -3490,13 +3549,14 @@ async function startMusic(){
   setupAudio();await audioContext.resume();
   if(audioContext.state!=='running')return false;
   wantedMusic=true;
-  if(musicPlaying)return true;
+  if(musicPlaying){updateIntroMusicHint();return true;}
   musicPlaying=true;currentStep=0;nextNoteTime=audioContext.currentTime+.04;
-  masterGain.gain.setTargetAtTime(Number(volumeSlider?.value||75)/100*.78,audioContext.currentTime,.03);
+  masterGain.gain.setTargetAtTime(Number(volumeSlider?.value||75)/100*1.65,audioContext.currentTime,.03);
   clearInterval(musicTimer);scheduleMusic();musicTimer=setInterval(scheduleMusic,65);
   if(musicButton){musicButton.textContent='❚❚';musicButton.setAttribute('aria-label','Pause music');}
+  updateIntroMusicHint();
   return true;
- }catch(e){console.warn('Music unavailable until user interacts',e);return false;}
+ }catch(e){console.warn('Music unavailable until user interacts',e);updateIntroMusicHint();return false;}
 }
 function stopMusic(){
  musicPlaying=false;wantedMusic=false;clearInterval(musicTimer);clearScheduledNotes();
@@ -3514,7 +3574,7 @@ if(musicPicker){musicPicker.addEventListener('change',switchMusic);}
 if(musicButton)musicButton.addEventListener('click',()=>musicPlaying?stopMusic():startMusic());
 if(volumeSlider)volumeSlider.addEventListener('input',()=>{
  const v=Number(volumeSlider.value);if(volumeText)volumeText.textContent=v+'%';
- if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(v/100*.78,audioContext.currentTime,.025);
+ if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(v/100*1.65,audioContext.currentTime,.025);
 });
 function playClickSound(){
  if(!audioContext||audioContext.state!=='running')return;
@@ -3525,6 +3585,12 @@ function playClickSound(){
 
 const loadingScreen = document.getElementById("loading");
 const enterButton = document.getElementById("enterShop");
+const introMusicHint = document.getElementById("introMusicHint");
+function updateIntroMusicHint(){
+ if(!introMusicHint)return;
+ introMusicHint.textContent=musicPlaying?'♫ Cozy dinner music is playing':'♫ Tap anywhere to start cozy dinner music';
+}
+
 
 function finishLoading() {
   loadingScreen.classList.add("hide");
@@ -3539,7 +3605,7 @@ enterButton.addEventListener("click",() => {
 
 // Try autoplay immediately; browsers may block audible playback without a gesture.
 // The first tap/click anywhere on the intro unlocks audio where permitted.
-startMusic().catch(() => {});
+startMusic().then(updateIntroMusicHint).catch(updateIntroMusicHint);
 function unlockIntroMusic(){
   if (wantedMusic && !musicPlaying) startMusic().catch(() => {});
 }
