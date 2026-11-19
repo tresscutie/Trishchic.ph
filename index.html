@@ -1704,6 +1704,267 @@ footer :is(h2,p,small,a){color:#563040!important}
 #booking h3.pink{color:#bf5c7a!important}
 @media(max-width:720px){body{background-size:64px 64px!important}}
 
+
+/* V19 readability audit: high-specificity contrast rules for light gingham theme */
+:root{--readable-ink:#54293b;--readable-muted:#68475a;--readable-rose:#b43d69}
+body section.section .container > h2.title,
+body section.section .container.center > h2.title,
+body section.section .container > h2:not(.card h2),
+body section.section h2.title,
+body section.section .title,
+body section.section .subtitle{
+ color:var(--readable-ink)!important;text-shadow:none!important;
+}
+body section.section .container > h2.title .pink,
+body section.section .title .pink,
+body section.section h2 .pink{
+ color:var(--readable-rose)!important;text-shadow:none!important;
+}
+body section.section .container > h2.title .green,
+body section.section .title .green{color:#8b5a44!important;text-shadow:none!important}
+body section.section .container > p.subtitle,
+body section.section .container.center > p,
+body section.section > .container > p,
+body section.section .container > .subtitle{
+ color:var(--readable-muted)!important;text-shadow:none!important;
+}
+body section.section .tag{color:#84364d!important}
+body section.section .card,
+body section.section .toc-box,
+body section.section .faq-item,
+body section.section .service-card,
+body section.section .plan-card{
+ color:var(--readable-ink)!important;
+}
+body section.section .card :is(h2,h3,h4,p,li,small,strong),
+body section.section .faq-item :is(h2,h3,p,summary),
+body section.section .service-card :is(h2,h3,p),
+body section.section .plan-card :is(h2,h3,p){color:var(--readable-ink)!important}
+body section.section .btn,body section.section .btn-green,
+body section.section a.btn,body section.section button.btn{color:#fffaf8!important}
+body section.section .product-card :is(h2,h3,h4,p,small,strong,span){color:#fffaf8!important}
+body section.section .product-card .btn{color:#fffaf8!important}
+body section.section #nothing{color:inherit}
+body section#proofs .feedback-count,
+body section#proofs .feedback-count :not(a){color:#54293b!important}
+body section#proofs .feedback-count a{color:#9f2855!important}
+body section#socials .card :is(h2,h3,h4,p,small,strong,span){color:#54293b!important}
+body section#socials .card .btn,body section#socials .card .btn *{color:#fffaf8!important}
+body section#faq details summary,body section#faq details p{color:#54293b!important}
+body section#booking .joyride-brand{color:#1159d2!important;font-weight:900!important}
+body section#booking .moveit-brand{color:#ce2535!important;font-weight:900!important}
+/* Keep color changes clear and accessible on mobile too */
+@media(max-width:720px){body section.section .container > h2.title{color:#54293b!important}}
+
+
+/* V20: Slightly deeper pink gingham, stronger visible stripes */
+html,body{background-color:#efbfc9!important}
+body{
+ background-color:#efbfc9!important;
+ background-image:
+  linear-gradient(90deg,rgba(164,54,79,.26) 50%,transparent 50%),
+  linear-gradient(rgba(164,54,79,.26) 50%,transparent 50%),
+  linear-gradient(90deg,transparent 50%,rgba(255,248,247,.25) 50%),
+  linear-gradient(transparent 50%,rgba(255,248,247,.25) 50%)!important;
+ background-size:88px 88px!important;
+ background-attachment:fixed!important;
+}
+body::before{background:repeating-linear-gradient(35deg,#ffffff09 0 1px,transparent 1px 6px)!important;opacity:.5!important}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(150deg,rgba(255,248,246,.78),rgba(255,230,235,.73),rgba(255,248,246,.78))!important;
+ color:#54293b!important;
+}
+.hero{background:radial-gradient(ellipse at center,rgba(255,249,246,.83),rgba(248,216,224,.71))!important}
+@media(max-width:720px){body{background-size:64px 64px!important}}
+
+
+/* V21: contrast, glitter and gratitude section */
+body section.section .product-card .explore,
+body section.section .product-card .explore *{
+  background:#fff6f3!important;color:#572438!important;
+  font-weight:900!important;text-shadow:none!important;
+  border:1px solid #ffd6df!important;
+  box-shadow:0 5px 0 #a94366,0 10px 20px #21051135!important;
+}
+body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!important;text-shadow:0 2px 5px #20010b77!important}
+#productModal .modal-top :is(h2,p,small),
+#productModal .modal-top div :is(h2,p,small){color:#fff!important;text-shadow:0 2px 6px #24051888!important}
+#productModal .modal-top h2{font-weight:900!important}
+#productModal .modal-body,#productModal .modal-body :is(p,strong,h2,h3){color:#51283a!important}
+#productModal .modal-body .btn,#productModal .modal-body .btn *{color:#fff!important}
+#productModal .modal-body a:not(.btn){color:#a32c57!important;font-weight:800!important}
+#productModal .plan{background:#fff9fa!important;color:#4d2838!important}
+#productModal .plan strong{color:#8d294b!important}
+/* Animated dots are CSS light particles, not emoji */
+.glitter-sky{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.glitter-sky i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;background:var(--c);box-shadow:0 0 7px 2px var(--c),0 0 19px 5px var(--c);opacity:.15;animation:glitterPulse var(--d) ease-in-out infinite alternate;animation-delay:var(--delay)}
+@keyframes glitterPulse{0%{opacity:.06;transform:scale(.45) translateY(3px)}55%{opacity:.9}100%{opacity:.2;transform:scale(1.4) translateY(-8px)}}
+.glitter-sky i:nth-child(7n){width:2px;height:2px;box-shadow:0 0 12px 4px var(--c)}
+.thankyou-section{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,#622137,#8c3956 53%,#4c172d)!important;padding:75px 22px 85px;color:#fff7f4;text-align:center;border-top:5px solid #f5c5d2}
+.thankyou-section:before{content:'';position:absolute;inset:0;z-index:-1;opacity:.18;background:repeating-linear-gradient(45deg,transparent 0 18px,#ffffff30 19px 20px,transparent 21px 40px)}
+.thankyou-wrap{max-width:1060px;margin:auto;display:grid;grid-template-columns:minmax(220px,350px) 1fr;align-items:center;gap:clamp(26px,6vw,90px)}
+.thankyou-photo{margin:0;transform:rotate(-4deg);padding:12px 12px 34px;background:#fff8f4;box-shadow:0 20px 40px #26061477;border-radius:6px;transition:transform .4s}
+.thankyou-photo:hover{transform:rotate(0) scale(1.03)}
+.thankyou-photo img{width:100%;height:320px;object-fit:cover;display:block;border-radius:3px;background:#f2c4d0}
+.thankyou-photo figcaption{color:#8d3c59;font-weight:800;margin-top:12px;font-size:14px}
+.thankyou-copy h2{font-size:clamp(44px,6vw,78px);line-height:1.15;color:#fff8f4!important;text-shadow:0 3px 15px #3c0b20!important;margin:0 0 18px}
+.thankyou-copy p{font-size:clamp(16px,2vw,20px);line-height:1.75;color:#fff7f4!important;margin:0 auto 16px;max-width:560px}
+.thankyou-copy .thankyou-pill{display:inline-block;border:1px solid #ffcedc;border-radius:50px;padding:12px 24px;margin-top:10px;color:#fff8f4;font-weight:800;letter-spacing:.04em}
+@media(max-width:650px){.thankyou-section{padding:50px 18px 65px}.thankyou-wrap{grid-template-columns:1fr;gap:32px}.thankyou-photo{max-width:285px;margin:auto}.thankyou-photo img{height:270px}.thankyou-copy h2{font-size:48px}}
+@media(prefers-reduced-motion:reduce){.glitter-sky i{animation:none;opacity:.6}}
+
+</style>
+<style id="v22-booking-and-interactions">
+/* Booking details: framed, readable, and clearly separated from gingham. */
+#booking .booking-layout > .reveal:first-child{background:rgba(255,250,250,.94)!important;border:2px solid #b95378!important;box-shadow:0 20px 55px rgba(96,24,52,.18),inset 0 0 0 6px rgba(255,221,231,.65)!important;border-radius:32px;padding:clamp(22px,3vw,44px)!important;backdrop-filter:blur(9px)}
+#booking .booking-layout > .reveal:first-child p{color:#512b3c!important;line-height:1.75!important}
+#booking .booking-layout > .reveal:first-child h2{color:#4a2434!important}
+#booking .booking-layout > .reveal:first-child h3{color:#a93462!important}
+#booking .booking-visual{border:2px solid #e7a7bd!important;background:rgba(255,249,251,.95)!important;box-shadow:0 20px 50px #641e3a25!important}
+#booking .booking-visual h3{color:#a62f60!important}
+#booking .booking-visual p{color:#542a3d!important}
+#booking .booking-visual .tag{color:#922e54!important}
+#booking .joyride-brand{color:#0860db!important;font-weight:900!important}
+#booking .moveit-brand{color:#d21f37!important;font-weight:900!important}
+/* Product selection has a distinct pop and ring, followed by a modal entrance. */
+.product-card{isolation:isolate;overflow:hidden;position:relative;cursor:pointer}
+.product-card.v22-selected{animation:v22-card-select .48s cubic-bezier(.2,.9,.2,1) both!important}
+.product-card.v22-selected::before{opacity:1!important}
+@keyframes v22-card-select{0%{filter:brightness(1);scale:1}42%{filter:brightness(1.24);scale:.965}75%{scale:1.045}100%{filter:brightness(1);scale:1}}
+#productModal.active .modal-box{animation:v22-modal-entry .55s cubic-bezier(.17,.88,.3,1.12) both!important;transform-origin:center center}
+@keyframes v22-modal-entry{from{opacity:0;transform:translateY(35px) scale(.88);filter:blur(7px)}65%{opacity:1;filter:blur(0)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:780px){#booking .booking-layout{grid-template-columns:1fr!important}#booking .booking-layout > .reveal:first-child{padding:23px!important}}
+@media(prefers-reduced-motion:reduce){.product-card.v22-selected,#productModal.active .modal-box{animation:none!important}}
+/* Keep sparkle positions in the document instead of sticking to the screen. */
+.glitter-sky{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:auto!important;pointer-events:none!important}
+</style>
+<style id="v24-visual-update">
+/* V24 — Wavy pink backdrop, cinematic welcome, and floating doll */
+html,body{background-color:#e9b4ca!important}
+body{
+ background-image:linear-gradient(rgba(255,245,250,.10),rgba(255,245,250,.10)),url("background.jpg")!important;
+ background-size:auto, min(100%,900px) auto!important;
+ background-position:center top!important;
+ background-repeat:repeat!important;
+ background-attachment:scroll!important;
+}
+body::before{opacity:.15!important;pointer-events:none!important}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(145deg,rgba(255,248,250,.78),rgba(255,236,243,.73))!important;
+}
+.hero{overflow:hidden;isolation:isolate;position:relative;background:linear-gradient(120deg,rgba(255,246,249,.74),rgba(255,229,238,.60))!important}
+.hero-content{position:relative;z-index:1}
+.v24-welcome-banner{
+ position:relative;isolation:isolate;max-width:900px;margin:24px auto 22px;
+ padding:clamp(24px,4vw,46px) clamp(20px,5vw,64px);
+ background:linear-gradient(125deg,rgba(255,250,252,.96),rgba(255,217,233,.96) 52%,rgba(255,245,250,.96));
+ border:2px solid #e7a3bc;border-radius:34px;
+ box-shadow:0 18px 45px #7a284a2d,inset 0 0 0 7px #fff9fc99;
+ transform:translateZ(0);animation:v24BannerEnter .95s cubic-bezier(.2,.9,.3,1) both;
+}
+.v24-welcome-banner:before{content:"";position:absolute;inset:8px;border:1px dashed #d78aaa;border-radius:27px;pointer-events:none;z-index:-1}
+.v24-welcome-banner:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(105deg,transparent 20%,#ffffff6e 46%,transparent 70%);background-size:250% 100%;animation:v24Shimmer 7s ease-in-out infinite;z-index:-1}
+.v24-welcome-banner h1{position:relative;z-index:1;margin:0!important;font-size:clamp(46px,7.3vw,105px)!important;line-height:1.08!important;color:#79314f!important;text-shadow:0 3px 0 #fff,0 7px 16px #74304c25!important}
+.v24-welcome-banner h1 span{color:#bd4b79!important;text-shadow:0 3px 0 #fff,0 7px 15px #80304c30!important}
+.v24-banner-star,.v24-banner-bubble{position:absolute;pointer-events:none;line-height:1;z-index:2;animation:v24FloatStar 3.8s ease-in-out infinite alternate}
+.v24-banner-star{color:#f5bd60;font-size:clamp(26px,3.6vw,53px);filter:drop-shadow(0 0 9px #fff3a5)}
+.v24-star-one{top:6%;left:5%}.v24-star-two{bottom:6%;right:5%;animation-delay:-1.3s}
+.v24-banner-bubble{font-size:clamp(22px,3vw,40px);color:#dc6b9d}.v24-bubble-one{top:11%;right:10%;animation-delay:-.8s}.v24-bubble-two{bottom:12%;left:8%;animation-delay:-2s}
+.hero .hero-girl{display:block!important;position:absolute!important;z-index:3;left:max(-55px,calc(50% - 680px));bottom:5%;width:clamp(120px,19vw,270px)!important;height:auto!important;max-height:58%;object-fit:contain;filter:drop-shadow(0 15px 13px #67203c40);pointer-events:none;animation:v24DollFloat 5s ease-in-out infinite!important}
+.v24-social-note{max-width:350px;margin:12px auto 18px!important;padding:12px 14px;border-radius:14px;border:1px solid #f0c2d2;background:#fff1f6!important;color:#69364b!important;font-size:14px;line-height:1.55}
+#socials .social-grid .card{display:flex;flex-direction:column;align-items:center;justify-content:center}
+#socials .social-grid .card .btn{margin-top:auto}
+#faq details{border:1px solid #f1c4d1!important;box-shadow:0 8px 23px #70344a12}
+@keyframes v24DollFloat{0%,100%{transform:translate3d(0,0,0) rotate(-3deg)}50%{transform:translate3d(5px,-17px,0) rotate(2deg)}}
+@keyframes v24FloatStar{from{transform:translateY(0) rotate(-12deg) scale(.9);opacity:.7}to{transform:translateY(-11px) rotate(13deg) scale(1.14);opacity:1}}
+@keyframes v24Shimmer{0%,25%{background-position:200% 0}60%,100%{background-position:-120% 0}}
+@keyframes v24BannerEnter{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:850px){.hero .hero-girl{left:-35px;bottom:8%;width:clamp(105px,22vw,180px)!important;opacity:.9}.v24-welcome-banner{margin-left:20px;margin-right:20px}}
+@media(max-width:560px){body{background-size:auto,420px auto!important}.hero .hero-girl{left:-30px;bottom:6%;width:112px!important;max-height:26%;opacity:.85}.v24-welcome-banner{padding:33px 14px;margin:20px 0 18px;border-radius:24px}.v24-welcome-banner h1{font-size:clamp(38px,10vw,56px)!important}.v24-banner-star{font-size:24px}.v24-banner-bubble{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.hero .hero-girl,.v24-welcome-banner,.v24-welcome-banner:after,.v24-banner-star,.v24-banner-bubble{animation:none!important}}
+</style>
+<style id="v25-integrated-hero">
+/* V25: cohesive centered doll + welcome hero, based on client reference */
+.hero{overflow:hidden!important}
+.hero .hero-content{display:flex;flex-direction:column;align-items:center;position:relative}
+.hero .hero-girl{display:block!important;position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;align-self:center!important;width:clamp(115px,14vw,180px)!important;height:clamp(135px,17vw,210px)!important;max-height:none!important;object-fit:contain!important;object-position:center bottom!important;margin:0 auto 8px!important;z-index:2!important;filter:drop-shadow(0 10px 12px #79314f22)!important;animation:v24DollFloat 5s ease-in-out infinite!important}
+.hero .hero-content>div:first-of-type{position:relative;z-index:2}
+.hero .v24-welcome-banner{width:100%;max-width:950px;margin:12px auto 18px!important;padding:12px 20px 16px!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;animation:v24BannerEnter .95s cubic-bezier(.2,.9,.3,1) both}
+.hero .v24-welcome-banner:before{display:none!important}
+.hero .v24-welcome-banner:after{opacity:.35}
+.hero .v24-welcome-banner h1{font-size:clamp(49px,7.3vw,105px)!important;line-height:1.08!important;color:#88a954!important;text-shadow:0 4px 0 #fff,0 8px 15px #7c4c6129!important}
+.hero .v24-welcome-banner h1 span{color:#df74a2!important;text-shadow:0 4px 0 #fff,0 8px 15px #7c4c6129!important}
+.hero .v24-banner-star,.hero .v24-banner-bubble{opacity:.7}
+.hero .notice,.hero .explore-help{max-width:min(94%,780px)}
+@media(max-width:560px){.hero .hero-girl{width:125px!important;height:145px!important;margin-bottom:8px!important}.hero .v24-welcome-banner{padding:8px 4px 14px!important;margin:10px auto 15px!important}.hero .v24-welcome-banner h1{font-size:clamp(41px,10vw,59px)!important}.hero .v24-banner-star,.hero .v24-banner-bubble{font-size:20px!important}}
+@media(prefers-reduced-motion:reduce){.hero .hero-girl{animation:none!important}}
+</style>
+<style id="v27-curved-banner">
+/* Curved welcome text and one unified, elegant banner */
+.hero .v24-welcome-banner{position:relative!important;isolation:isolate;width:min(94vw,980px)!important;max-width:980px!important;margin:12px auto 22px!important;padding:18px 40px 32px!important;background:linear-gradient(135deg,rgba(255,255,255,.83),rgba(255,232,242,.92) 52%,rgba(255,248,251,.86))!important;border:2px solid #ee9dbf!important;border-radius:36px!important;box-shadow:0 18px 38px rgba(128,49,83,.18),inset 0 0 0 6px rgba(255,255,255,.48)!important;overflow:hidden!important}
+.hero .v24-welcome-banner:before{display:block!important;content:""!important;position:absolute!important;inset:9px!important;border:1px dashed #df9bb9!important;border-radius:27px!important;pointer-events:none!important;z-index:-1!important}
+.hero .v24-welcome-banner:after{opacity:.35!important;z-index:0!important}
+.hero .v24-welcome-banner .v27-curved-title{position:relative!important;z-index:2!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;margin:0!important;font-size:initial!important;line-height:1!important}
+.hero .v27-curve{display:block;width:min(100%,810px);height:auto;overflow:visible;filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 6px 8px #854e6330)}
+.hero .v27-curve text{fill:#87a950;font-family:'Fredoka',system-ui,sans-serif;font-weight:750;font-size:110px;letter-spacing:-2px;paint-order:stroke fill;stroke:#fff;stroke-width:2px}
+.hero .v24-welcome-banner h1 .v27-brand-title{display:block!important;color:#df74a2!important;font-family:'Fredoka',system-ui,sans-serif!important;font-size:clamp(52px,7.6vw,103px)!important;font-weight:750!important;line-height:1.06!important;margin-top:-14px!important;text-shadow:0 4px 0 #fff,0 8px 15px #7c4c6129!important;white-space:nowrap}
+.hero .v24-banner-star,.hero .v24-banner-bubble{z-index:3!important}
+@media(max-width:600px){.hero .v24-welcome-banner{padding:18px 12px 26px!important;border-radius:25px!important}.hero .v24-welcome-banner:before{border-radius:18px!important}.hero .v27-curve{width:100%}.hero .v24-welcome-banner h1 .v27-brand-title{font-size:clamp(38px,9.3vw,60px)!important;margin-top:-7px!important}}
+@media(prefers-reduced-motion:reduce){.hero .v24-welcome-banner:after{animation:none!important}}
+</style>
+
+<style id="v28-background-and-hero-fix">
+/* Use the supplied wavy burgundy-pink image across the actual page, not a checkerboard. */
+html{background:#e9b4ca!important}
+body{
+ background:#e9b4ca url("background.jpg") center top / 630px 960px repeat!important;
+ background-attachment:scroll!important;
+}
+/* Old translucent pink checkerboard layers were masking the requested artwork. */
+body::before,body::after{display:none!important;content:none!important}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty,
+#contact,#products,#pricing,#legitimacy,#thankyou,main,footer{
+ background:transparent!important;
+ background-image:none!important;
+}
+/* A unified hero: character sits within the welcome banner, above the curved lettering. */
+.hero{overflow:visible!important;padding-top:clamp(30px,5vw,68px)!important}
+.hero .hero-content{display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;width:min(100%,1120px)!important;margin:auto!important}
+.hero .v24-welcome-banner{
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ width:min(94%,950px)!important;max-width:950px!important;
+ padding:15px clamp(12px,3.5vw,40px) 30px!important;
+ margin:20px auto 24px!important;
+ border:2px solid #f3a9c5!important;border-radius:38px!important;
+ background:linear-gradient(130deg,rgba(255,250,252,.96),rgba(255,227,238,.95) 53%,rgba(255,250,252,.96))!important;
+ box-shadow:0 18px 45px #4c173d48,inset 0 0 0 5px #fff9!important;
+ isolation:isolate!important;
+}
+.hero .v24-welcome-banner:before{z-index:0!important;inset:9px!important;border-radius:29px!important}
+.hero .v24-welcome-banner .hero-girl{
+ display:block!important;position:relative!important;inset:auto!important;
+ width:clamp(110px,15vw,170px)!important;height:clamp(120px,17vw,185px)!important;
+ max-height:none!important;object-fit:contain!important;object-position:center bottom!important;
+ margin:0 auto -4px!important;z-index:4!important;
+ filter:drop-shadow(0 12px 12px #69304b45)!important;
+ animation:v24DollFloat 5s ease-in-out infinite!important;
+}
+.hero .v27-curved-title{width:100%!important;position:relative!important;z-index:3!important}
+.hero .v27-curve{width:min(100%,730px)!important}
+.hero .v27-curve text{fill:#8ba954!important}
+.hero .v27-brand-title{color:#d86c9c!important}
+.hero .v24-banner-star,.hero .v24-banner-bubble{z-index:2!important}
+/* Ensure large sections retain contrast without covering the wavy background. */
+.hero .notice,.hero .explore-help{background:rgba(255,252,252,.94)!important}
+@media(max-width:600px){
+ body{background-size:315px 480px!important}
+ .hero .v24-welcome-banner{padding:12px 10px 24px!important;border-radius:26px!important;margin-top:15px!important}
+ .hero .v24-welcome-banner:before{border-radius:18px!important}
+ .hero .v24-welcome-banner .hero-girl{width:120px!important;height:130px!important;margin-bottom:-8px!important}
+ .hero .v27-curve{width:100%!important}
+ .hero .v27-brand-title{font-size:clamp(36px,9vw,59px)!important;white-space:nowrap!important}
+}
+@media(prefers-reduced-motion:reduce){.hero .v24-welcome-banner .hero-girl{animation:none!important}}
 </style>
 </head>
 
@@ -1778,22 +2039,20 @@ footer :is(h2,p,small,a){color:#563040!important}
 <header class="hero" id="home">
   <div class="hero-content">
 
-    <img
-      src="girl (1).png"
-      class="hero-girl"
-      alt="Trishchic character"
-    >
-
     <div>
       <span class="tag">
         YOUR COZY LITTLE DIGITAL SHOP ♡
       </span>
     </div>
 
-    <h1>
-      Welcome to<br>
-      <span>Trishchic.ph</span>
-    </h1>
+    <div class="v24-welcome-banner" aria-label="Welcome to Trishchic.ph">
+      <img src="girl(5).png" class="hero-girl" alt="Trishchic floating character" loading="eager">
+      <span class="v24-banner-star v24-star-one" aria-hidden="true">✦</span>
+      <h1 class="v27-curved-title"><svg class="v27-curve" viewBox="0 0 900 205" role="img" aria-label="Welcome to"><defs><path id="v27WelcomeArc" d="M 80,175 Q 450,5 820,175" /></defs><text><textPath href="#v27WelcomeArc" startOffset="50%" text-anchor="middle">Welcome to</textPath></text></svg><span class="v27-brand-title">Trishchic.ph</span></h1>
+      <span class="v24-banner-star v24-star-two" aria-hidden="true">✧</span>
+      <span class="v24-banner-bubble v24-bubble-one" aria-hidden="true">♡</span>
+      <span class="v24-banner-bubble v24-bubble-two" aria-hidden="true">✿</span>
+    </div>
 
     <p>
       Affordable digital goodies, friendly services,
@@ -1897,9 +2156,8 @@ footer :is(h2,p,small,a){color:#563040!important}
     </h2>
 
     <p class="subtitle">
-      If there's any problem, question, or order,
-      kindly message us on TikTok @trishchic.ph or Instagram @xx.twisha.
-      We'd love to assist you! 💌
+      For new orders, please message us on TikTok @trishchic.ph.
+      For problems or after-sales concerns, reach us on Instagram @xx.twisha. 💌
     </p>
 
     <div class="social-grid">
@@ -1908,6 +2166,7 @@ footer :is(h2,p,small,a){color:#563040!important}
         <img class="social-logo" src="isnta.webp" alt="Instagram logo" loading="lazy">
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
+        <p class="v24-social-note">💌 <strong>Need help?</strong> Message us here if you have a problem with your service or need after-sales support.</p>
 
         <a
           class="btn"
@@ -1923,6 +2182,7 @@ footer :is(h2,p,small,a){color:#563040!important}
         <img class="social-logo social-logo-tiktok" src="tiktok.avif" alt="TikTok logo" loading="lazy">
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
+        <p class="v24-social-note">🛍️ <strong>Ready to order?</strong> Please send your order inquiry here on TikTok.</p>
 
         <a
           class="btn btn-green"
@@ -2308,6 +2568,11 @@ footer :is(h2,p,small,a){color:#563040!important}
       </details>
 
       <details>
+        <summary>Can I cancel after submitting my Gmail address?</summary>
+        <p>No. As stated in our order policy, once you have submitted your Gmail address for processing, your order can no longer be cancelled. Please confirm your chosen service and details before sending your Gmail address. Never send your password or verification code.</p>
+      </details>
+
+      <details>
         <summary>Can I request another service?</summary>
         <p>Contact the seller to ask about other available services.</p>
       </details>
@@ -2334,8 +2599,25 @@ footer :is(h2,p,small,a){color:#563040!important}
   </div>
 </section>
 
+
+<section class="thankyou-section" id="thank-you" aria-label="Thank you for visiting Trishchic">
+  <div class="thankyou-wrap">
+    <figure class="thankyou-photo">
+      <img src="self.jpg" alt="A thank-you photo from Trishchic.ph" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('figcaption').textContent='With love, Trishchic.ph ♡';">
+      <figcaption>with love, trishchic.ph ♡</figcaption>
+    </figure>
+    <div class="thankyou-copy">
+      <h2>Thank You! ♡</h2>
+      <p>Thank you so much for visiting <strong>Trishchic.ph</strong>! Whether you're just browsing or you've placed an order, your time and support mean so much to us.</p>
+      <p>We hope you found something that makes your day a little sweeter. We can't wait to serve you again! ♡</p>
+      <div class="thankyou-pill">♡ Shop · Order · Create · Enjoy ♡</div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 
+<div class="glitter-sky" aria-hidden="true" id="glitterSky"></div>
 <footer id="contact">
   <div class="container">
 
@@ -3341,5 +3623,148 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 })();
 </script>
 
+<script>
+/* Sparkles anchored to page coordinates, not the viewport. */
+(function(){
+ const sky=document.getElementById('glitterSky');
+ if(!sky)return;
+ const colors=['#fffef9','#fff7d6','#ffe4a5','#ffffff'];
+ function fitSky(){sky.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+'px';}
+ fitSky();window.addEventListener('load',fitSky);window.addEventListener('resize',fitSky);
+ for(let i=0;i<48;i++){
+  const dot=document.createElement('i');
+  dot.style.setProperty('--x',((i*67.39+13)%100)+'%');
+  dot.style.setProperty('--y',((i*37.73+9)%100)+'%');
+  dot.style.setProperty('--s',(i%5===0?5:i%3===0?3:2)+'px');
+  dot.style.setProperty('--c',colors[i%colors.length]);
+  dot.style.setProperty('--d',(2.1+(i%8)*.46)+'s');
+  dot.style.setProperty('--delay',(-i*.31)+'s');
+  sky.appendChild(dot);
+ }
+})();
+</script>
+<script id="v22-interaction-script">
+(function(){
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const grid=document.getElementById('productGrid');
+ if(grid)grid.addEventListener('click',function(e){
+   const card=e.target.closest('.product-card');if(!card||reduced)return;
+   card.classList.remove('v22-selected');void card.offsetWidth;card.classList.add('v22-selected');
+   setTimeout(()=>card.classList.remove('v22-selected'),550);
+ });
+})();
+</script>
+
+<script id="v24-cozy-audio">
+/* Original synthesized café/lounge instrumental, generated locally without external audio. */
+(function(){
+ const cozyChords=[
+  {bass:130.81,tones:[261.63,329.63,392,493.88]},
+  {bass:110,tones:[220,261.63,329.63,392]},
+  {bass:146.83,tones:[293.66,349.23,440,523.25]},
+  {bass:98,tones:[196,246.94,293.66,392]},
+  {bass:130.81,tones:[261.63,329.63,392,440]},
+  {bass:164.81,tones:[329.63,392,493.88,587.33]},
+  {bass:146.83,tones:[293.66,349.23,440,523.25]},
+  {bass:98,tones:[196,246.94,329.63,392]}
+ ];
+ const littleNotes=[0,392,0,329.63,0,293.66,0,0,0,349.23,0,329.63,0,261.63,0,0];
+ const stepSeconds=60/68/2;
+ scheduleMusic=function(){
+  if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
+  while(nextNoteTime<audioContext.currentTime+.35){
+   const step=noteIndex%16,bar=Math.floor(noteIndex/16);
+   const chord=cozyChords[bar%cozyChords.length];
+   if(step===0){
+    chord.tones.forEach((f,i)=>playTone(f,nextNoteTime,3.9,.018-(i*.002),'sine'));
+    playTone(chord.bass,nextNoteTime,2.1,.048,'sine');
+   }
+   if(step===8)playTone(chord.bass*1.5,nextNoteTime,1.1,.021,'sine');
+   const note=littleNotes[(step+(bar%2)*2)%16];
+   if(note&&bar%4!==3)playTone(note,nextNoteTime,.7,.018,'sine');
+   noteIndex++;nextNoteTime+=stepSeconds;
+  }
+ };
+ /* Soft two-note, bell-like click; quiet so it doesn't interrupt the café music. */
+ playClickSound=function(){
+  if(!audioContext||audioContext.state!=='running')return;
+  const now=audioContext.currentTime;
+  [[784,0,.13,.045],[1046.5,.055,.18,.026]].forEach(([pitch,offset,duration,volume])=>{
+   const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+   osc.type='sine';osc.frequency.value=pitch;
+   gain.gain.setValueAtTime(.0001,now+offset);
+   gain.gain.linearRampToValueAtTime(volume,now+offset+.009);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+offset+duration);
+   osc.connect(gain);gain.connect(audioContext.destination);
+   osc.start(now+offset);osc.stop(now+offset+duration+.01);
+  });
+ };
+})();
+</script>
+
+<script id="v26-warm-dining-jazz">
+/* V26: original warm dining-room jazz: muted electric-piano voicings,
+   round bass, relaxed syncopation. No drums, bells or high-pitched lead. */
+(function(){
+ const changes=[
+  {bass:130.81,chord:[164.81,196.00,246.94,293.66]}, // Cmaj9
+  {bass:110.00,chord:[164.81,196.00,261.63,329.63]}, // Am9
+  {bass:146.83,chord:[174.61,220.00,261.63,329.63]}, // Dm9
+  {bass:98.00,chord:[174.61,196.00,246.94,293.66]}, // G13
+  {bass:130.81,chord:[164.81,196.00,246.94,329.63]},
+  {bass:164.81,chord:[196.00,246.94,293.66,392.00]},
+  {bass:146.83,chord:[174.61,220.00,261.63,349.23]},
+  {bass:98.00,chord:[174.61,220.00,246.94,329.63]}
+ ];
+ const phrases=[
+  [0,0,0,0,293.66,0,261.63,0,0,0,246.94,0,0,0,0,0],
+  [0,0,261.63,0,0,0,246.94,0,0,0,220,0,0,0,0,0],
+  [0,0,0,0,261.63,0,293.66,0,0,0,261.63,0,0,0,0,0],
+  [0,0,246.94,0,0,0,220,0,0,0,196,0,0,0,0,0]
+ ];
+ function warmKey(f,t,d,v){
+  const osc=audioContext.createOscillator(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();
+  osc.type='triangle';osc.frequency.setValueAtTime(f,t);
+  filter.type='lowpass';filter.frequency.value=820;filter.Q.value=.35;
+  gain.gain.setValueAtTime(.0001,t);
+  gain.gain.exponentialRampToValueAtTime(v,t+.024);
+  gain.gain.exponentialRampToValueAtTime(v*.44,t+.17);
+  gain.gain.exponentialRampToValueAtTime(.0001,t+d);
+  osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
+  osc.start(t);osc.stop(t+d+.03);
+ }
+ function roundBass(f,t,d){
+  const osc=audioContext.createOscillator(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();
+  osc.type='sine';osc.frequency.value=f;
+  filter.type='lowpass';filter.frequency.value=360;
+  gain.gain.setValueAtTime(.0001,t);
+  gain.gain.exponentialRampToValueAtTime(.055,t+.035);
+  gain.gain.exponentialRampToValueAtTime(.0001,t+d);
+  osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
+  osc.start(t);osc.stop(t+d+.03);
+ }
+ const beat=60/72,stepDuration=beat/4;
+ scheduleMusic=function(){
+  if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
+  while(nextNoteTime<audioContext.currentTime+.32){
+   const step=noteIndex%16,bar=Math.floor(noteIndex/16);
+   const harmony=changes[bar%changes.length];
+   if(step===0){
+    roundBass(harmony.bass,nextNoteTime,beat*1.75);
+    harmony.chord.forEach((f,i)=>warmKey(f,nextNoteTime+i*.013,beat*2.5,.011-i*.001));
+   }
+   if(step===8)roundBass(harmony.bass*1.5,nextNoteTime,beat*1.2);
+   if(step===7||step===14){
+    const voicing=step===7?[0,2,3]:[1,2,3];
+    voicing.forEach((i,j)=>warmKey(harmony.chord[i],nextNoteTime+j*.015,beat*1.4,.009));
+   }
+   const note=phrases[bar%phrases.length][step];
+   if(note && bar%4!==3)warmKey(note,nextNoteTime,beat*.7,.011);
+   noteIndex++;
+   nextNoteTime+=stepDuration;
+  }
+ };
+})();
+</script>
 </body>
 </html>
