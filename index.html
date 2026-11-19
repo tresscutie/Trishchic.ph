@@ -1803,14 +1803,14 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
 .thankyou-section{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(135deg,#622137,#8c3956 53%,#4c172d)!important;padding:75px 22px 85px;color:#fff7f4;text-align:center;border-top:5px solid #f5c5d2}
 .thankyou-section:before{content:'';position:absolute;inset:0;z-index:-1;opacity:.18;background:repeating-linear-gradient(45deg,transparent 0 18px,#ffffff30 19px 20px,transparent 21px 40px)}
 .thankyou-wrap{max-width:1060px;margin:auto;display:grid;grid-template-columns:minmax(220px,350px) 1fr;align-items:center;gap:clamp(26px,6vw,90px)}
-.thankyou-photo{margin:0;transform:rotate(-4deg);padding:12px 12px 34px;background:#fff8f4;box-shadow:0 20px 40px #26061477;border-radius:6px;transition:transform .4s}
+.thankyou-photo{margin:0;position:relative;left:18px;transform:rotate(-4deg);padding:12px 12px 34px;background:#fff8f4;box-shadow:0 20px 40px #26061477;border-radius:6px;transition:transform .4s}
 .thankyou-photo:hover{transform:rotate(0) scale(1.03)}
-.thankyou-photo img{width:100%;height:320px;object-fit:cover;display:block;border-radius:3px;background:#f2c4d0}
+.thankyou-photo img{width:100%;height:320px;object-fit:contain;object-position:center center;display:block;border-radius:3px;background:#f2c4d0;-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 .thankyou-photo figcaption{color:#8d3c59;font-weight:800;margin-top:12px;font-size:14px}
 .thankyou-copy h2{font-size:clamp(44px,6vw,78px);line-height:1.15;color:#fff8f4!important;text-shadow:0 3px 15px #3c0b20!important;margin:0 0 18px}
 .thankyou-copy p{font-size:clamp(16px,2vw,20px);line-height:1.75;color:#fff7f4!important;margin:0 auto 16px;max-width:560px}
 .thankyou-copy .thankyou-pill{display:inline-block;border:1px solid #ffcedc;border-radius:50px;padding:12px 24px;margin-top:10px;color:#fff8f4;font-weight:800;letter-spacing:.04em}
-@media(max-width:650px){.thankyou-section{padding:50px 18px 65px}.thankyou-wrap{grid-template-columns:1fr;gap:32px}.thankyou-photo{max-width:285px;margin:auto}.thankyou-photo img{height:270px}.thankyou-copy h2{font-size:48px}}
+@media(max-width:650px){.thankyou-section{padding:50px 18px 65px}.thankyou-wrap{grid-template-columns:1fr;gap:32px}.thankyou-photo{max-width:285px;margin:auto;left:0}.thankyou-photo img{height:270px}.thankyou-copy h2{font-size:48px}}
 @media(prefers-reduced-motion:reduce){.glitter-sky i{animation:none;opacity:.6}}
 
 </style>
@@ -2901,7 +2901,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
 <section class="thankyou-section" id="thank-you" aria-label="Thank you for visiting Trishchic">
   <div class="thankyou-wrap">
     <figure class="thankyou-photo">
-      <img src="self.jpg" alt="A thank-you photo from Trishchic.ph" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('figcaption').textContent='With love, Trishchic.ph ♡';">
+      <img src="selfpic.jpg" alt="A thank-you photo from Trishchic.ph" draggable="false" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('figcaption').textContent='With love, Trishchic.ph ♡';">
       <figcaption>with love, trishchic.ph ♡</figcaption>
     </figure>
     <div class="thankyou-copy">
@@ -2912,6 +2912,16 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
     </div>
   </div>
 </section>
+<script>
+/* Discourage casual saving of the thank-you photo; this cannot prevent screenshots or developer tools. */
+document.addEventListener('DOMContentLoaded',function(){
+ const photo=document.querySelector('.thankyou-photo img');
+ if(!photo)return;
+ photo.addEventListener('contextmenu',function(e){e.preventDefault();});
+ photo.addEventListener('dragstart',function(e){e.preventDefault();});
+});
+</script>
+
 
 <!-- FOOTER -->
 
