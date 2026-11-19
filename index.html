@@ -2184,6 +2184,44 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
 @media(max-width:760px){@keyframes v37RaisedFloat{0%,100%{transform:translateY(-25px)}50%{transform:translateY(-34px)}}}
 @media(prefers-reduced-motion:reduce){.hero .v29-character{animation:none!important;transform:translateY(-43px)!important;}}
 </style>
+
+<style id="v38-mobile-music-dropdown">
+/* On phones, dedicate a second navbar row to music so the dropdown never
+   gets clipped offscreen by the logo, volume slider or viewport width. */
+@media(max-width:760px){
+  nav{height:auto!important;min-height:64px!important;}
+  nav .nav-inner{
+    display:flex!important;flex-wrap:wrap!important;
+    align-items:center!important;justify-content:center!important;
+    gap:7px!important;padding:8px 12px 10px!important;
+    height:auto!important;min-height:64px!important;
+    overflow:visible!important;
+  }
+  nav .logo{width:100%!important;text-align:center!important;line-height:1.2!important;}
+  nav .music-player{
+    width:100%!important;max-width:410px!important;
+    display:flex!important;flex-wrap:nowrap!important;
+    justify-content:center!important;gap:7px!important;
+    padding:7px 10px!important;box-sizing:border-box!important;
+    overflow:visible!important;
+  }
+  nav #volume{width:64px!important;min-width:40px!important;flex:0 0 64px!important;}
+  nav #volumeText{display:none!important;}
+  nav .music-choice-label{display:none!important;}
+  nav #cozyMusicChoice{
+    display:block!important;position:relative!important;
+    flex:1 1 145px!important;min-width:0!important;max-width:none!important;
+    width:auto!important;height:38px!important;
+    padding:5px 8px!important;font-size:12px!important;
+    border:1.5px solid #ce7b9b!important;border-radius:14px!important;
+    background:#fff5f9!important;color:#67314b!important;
+    opacity:1!important;visibility:visible!important;
+    appearance:auto!important;-webkit-appearance:menulist!important;
+    touch-action:manipulation!important;pointer-events:auto!important;
+  }
+  nav .nav-links{display:none!important;}
+}
+</style>
 </head>
 
 <body>
@@ -3995,87 +4033,108 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 })();
 </script>
 
-<script id="v35-cozy-music-options">
+<script id="v38-music-selector-fixed">
 (function(){
   "use strict";
-  const chooser=document.getElementById("cozyMusicChoice");
-  if(!chooser) return;
-  const progressions={
-    piano:[
-      {bass:130.81,chord:[261.63,329.63,392,493.88]},
-      {bass:110,chord:[220,261.63,329.63,392]},
-      {bass:146.83,chord:[293.66,349.23,440,523.25]},
-      {bass:98,chord:[196,246.94,329.63,392]}
-    ],
-    bossa:[
-      {bass:130.81,chord:[261.63,329.63,440,493.88]},
-      {bass:146.83,chord:[293.66,349.23,440,523.25]},
-      {bass:110,chord:[220,261.63,329.63,440]},
-      {bass:98,chord:[196,246.94,329.63,392]}
-    ],
-    waltz:[
-      {bass:174.61,chord:[349.23,440,523.25,659.25]},
-      {bass:130.81,chord:[261.63,329.63,392,523.25]},
-      {bass:146.83,chord:[293.66,349.23,440,587.33]},
-      {bass:196,chord:[392,493.88,587.33,698.46]}
-    ]
+  const picker=document.getElementById("cozyMusicChoice");
+  if(!picker)return;
+  const configs={
+    piano:{tempo:.37,steps:16,bass:[130.81,110,146.83,98],
+      chords:[[261.63,329.63,392],[220,261.63,329.63],[293.66,349.23,440],[196,246.94,329.63]],
+      melody:[523.25,0,659.25,0,587.33,0,493.88,0,440,0,392,0,440,0,0,0]},
+    bossa:{tempo:.205,steps:16,bass:[130.81,146.83,110,98],
+      chords:[[261.63,329.63,440],[293.66,349.23,440],[220,261.63,392],[196,246.94,329.63]],
+      melody:[392,0,0,493.88,0,523.25,0,0,440,0,392,0,523.25,0,493.88,0]},
+    waltz:{tempo:.32,steps:12,bass:[174.61,130.81,146.83,196],
+      chords:[[349.23,440,523.25],[261.63,329.63,392],[293.66,349.23,440],[392,493.88,587.33]],
+      melody:[523.25,0,659.25,0,0,587.33,523.25,0,493.88,0,440,0]}
   };
-  const phrases={
-    piano:[0,523.25,0,659.25,0,587.33,0,493.88,0,440,0,392,0,440,0,0],
-    bossa:[392,0,493.88,523.25,0,440,0,392,440,0,523.25,0,493.88,392,0,0],
-    waltz:[523.25,0,659.25,0,587.33,0,523.25,0,493.88,0,440,0]
-  };
-  let selected="piano", stepIndex=0;
-  function gentleNote(freq,when,duration,level,type){
-    if(!freq || !audioContext || !masterGain)return;
-    const osc=audioContext.createOscillator(),gain=audioContext.createGain();
-    const filter=audioContext.createBiquadFilter();
-    osc.type=type||"sine";
-    osc.frequency.setValueAtTime(freq,when);
-    filter.type="lowpass";filter.frequency.value=type==="triangle"?1000:1550;
-    gain.gain.setValueAtTime(.0001,when);
-    gain.gain.exponentialRampToValueAtTime(level,when+.035);
-    gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
-    osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
-    osc.start(when);osc.stop(when+duration+.02);
+  let selected=picker.value in configs?picker.value:"piano", index=0;
+  let activeBus=null;
+  function bus(){
+    if(!audioContext||!masterGain)return null;
+    if(!activeBus){
+      activeBus=audioContext.createGain();
+      activeBus.gain.value=1;
+      activeBus.connect(masterGain);
+    }
+    return activeBus;
   }
-  // All three compositions are synthesized on-device, with no external audio or copyright dependency.
+  function note(freq,time,length,volume,kind,output){
+    if(!freq||!audioContext||!output)return;
+    const o=audioContext.createOscillator(),g=audioContext.createGain();
+    o.type=kind||"sine";o.frequency.setValueAtTime(freq,time);
+    g.gain.setValueAtTime(.0001,time);
+    g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),time+.022);
+    g.gain.exponentialRampToValueAtTime(.0001,time+length);
+    o.connect(g);g.connect(output);o.start(time);o.stop(time+length+.025);
+  }
+  // Distinct musical arrangements: slow arpeggiated piano, syncopated bossa,
+  // and a three-beat waltz. Switching resets the phrase immediately.
   scheduleMusic=function(){
-    if(!musicPlaying || !audioContext || audioContext.state!=="running")return;
-    const beat=selected==="piano"?.46:selected==="bossa"?.31:.43;
-    const stepsPerBar=selected==="waltz"?12:16;
-    while(nextNoteTime<audioContext.currentTime+.25){
-      const step=stepIndex%stepsPerBar;
-      const bar=Math.floor(stepIndex/stepsPerBar);
-      const harmony=progressions[selected][bar%4];
-      if(step===0){
-        gentleNote(harmony.bass,nextNoteTime,1.05,.085,"sine");
-        harmony.chord.forEach((n,i)=>gentleNote(n,nextNoteTime,selected==="piano"?2.6:1.8,.023-i*.002,"triangle"));
+    if(!musicPlaying||!audioContext||audioContext.state!=="running")return;
+    const c=configs[selected],output=bus();
+    while(nextNoteTime<audioContext.currentTime+.12){
+      const beat=index%c.steps,bar=Math.floor(index/c.steps),h=bar%4;
+      const chord=c.chords[h];
+      if(beat===0){
+        note(c.bass[h],nextNoteTime,selected==="piano"?1.4:.8,.095,"sine",output);
+        if(selected==="piano"){
+          chord.forEach((f,j)=>note(f,nextNoteTime+j*.10,1.5,.026,"triangle",output));
+        } else if(selected==="waltz"){
+          note(chord[0],nextNoteTime,.55,.030,"triangle",output);
+        }
       }
-      if(selected==="bossa" && (step===7 || step===13)){
-        harmony.chord.forEach((n,i)=>gentleNote(n,nextNoteTime,.44,.012-i*.001,"sine"));
+      if(selected==="bossa"){
+        if(beat===6||beat===14)chord.forEach((f,j)=>note(f,nextNoteTime,.34,.023-j*.002,"triangle",output));
+        if(beat===8)note(c.bass[h]*1.5,nextNoteTime,.28,.06,"sine",output);
       }
-      if(selected==="waltz" && (step===4 || step===8)){
-        harmony.chord.slice(1).forEach((n,i)=>gentleNote(n,nextNoteTime,.65,.014-i*.002,"sine"));
+      if(selected==="waltz"&&(beat===4||beat===8)){
+        chord.forEach((f,j)=>note(f,nextNoteTime,.55,.022-j*.002,"triangle",output));
       }
-      const phrase=phrases[selected],tone=phrase[step%phrase.length];
-      if(tone)gentleNote(tone,nextNoteTime,selected==="piano"?.64:.37,.028,"sine");
-      stepIndex++;
-      nextNoteTime+=beat;
+      if(selected==="piano" && (beat===4||beat===12)){
+        note(chord[(beat===4?1:2)],nextNoteTime,.6,.019,"triangle",output);
+      }
+      const m=c.melody[beat];
+      if(m)note(m,nextNoteTime,selected==="piano"?.62:.27,selected==="piano"?.035:.043,"sine",output);
+      index++;
+      nextNoteTime+=c.tempo;
     }
   };
-  chooser.addEventListener("change",function(){
-    selected=chooser.value in progressions?chooser.value:"piano";
-    stepIndex=0;
-    if(typeof noteIndex!=="undefined")noteIndex=0;
-    if(typeof nextNoteTime!=="undefined" && audioContext)nextNoteTime=audioContext.currentTime+.15;
-  });
-  // Gentle glassy two-note click instead of the previous game-like tap.
+  async function changeTrack(){
+    selected=picker.value in configs?picker.value:"piano";
+    index=0;
+    if(!audioContext){
+      try{await startMusic()}catch(e){}
+    }else{
+      if(audioContext.state==="suspended")try{await audioContext.resume()}catch(e){}
+      if(!musicPlaying){
+        try{await startMusic()}catch(e){}
+      }
+      if(audioContext&&musicPlaying){
+        // Fade out already scheduled notes so the new track is heard immediately.
+        if(activeBus){
+          const old=activeBus,now=audioContext.currentTime;
+          old.gain.cancelScheduledValues(now);
+          old.gain.setValueAtTime(old.gain.value,now);
+          old.gain.linearRampToValueAtTime(.0001,now+.09);
+          activeBus=null;
+          setTimeout(()=>{try{old.disconnect()}catch(e){}},3000);
+        }
+        nextNoteTime=audioContext.currentTime+.11;
+        scheduleMusic();
+      }
+    }
+    picker.setAttribute("aria-label","Now playing: "+picker.options[picker.selectedIndex].text);
+  }
+  picker.addEventListener("change",changeTrack);
+  picker.addEventListener("input",()=>{selected=picker.value;});
+  // Cute two-note tap; preserve existing click sound preference.
   playClickSound=function(){
-    if(!audioContext || audioContext.state!=="running")return;
+    if(!audioContext||audioContext.state!=="running")return;
     const t=audioContext.currentTime;
-    gentleNote(740,t,.13,.026,"sine");
-    gentleNote(987.77,t+.055,.18,.018,"sine");
+    note(740,t,.11,.018,"sine",audioContext.destination);
+    note(987.77,t+.05,.14,.014,"sine",audioContext.destination);
   };
 })();
 </script>
