@@ -1838,6 +1838,51 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
 /* Keep sparkle positions in the document instead of sticking to the screen. */
 .glitter-sky{position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:auto!important;pointer-events:none!important}
 </style>
+<style id="v24-visual-update">
+/* V24 — Wavy pink backdrop, cinematic welcome, and floating doll */
+html,body{background-color:#e9b4ca!important}
+body{
+ background-image:linear-gradient(rgba(255,245,250,.10),rgba(255,245,250,.10)),url("background.jpg")!important;
+ background-size:auto, min(100%,900px) auto!important;
+ background-position:center top!important;
+ background-repeat:repeat!important;
+ background-attachment:scroll!important;
+}
+body::before{opacity:.15!important;pointer-events:none!important}
+.hero,.section,#contents,#about,#socials,#shop,#bestseller,#proofs,#howto,#booking,#tutorial,#rules,#notes,#payment,#faq,#warranty{
+ background:linear-gradient(145deg,rgba(255,248,250,.78),rgba(255,236,243,.73))!important;
+}
+.hero{overflow:hidden;isolation:isolate;position:relative;background:linear-gradient(120deg,rgba(255,246,249,.74),rgba(255,229,238,.60))!important}
+.hero-content{position:relative;z-index:1}
+.v24-welcome-banner{
+ position:relative;isolation:isolate;max-width:900px;margin:24px auto 22px;
+ padding:clamp(24px,4vw,46px) clamp(20px,5vw,64px);
+ background:linear-gradient(125deg,rgba(255,250,252,.96),rgba(255,217,233,.96) 52%,rgba(255,245,250,.96));
+ border:2px solid #e7a3bc;border-radius:34px;
+ box-shadow:0 18px 45px #7a284a2d,inset 0 0 0 7px #fff9fc99;
+ transform:translateZ(0);animation:v24BannerEnter .95s cubic-bezier(.2,.9,.3,1) both;
+}
+.v24-welcome-banner:before{content:"";position:absolute;inset:8px;border:1px dashed #d78aaa;border-radius:27px;pointer-events:none;z-index:-1}
+.v24-welcome-banner:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(105deg,transparent 20%,#ffffff6e 46%,transparent 70%);background-size:250% 100%;animation:v24Shimmer 7s ease-in-out infinite;z-index:-1}
+.v24-welcome-banner h1{position:relative;z-index:1;margin:0!important;font-size:clamp(46px,7.3vw,105px)!important;line-height:1.08!important;color:#79314f!important;text-shadow:0 3px 0 #fff,0 7px 16px #74304c25!important}
+.v24-welcome-banner h1 span{color:#bd4b79!important;text-shadow:0 3px 0 #fff,0 7px 15px #80304c30!important}
+.v24-banner-star,.v24-banner-bubble{position:absolute;pointer-events:none;line-height:1;z-index:2;animation:v24FloatStar 3.8s ease-in-out infinite alternate}
+.v24-banner-star{color:#f5bd60;font-size:clamp(26px,3.6vw,53px);filter:drop-shadow(0 0 9px #fff3a5)}
+.v24-star-one{top:6%;left:5%}.v24-star-two{bottom:6%;right:5%;animation-delay:-1.3s}
+.v24-banner-bubble{font-size:clamp(22px,3vw,40px);color:#dc6b9d}.v24-bubble-one{top:11%;right:10%;animation-delay:-.8s}.v24-bubble-two{bottom:12%;left:8%;animation-delay:-2s}
+.hero .hero-girl{display:block!important;position:absolute!important;z-index:3;left:max(-55px,calc(50% - 680px));bottom:5%;width:clamp(120px,19vw,270px)!important;height:auto!important;max-height:58%;object-fit:contain;filter:drop-shadow(0 15px 13px #67203c40);pointer-events:none;animation:v24DollFloat 5s ease-in-out infinite!important}
+.v24-social-note{max-width:350px;margin:12px auto 18px!important;padding:12px 14px;border-radius:14px;border:1px solid #f0c2d2;background:#fff1f6!important;color:#69364b!important;font-size:14px;line-height:1.55}
+#socials .social-grid .card{display:flex;flex-direction:column;align-items:center;justify-content:center}
+#socials .social-grid .card .btn{margin-top:auto}
+#faq details{border:1px solid #f1c4d1!important;box-shadow:0 8px 23px #70344a12}
+@keyframes v24DollFloat{0%,100%{transform:translate3d(0,0,0) rotate(-3deg)}50%{transform:translate3d(5px,-17px,0) rotate(2deg)}}
+@keyframes v24FloatStar{from{transform:translateY(0) rotate(-12deg) scale(.9);opacity:.7}to{transform:translateY(-11px) rotate(13deg) scale(1.14);opacity:1}}
+@keyframes v24Shimmer{0%,25%{background-position:200% 0}60%,100%{background-position:-120% 0}}
+@keyframes v24BannerEnter{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:850px){.hero .hero-girl{left:-35px;bottom:8%;width:clamp(105px,22vw,180px)!important;opacity:.9}.v24-welcome-banner{margin-left:20px;margin-right:20px}}
+@media(max-width:560px){body{background-size:auto,420px auto!important}.hero .hero-girl{left:-30px;bottom:6%;width:112px!important;max-height:26%;opacity:.85}.v24-welcome-banner{padding:33px 14px;margin:20px 0 18px;border-radius:24px}.v24-welcome-banner h1{font-size:clamp(38px,10vw,56px)!important}.v24-banner-star{font-size:24px}.v24-banner-bubble{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.hero .hero-girl,.v24-welcome-banner,.v24-welcome-banner:after,.v24-banner-star,.v24-banner-bubble{animation:none!important}}
+</style>
 </head>
 
 <body>
@@ -1912,7 +1957,7 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
   <div class="hero-content">
 
     <img
-      src="girl (1).png"
+      src="girl(5).png"
       class="hero-girl"
       alt="Trishchic character"
     >
@@ -1923,10 +1968,13 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
       </span>
     </div>
 
-    <h1>
-      Welcome to<br>
-      <span>Trishchic.ph</span>
-    </h1>
+    <div class="v24-welcome-banner" aria-label="Welcome to Trishchic.ph">
+      <span class="v24-banner-star v24-star-one" aria-hidden="true">✦</span>
+      <h1>Welcome to<br><span>Trishchic.ph</span></h1>
+      <span class="v24-banner-star v24-star-two" aria-hidden="true">✧</span>
+      <span class="v24-banner-bubble v24-bubble-one" aria-hidden="true">♡</span>
+      <span class="v24-banner-bubble v24-bubble-two" aria-hidden="true">✿</span>
+    </div>
 
     <p>
       Affordable digital goodies, friendly services,
@@ -2030,9 +2078,8 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
     </h2>
 
     <p class="subtitle">
-      If there's any problem, question, or order,
-      kindly message us on TikTok @trishchic.ph or Instagram @xx.twisha.
-      We'd love to assist you! 💌
+      For new orders, please message us on TikTok @trishchic.ph.
+      For problems or after-sales concerns, reach us on Instagram @xx.twisha. 💌
     </p>
 
     <div class="social-grid">
@@ -2041,6 +2088,7 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
         <img class="social-logo" src="isnta.webp" alt="Instagram logo" loading="lazy">
         <h3>Instagram</h3>
         <p>@xx.twisha</p>
+        <p class="v24-social-note">💌 <strong>Need help?</strong> Message us here if you have a problem with your service or need after-sales support.</p>
 
         <a
           class="btn"
@@ -2056,6 +2104,7 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
         <img class="social-logo social-logo-tiktok" src="tiktok.avif" alt="TikTok logo" loading="lazy">
         <h3>TikTok</h3>
         <p>@trishchic.ph</p>
+        <p class="v24-social-note">🛍️ <strong>Ready to order?</strong> Please send your order inquiry here on TikTok.</p>
 
         <a
           class="btn btn-green"
@@ -2438,6 +2487,11 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
       <details>
         <summary>What if my service stops working?</summary>
         <p>Message the seller with your order details and a description of the issue.</p>
+      </details>
+
+      <details>
+        <summary>Can I cancel after submitting my Gmail address?</summary>
+        <p>No. As stated in our order policy, once you have submitted your Gmail address for processing, your order can no longer be cancelled. Please confirm your chosen service and details before sending your Gmail address. Never send your password or verification code.</p>
       </details>
 
       <details>
@@ -3520,6 +3574,53 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
    card.classList.remove('v22-selected');void card.offsetWidth;card.classList.add('v22-selected');
    setTimeout(()=>card.classList.remove('v22-selected'),550);
  });
+})();
+</script>
+
+<script id="v24-cozy-audio">
+/* Original synthesized café/lounge instrumental, generated locally without external audio. */
+(function(){
+ const cozyChords=[
+  {bass:130.81,tones:[261.63,329.63,392,493.88]},
+  {bass:110,tones:[220,261.63,329.63,392]},
+  {bass:146.83,tones:[293.66,349.23,440,523.25]},
+  {bass:98,tones:[196,246.94,293.66,392]},
+  {bass:130.81,tones:[261.63,329.63,392,440]},
+  {bass:164.81,tones:[329.63,392,493.88,587.33]},
+  {bass:146.83,tones:[293.66,349.23,440,523.25]},
+  {bass:98,tones:[196,246.94,329.63,392]}
+ ];
+ const littleNotes=[0,392,0,329.63,0,293.66,0,0,0,349.23,0,329.63,0,261.63,0,0];
+ const stepSeconds=60/68/2;
+ scheduleMusic=function(){
+  if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
+  while(nextNoteTime<audioContext.currentTime+.35){
+   const step=noteIndex%16,bar=Math.floor(noteIndex/16);
+   const chord=cozyChords[bar%cozyChords.length];
+   if(step===0){
+    chord.tones.forEach((f,i)=>playTone(f,nextNoteTime,3.9,.018-(i*.002),'sine'));
+    playTone(chord.bass,nextNoteTime,2.1,.048,'sine');
+   }
+   if(step===8)playTone(chord.bass*1.5,nextNoteTime,1.1,.021,'sine');
+   const note=littleNotes[(step+(bar%2)*2)%16];
+   if(note&&bar%4!==3)playTone(note,nextNoteTime,.7,.018,'sine');
+   noteIndex++;nextNoteTime+=stepSeconds;
+  }
+ };
+ /* Soft two-note, bell-like click; quiet so it doesn't interrupt the café music. */
+ playClickSound=function(){
+  if(!audioContext||audioContext.state!=='running')return;
+  const now=audioContext.currentTime;
+  [[784,0,.13,.045],[1046.5,.055,.18,.026]].forEach(([pitch,offset,duration,volume])=>{
+   const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+   osc.type='sine';osc.frequency.value=pitch;
+   gain.gain.setValueAtTime(.0001,now+offset);
+   gain.gain.linearRampToValueAtTime(volume,now+offset+.009);
+   gain.gain.exponentialRampToValueAtTime(.0001,now+offset+duration);
+   osc.connect(gain);gain.connect(audioContext.destination);
+   osc.start(now+offset);osc.stop(now+offset+duration+.01);
+  });
+ };
 })();
 </script>
 </body>
