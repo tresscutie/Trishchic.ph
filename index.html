@@ -2275,6 +2275,21 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
  max-width:95%;line-height:1.4!important;
 }
 </style>
+
+<style id="v44-phone-music-controls">
+/* A dedicated, always-visible music toolbar for narrow screens. */
+.mobile-music-toolbar{display:none}
+@media(max-width:760px){
+ nav{position:sticky!important;top:0!important;z-index:200!important;overflow:visible!important}
+ nav .nav-inner{display:flex!important;justify-content:center!important;padding:9px 12px 5px!important;min-height:0!important}
+ nav .nav-inner>.logo{display:block!important;width:auto!important;margin:auto!important;text-align:center!important}
+ nav .nav-inner>.music-player{display:none!important}
+ .mobile-music-toolbar{display:flex!important;position:relative!important;align-items:center!important;justify-content:center!important;gap:9px!important;width:100%!important;padding:6px 12px 11px!important;background:#fff8f9!important;border-top:1px solid #f1d5df!important;box-sizing:border-box!important;overflow:visible!important}
+ .mobile-music-toolbar label{font-size:12px!important;color:#74304e!important;font-weight:800!important;white-space:nowrap!important}
+ .mobile-music-toolbar select{display:block!important;visibility:visible!important;opacity:1!important;min-width:0!important;max-width:310px!important;width:100%!important;flex:1 1 180px!important;height:42px!important;padding:7px 30px 7px 11px!important;background:#fff0f6!important;border:2px solid #ce87a6!important;border-radius:12px!important;color:#692f4a!important;font:700 12px "DM Sans",sans-serif!important;appearance:auto!important;-webkit-appearance:menulist!important;pointer-events:auto!important;touch-action:manipulation!important}
+ .mobile-music-toolbar input[type=range]{width:68px!important;min-width:50px!important;max-width:68px!important;flex:0 0 68px!important;accent-color:#cb628c!important;display:block!important}
+}
+</style>
 </head>
 
 <body>
@@ -2347,6 +2362,16 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
     </div>
 
   </div>
+
+ <div class="mobile-music-toolbar" aria-label="Mobile background music settings">
+  <label for="mobileCozyMusicChoice">♫ Music</label>
+  <select id="mobileCozyMusicChoice" aria-label="Choose background music on phone">
+   <option value="piano">① Candlelight Dinner Piano</option>
+   <option value="bossa">② Cozy Rose Dinner Piano</option>
+   <option value="waltz">③ Soft Café Piano</option>
+  </select>
+  <input id="mobileMusicVolume" type="range" min="0" max="100" value="75" aria-label="Music volume on phone">
+ </div>
 </nav>
 
 <!-- HERO -->
@@ -3847,5 +3872,26 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 
 
 
+
+<script id="v44-mobile-music-sync">
+(function(){
+ const desktop=document.getElementById('cozyMusicChoice');
+ const mobile=document.getElementById('mobileCozyMusicChoice');
+ const volume=document.getElementById('volume');
+ const mobileVolume=document.getElementById('mobileMusicVolume');
+ if(!desktop||!mobile)return;
+ mobile.value=desktop.value;
+ mobile.addEventListener('change',function(){
+   desktop.value=mobile.value;
+   desktop.dispatchEvent(new Event('change',{bubbles:true}));
+ });
+ desktop.addEventListener('change',function(){mobile.value=desktop.value;});
+ if(volume&&mobileVolume){
+  mobileVolume.value=volume.value;
+  mobileVolume.addEventListener('input',function(){volume.value=mobileVolume.value;volume.dispatchEvent(new Event('input',{bubbles:true}));});
+  volume.addEventListener('input',function(){mobileVolume.value=volume.value;});
+ }
+})();
+</script>
 </body>
 </html>
