@@ -2299,6 +2299,18 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
 @media(max-width:650px){.hero .explore-help{max-width:92%!important;margin:13px auto 0!important;padding:10px 13px!important;border-radius:17px!important;font-size:13px!important}#contents .toc-tap-guide{max-width:100%;padding:8px 10px!important;font-size:12px!important}}
 @media(prefers-reduced-motion:reduce){#contents .toc-tap-hand{animation:none}}
 </style>
+<style>
+/* V50 — single animated girl pointing to each Table of Contents choice */
+#contents .toc-box{position:relative;overflow:visible!important}
+#contents .toc-grid{position:relative}
+#contents .toc-girl-guide{position:absolute;z-index:9;width:52px;height:66px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 5px #78374e55);transition:top .7s cubic-bezier(.22,.8,.25,1),left .7s cubic-bezier(.22,.8,.25,1),opacity .25s ease;animation:tocGirlBob 1.8s ease-in-out infinite;opacity:0}
+#contents .toc-girl-guide.ready{opacity:1}
+@keyframes tocGirlBob{0%,100%{translate:0 0;rotate:-7deg}50%{translate:0 -7px;rotate:5deg}}
+#contents .toc-item{isolation:isolate}
+#contents .toc-item.guide-highlight{box-shadow:0 6px 21px #bd64804d!important;border-color:#c67894!important}
+@media(max-width:650px){#contents .toc-girl-guide{width:37px;height:48px}#contents .toc-item{padding-right:20px!important}}
+@media(prefers-reduced-motion:reduce){#contents .toc-girl-guide{animation:none;transition:none}}
+</style>
 </head>
 
 <body>
@@ -3855,6 +3867,75 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
   volume.addEventListener('input',function(){mobileVolume.value=volume.value;});
  }
 })();
+</script>
+<script>
+
+/* V50 — guided TOC cursor: one moving girl, never blocks clicks */
+(function(){
+ const grid=document.getElementById('tocGrid');
+ const box=document.querySelector('#contents .toc-box');
+ if(!grid||!box)return;
+ const cards=[...grid.querySelectorAll('.toc-item')];
+ if(!cards.length)return;
+ const girl=document.createElement('img');
+ girl.src='girl(5).png';
+ girl.alt='';girl.setAttribute('aria-hidden','true');
+ girl.className='toc-girl-guide';
+ box.appendChild(girl);
+ let active=0, interval=null;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function moveTo(index){
+  active=index;
+  const target=cards[index],boxRect=box.getBoundingClientRect(),r=target.getBoundingClientRect();
+  const girlWidth=window.innerWidth<=650?37:52;
+  const left=r.right-boxRect.left-girlWidth*.85;
+  girl.style.left=Math.max(4,left)+'px';
+  girl.style.top=(r.top-boxRect.top+(r.height-(window.innerWidth<=650?48:66))/2)+'px';
+  girl.classList.add('ready');
+  cards.forEach((c,i)=>c.classList.toggle('guide-highlight',i===index));
+ }
+ function restart(){if(interval)clearInterval(interval);if(!reduced)interval=setInterval(()=>moveTo((active+1)%cards.length),1700)}
+ cards.forEach((card,i)=>{
+  card.addEventListener('pointerenter',()=>{moveTo(i);restart()});
+  card.addEventListener('focus',()=>{moveTo(i);restart()});
+ });
+ const observer=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){moveTo(active);restart()}
+  else if(interval){clearInterval(interval);interval=null}
+ },{threshold:.12});
+ observer.observe(grid);
+ window.addEventListener('resize',()=>moveTo(active));
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>moveTo(active));
+})();
+/* V50 — Sweet Bubble Pop on the X of the Premium Experience popup */
+(function(){
+ let bubbleContext;
+ function sweetBubble(){
+  try{
+   const AC=window.AudioContext||window.webkitAudioContext;
+   if(!AC)return;
+   bubbleContext=bubbleContext||new AC();
+   if(bubbleContext.state==='suspended')bubbleContext.resume().catch(()=>{});
+   const now=bubbleContext.currentTime+.006;
+   [[620,0,.21,.34],[850,.065,.19,.25]].forEach(([frequency,delay,duration,volume])=>{
+    const oscillator=bubbleContext.createOscillator(),gain=bubbleContext.createGain();
+    oscillator.type='sine';oscillator.frequency.value=frequency;
+    gain.gain.setValueAtTime(.0001,now+delay);
+    gain.gain.exponentialRampToValueAtTime(volume,now+delay+.012);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+delay+duration);
+    oscillator.connect(gain);gain.connect(bubbleContext.destination);
+    oscillator.start(now+delay);oscillator.stop(now+delay+duration+.02);
+   });
+  }catch(e){console.warn('Bubble click unavailable',e)}
+ }
+ const x=document.querySelector('#productModal .modal-close');
+ if(x)x.addEventListener('click',()=>{
+  // Suppress the normal Fairy Twinkle for this one button only.
+  if(typeof lastFairyClick!=='undefined')lastFairyClick=performance.now();
+  sweetBubble();
+ },{capture:true});
+})();
+
 </script>
 </body>
 </html>
