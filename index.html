@@ -1842,7 +1842,7 @@ body section.section .product-card :is(h3,p,.product-category){color:#fffaf6!imp
 /* V24 — Wavy pink backdrop, cinematic welcome, and floating doll */
 html,body{background-color:#e9b4ca!important}
 body{
- background-image:linear-gradient(rgba(255,245,250,.10),rgba(255,245,250,.10)),url("background.jpg")!important;
+ background-image:linear-gradient(rgba(255,245,250,.10),rgba(255,245,250,.10)),url("backround.jpg")!important;
  background-size:auto, min(100%,900px) auto!important;
  background-position:center top!important;
  background-repeat:repeat!important;
@@ -1917,7 +1917,7 @@ body::before{opacity:.15!important;pointer-events:none!important}
 /* Use the supplied wavy burgundy-pink image across the actual page, not a checkerboard. */
 html{background:#e9b4ca!important}
 body{
- background:#e9b4ca url("background.jpg") center top / 630px 960px repeat!important;
+ background:#e9b4ca url("backround.jpg") center top / 630px 960px repeat!important;
  background-attachment:scroll!important;
 }
 /* Old translucent pink checkerboard layers were masking the requested artwork. */
@@ -1965,6 +1965,69 @@ body::before,body::after{display:none!important;content:none!important}
  .hero .v27-brand-title{font-size:clamp(36px,9vw,59px)!important;white-space:nowrap!important}
 }
 @media(prefers-reduced-motion:reduce){.hero .v24-welcome-banner .hero-girl{animation:none!important}}
+</style>
+
+<style id="v29-editorial-hero-redesign">
+/* V29: premium, unified art direction; preserve the supplied wave image. */
+html{background:#59293f!important}
+body{background:#59293f url("backround.jpg") center top / cover fixed no-repeat!important}
+body::before,body::after{display:none!important}
+.hero{background:transparent!important;min-height:auto!important;padding:clamp(48px,6vw,96px) 20px 70px!important;overflow:hidden!important}
+.hero .hero-content{width:min(100%,1100px)!important;max-width:1100px!important;display:flex!important;align-items:center!important;flex-direction:column!important}
+.hero .v29-hero-panel{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(240px,.7fr);align-items:center;width:100%;min-height:410px;isolation:isolate;overflow:hidden;padding:40px 30px 36px clamp(34px,6vw,90px);border-radius:36px;border:1px solid rgba(255,255,255,.9);background:linear-gradient(115deg,rgba(255,250,247,.98) 0%,rgba(255,239,242,.98) 56%,rgba(247,210,224,.96) 100%);box-shadow:0 28px 65px rgba(47,13,34,.36),inset 0 0 0 8px rgba(255,255,255,.4)}
+.hero .v29-hero-panel:before{content:"";position:absolute;inset:13px;border:1px solid rgba(166,78,114,.24);border-radius:26px;pointer-events:none;z-index:-1}
+.hero .v29-hero-panel:after{content:"";position:absolute;right:-95px;bottom:-210px;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(242,173,201,.5),rgba(242,173,201,0) 68%);z-index:-1}
+.hero .v29-hero-copy{position:relative;z-index:3;text-align:left;min-width:0}
+.hero .v29-eyebrow{display:inline-block;padding:10px 17px;border-radius:999px;background:#fff9f8;border:1px solid #ecc2d0;color:#a84f72;font-size:clamp(10px,1.15vw,13px);font-weight:800;letter-spacing:.14em}
+.hero .v29-heading-wrap{margin:28px 0 14px}
+.hero .v29-welcome{display:block;font-family:'Fredoka',system-ui,sans-serif;font-size:clamp(40px,5.5vw,72px);font-weight:700;line-height:1.04;color:#69334b;letter-spacing:-.045em;transform:rotate(-3deg);transform-origin:left center;text-shadow:0 3px 0 #fff}
+.hero .v29-heading-wrap h1{margin:6px 0 0!important;font-family:'Fredoka',system-ui,sans-serif!important;font-size:clamp(54px,6.8vw,93px)!important;font-weight:750!important;line-height:1.04!important;letter-spacing:-.055em!important;color:#cc638c!important;text-shadow:0 4px 0 #fff,0 10px 16px rgba(120,55,81,.15)!important;white-space:nowrap}
+.hero .v29-heading-wrap h1 span{color:#cc638c!important}
+.hero .v29-panel-subtitle{margin:20px 0 0!important;font-size:clamp(16px,1.7vw,21px)!important;color:#754c60!important;line-height:1.5!important;text-align:left!important}
+.hero .v29-mini-line{width:130px;height:1px;background:#dca5ba;margin-top:26px;position:relative}.hero .v29-mini-line span{position:absolute;left:100%;top:-13px;color:#c67c98;font-size:20px}
+.hero .v29-character-wrap{height:370px;align-self:end;position:relative;display:flex;align-items:flex-end;justify-content:center;z-index:2}
+.hero .v29-character-halo{position:absolute;width:310px;height:310px;border-radius:50%;bottom:14px;background:radial-gradient(circle,#fff8f9 0%,#f9d7e2 62%,transparent 71%);border:1px solid #f8e5ea;box-shadow:0 0 0 18px rgba(255,255,255,.22)}
+.hero .v29-character{display:block;position:relative;width:clamp(190px,23vw,275px);height:375px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 15px 12px rgba(84,40,58,.19));animation:v29Float 5.5s ease-in-out infinite}
+.hero .v29-character-heart{position:absolute;right:10px;top:24px;color:#c8618b;font-size:40px;animation:v29Float 4s ease-in-out infinite}
+.hero .v29-panel-spark{position:absolute;color:#d5a66b;font-size:36px;z-index:4;animation:v29Twinkle 3.6s ease-in-out infinite}.hero .v29-spark-a{top:26px;right:45px}.hero .v29-spark-b{bottom:25px;left:25px;font-size:22px;animation-delay:1s}
+.hero .hero-content>p:not(.explore-help){max-width:820px;margin:28px auto 18px!important;color:#fff9f8!important;text-shadow:0 2px 7px #3e1937,0 0 15px #3e1937!important;font-weight:650!important;text-align:center!important}
+.hero .notice{margin:0 auto 22px!important;max-width:780px!important;background:rgba(255,251,250,.97)!important;border:2px solid #f3bdcc!important;box-shadow:0 12px 30px #38132f44!important}
+.hero .explore-help{background:rgba(255,249,249,.96)!important;border-radius:20px;padding:16px 20px!important;box-shadow:0 10px 26px #38132f38!important}
+@keyframes v29Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes v29Twinkle{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1.14)}}
+@media(max-width:760px){body{background-size:auto 100vh!important}.hero{padding:35px 14px 55px!important}.hero .v29-hero-panel{grid-template-columns:1fr;min-height:0;padding:30px 20px 15px;border-radius:26px}.hero .v29-hero-copy{text-align:center}.hero .v29-welcome{transform:rotate(-2deg);transform-origin:center}.hero .v29-heading-wrap{margin:20px 0 8px}.hero .v29-heading-wrap h1{font-size:clamp(43px,10.5vw,74px)!important}.hero .v29-panel-subtitle{text-align:center!important;margin-top:14px!important}.hero .v29-mini-line{margin:20px auto 0}.hero .v29-character-wrap{height:205px;align-self:center;width:100%;margin-top:5px}.hero .v29-character-halo{height:175px;width:175px;bottom:8px}.hero .v29-character{height:210px;width:170px}.hero .v29-character-heart{right:22%;top:8px;font-size:25px}.hero .v29-spark-a{right:18px;top:15px}.hero .v29-spark-b{bottom:15px;left:15px}}
+@media(max-width:400px){.hero .v29-hero-panel{padding:24px 12px 12px}.hero .v29-heading-wrap h1{font-size:clamp(39px,10.4vw,48px)!important}.hero .v29-welcome{font-size:42px}.hero .v29-eyebrow{font-size:9px;letter-spacing:.08em}}
+@media(prefers-reduced-motion:reduce){.hero .v29-character,.hero .v29-character-heart,.hero .v29-panel-spark{animation:none!important}}
+</style>
+
+<style id="v30-exact-github-background">
+/* The file already in the GitHub repository is spelled backround.jpg. */
+html{background-color:#5a2941!important}
+html body{background-color:#5a2941!important;background-image:url("backround.jpg")!important;background-position:center top!important;background-repeat:repeat!important;background-size:630px auto!important;background-attachment:scroll!important}
+body::before,body::after{display:none!important;content:none!important}
+/* Keep page sections transparent so the supplied artwork is actually visible. */
+.hero,main,footer,.section{background-color:transparent!important;background-image:none!important}
+@media(max-width:760px){html body{background-size:315px auto!important;background-position:center top!important}}
+</style>
+
+<style id="v31-seamless-background">
+/* Display the client's original wavy artwork as one continuous image: no tiled cuts. */
+html, html body {
+  background-color:#59293f !important;
+  background-image:url("backround.jpg") !important;
+  background-repeat:no-repeat !important;
+  background-position:center center !important;
+  background-size:cover !important;
+  background-attachment:fixed !important;
+}
+/* A subtle translucent veil keeps section transitions gentle without hiding the pattern. */
+html body::before {
+  background:linear-gradient(180deg,rgba(75,25,49,.045),rgba(249,205,224,.055)) !important;
+  opacity:1 !important;
+}
+@media(max-width:760px){
+ html, html body {background-size:cover !important;background-position:center center !important;background-attachment:fixed !important;}
+}
 </style>
 </head>
 
@@ -2039,19 +2102,23 @@ body::before,body::after{display:none!important;content:none!important}
 <header class="hero" id="home">
   <div class="hero-content">
 
-    <div>
-      <span class="tag">
-        YOUR COZY LITTLE DIGITAL SHOP ♡
-      </span>
-    </div>
-
-    <div class="v24-welcome-banner" aria-label="Welcome to Trishchic.ph">
-      <img src="girl(5).png" class="hero-girl" alt="Trishchic floating character" loading="eager">
-      <span class="v24-banner-star v24-star-one" aria-hidden="true">✦</span>
-      <h1 class="v27-curved-title"><svg class="v27-curve" viewBox="0 0 900 205" role="img" aria-label="Welcome to"><defs><path id="v27WelcomeArc" d="M 80,175 Q 450,5 820,175" /></defs><text><textPath href="#v27WelcomeArc" startOffset="50%" text-anchor="middle">Welcome to</textPath></text></svg><span class="v27-brand-title">Trishchic.ph</span></h1>
-      <span class="v24-banner-star v24-star-two" aria-hidden="true">✧</span>
-      <span class="v24-banner-bubble v24-bubble-one" aria-hidden="true">♡</span>
-      <span class="v24-banner-bubble v24-bubble-two" aria-hidden="true">✿</span>
+    <div class="v29-hero-panel" aria-label="Welcome to Trishchic.ph">
+      <div class="v29-panel-spark v29-spark-a" aria-hidden="true">✧</div>
+      <div class="v29-panel-spark v29-spark-b" aria-hidden="true">✦</div>
+      <div class="v29-hero-copy">
+        <span class="v29-eyebrow">✿ YOUR COZY LITTLE DIGITAL SHOP ✿</span>
+        <div class="v29-heading-wrap">
+          <span class="v29-welcome">Welcome to</span>
+          <h1>Trishchic<span>.ph</span></h1>
+        </div>
+        <p class="v29-panel-subtitle">Your little corner of digital delights <span aria-hidden="true">♡</span></p>
+        <div class="v29-mini-line" aria-hidden="true"><span>✦</span></div>
+      </div>
+      <div class="v29-character-wrap" aria-hidden="true">
+        <div class="v29-character-halo"></div>
+        <img src="girl(5).png" class="v29-character" alt="" loading="eager">
+        <span class="v29-character-heart">♡</span>
+      </div>
     </div>
 
     <p>
