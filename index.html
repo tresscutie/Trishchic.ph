@@ -2287,9 +2287,9 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <span id="volumeText">75%</span>
       <label for="cozyMusicChoice" class="music-choice-label">Music</label>
       <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
-        <option value="piano">① Soft Café Piano</option>
-        <option value="bossa">② Gentle Bossa Lounge</option>
-        <option value="waltz">③ Dreamy Dining Waltz</option>
+        <option value="piano">① Candlelight Dinner Piano</option>
+        <option value="bossa">② Velvet Dinner Jazz</option>
+        <option value="waltz">③ Soft Café Piano</option>
       </select>
     </div>
 
@@ -3411,190 +3411,115 @@ document.querySelectorAll(".reveal").forEach(element => {
   observer.observe(element);
 });
 
-/* ORIGINAL COZY MUSIC */
-/* GENERATED USING WEB AUDIO API */
-/* NO MP3 FILE REQUIRED */
-
-let audioContext;
-let masterGain;
-let musicTimer;
-let musicPlaying = false;
-let noteIndex = 0;
-let nextNoteTime = 0;
-let wantedMusic = true;
-
-const musicButton = document.getElementById("musicToggle");
-const volumeSlider = document.getElementById("volume");
-const volumeText = document.getElementById("volumeText");
-
-const melody = [
-  392.00,493.88,587.33,493.88,
-  440.00,523.25,659.25,523.25,
-  392.00,493.88,587.33,493.88,
-  349.23,440.00,523.25,440.00,
-
-  329.63,392.00,493.88,392.00,
-  349.23,440.00,523.25,440.00,
-  392.00,493.88,587.33,659.25,
-  523.25,440.00,392.00,329.63
-];
-
-const chords = [
-  [261.63,329.63,392.00],
-  [220.00,261.63,329.63],
-  [174.61,220.00,261.63],
-  [196.00,246.94,293.66]
-];
-
-function setupAudio() {
-  if (audioContext) return;
-
-  audioContext = new (
-    window.AudioContext || window.webkitAudioContext
-  )();
-
-  masterGain = audioContext.createGain();
-  masterGain.gain.value = Number(volumeSlider.value)/100*.75;
-
-  const compressor = audioContext.createDynamicsCompressor();
-  compressor.threshold.value = -24;
-  compressor.ratio.value = 5;
-
-  compressor.knee.value = 16;
-  compressor.attack.value = .008;
-  compressor.release.value = .18;
-  masterGain.connect(compressor);
-  compressor.connect(audioContext.destination);
+/* V39: SINGLE MUSIC ENGINE. All legacy competing music schedulers removed. */
+let audioContext=null, masterGain=null, musicTimer=null;
+let musicPlaying=false, wantedMusic=true;
+const musicButton=document.getElementById('musicToggle');
+const volumeSlider=document.getElementById('volume');
+const volumeText=document.getElementById('volumeText');
+const musicPicker=document.getElementById('cozyMusicChoice');
+let currentTrack=musicPicker?.value||'piano';
+let currentStep=0, nextNoteTime=0;
+let activeNotes=new Set();
+const tracks={
+ // Three original cozy dinner arrangements, each with its own melody and timbre.
+ piano:{step:.38,bar:16,bass:[130.81,110,146.83,98],
+  chords:[[261.63,329.63,392,493.88],[220,261.63,329.63,392],[293.66,349.23,440,523.25],[196,246.94,329.63,392]],
+  lead:[523.25,0,0,493.88,0,392,0,0,440,0,392,0,329.63,0,0,0]},
+ bossa:{step:.265,bar:16,bass:[146.83,130.81,110,98],
+  chords:[[293.66,349.23,440,523.25],[261.63,329.63,392,493.88],[220,261.63,349.23,440],[196,246.94,329.63,392]],
+  lead:[0,440,0,523.25,0,0,493.88,0,392,0,440,0,349.23,0,0,0]},
+ waltz:{step:.33,bar:16,bass:[110,130.81,98,146.83],
+  chords:[[220,261.63,329.63,392],[261.63,329.63,392,493.88],[196,246.94,293.66,392],[293.66,349.23,440,523.25]],
+  lead:[0,392,0,440,0,0,392,0,329.63,0,392,0,293.66,0,0,0]}
+};
+function setupAudio(){
+ if(audioContext)return;
+ audioContext=new (window.AudioContext||window.webkitAudioContext)();
+ masterGain=audioContext.createGain();
+ masterGain.gain.value=Number(volumeSlider?.value||75)/100*.78;
+ masterGain.connect(audioContext.destination);
 }
-
-function playTone(frequency,time,duration,volume,type="sine") {
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = type;
-  oscillator.frequency.setValueAtTime(frequency,time);
-
-  gain.gain.setValueAtTime(.0001,time);
-  gain.gain.exponentialRampToValueAtTime(volume,time+.04);
-  gain.gain.exponentialRampToValueAtTime(
-    .0001,
-    time+duration
-  );
-
-  oscillator.connect(gain);
-  gain.connect(masterGain);
-
-  oscillator.start(time);
-  oscillator.stop(time+duration+.02);
+function tone(freq,time,duration,vol,wave='sine'){
+ if(!freq||!audioContext||!masterGain)return;
+ const osc=audioContext.createOscillator(),gain=audioContext.createGain();
+ osc.type=wave;osc.frequency.setValueAtTime(freq,time);
+ gain.gain.setValueAtTime(.00001,time);
+ gain.gain.exponentialRampToValueAtTime(vol,time+.025);
+ gain.gain.exponentialRampToValueAtTime(.00001,time+duration);
+ osc.connect(gain);gain.connect(masterGain);
+ activeNotes.add(osc);
+ osc.onended=()=>{activeNotes.delete(osc);try{osc.disconnect();gain.disconnect()}catch(e){}};
+ osc.start(time);osc.stop(time+duration+.03);
 }
-
-function scheduleMusic() {
-  if (!musicPlaying) return;
-
-  while (nextNoteTime < audioContext.currentTime+.35) {
-    const position = noteIndex % melody.length;
-
-    playTone(
-      melody[position],
-      nextNoteTime,
-      .36,
-      .11,
-      "sine"
-    );
-
-    if (position % 8 === 0) {
-      const chordIndex = Math.floor(position/8)%chords.length;
-
-      chords[chordIndex].forEach(frequency => {
-        playTone(
-          frequency/2,
-          nextNoteTime,
-          2.6,
-          .055,
-          "triangle"
-        );
-      });
-    }
-
-    noteIndex++;
-    nextNoteTime += .43;
+function scheduleMusic(){
+ if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
+ const t=tracks[currentTrack]||tracks.piano;
+ while(nextNoteTime<audioContext.currentTime+.13){
+  const step=currentStep%t.bar,bar=Math.floor(currentStep/t.bar),h=bar%4;
+  const chord=t.chords[h];
+  if(currentTrack==='piano'){
+   // Candlelight: slow, spacious, broken-chord piano.
+   if(step===0)tone(t.bass[h],nextNoteTime,2,.105,'sine');
+   if(step===0||step===4||step===8||step===12)
+     tone(chord[(step/4)%4],nextNoteTime,1.25,.08,'triangle');
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,.8,.052,'sine');
+  }else if(currentTrack==='bossa'){
+   // Velvet jazz: off-beat lounge chords, walking bass, soft lead.
+   if(step===0||step===8)tone(t.bass[h]*(step===8?1.5:1),nextNoteTime,.62,.14,'sine');
+   if(step===3||step===7||step===11||step===15)
+     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.025,.32,.035,'triangle'));
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,.28,.045,'sine');
+  }else{
+   // Soft Cafe Piano: light mellow notes and gentle alternating piano chords.
+   if(step===0||step===8)tone(t.bass[h],nextNoteTime,1.45,.13,'sine');
+   if(step===0||step===5||step===10||step===14)
+     chord.forEach((n,i)=>tone(n,nextNoteTime+i*.045,.9,.033,'triangle'));
+   if(t.lead[step])tone(t.lead[step],nextNoteTime,.56,.065,'sine');
   }
+  currentStep++;nextNoteTime+=t.step;
+ }
 }
-
-async function startMusic() {
-  try {
-    setupAudio();
-
-    await audioContext.resume();
-
-    if (audioContext.state !== "running") return false;
-
-    if (musicPlaying) return true;
-
-    musicPlaying = true;
-    wantedMusic = true;
-    nextNoteTime = audioContext.currentTime+.05;
-
-    scheduleMusic();
-
-    musicTimer = setInterval(scheduleMusic,100);
-
-    musicButton.textContent = "❚❚";
-    musicButton.setAttribute("aria-label","Pause music");
-
-    return true;
-  } catch(error) {
-    console.warn("Music could not start:",error);
-    return false;
-  }
+function clearScheduledNotes(){
+ if(!audioContext)return;
+ for(const osc of activeNotes){try{osc.stop(audioContext.currentTime+.01)}catch(e){}}
+ activeNotes.clear();
 }
-
-function stopMusic() {
-  musicPlaying = false;
-  wantedMusic = false;
-
-  clearInterval(musicTimer);
-
-  if (audioContext && masterGain) {
-    masterGain.gain.setTargetAtTime(
-      0,
-      audioContext.currentTime,
-      .05
-    );
-  }
-
-  musicButton.textContent = "▶";
-  musicButton.setAttribute("aria-label","Play music");
+async function startMusic(){
+ try{
+  setupAudio();await audioContext.resume();
+  if(audioContext.state!=='running')return false;
+  wantedMusic=true;
+  if(musicPlaying)return true;
+  musicPlaying=true;currentStep=0;nextNoteTime=audioContext.currentTime+.04;
+  masterGain.gain.setTargetAtTime(Number(volumeSlider?.value||75)/100*.78,audioContext.currentTime,.03);
+  clearInterval(musicTimer);scheduleMusic();musicTimer=setInterval(scheduleMusic,65);
+  if(musicButton){musicButton.textContent='❚❚';musicButton.setAttribute('aria-label','Pause music');}
+  return true;
+ }catch(e){console.warn('Music unavailable until user interacts',e);return false;}
 }
-
-musicButton.addEventListener("click",async () => {
-  if (musicPlaying) {
-    stopMusic();
-  } else {
-    if (masterGain && audioContext) {
-      masterGain.gain.setTargetAtTime(
-        Number(volumeSlider.value)/100*.75,
-        audioContext.currentTime,
-        .05
-      );
-    }
-    await startMusic();
-  }
+function stopMusic(){
+ musicPlaying=false;wantedMusic=false;clearInterval(musicTimer);clearScheduledNotes();
+ if(musicButton){musicButton.textContent='▶';musicButton.setAttribute('aria-label','Play music');}
+}
+async function switchMusic(){
+ const choice=musicPicker?.value||'piano';
+ currentTrack=tracks[choice]?choice:'piano';
+ if(musicPicker)musicPicker.setAttribute('aria-label','Selected: '+musicPicker.options[musicPicker.selectedIndex].text);
+ if(!musicPlaying){await startMusic();return;}
+ clearScheduledNotes();currentStep=0;nextNoteTime=audioContext.currentTime+.045;
+ scheduleMusic();
+}
+if(musicPicker){musicPicker.addEventListener('change',switchMusic);}
+if(musicButton)musicButton.addEventListener('click',()=>musicPlaying?stopMusic():startMusic());
+if(volumeSlider)volumeSlider.addEventListener('input',()=>{
+ const v=Number(volumeSlider.value);if(volumeText)volumeText.textContent=v+'%';
+ if(masterGain&&audioContext)masterGain.gain.setTargetAtTime(v/100*.78,audioContext.currentTime,.025);
 });
-
-volumeSlider.addEventListener("input",event => {
-  const value = Number(event.target.value);
-
-  volumeText.textContent = value+"%";
-
-  if (masterGain && audioContext) {
-    masterGain.gain.setTargetAtTime(
-      value/100*.75,
-      audioContext.currentTime,
-      .05
-    );
-  }
-});
+function playClickSound(){
+ if(!audioContext||audioContext.state!=='running')return;
+ tone(740,audioContext.currentTime,.09,.015);tone(987.77,audioContext.currentTime+.045,.12,.012);
+}
 
 /* LOADING SCREEN AND AUTOPLAY */
 
@@ -3704,76 +3629,6 @@ document.addEventListener("click",event => {
   window.addEventListener("load",()=>{garden.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+"px"},{once:true});
   window.addEventListener("resize",()=>{garden.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+"px"});
 })();
-
-/* =============================================
-   UPGRADED MUSIC: Eight-bar lo-fi arrangement
-   Overrides only the old repetitive scheduler.
-   Original audio controls are retained.
-   ============================================= */
-const newChordProgression = [
-  {bass:130.81,notes:[261.63,329.63,392.00,493.88]},
-  {bass:110.00,notes:[220.00,261.63,329.63,392.00]},
-  {bass:174.61,notes:[349.23,440.00,523.25,659.25]},
-  {bass:196.00,notes:[392.00,493.88,587.33,698.46]},
-  {bass:130.81,notes:[261.63,329.63,392.00,493.88]},
-  {bass:164.81,notes:[329.63,392.00,493.88,587.33]},
-  {bass:110.00,notes:[220.00,261.63,329.63,392.00]},
-  {bass:98.00,notes:[196.00,246.94,293.66,349.23]}
-];
-const newMelodies = [
-  [523.25,0,659.25,783.99,0,659.25,587.33,0,523.25,0,493.88,392,0,440,493.88,0],
-  [440,0,523.25,0,659.25,587.33,0,523.25,440,0,392,0,329.63,392,0,0],
-  [523.25,659.25,0,783.99,880,0,783.99,659.25,0,587.33,523.25,0,440,0,523.25,0],
-  [587.33,0,698.46,783.99,0,698.46,587.33,0,493.88,587.33,0,440,392,0,0,0],
-  [783.99,0,659.25,523.25,0,587.33,659.25,0,783.99,880,0,783.99,659.25,0,523.25,0],
-  [659.25,0,783.99,987.77,0,880,783.99,0,659.25,0,587.33,493.88,523.25,0,0,0],
-  [523.25,659.25,783.99,0,659.25,0,523.25,440,0,392,440,523.25,0,659.25,0,0],
-  [587.33,0,493.88,392,0,440,493.88,0,587.33,698.46,0,587.33,523.25,0,493.88,0]
-];
-let grooveNoiseBuffer=null;
-function groovePercussion(time,kind){
-  if(!grooveNoiseBuffer){
-    grooveNoiseBuffer=audioContext.createBuffer(1,audioContext.sampleRate,audioContext.sampleRate);
-    const channel=grooveNoiseBuffer.getChannelData(0);
-    for(let i=0;i<channel.length;i++) channel[i]=Math.random()*2-1;
-  }
-  const source=audioContext.createBufferSource();
-  const filter=audioContext.createBiquadFilter();
-  const gain=audioContext.createGain();
-  const duration=kind==="snare"?.11:.045;
-  source.buffer=grooveNoiseBuffer;
-  filter.type=kind==="snare"?"bandpass":"highpass";
-  filter.frequency.value=kind==="snare"?1600:6000;
-  gain.gain.setValueAtTime(kind==="snare"?.06:.025,time);
-  gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
-  source.connect(filter);filter.connect(gain);gain.connect(masterGain);
-  source.start(time);source.stop(time+duration);
-}
-const grooveStepSeconds=60/76/4;
-scheduleMusic=function(){
-  if(!musicPlaying || !audioContext || audioContext.state!=="running") return;
-  while(nextNoteTime<audioContext.currentTime+.3){
-    const step=noteIndex%16;
-    const bar=Math.floor(noteIndex/16);
-    const harmony=newChordProgression[bar%newChordProgression.length];
-    const tune=newMelodies[bar%newMelodies.length];
-    if(step===0){
-      harmony.notes.forEach((frequency,index)=>{
-        playTone(frequency,nextNoteTime,2.7,.04-index*.004,"triangle");
-      });
-    }
-    if(step===0||step===8) playTone(harmony.bass,nextNoteTime,.6,.15,"sine");
-    if(step===4||step===12) groovePercussion(nextNoteTime,"snare");
-    if(step%2===0) groovePercussion(nextNoteTime,"hat");
-    const pitch=tune[step];
-    if(pitch && (bar%3!==2 || step%4!==2)){
-      playTone(pitch,nextNoteTime,.3+(step%3)*.09,.085,"sine");
-      if(step%4===0) playTone(pitch*2,nextNoteTime,.2,.012,"triangle");
-    }
-    noteIndex++;
-    nextNoteTime+=grooveStepSeconds;
-  }
-};
 
 /* =============================================
    MODERN SOFT UI SOUNDS (NOT CUTE CHIMES)
@@ -3921,222 +3776,10 @@ if (window.matchMedia("(hover:hover) and (pointer:fine)").matches &&
 })();
 </script>
 
-<script id="v24-cozy-audio">
-/* Original synthesized café/lounge instrumental, generated locally without external audio. */
-(function(){
- const cozyChords=[
-  {bass:130.81,tones:[261.63,329.63,392,493.88]},
-  {bass:110,tones:[220,261.63,329.63,392]},
-  {bass:146.83,tones:[293.66,349.23,440,523.25]},
-  {bass:98,tones:[196,246.94,293.66,392]},
-  {bass:130.81,tones:[261.63,329.63,392,440]},
-  {bass:164.81,tones:[329.63,392,493.88,587.33]},
-  {bass:146.83,tones:[293.66,349.23,440,523.25]},
-  {bass:98,tones:[196,246.94,329.63,392]}
- ];
- const littleNotes=[0,392,0,329.63,0,293.66,0,0,0,349.23,0,329.63,0,261.63,0,0];
- const stepSeconds=60/68/2;
- scheduleMusic=function(){
-  if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
-  while(nextNoteTime<audioContext.currentTime+.35){
-   const step=noteIndex%16,bar=Math.floor(noteIndex/16);
-   const chord=cozyChords[bar%cozyChords.length];
-   if(step===0){
-    chord.tones.forEach((f,i)=>playTone(f,nextNoteTime,3.9,.018-(i*.002),'sine'));
-    playTone(chord.bass,nextNoteTime,2.1,.048,'sine');
-   }
-   if(step===8)playTone(chord.bass*1.5,nextNoteTime,1.1,.021,'sine');
-   const note=littleNotes[(step+(bar%2)*2)%16];
-   if(note&&bar%4!==3)playTone(note,nextNoteTime,.7,.018,'sine');
-   noteIndex++;nextNoteTime+=stepSeconds;
-  }
- };
- /* Soft two-note, bell-like click; quiet so it doesn't interrupt the café music. */
- playClickSound=function(){
-  if(!audioContext||audioContext.state!=='running')return;
-  const now=audioContext.currentTime;
-  [[784,0,.13,.045],[1046.5,.055,.18,.026]].forEach(([pitch,offset,duration,volume])=>{
-   const osc=audioContext.createOscillator(),gain=audioContext.createGain();
-   osc.type='sine';osc.frequency.value=pitch;
-   gain.gain.setValueAtTime(.0001,now+offset);
-   gain.gain.linearRampToValueAtTime(volume,now+offset+.009);
-   gain.gain.exponentialRampToValueAtTime(.0001,now+offset+duration);
-   osc.connect(gain);gain.connect(audioContext.destination);
-   osc.start(now+offset);osc.stop(now+offset+duration+.01);
-  });
- };
-})();
-</script>
 
-<script id="v26-warm-dining-jazz">
-/* V26: original warm dining-room jazz: muted electric-piano voicings,
-   round bass, relaxed syncopation. No drums, bells or high-pitched lead. */
-(function(){
- const changes=[
-  {bass:130.81,chord:[164.81,196.00,246.94,293.66]}, // Cmaj9
-  {bass:110.00,chord:[164.81,196.00,261.63,329.63]}, // Am9
-  {bass:146.83,chord:[174.61,220.00,261.63,329.63]}, // Dm9
-  {bass:98.00,chord:[174.61,196.00,246.94,293.66]}, // G13
-  {bass:130.81,chord:[164.81,196.00,246.94,329.63]},
-  {bass:164.81,chord:[196.00,246.94,293.66,392.00]},
-  {bass:146.83,chord:[174.61,220.00,261.63,349.23]},
-  {bass:98.00,chord:[174.61,220.00,246.94,329.63]}
- ];
- const phrases=[
-  [0,0,0,0,293.66,0,261.63,0,0,0,246.94,0,0,0,0,0],
-  [0,0,261.63,0,0,0,246.94,0,0,0,220,0,0,0,0,0],
-  [0,0,0,0,261.63,0,293.66,0,0,0,261.63,0,0,0,0,0],
-  [0,0,246.94,0,0,0,220,0,0,0,196,0,0,0,0,0]
- ];
- function warmKey(f,t,d,v){
-  const osc=audioContext.createOscillator(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();
-  osc.type='triangle';osc.frequency.setValueAtTime(f,t);
-  filter.type='lowpass';filter.frequency.value=820;filter.Q.value=.35;
-  gain.gain.setValueAtTime(.0001,t);
-  gain.gain.exponentialRampToValueAtTime(v,t+.024);
-  gain.gain.exponentialRampToValueAtTime(v*.44,t+.17);
-  gain.gain.exponentialRampToValueAtTime(.0001,t+d);
-  osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
-  osc.start(t);osc.stop(t+d+.03);
- }
- function roundBass(f,t,d){
-  const osc=audioContext.createOscillator(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();
-  osc.type='sine';osc.frequency.value=f;
-  filter.type='lowpass';filter.frequency.value=360;
-  gain.gain.setValueAtTime(.0001,t);
-  gain.gain.exponentialRampToValueAtTime(.055,t+.035);
-  gain.gain.exponentialRampToValueAtTime(.0001,t+d);
-  osc.connect(filter);filter.connect(gain);gain.connect(masterGain);
-  osc.start(t);osc.stop(t+d+.03);
- }
- const beat=60/72,stepDuration=beat/4;
- scheduleMusic=function(){
-  if(!musicPlaying||!audioContext||audioContext.state!=='running')return;
-  while(nextNoteTime<audioContext.currentTime+.32){
-   const step=noteIndex%16,bar=Math.floor(noteIndex/16);
-   const harmony=changes[bar%changes.length];
-   if(step===0){
-    roundBass(harmony.bass,nextNoteTime,beat*1.75);
-    harmony.chord.forEach((f,i)=>warmKey(f,nextNoteTime+i*.013,beat*2.5,.011-i*.001));
-   }
-   if(step===8)roundBass(harmony.bass*1.5,nextNoteTime,beat*1.2);
-   if(step===7||step===14){
-    const voicing=step===7?[0,2,3]:[1,2,3];
-    voicing.forEach((i,j)=>warmKey(harmony.chord[i],nextNoteTime+j*.015,beat*1.4,.009));
-   }
-   const note=phrases[bar%phrases.length][step];
-   if(note && bar%4!==3)warmKey(note,nextNoteTime,beat*.7,.011);
-   noteIndex++;
-   nextNoteTime+=stepDuration;
-  }
- };
-})();
-</script>
 
-<script id="v38-music-selector-fixed">
-(function(){
-  "use strict";
-  const picker=document.getElementById("cozyMusicChoice");
-  if(!picker)return;
-  const configs={
-    piano:{tempo:.37,steps:16,bass:[130.81,110,146.83,98],
-      chords:[[261.63,329.63,392],[220,261.63,329.63],[293.66,349.23,440],[196,246.94,329.63]],
-      melody:[523.25,0,659.25,0,587.33,0,493.88,0,440,0,392,0,440,0,0,0]},
-    bossa:{tempo:.205,steps:16,bass:[130.81,146.83,110,98],
-      chords:[[261.63,329.63,440],[293.66,349.23,440],[220,261.63,392],[196,246.94,329.63]],
-      melody:[392,0,0,493.88,0,523.25,0,0,440,0,392,0,523.25,0,493.88,0]},
-    waltz:{tempo:.32,steps:12,bass:[174.61,130.81,146.83,196],
-      chords:[[349.23,440,523.25],[261.63,329.63,392],[293.66,349.23,440],[392,493.88,587.33]],
-      melody:[523.25,0,659.25,0,0,587.33,523.25,0,493.88,0,440,0]}
-  };
-  let selected=picker.value in configs?picker.value:"piano", index=0;
-  let activeBus=null;
-  function bus(){
-    if(!audioContext||!masterGain)return null;
-    if(!activeBus){
-      activeBus=audioContext.createGain();
-      activeBus.gain.value=1;
-      activeBus.connect(masterGain);
-    }
-    return activeBus;
-  }
-  function note(freq,time,length,volume,kind,output){
-    if(!freq||!audioContext||!output)return;
-    const o=audioContext.createOscillator(),g=audioContext.createGain();
-    o.type=kind||"sine";o.frequency.setValueAtTime(freq,time);
-    g.gain.setValueAtTime(.0001,time);
-    g.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),time+.022);
-    g.gain.exponentialRampToValueAtTime(.0001,time+length);
-    o.connect(g);g.connect(output);o.start(time);o.stop(time+length+.025);
-  }
-  // Distinct musical arrangements: slow arpeggiated piano, syncopated bossa,
-  // and a three-beat waltz. Switching resets the phrase immediately.
-  scheduleMusic=function(){
-    if(!musicPlaying||!audioContext||audioContext.state!=="running")return;
-    const c=configs[selected],output=bus();
-    while(nextNoteTime<audioContext.currentTime+.12){
-      const beat=index%c.steps,bar=Math.floor(index/c.steps),h=bar%4;
-      const chord=c.chords[h];
-      if(beat===0){
-        note(c.bass[h],nextNoteTime,selected==="piano"?1.4:.8,.095,"sine",output);
-        if(selected==="piano"){
-          chord.forEach((f,j)=>note(f,nextNoteTime+j*.10,1.5,.026,"triangle",output));
-        } else if(selected==="waltz"){
-          note(chord[0],nextNoteTime,.55,.030,"triangle",output);
-        }
-      }
-      if(selected==="bossa"){
-        if(beat===6||beat===14)chord.forEach((f,j)=>note(f,nextNoteTime,.34,.023-j*.002,"triangle",output));
-        if(beat===8)note(c.bass[h]*1.5,nextNoteTime,.28,.06,"sine",output);
-      }
-      if(selected==="waltz"&&(beat===4||beat===8)){
-        chord.forEach((f,j)=>note(f,nextNoteTime,.55,.022-j*.002,"triangle",output));
-      }
-      if(selected==="piano" && (beat===4||beat===12)){
-        note(chord[(beat===4?1:2)],nextNoteTime,.6,.019,"triangle",output);
-      }
-      const m=c.melody[beat];
-      if(m)note(m,nextNoteTime,selected==="piano"?.62:.27,selected==="piano"?.035:.043,"sine",output);
-      index++;
-      nextNoteTime+=c.tempo;
-    }
-  };
-  async function changeTrack(){
-    selected=picker.value in configs?picker.value:"piano";
-    index=0;
-    if(!audioContext){
-      try{await startMusic()}catch(e){}
-    }else{
-      if(audioContext.state==="suspended")try{await audioContext.resume()}catch(e){}
-      if(!musicPlaying){
-        try{await startMusic()}catch(e){}
-      }
-      if(audioContext&&musicPlaying){
-        // Fade out already scheduled notes so the new track is heard immediately.
-        if(activeBus){
-          const old=activeBus,now=audioContext.currentTime;
-          old.gain.cancelScheduledValues(now);
-          old.gain.setValueAtTime(old.gain.value,now);
-          old.gain.linearRampToValueAtTime(.0001,now+.09);
-          activeBus=null;
-          setTimeout(()=>{try{old.disconnect()}catch(e){}},3000);
-        }
-        nextNoteTime=audioContext.currentTime+.11;
-        scheduleMusic();
-      }
-    }
-    picker.setAttribute("aria-label","Now playing: "+picker.options[picker.selectedIndex].text);
-  }
-  picker.addEventListener("change",changeTrack);
-  picker.addEventListener("input",()=>{selected=picker.value;});
-  // Cute two-note tap; preserve existing click sound preference.
-  playClickSound=function(){
-    if(!audioContext||audioContext.state!=="running")return;
-    const t=audioContext.currentTime;
-    note(740,t,.11,.018,"sine",audioContext.destination);
-    note(987.77,t+.05,.14,.014,"sine",audioContext.destination);
-  };
-})();
-</script>
+
+
+
 </body>
 </html>
