@@ -2289,6 +2289,15 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
  .mobile-music-toolbar select{display:block!important;visibility:visible!important;opacity:1!important;min-width:0!important;max-width:310px!important;width:100%!important;flex:1 1 180px!important;height:42px!important;padding:7px 30px 7px 11px!important;background:#fff0f6!important;border:2px solid #ce87a6!important;border-radius:12px!important;color:#692f4a!important;font:700 12px "DM Sans",sans-serif!important;appearance:auto!important;-webkit-appearance:menulist!important;pointer-events:auto!important;touch-action:manipulation!important}
  .mobile-music-toolbar input[type=range]{width:68px!important;min-width:50px!important;max-width:68px!important;flex:0 0 68px!important;accent-color:#cb628c!important;display:block!important}
 }
+
+/* V49: gentle listening reminder and minimalist table-of-contents guidance */
+.hero .explore-help {max-width:580px!important;margin:16px auto 0!important;padding:11px 17px!important;font-size:clamp(13px,1.15vw,15px)!important;line-height:1.5!important;font-weight:650!important;text-align:center!important;border-radius:999px!important;}
+#contents .toc-tap-guide {display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 17px!important;padding:8px 14px!important;border-radius:999px;background:#fff0f3!important;border:1px solid #edc6d2!important;color:#8a395b!important;font-size:clamp(12px,1.15vw,14px)!important;font-weight:700!important;letter-spacing:.01em;}
+#contents .toc-tap-hand {display:inline-block;animation:tocGuideNudge 1.9s ease-in-out infinite;transform-origin:center bottom;}
+@keyframes tocGuideNudge {0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+#contents .toc-item {cursor:pointer;}
+@media(max-width:650px){.hero .explore-help{max-width:92%!important;margin:13px auto 0!important;padding:10px 13px!important;border-radius:17px!important;font-size:13px!important}#contents .toc-tap-guide{max-width:100%;padding:8px 10px!important;font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){#contents .toc-tap-hand{animation:none}}
 </style>
 </head>
 
@@ -2355,10 +2364,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
       <span id="volumeText">75%</span>
       <label for="cozyMusicChoice" class="music-choice-label">Music</label>
       <select id="cozyMusicChoice" class="cozy-music-select" aria-label="Choose cozy background music">
-        <option value="lounge" selected>① Luxury Hotel Lounge (MP3)</option>
-        <option value="piano">② Candlelight Dinner Piano</option>
-        <option value="bossa">③ Cozy Rose Dinner Piano</option>
-        <option value="waltz">④ Soft Café Piano</option>
+        <option value="lounge" selected>Luxury Hotel Lounge (MP3)</option>
       </select>
     </div>
 
@@ -2367,10 +2373,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
  <div class="mobile-music-toolbar" aria-label="Mobile background music settings">
   <label for="mobileCozyMusicChoice">♫ Music</label>
   <select id="mobileCozyMusicChoice" aria-label="Choose background music on phone">
-   <option value="lounge" selected>① Luxury Hotel Lounge (MP3)</option>
-        <option value="piano">② Candlelight Dinner Piano</option>
-   <option value="bossa">③ Cozy Rose Dinner Piano</option>
-   <option value="waltz">④ Soft Café Piano</option>
+   <option value="lounge" selected>Luxury Hotel Lounge (MP3)</option>
   </select>
   <input id="mobileMusicVolume" type="range" min="0" max="100" value="75" aria-label="Music volume on phone">
  </div>
@@ -2413,7 +2416,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
     <a href="#contents" class="btn">
       Let's Explore ♡ ↓
     </a>
-    <p class="explore-help">Tip: Click any section in the Table of Contents below to jump straight to what you're looking for! ♡</p>
+    <p class="explore-help">🎧 Turn up your volume and enjoy the Trishchic.ph vibe as you scroll! ♡</p>
 
   </div>
 </header>
@@ -2433,7 +2436,7 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
           <span class="pink">Contents</span>
         </h2>
 
-        <p>Tap any section to explore! 🌷</p>
+        <p class="toc-tap-guide"><span class="toc-tap-hand" aria-hidden="true">☝</span> Tap a section below to explore <span aria-hidden="true">↓</span></p>
       </div>
 
       <div class="toc-grid" id="tocGrid"></div>
@@ -3641,8 +3644,8 @@ function playClickSound() {
 }
 
 document.addEventListener("click",event => {
-  if (event.target.closest("button,a,summary")) {
-    playClickSound();
+  if (event.target.closest("button,a,summary,select,.product-card,.toc-item,.social-logo,[data-proof]")) {
+    fairyTwinkleClick();
   }
 });
 
@@ -3680,37 +3683,38 @@ document.addEventListener("click",event => {
   window.addEventListener("resize",()=>{garden.style.height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)+"px"});
 })();
 
-/* =============================================
-   MODERN SOFT UI SOUNDS (NOT CUTE CHIMES)
-   Hover: short airy tick. Click: low muted tap.
-   ============================================= */
-function modernUITone(frequency,duration,volume,isClick){
-  if(!audioContext || audioContext.state!=="running") return;
-  const time=audioContext.currentTime;
-  const oscillator=audioContext.createOscillator();
-  const filter=audioContext.createBiquadFilter();
-  const gain=audioContext.createGain();
-  oscillator.type=isClick?"triangle":"sine";
-  oscillator.frequency.setValueAtTime(frequency,time);
-  oscillator.frequency.exponentialRampToValueAtTime(frequency*(isClick?.65:1.07),time+duration);
-  filter.type="lowpass";filter.frequency.value=1600;
-  gain.gain.setValueAtTime(.0001,time);
-  gain.gain.linearRampToValueAtTime(volume,time+.006);
-  gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
-  oscillator.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);
-  oscillator.start(time);oscillator.stop(time+duration+.01);
-}
-playClickSound=function(){modernUITone(310,.13,.13,true)};
-let lastModernHover=0;
-document.addEventListener("pointerover",event=>{
-  if(event.pointerType==="touch")return;
-  const target=event.target.closest("button,a,summary,.product-card,.toc-item,.social-logo,[data-proof]");
-  if(!target || target.contains(event.relatedTarget))return;
+/* V48: Fairy Twinkle click effect, independent of background music. */
+let fairyClickContext=null;
+let lastFairyClick=0;
+function fairyTwinkleClick(){
+ try{
   const now=performance.now();
-  if(now-lastModernHover<100)return;
-  lastModernHover=now;
-  modernUITone(560,.09,.065,false);
-});
+  if(now-lastFairyClick<90)return;
+  lastFairyClick=now;
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(!AudioContextClass)return;
+  if(!fairyClickContext)fairyClickContext=new AudioContextClass();
+  const ctx=fairyClickContext;
+  if(ctx.state==='suspended')ctx.resume().catch(()=>{});
+  const start=ctx.currentTime+.008;
+  for(const n of [
+   {frequency:784,delay:0,duration:.27,volume:.27},
+   {frequency:1046.5,delay:.11,duration:.31,volume:.28},
+   {frequency:1568,delay:.22,duration:.42,volume:.22}
+  ]){
+   const oscillator=ctx.createOscillator(),gain=ctx.createGain();
+   oscillator.type='sine';
+   oscillator.frequency.setValueAtTime(n.frequency,start+n.delay);
+   gain.gain.setValueAtTime(.0001,start+n.delay);
+   gain.gain.exponentialRampToValueAtTime(n.volume,start+n.delay+.012);
+   gain.gain.exponentialRampToValueAtTime(.0001,start+n.delay+n.duration);
+   oscillator.connect(gain);gain.connect(ctx.destination);
+   oscillator.start(start+n.delay);
+   oscillator.stop(start+n.delay+n.duration+.02);
+  }
+ }catch(error){console.warn('Click audio unavailable',error);}
+}
+playClickSound=fairyTwinkleClick;
 
 
 /* ADDED: Pointer-responsive 3D service cards (desktop mouse only). */
