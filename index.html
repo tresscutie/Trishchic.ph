@@ -2314,6 +2314,17 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
 #cozyMusicChoice,#mobileCozyMusicChoice,.music-choice-label{display:none!important}
 .v51-mobile-music-title{font-size:11px;font-weight:700;color:#8d3c5e;white-space:nowrap}
 </style>
+<style id="trishchic-v60-payment">
+.payment-simple-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,3vw,26px);align-items:center;text-align:center}
+.payment-simple-label{font-size:clamp(14px,2vw,19px);font-weight:900;color:#9abf46;letter-spacing:.045em}
+.payment-simple-brand{font-size:clamp(28px,5vw,44px);font-weight:900;color:#7fa82b;margin:8px 0}
+.payment-simple-number{background:#f7bfd4;color:#8a315a;font-weight:900;border-radius:15px;padding:12px 8px;font-size:clamp(18px,3vw,27px);white-space:nowrap}
+.payment-simple-name{font-weight:800;color:#9e4567;margin-top:6px;font-size:15px}
+.payment-simple-tip{font-size:clamp(10px,1.6vw,12px);font-weight:800;color:#88a948;margin:20px auto 0;line-height:1.5;max-width:230px}
+.payment-simple-scan img{display:block;width:100%;max-width:260px;aspect-ratio:1;object-fit:contain;margin:auto;background:#fff;border:5px solid #f8d9e4;border-radius:15px}
+.payment-simple-scan-label{font-weight:900;color:#91b944;font-size:clamp(17px,3vw,25px);margin-top:10px;letter-spacing:.03em}
+@media(max-width:480px){.payment-simple-layout{grid-template-columns:1fr;gap:22px}.payment-simple-number{max-width:260px;margin:auto}.payment-simple-scan img{max-width:230px}}
+</style>
 </head>
 
 <body>
@@ -2796,11 +2807,21 @@ footer#contact .container > p {box-shadow:none !important;background:transparent
   <div class="container center">
     <span class="tag">CHECKOUT INFORMATION</span>
     <h2 class="title">Mode of <span class="pink">Payment</span></h2>
-    <div class="card reveal" style="max-width:680px;margin:20px auto;padding:clamp(10px,2vw,18px);border-radius:22px">
-      <!-- Exact client-supplied payment poster (not the standalone QR image). -->
-      <img src="payment_poster.png" alt="Trishchic.ph GCash mode of payment poster with QR code and payment details" loading="lazy" decoding="async" draggable="false" style="display:block;width:100%;max-width:640px;height:auto;object-fit:contain;border-radius:12px;margin:0 auto" onerror="this.style.display='none';this.nextElementSibling.hidden=false">
-      <p hidden style="color:#913d61;font-weight:700">Payment poster not found. Upload payment_poster.png alongside index.html.</p>
-      <p style="margin:20px 0 4px;font-size:clamp(14px,2.4vw,17px);font-weight:700">Kindly send your receipt to verify your payment.</p>
+    <div class="card reveal" style="max-width:680px;margin:20px auto;padding:clamp(16px,3vw,26px);border-radius:22px">
+      <div class="payment-simple-layout">
+        <div class="payment-simple-details">
+          <div class="payment-simple-label">MODE OF PAYMENT</div>
+          <div class="payment-simple-brand">GCash</div>
+          <div class="payment-simple-number">0946 051 9829</div>
+          <div class="payment-simple-name">AP..E C.</div>
+          <p class="payment-simple-tip">GIVING TIP ISN'T REQUIRED, BUT I REALLY APPRECIATE IT IF YOU DO ♡</p>
+        </div>
+        <div class="payment-simple-scan">
+          <img src="qrcode.jpg" alt="GCash InstaPay QR code for Trishchic.ph" loading="lazy" decoding="async" draggable="false">
+          <div class="payment-simple-scan-label">SCAN TO PAY</div>
+        </div>
+      </div>
+      <p style="margin:22px 0 0;font-size:clamp(13px,2vw,15px);font-weight:700">Kindly send your receipt to verify your payment.</p>
     </div>
   </div>
 </section>
